@@ -1,2 +1,2 @@
 # mi-portfolio
-Este es mi portfolio hecho en Java
+Este es mi portfolio hecho en plataforma Java
