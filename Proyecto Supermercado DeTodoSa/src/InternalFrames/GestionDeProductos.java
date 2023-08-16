@@ -274,7 +274,7 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Realmente desea realizar los cambios?", "ALERTA!!!", JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
                 for (Producto prod : MenuPrincipal.listaProductos) {
-                    if (prod.getDescripción().equals(newDescripcion)) {
+                    if (prod.getCodigo()==newCodigo) {
                         MenuPrincipal.listaProductos.remove(prod);
                         prod.setCodigo(newCodigo);
                         prod.setDescripción(newDescripcion);
