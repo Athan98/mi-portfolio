@@ -5,8 +5,6 @@
  */
 package etapa3.guia2.ejextra2;
 
-
-
 import Entidades.Cliente;
 import InternalFrames.Administracion;
 import InternalFrames.BusquedaPorApellido;
@@ -18,10 +16,8 @@ import java.util.TreeMap;
  */
 public class Directorio extends javax.swing.JFrame {
 
-    public static TreeMap<Integer,Cliente> directorio = new TreeMap();
-    
-    
-    
+    public static TreeMap<Integer, Cliente> directorio = new TreeMap();
+
     /**
      * Creates new form Directorio
      */
@@ -130,7 +126,7 @@ public class Directorio extends javax.swing.JFrame {
     private void jbBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscadorActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        BusquedaPorApellido bpa=new BusquedaPorApellido();
+        BusquedaPorApellido bpa = new BusquedaPorApellido();
         bpa.setVisible(true);
         escritorio.add(bpa);
         escritorio.moveToFront(bpa);
@@ -143,7 +139,7 @@ public class Directorio extends javax.swing.JFrame {
     private void jbAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdministracionActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        Administracion a=new Administracion();
+        Administracion a = new Administracion();
         a.setVisible(true);
         escritorio.add(a);
         escritorio.moveToFront(a);
@@ -196,16 +192,15 @@ public class Directorio extends javax.swing.JFrame {
     private javax.swing.JButton jbBuscador;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarClientes(){
-        
-        Cliente c1=new Cliente("Nicolas", "Roldan", "nicoroldan15@outlook.com.ar");
+    private void cargarClientes() {
+
+        Cliente c1 = new Cliente("Nicolas", "Roldan", "nicoroldan15@outlook.com.ar");
         directorio.put(123456, c1);
-        Cliente c2=new Cliente("Franco", "Alvarez", "francogomez98@gmail.com");
+        Cliente c2 = new Cliente("Franco", "Alvarez", "francogomez98@gmail.com");
         directorio.put(256397, c2);
-        Cliente c3=new Cliente("Ignacio", "Zarate", "zarateign76@hotmail.com");
+        Cliente c3 = new Cliente("Ignacio", "Zarate", "zarateign76@hotmail.com");
         directorio.put(236589, c3);
-    
-        
+
     }
 
 }

@@ -17,8 +17,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BusquedaPorApellido extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo=new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel();
     private int filaSeleccionada;
+
     /**
      * Creates new form BusquedaPorTelefono
      */
@@ -192,37 +193,41 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtApellidoKeyReleased
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-        if(jtTelefonos.getSelectedRow()==-1){
+        if (jtTelefonos.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una fila para editar");
-        }else{
-            
-        filaSeleccionada=jtTelefonos.getSelectedRow();
-        jtEditorApellido.setText(modelo.getValueAt(jtTelefonos.getSelectedRow(), 1).toString());
-        jtEditorNombre.setText(modelo.getValueAt(jtTelefonos.getSelectedRow(), 2).toString());
-        jtEditorEmail.setText(modelo.getValueAt(jtTelefonos.getSelectedRow(), 3).toString());}
+        } else {
+
+            filaSeleccionada = jtTelefonos.getSelectedRow();
+            jtEditorApellido.setText(modelo.getValueAt(jtTelefonos.getSelectedRow(), 1).toString());
+            jtEditorNombre.setText(modelo.getValueAt(jtTelefonos.getSelectedRow(), 2).toString());
+            jtEditorEmail.setText(modelo.getValueAt(jtTelefonos.getSelectedRow(), 3).toString());
+        }
         Directorio.directorio.remove(filaSeleccionada);
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        
-        try{
-        
-        int respuesta = JOptionPane.showConfirmDialog(this, "¿Realmente desea realizar los cambios?", "ALERTA!!!", JOptionPane.YES_NO_OPTION);
-        if (respuesta == JOptionPane.YES_OPTION) {
-        modelo.setValueAt(jtEditorApellido.getText(), filaSeleccionada, 1);
-        modelo.setValueAt(jtEditorNombre.getText(), filaSeleccionada, 2);
-        modelo.setValueAt(jtEditorEmail.getText(), filaSeleccionada, 3);
-        Cliente cliente=new Cliente(jtEditorApellido.getText(), jtEditorNombre.getText(), jtEditorEmail.getText());
-        Directorio.directorio.put((Integer) modelo.getValueAt(filaSeleccionada,0 ),cliente);
-        
-        
-        }else{JOptionPane.showMessageDialog(this, "No se ha modificado el elemento");}
-        }catch(Exception e){
-        JOptionPane.showMessageDialog(this, "Ha ocurrido un error");
+
+        try {
+            if(jtEditorApellido.getText().isEmpty() || jtEditorEmail.getText().isEmpty() || jtEditorNombre.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+            }else{
+
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Realmente desea realizar los cambios?", "ALERTA!!!", JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                modelo.setValueAt(jtEditorApellido.getText(), filaSeleccionada, 1);
+                modelo.setValueAt(jtEditorNombre.getText(), filaSeleccionada, 2);
+                modelo.setValueAt(jtEditorEmail.getText(), filaSeleccionada, 3);
+                Cliente cliente = new Cliente(jtEditorApellido.getText(), jtEditorNombre.getText(), jtEditorEmail.getText());
+                Directorio.directorio.put((Integer) modelo.getValueAt(filaSeleccionada, 0), cliente);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No se ha modificado el elemento");
+            }}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error");
         }
-       
-        
-        
+
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
 
@@ -243,7 +248,6 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtTelefonos;
     // End of variables declaration//GEN-END:variables
 
-
     private void borrarFilas() {
         int f = jtTelefonos.getRowCount() - 1;
         for (; f >= 0; f--) {
@@ -251,15 +255,15 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    private void armarCabecera(){
-    
+
+    private void armarCabecera() {
+
         modelo.addColumn("N° de Telefono");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
         modelo.addColumn("E-mail");
         jtTelefonos.setModel(modelo);
-    
+
     }
 
 }

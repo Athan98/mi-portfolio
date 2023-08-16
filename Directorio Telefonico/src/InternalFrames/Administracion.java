@@ -17,7 +17,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Administracion extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo2=new DefaultTableModel();
+    DefaultTableModel modelo2 = new DefaultTableModel();
+
     /**
      * Creates new form Administracion
      */
@@ -168,22 +169,36 @@ public class Administracion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Integer clave=Integer.parseInt(jtNroTelefono.getText());
-        String apellido=jtApellido.getText();
-        String nombre=jtNombre.getText();
-        String email=jtEmail.getText();
-        Cliente cliente=new Cliente(nombre, apellido, email);
-        Directorio.directorio.put(clave,cliente);
+        try {
+
+            Integer clave = Integer.parseInt(jtNroTelefono.getText());
+            String apellido = jtApellido.getText();
+            String nombre = jtNombre.getText();
+            String email = jtEmail.getText();
+            Cliente cliente = new Cliente(nombre, apellido, email);
+            if (jtNroTelefono.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jtEmail.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+            } else {
+                Directorio.directorio.put(clave, cliente);
+                llenarTabla();
+            }
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "El numero de telefono no puede contener letras");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error");
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        int filaSeleccionada=jtNumerosTotales.getSelectedRow();
-        Integer llaveSeleccionada=(Integer) jtNumerosTotales.getValueAt(filaSeleccionada, 0);
-        if(filaSeleccionada!=-1){
-        modelo2.removeRow(filaSeleccionada);
-        Directorio.directorio.remove(llaveSeleccionada);
-        }else{
-        JOptionPane.showMessageDialog(this, "Debe seleccionar un elemento de la lista");}
+        int filaSeleccionada = jtNumerosTotales.getSelectedRow();
+        Integer llaveSeleccionada = (Integer) jtNumerosTotales.getValueAt(filaSeleccionada, 0);
+        if (filaSeleccionada != -1) {
+            modelo2.removeRow(filaSeleccionada);
+            Directorio.directorio.remove(llaveSeleccionada);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un elemento de la lista");
+        }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
 
@@ -203,15 +218,15 @@ public class Administracion extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtNumerosTotales;
     // End of variables declaration//GEN-END:variables
 
-    private void armarCabecera(){
-        modelo2.addColumn("Codigo");
-        modelo2.addColumn("Descripcion");
-        modelo2.addColumn("Precio ($)");
-        modelo2.addColumn("Stock");
+    private void armarCabecera() {
+        modelo2.addColumn("N° de Telefono");
+        modelo2.addColumn("Apellido");
+        modelo2.addColumn("Nombre");
+        modelo2.addColumn("E-mail");
         jtNumerosTotales.setModel(modelo2);
     }
-    
-    private void llenarTabla(){
+
+    private void llenarTabla() {
         for (Map.Entry<Integer, Cliente> entry : Directorio.directorio.entrySet()) {
             if (entry.getValue().getApellido().startsWith(jtApellido.getText())) {
                 modelo2.addRow(new Object[]{
