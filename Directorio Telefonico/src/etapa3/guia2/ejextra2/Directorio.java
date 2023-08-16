@@ -44,18 +44,18 @@ public class Directorio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 700));
 
-        jbAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/contactos200x200.png"))); // NOI18N
-        jbAdministracion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/contactos200x200.png"))); // NOI18N
-        jbAdministracion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/contactos200x200.png"))); // NOI18N
+        jbAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Contacts_31110.png"))); // NOI18N
+        jbAdministracion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Contacts_31110.png"))); // NOI18N
+        jbAdministracion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Contacts_31110.png"))); // NOI18N
         jbAdministracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAdministracionActionPerformed(evt);
             }
         });
 
-        jbBuscador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/LupaAzul200x200.png"))); // NOI18N
-        jbBuscador.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/LupaAzul200x200.png"))); // NOI18N
-        jbBuscador.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/LupaAzul200x200.png"))); // NOI18N
+        jbBuscador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/loupe_78956.png"))); // NOI18N
+        jbBuscador.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/loupe_78956.png"))); // NOI18N
+        jbBuscador.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/loupe_78956.png"))); // NOI18N
         jbBuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscadorActionPerformed(evt);
@@ -82,31 +82,30 @@ public class Directorio extends javax.swing.JFrame {
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel1))
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jbAdministracion, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(122, 122, 122))
+                .addGap(77, 77, 77)
+                .addComponent(jbAdministracion, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89)
+                .addComponent(jbBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(106, Short.MAX_VALUE))
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel1)
+                .addGap(99, 99, 99)
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(216, 216, 216)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbAdministracion, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                .addGap(167, 167, 167)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbAdministracion, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
