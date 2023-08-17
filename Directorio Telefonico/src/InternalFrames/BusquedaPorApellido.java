@@ -51,6 +51,8 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
         jtEditorEmail = new javax.swing.JTextField();
         jbEditar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jtCodigoAreaEditor = new javax.swing.JTextField();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(700, 600));
@@ -106,6 +108,9 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel6.setText("Codigo de área:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,20 +127,23 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jbEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
-                                .addComponent(jbGuardar)
-                                .addGap(38, 38, 38))
-                            .addComponent(jtEditorNombre)
-                            .addComponent(jtEditorEmail)
-                            .addComponent(jtEditorApellido))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(51, 51, 51)
+                                    .addComponent(jbEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbGuardar)
+                                    .addGap(51, 51, 51))
+                                .addComponent(jtEditorNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                                .addComponent(jtEditorEmail)
+                                .addComponent(jtEditorApellido))
+                            .addComponent(jtCodigoAreaEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -168,11 +176,15 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtEditorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(47, 47, 47)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jtCodigoAreaEditor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addGap(58, 58, 58))
         );
 
         pack();
@@ -183,6 +195,7 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
         for (Map.Entry<Integer, Cliente> entry : Directorio.directorio.entrySet()) {
             if (entry.getValue().getApellido().startsWith(jtApellido.getText())) {
                 modelo.addRow(new Object[]{
+                    entry.getValue().getCodigoArea(),
                     entry.getKey(),
                     entry.getValue().getApellido(),
                     entry.getValue().getNombre(),
@@ -198,9 +211,10 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
         } else {
 
             filaSeleccionada = jtTelefonos.getSelectedRow();
-            jtEditorApellido.setText(modelo.getValueAt(jtTelefonos.getSelectedRow(), 1).toString());
-            jtEditorNombre.setText(modelo.getValueAt(jtTelefonos.getSelectedRow(), 2).toString());
-            jtEditorEmail.setText(modelo.getValueAt(jtTelefonos.getSelectedRow(), 3).toString());
+            jtCodigoAreaEditor.setText(modelo.getValueAt(filaSeleccionada, 0).toString());
+            jtEditorApellido.setText(modelo.getValueAt(filaSeleccionada, 2).toString());
+            jtEditorNombre.setText(modelo.getValueAt(filaSeleccionada, 3).toString());
+            jtEditorEmail.setText(modelo.getValueAt(filaSeleccionada, 4).toString());
         }
         Directorio.directorio.remove(filaSeleccionada);
     }//GEN-LAST:event_jbEditarActionPerformed
@@ -214,11 +228,18 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
 
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Realmente desea realizar los cambios?", "ALERTA!!!", JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
-                modelo.setValueAt(jtEditorApellido.getText(), filaSeleccionada, 1);
-                modelo.setValueAt(jtEditorNombre.getText(), filaSeleccionada, 2);
-                modelo.setValueAt(jtEditorEmail.getText(), filaSeleccionada, 3);
-                Cliente cliente = new Cliente(jtEditorApellido.getText(), jtEditorNombre.getText(), jtEditorEmail.getText());
-                Directorio.directorio.put((Integer) modelo.getValueAt(filaSeleccionada, 0), cliente);
+                modelo.setValueAt(jtCodigoAreaEditor.getText(), filaSeleccionada, 0);
+                modelo.setValueAt(jtEditorApellido.getText(), filaSeleccionada, 2);
+                modelo.setValueAt(jtEditorNombre.getText(), filaSeleccionada, 3);
+                modelo.setValueAt(jtEditorEmail.getText(), filaSeleccionada, 4);
+                Cliente cliente = new Cliente( Integer.parseInt(jtCodigoAreaEditor.getText()),jtEditorApellido.getText(), jtEditorNombre.getText(), jtEditorEmail.getText());
+                Directorio.directorio.put((Integer) modelo.getValueAt(filaSeleccionada, 1), cliente);
+                JOptionPane.showMessageDialog(this, "La modificacion resultó exitosa");
+                jtCodigoAreaEditor.setText("");
+                jtEditorApellido.setText("");
+                jtEditorEmail.setText("");
+                jtEditorNombre.setText("");
+                
 
             } else {
                 JOptionPane.showMessageDialog(this, "No se ha modificado el elemento");
@@ -237,11 +258,13 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JTextField jtApellido;
+    private javax.swing.JTextField jtCodigoAreaEditor;
     private javax.swing.JTextField jtEditorApellido;
     private javax.swing.JTextField jtEditorEmail;
     private javax.swing.JTextField jtEditorNombre;
@@ -257,7 +280,8 @@ public class BusquedaPorApellido extends javax.swing.JInternalFrame {
     }
 
     private void armarCabecera() {
-
+        
+        modelo.addColumn("Codigo de área");
         modelo.addColumn("N° de Telefono");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");

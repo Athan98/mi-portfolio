@@ -3,15 +3,24 @@ package Entidades;
 
 
 public class Cliente {
-    
+    private Integer codigoArea;
     private String nombre;
     private String apellido;
     private String email;
 
-    public Cliente(String nombre, String apellido, String email) {
+    public Cliente(Integer codigoArea, String nombre, String apellido, String email) {
+        this.codigoArea = codigoArea;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+    }
+
+    public Integer getCodigoArea() {
+        return codigoArea;
+    }
+
+    public void setCodigoArea(Integer codigoArea) {
+        this.codigoArea = codigoArea;
     }
 
     public String getNombre() {
@@ -38,9 +47,5 @@ public class Cliente {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" + "nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + '}';
-    }
     
 }

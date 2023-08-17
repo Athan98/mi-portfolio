@@ -50,14 +50,19 @@ public class Administracion extends javax.swing.JInternalFrame {
         jtEmail = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jtCodigoDeArea = new javax.swing.JTextField();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(600, 550));
         setRequestFocusEnabled(false);
 
+        jLabel1.setBackground(new java.awt.Color(102, 102, 255));
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 102));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Administración");
+        jLabel1.setOpaque(true);
 
         jtNumerosTotales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,6 +99,8 @@ public class Administracion extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setText("Codigo de área");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,39 +119,44 @@ public class Administracion extends javax.swing.JInternalFrame {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(60, 60, 60)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5)))
-                                    .addComponent(jLabel2))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(60, 60, 60)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel3)
+                                                .addComponent(jLabel4)
+                                                .addComponent(jLabel5)))
+                                        .addComponent(jLabel2)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtApellido)
                                     .addComponent(jtEmail)
                                     .addComponent(jtNombre)
-                                    .addComponent(jtNroTelefono))))
+                                    .addComponent(jtNroTelefono)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jtCodigoDeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(66, 66, 66))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                         .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(182, 182, 182))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtNroTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jtCodigoDeArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtNroTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,16 +183,23 @@ public class Administracion extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
 
-            Integer clave = Integer.parseInt(jtNroTelefono.getText());
+            Integer codigo=Integer.parseInt(jtCodigoDeArea.getText());
+            Integer clave =Integer.parseInt(jtNroTelefono.getText());
             String apellido = jtApellido.getText();
             String nombre = jtNombre.getText();
             String email = jtEmail.getText();
-            Cliente cliente = new Cliente(nombre, apellido, email);
+            Cliente cliente = new Cliente(codigo,nombre, apellido, email);
             if (jtNroTelefono.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jtEmail.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
             } else {
                 Directorio.directorio.put(clave, cliente);
                 llenarTabla();
+                JOptionPane.showMessageDialog(this, "El cliente se ha ingresado correctamente");
+                jtCodigoDeArea.setText("");
+                jtApellido.setText("");
+                jtNroTelefono.setText("");
+                jtNombre.setText("");
+                jtEmail.setText("");
             }
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "El numero de telefono no puede contener letras");
@@ -209,9 +228,11 @@ public class Administracion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JTextField jtApellido;
+    private javax.swing.JTextField jtCodigoDeArea;
     private javax.swing.JTextField jtEmail;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtNroTelefono;
@@ -219,6 +240,7 @@ public class Administracion extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void armarCabecera() {
+        modelo2.addColumn("Codigo de área");
         modelo2.addColumn("N° de Telefono");
         modelo2.addColumn("Apellido");
         modelo2.addColumn("Nombre");
@@ -230,6 +252,7 @@ public class Administracion extends javax.swing.JInternalFrame {
         for (Map.Entry<Integer, Cliente> entry : Directorio.directorio.entrySet()) {
             if (entry.getValue().getApellido().startsWith(jtApellido.getText())) {
                 modelo2.addRow(new Object[]{
+                    entry.getValue().getCodigoArea(),
                     entry.getKey(),
                     entry.getValue().getApellido(),
                     entry.getValue().getNombre(),
