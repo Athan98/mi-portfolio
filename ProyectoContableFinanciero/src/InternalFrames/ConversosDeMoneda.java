@@ -7,6 +7,8 @@
 package InternalFrames;
 
 import Entidades.Divisas;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -15,7 +17,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import org.json.JSONObject;
 
 
@@ -29,11 +33,13 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
     double euroOficialVenta;
     double euroBlueCompra;
     double euroBlueVenta;
+    
     /**
      * Creates new form ConversosDeMoneda
      */
     public ConversosDeMoneda() throws Exception {
-        initComponents();
+        
+        initComponents(); 
         apiMonedas();
         cargarCombo();
     }
@@ -47,7 +53,7 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jcDivisas = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -56,12 +62,13 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jtMontoAConvertir = new javax.swing.JTextField();
         jbConvertir = new javax.swing.JButton();
+        jPanel2 = new FondoPanel();
+        jLabel1 = new javax.swing.JLabel();
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(500, 400));
-
-        jLabel1.setFont(new java.awt.Font("Onyx", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel1.setText("Conversor de divisas");
 
         jcDivisas.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -94,61 +101,99 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Bauhaus 93", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Conversor de divisas");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcDivisas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtMuestraCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtMuestaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(31, 31, 31)
-                                .addComponent(jtMontoAConvertir))
-                            .addComponent(jbConvertir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(jcDivisas, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtMontoAConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jtMuestraCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(67, 67, 67)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jtMuestaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jcDivisas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
                     .addComponent(jtMuestraCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
                     .addComponent(jtMuestaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtMontoAConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(46, 46, 46)
+                    .addComponent(jLabel4)
+                    .addComponent(jtMontoAConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
                 .addComponent(jbConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConvertirActionPerformed
-        
+        Double resultadoVenta,resultadoCompra;
+        if(jcDivisas.getSelectedItem().equals(Divisas.DOLAR)){
+        resultadoCompra=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestraCompra.getText());
+        resultadoVenta=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestaVenta.getText());
+        JOptionPane.showMessageDialog(this, "La conversion del monto es igual a --> COMPRA: $"+resultadoCompra+" / VENTA: $"+resultadoVenta);
+        jtMontoAConvertir.setText("");
+        }else if(jcDivisas.getSelectedItem().equals(Divisas.DOLAROFICIAL)){
+        resultadoCompra=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestraCompra.getText());
+        resultadoVenta=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestaVenta.getText());
+        JOptionPane.showMessageDialog(this, "La conversion del monto es igual a --> COMPRA: $"+resultadoCompra+" / VENTA: $"+resultadoVenta);
+        jtMontoAConvertir.setText("");
+        }else if(jcDivisas.getSelectedItem().equals(Divisas.EURO)){
+        resultadoCompra=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestraCompra.getText());
+        resultadoVenta=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestaVenta.getText());
+        JOptionPane.showMessageDialog(this, "La conversion del monto es igual a --> COMPRA: $"+resultadoCompra+" / VENTA: $"+resultadoVenta);
+        jtMontoAConvertir.setText("");
+        }else if(jcDivisas.getSelectedItem().equals(Divisas.EUROOFICIAL)){
+       resultadoCompra=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestraCompra.getText());
+        resultadoVenta=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestaVenta.getText());
+        JOptionPane.showMessageDialog(this, "La conversion del monto es igual a --> COMPRA: $"+resultadoCompra+" / VENTA: $"+resultadoVenta);
+        jtMontoAConvertir.setText("");
+        }
     }//GEN-LAST:event_jbConvertirActionPerformed
 
     private void jcDivisasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcDivisasItemStateChanged
@@ -169,10 +214,12 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbConvertir;
     private javax.swing.JComboBox<Divisas> jcDivisas;
     private javax.swing.JTextField jtMontoAConvertir;
@@ -180,6 +227,21 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtMuestraCompra;
     // End of variables declaration//GEN-END:variables
 
+    
+    class FondoPanel extends JPanel{
+        private Image imagen;
+    
+        @Override
+        public void paint (Graphics g){
+            
+            imagen=new ImageIcon(getClass().getResource("/Fondos/divisasconv.jpg")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        
+        }
+    
+    }
 private void apiMonedas() throws Exception{
     
   try {
