@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package InternalFrames;
 
 import Entidades.Divisas;
@@ -22,24 +21,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.json.JSONObject;
 
-
 public class ConversosDeMoneda extends javax.swing.JInternalFrame {
 
     double dolarOficialCompra;
     double dolarOficialVenta;
     double dolarBlueCompra;
-    double dolarBlueVenta; 
+    double dolarBlueVenta;
     double euroOficialCompra;
     double euroOficialVenta;
     double euroBlueCompra;
     double euroBlueVenta;
-    
+
     /**
      * Creates new form ConversosDeMoneda
      */
     public ConversosDeMoneda() throws Exception {
-        
-        initComponents(); 
+
+        initComponents();
         apiMonedas();
         cargarCombo();
     }
@@ -93,6 +91,7 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel4.setText("Ingrese el monto: ");
 
+        jbConvertir.setBackground(new java.awt.Color(204, 204, 204));
         jbConvertir.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jbConvertir.setText("CONVERTIR");
         jbConvertir.addActionListener(new java.awt.event.ActionListener() {
@@ -128,24 +127,30 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcDivisas, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jtMontoAConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jtMuestraCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(67, 67, 67)
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jtMuestaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jbConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtMontoAConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jcDivisas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtMuestraCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(67, 67, 67)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jtMuestaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,52 +168,52 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtMontoAConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jbConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConvertirActionPerformed
-        Double resultadoVenta,resultadoCompra;
-        if(jcDivisas.getSelectedItem().equals(Divisas.DOLAR)){
-        resultadoCompra=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestraCompra.getText());
-        resultadoVenta=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestaVenta.getText());
-        JOptionPane.showMessageDialog(this, "La conversion del monto es igual a --> COMPRA: $"+resultadoCompra+" / VENTA: $"+resultadoVenta);
-        jtMontoAConvertir.setText("");
-        }else if(jcDivisas.getSelectedItem().equals(Divisas.DOLAROFICIAL)){
-        resultadoCompra=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestraCompra.getText());
-        resultadoVenta=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestaVenta.getText());
-        JOptionPane.showMessageDialog(this, "La conversion del monto es igual a --> COMPRA: $"+resultadoCompra+" / VENTA: $"+resultadoVenta);
-        jtMontoAConvertir.setText("");
-        }else if(jcDivisas.getSelectedItem().equals(Divisas.EURO)){
-        resultadoCompra=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestraCompra.getText());
-        resultadoVenta=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestaVenta.getText());
-        JOptionPane.showMessageDialog(this, "La conversion del monto es igual a --> COMPRA: $"+resultadoCompra+" / VENTA: $"+resultadoVenta);
-        jtMontoAConvertir.setText("");
-        }else if(jcDivisas.getSelectedItem().equals(Divisas.EUROOFICIAL)){
-       resultadoCompra=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestraCompra.getText());
-        resultadoVenta=Double.parseDouble(jtMontoAConvertir.getText())*Double.parseDouble(jtMuestaVenta.getText());
-        JOptionPane.showMessageDialog(this, "La conversion del monto es igual a --> COMPRA: $"+resultadoCompra+" / VENTA: $"+resultadoVenta);
-        jtMontoAConvertir.setText("");
+        Double resultadoVenta, resultadoCompra;
+        if (jcDivisas.getSelectedItem().equals(Divisas.DOLARBLUE)) {
+            resultadoCompra = Double.parseDouble(jtMontoAConvertir.getText()) * Double.parseDouble(jtMuestraCompra.getText());
+            resultadoVenta = Double.parseDouble(jtMontoAConvertir.getText()) * Double.parseDouble(jtMuestaVenta.getText());
+            JOptionPane.showMessageDialog(this, "USD Blue: " + jtMontoAConvertir.getText() + " es igual a --> COMPRA: $" + resultadoCompra + " / VENTA: $" + resultadoVenta);
+            jtMontoAConvertir.setText("");
+        } else if (jcDivisas.getSelectedItem().equals(Divisas.DOLAROFICIAL)) {
+            resultadoCompra = Double.parseDouble(jtMontoAConvertir.getText()) * Double.parseDouble(jtMuestraCompra.getText());
+            resultadoVenta = Double.parseDouble(jtMontoAConvertir.getText()) * Double.parseDouble(jtMuestaVenta.getText());
+            JOptionPane.showMessageDialog(this, "USD: " + jtMontoAConvertir.getText() + " es igual a --> COMPRA: $" + resultadoCompra + " / VENTA: $" + resultadoVenta);
+            jtMontoAConvertir.setText("");
+        } else if (jcDivisas.getSelectedItem().equals(Divisas.EUROBLUE)) {
+            resultadoCompra = Double.parseDouble(jtMontoAConvertir.getText()) * Double.parseDouble(jtMuestraCompra.getText());
+            resultadoVenta = Double.parseDouble(jtMontoAConvertir.getText()) * Double.parseDouble(jtMuestaVenta.getText());
+            JOptionPane.showMessageDialog(this, "EUR Blue: " + jtMontoAConvertir.getText() + " es igual a --> COMPRA: $" + resultadoCompra + " / VENTA: $" + resultadoVenta);
+            jtMontoAConvertir.setText("");
+        } else if (jcDivisas.getSelectedItem().equals(Divisas.EUROOFICIAL)) {
+            resultadoCompra = Double.parseDouble(jtMontoAConvertir.getText()) * Double.parseDouble(jtMuestraCompra.getText());
+            resultadoVenta = Double.parseDouble(jtMontoAConvertir.getText()) * Double.parseDouble(jtMuestaVenta.getText());
+            JOptionPane.showMessageDialog(this, "EUR: " + jtMontoAConvertir.getText() + " es igual a --> COMPRA: $" + resultadoCompra + " / VENTA: $" + resultadoVenta);
+            jtMontoAConvertir.setText("");
         }
     }//GEN-LAST:event_jbConvertirActionPerformed
 
     private void jcDivisasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcDivisasItemStateChanged
-        if(jcDivisas.getSelectedItem().equals(Divisas.DOLAR)){
-        jtMuestaVenta.setText(dolarBlueVenta+"");
-        jtMuestraCompra.setText(dolarBlueCompra+"");
-        }else if(jcDivisas.getSelectedItem().equals(Divisas.DOLAROFICIAL)){
-        jtMuestaVenta.setText(dolarOficialVenta+"");
-        jtMuestraCompra.setText(dolarOficialCompra+"");
-        }else if(jcDivisas.getSelectedItem().equals(Divisas.EURO)){
-        jtMuestaVenta.setText(euroBlueVenta+"");
-        jtMuestraCompra.setText(euroBlueCompra+"");
-        }else if(jcDivisas.getSelectedItem().equals(Divisas.EUROOFICIAL)){
-        jtMuestaVenta.setText(euroOficialVenta+"");
-        jtMuestraCompra.setText(euroOficialCompra+"");
+        if (jcDivisas.getSelectedItem().equals(Divisas.DOLARBLUE)) {
+            jtMuestaVenta.setText(dolarBlueVenta + "");
+            jtMuestraCompra.setText(dolarBlueCompra + "");
+        } else if (jcDivisas.getSelectedItem().equals(Divisas.DOLAROFICIAL)) {
+            jtMuestaVenta.setText(dolarOficialVenta + "");
+            jtMuestraCompra.setText(dolarOficialCompra + "");
+        } else if (jcDivisas.getSelectedItem().equals(Divisas.EUROBLUE)) {
+            jtMuestaVenta.setText(euroBlueVenta + "");
+            jtMuestraCompra.setText(euroBlueCompra + "");
+        } else if (jcDivisas.getSelectedItem().equals(Divisas.EUROOFICIAL)) {
+            jtMuestaVenta.setText(euroOficialVenta + "");
+            jtMuestraCompra.setText(euroOficialCompra + "");
         }
     }//GEN-LAST:event_jcDivisasItemStateChanged
 
@@ -227,24 +232,25 @@ public class ConversosDeMoneda extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtMuestraCompra;
     // End of variables declaration//GEN-END:variables
 
-    
-    class FondoPanel extends JPanel{
+    class FondoPanel extends JPanel {
+
         private Image imagen;
-    
+
         @Override
-        public void paint (Graphics g){
-            
-            imagen=new ImageIcon(getClass().getResource("/Fondos/divisasconv.jpg")).getImage();
+        public void paint(Graphics g) {
+
+            imagen = new ImageIcon(getClass().getResource("/Fondos/divisasconv.jpg")).getImage();
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
-        
+
         }
-    
+
     }
-private void apiMonedas() throws Exception{
-    
-  try {
+
+    private void apiMonedas() throws Exception {
+
+        try {
             URL url = new URL("https://api.bluelytics.com.ar/v2/latest");
             HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
             conexion.setRequestMethod("GET");
@@ -265,11 +271,11 @@ private void apiMonedas() throws Exception{
             JSONObject dolarOficial = jsonObject.getJSONObject("oficial");
             dolarOficialCompra = dolarOficial.getDouble("value_buy");
             dolarOficialVenta = dolarOficial.getDouble("value_sell");
-            
+
             JSONObject dolarBlue = jsonObject.getJSONObject("blue");
             dolarBlueCompra = dolarBlue.getDouble("value_buy");
             dolarBlueVenta = dolarBlue.getDouble("value_sell");
-            
+
             JSONObject euroOficial = jsonObject.getJSONObject("oficial_euro");
             euroOficialCompra = euroOficial.getDouble("value_buy");
             euroOficialVenta = euroOficial.getDouble("value_sell");
@@ -278,22 +284,19 @@ private void apiMonedas() throws Exception{
             euroBlueCompra = euroBlue.getDouble("value_buy");
             euroBlueVenta = euroBlue.getDouble("value_sell");
 
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getStackTrace());
         }
     }
 
+    private void cargarCombo() {
 
-private void cargarCombo(){
-    
-    jcDivisas.addItem(Divisas.DOLAR);
-    jcDivisas.addItem(Divisas.DOLAROFICIAL);
-    jcDivisas.addItem(Divisas.EURO);
-    jcDivisas.addItem(Divisas.EUROOFICIAL);
+        jcDivisas.addItem(Divisas.DOLARBLUE);
+        jcDivisas.addItem(Divisas.DOLAROFICIAL);
+        jcDivisas.addItem(Divisas.EUROBLUE);
+        jcDivisas.addItem(Divisas.EUROOFICIAL);
 
-}
-    
+    }
 
 }
 

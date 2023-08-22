@@ -4,9 +4,9 @@ package Entidades;
 
 public enum Divisas {
     
-    DOLAR,
+    DOLARBLUE,
     DOLAROFICIAL,
-    EURO,
+    EUROBLUE,
     EUROOFICIAL
     
 }

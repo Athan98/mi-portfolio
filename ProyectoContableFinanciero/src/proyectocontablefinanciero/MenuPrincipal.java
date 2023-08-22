@@ -6,6 +6,7 @@
 package proyectocontablefinanciero;
 
 import InternalFrames.ConversosDeMoneda;
+import InternalFrames.UtilidadesFinancieras;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +39,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
+        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setResizable(false);
 
         escritorio.setPreferredSize(new java.awt.Dimension(800, 500));
 
@@ -56,6 +58,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Utilidades");
 
         jMenuItem1.setText("Financieras");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Conversor de moneda");
@@ -98,6 +105,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        UtilidadesFinancieras uf=new UtilidadesFinancieras();
+        uf.setVisible(true);
+        escritorio.add(uf);
+        escritorio.moveToFront(uf);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
