@@ -82,4 +82,22 @@ public class InscripcionData {
     
     
     }
+    
+    
+    public void calificar(int id, double nota){
+        String sql="UPDATE inscripcion SET nota=? WHERE idInscripcion=?";
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ps.setDouble(1, nota);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            System.out.println("La nota fue asignada con exito");
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error, no se puede asignar la nota");
+        }
+        
+    
+    
+    }
 }

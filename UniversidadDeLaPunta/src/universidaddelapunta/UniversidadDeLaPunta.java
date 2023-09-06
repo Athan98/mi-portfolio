@@ -46,8 +46,10 @@ public class UniversidadDeLaPunta {
 //          
 //          inscripcionData.inscribirAlumno(alumno1, materia1, inscripcion);
 
-           Inscripcion inscr=inscripcionData.buscarInscripcion(1);
-           System.out.println(inscr.toString());
+//           Inscripcion inscr=inscripcionData.buscarInscripcion(1);
+//           System.out.println(inscr.toString());
+
+             inscripcionData.calificar(2, 9);
 
 
 
