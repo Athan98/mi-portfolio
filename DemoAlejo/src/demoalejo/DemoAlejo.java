@@ -45,9 +45,11 @@ public class DemoAlejo {
              
              Conexion con=new Conexion();
              DivisaData divisaData=new DivisaData(con);
-             Divisa dolarOficial=new Divisa();
-             dolarOficial.setNombreDivisa("oficial");
-             System.out.println(divisaData.cotizacion(dolarOficial));
+             Divisa divisa=new Divisa();
+            
+             divisa.setBanco("bbva");
+             System.out.println(divisaData.cotizacionCompra(divisa));
+             System.out.println(divisaData.cotizacionVenta(divisa));
             
 //            Float dolarOficial = jsonObject.getFloat("oficial");
 //            System.out.println("Cotizacion dolar oficial (Banco Nacion): $"+dolarOficial);

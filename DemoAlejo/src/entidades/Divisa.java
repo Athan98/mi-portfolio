@@ -1,12 +1,34 @@
-
 package entidades;
 
-
 public class Divisa {
+
     private String nombreDivisa;
     private float precioCompra;
     private float precioVenta;
     private float variacion;
+    private String banco;
+
+    public Divisa(String banco) {
+        this.banco = banco;
+    }
+
+    public Divisa(String nombreDivisa, float precioCompra, float precioVenta, float variacion, String banco) {
+        this.nombreDivisa = nombreDivisa;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
+        this.variacion = variacion;
+        this.banco = banco;
+    }
+
+    public Divisa(String nombreDivisa, float precioCompra, float precioVenta, String banco) {
+        this.nombreDivisa = nombreDivisa;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
+        this.banco = banco;
+    }
+
+    public Divisa() {
+    }
 
     public String getNombreDivisa() {
         return nombreDivisa;
@@ -40,28 +62,12 @@ public class Divisa {
         this.variacion = variacion;
     }
 
-    public Divisa(String nombreDivisa, float precioCompra, float precioVenta, float variacion) {
-        this.nombreDivisa = nombreDivisa;
-        this.precioCompra = precioCompra;
-        this.precioVenta = precioVenta;
-        this.variacion = variacion;
+    public String getBanco() {
+        return banco;
     }
 
-    public Divisa(String nombreDivisa, float precioCompra, float precioVenta) {
-        this.nombreDivisa = nombreDivisa;
-        this.precioCompra = precioCompra;
-        this.precioVenta = precioVenta;
+    public void setBanco(String banco) {
+        this.banco = banco;
     }
 
-    @Override
-    public String toString() {
-        return nombreDivisa  ;
-    }
-
-    
-
-    public Divisa() {
-    }
-    
-    
 }

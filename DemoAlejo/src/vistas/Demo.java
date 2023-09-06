@@ -78,7 +78,7 @@ public class Demo extends javax.swing.JFrame {
     private void jbConversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConversorActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        Conversor c=new Conversor();
+        Conversor c = new Conversor();
         c.setVisible(true);
         escritorio.add(c);
         escritorio.moveToFront(c);

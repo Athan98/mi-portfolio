@@ -15,7 +15,6 @@ import java.net.URL;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
 
-
 /**
  *
  * @author alejo
@@ -25,11 +24,11 @@ public class Conexion {
     private static URL url;
     private static HttpURLConnection conexion;
     private static StringBuilder response = null;
-    private static JSONObject json=null;
+    private static JSONObject json = null;
 
     public Conexion() {
         try {
-            url = new URL("https://criptoya.com/api/dolar");
+            url = new URL("https://criptoya.com/api/bancostodos");
             conexion = (HttpURLConnection) url.openConnection();
             conexion.setRequestMethod("GET");
         } catch (MalformedURLException ex) {
@@ -39,7 +38,7 @@ public class Conexion {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error en la conexion");
         }
-        
+
         // Inicializa response como un nuevo StringBuilder
         response = new StringBuilder();
     }
@@ -62,11 +61,3 @@ public class Conexion {
         return json;
     }
 }
-
-
-
-
-
-
-
-
