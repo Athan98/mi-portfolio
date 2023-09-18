@@ -18,6 +18,7 @@ public class Demo extends javax.swing.JFrame {
     public Demo() {
         initComponents();
         this.setLocationRelativeTo(this);
+    
         escritorio.moveToFront(l);
         escritorio.add(l);
         l.setVisible(false);
@@ -85,6 +86,7 @@ public class Demo extends javax.swing.JFrame {
     private void jbConversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConversorActionPerformed
 
         new Carga().show();
+        
     }//GEN-LAST:event_jbConversorActionPerformed
 
     /**
@@ -125,7 +127,7 @@ public class Demo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane escritorio;
-    private javax.swing.JButton jbConversor;
+    public static javax.swing.JButton jbConversor;
     // End of variables declaration//GEN-END:variables
 
     public class Carga implements Runnable {
@@ -143,6 +145,7 @@ public class Demo extends javax.swing.JFrame {
             c.setVisible(true);
             escritorio.add(c);
             escritorio.moveToFront(c);
+            
 
             l.setVisible(false);
 

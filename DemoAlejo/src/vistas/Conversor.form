@@ -29,69 +29,64 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="jbConvertir" min="-2" pref="94" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel33" min="-2" pref="182" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jlFecha" min="-2" pref="285" max="-2" attributes="0"/>
-                                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jPanel14" min="-2" pref="257" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jPanel15" min="-2" pref="257" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jbConvertir" min="-2" pref="94" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jbLimpiar" min="-2" pref="89" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jbLimpiar" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel33" min="-2" pref="182" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jlFecha" min="-2" pref="285" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jbSalir" min="-2" pref="94" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jCDivisas" min="-2" pref="381" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jPanel14" min="-2" pref="257" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jPanel15" min="-2" pref="257" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jCDivisas" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
+                          <Component id="jPanel13" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -119,13 +114,23 @@
                   <Component id="jlFecha" min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="jLabel33" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jCDivisas" max="32767" attributes="0"/>
-                  <Component id="jbLimpiar" max="32767" attributes="0"/>
-                  <Component id="jbConvertir" alignment="1" min="-2" pref="52" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jbSalir" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
+                          <Component id="jbLimpiar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jCDivisas" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jbConvertir" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
                   <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
@@ -1393,30 +1398,31 @@
           <Font name="Tw Cen MT Condensed" size="18" style="1"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="23">
-            <StringItem index="0" value="Oficial BBVA"/>
-            <StringItem index="1" value="Oficial Hipotecario"/>
-            <StringItem index="2" value="Oficial Patagonia"/>
-            <StringItem index="3" value="Oficial Macro"/>
-            <StringItem index="4" value="Oficial ICBC"/>
-            <StringItem index="5" value="Oficial HSBC"/>
-            <StringItem index="6" value="Oficial Santander"/>
-            <StringItem index="7" value="Oficial Supervielle"/>
-            <StringItem index="8" value="Oficial Nacion"/>
-            <StringItem index="9" value="Oficial Galicia"/>
-            <StringItem index="10" value="Solidario"/>
-            <StringItem index="11" value="MEP"/>
-            <StringItem index="12" value="BLUE"/>
-            <StringItem index="13" value="MEP AL30"/>
-            <StringItem index="14" value="MEP AL30 Plazo CI"/>
-            <StringItem index="15" value="MEP GD30"/>
-            <StringItem index="16" value="MEP GD30 Plazo CI"/>
-            <StringItem index="17" value="CCL"/>
-            <StringItem index="18" value="CCL AL30"/>
-            <StringItem index="19" value="CCL AL30 Plazo CI"/>
-            <StringItem index="20" value="CCL GD30"/>
-            <StringItem index="21" value="CCL GD30 Plazo CI"/>
-            <StringItem index="22" value="CCB (D&#xf3;lar Contado con Bitcoin o D&#xf3;lar Cripto)"/>
+          <StringArray count="24">
+            <StringItem index="0" value="-Seleccione un tipo de cambio-"/>
+            <StringItem index="1" value="Oficial BBVA"/>
+            <StringItem index="2" value="Oficial Hipotecario"/>
+            <StringItem index="3" value="Oficial Patagonia"/>
+            <StringItem index="4" value="Oficial Macro"/>
+            <StringItem index="5" value="Oficial ICBC"/>
+            <StringItem index="6" value="Oficial HSBC"/>
+            <StringItem index="7" value="Oficial Santander"/>
+            <StringItem index="8" value="Oficial Supervielle"/>
+            <StringItem index="9" value="Oficial Nacion"/>
+            <StringItem index="10" value="Oficial Galicia"/>
+            <StringItem index="11" value="Solidario"/>
+            <StringItem index="12" value="MEP"/>
+            <StringItem index="13" value="BLUE"/>
+            <StringItem index="14" value="MEP AL30"/>
+            <StringItem index="15" value="MEP AL30 Plazo CI"/>
+            <StringItem index="16" value="MEP GD30"/>
+            <StringItem index="17" value="MEP GD30 Plazo CI"/>
+            <StringItem index="18" value="CCL"/>
+            <StringItem index="19" value="CCL AL30"/>
+            <StringItem index="20" value="CCL AL30 Plazo CI"/>
+            <StringItem index="21" value="CCL GD30"/>
+            <StringItem index="22" value="CCL GD30 Plazo CI"/>
+            <StringItem index="23" value="CCB (D&#xf3;lar Contado con Bitcoin o D&#xf3;lar Cripto)"/>
           </StringArray>
         </Property>
       </Properties>
@@ -1435,6 +1441,12 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icons/coin_icon_151439 muymuy chico.png"/>
         </Property>
+        <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/coin_icon_151439 muymuy chico.png"/>
+        </Property>
+        <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/coin_icon_151439 muymuy chico.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbConvertirActionPerformed"/>
@@ -1445,7 +1457,15 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="12" style="2"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Limpiar"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/BORRAR.png"/>
+        </Property>
+        <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/BORRAR.png"/>
+        </Property>
+        <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/BORRAR.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLimpiarActionPerformed"/>
@@ -1501,7 +1521,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jlCotizacionTipoDolar" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jlCotizacionTipoDolar1" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="jlVar" min="-2" pref="41" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jlVariacion" max="32767" attributes="0"/>
                       </Group>
@@ -1513,13 +1533,12 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="7" max="32767" attributes="0"/>
                   <Component id="jlTipoDolar" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jlCotizacionTipoDolar" min="-2" pref="43" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlCotizacionTipoDolar1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="jlVar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jlVariacion" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -1553,7 +1572,7 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jlCotizacionTipoDolar1">
+        <Component class="javax.swing.JLabel" name="jlVar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="12" style="1"/>
@@ -1716,5 +1735,24 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="jbSalir">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/4115235-exit-logout-sign-out_114030 (1).png"/>
+        </Property>
+        <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/4115235-exit-logout-sign-out_114030 (1).png"/>
+        </Property>
+        <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/4115235-exit-logout-sign-out_114030 (1).png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalirActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
