@@ -19,7 +19,7 @@ public class DivisaData {
     public DivisaData(Conexion con) {
         this.json = con.json();
     }
-
+    
     public float cotizacionCompra(Divisa divisa) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -88,5 +88,16 @@ public class DivisaData {
             JOptionPane.showMessageDialog(null, "Error al obtener la fecha");
         }
         return ""; // Valor predeterminado si no se encuentra la fecha o si hay un error
+    }
+    
+    public float cotizacionTipoDolar(Divisa divisa) {
+
+        try {
+            return json.getFloat(divisa.getBanco());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener la cotizacion");
+        }
+        return 0.0f;
+
     }
 }

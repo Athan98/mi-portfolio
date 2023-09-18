@@ -5,10 +5,10 @@
  */
 package vistas;
 
-import data.Conexion;
-import data.DivisaData;
+import data.*;
 import entidades.Divisa;
 import entidades.Fecha;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -23,7 +23,10 @@ public class Conversor extends javax.swing.JInternalFrame {
     FondoPanel fondo = new FondoPanel();
     FondoPane1 fondop = new FondoPane1();
     Conexion con = new Conexion();
+    Conexion2 con2=new Conexion2();
     DivisaData divisaData = new DivisaData(con);
+    DivisaData2 divisaData1= new DivisaData2(con2);
+    Divisa divisa=new Divisa();
     Divisa divisaBBVA = new Divisa("bbva");
     Divisa divisaNacion = new Divisa("bna");
     Divisa divisaSupervielle = new Divisa("supervielle");
@@ -114,19 +117,24 @@ public class Conversor extends javax.swing.JInternalFrame {
         jLabel30 = new javax.swing.JLabel();
         jlVentaICBC = new javax.swing.JLabel();
         jCDivisas = new javax.swing.JComboBox<>();
-        jPanel11 = new FondoPane1();
-        jLabel31 = new javax.swing.JLabel();
-        jtMontoAConvertir = new javax.swing.JTextField();
-        jPanel12 = new FondoPane1();
-        jLabel32 = new javax.swing.JLabel();
-        jtMontoTotal = new javax.swing.JTextField();
         jbConvertir = new javax.swing.JButton();
         jbLimpiar = new javax.swing.JButton();
         jLabel33 = new javax.swing.JLabel();
         jlFecha = new javax.swing.JLabel();
+        jPanel13 = new FondoPane1();
+        jlTipoDolar = new javax.swing.JLabel();
+        jlCotizacionTipoDolar = new javax.swing.JLabel();
+        jlCotizacionTipoDolar1 = new javax.swing.JLabel();
+        jlVariacion = new javax.swing.JLabel();
+        jPanel14 = new FondoPane1();
+        jLabel = new javax.swing.JLabel();
+        jtMontoAConvertir = new javax.swing.JTextField();
+        jPanel15 = new FondoPane1();
+        jLabel31 = new javax.swing.JLabel();
+        jlMontoConvertido = new javax.swing.JLabel();
 
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(776, 540));
+        setPreferredSize(new java.awt.Dimension(776, 650));
 
         jPanel1.setBackground(new java.awt.Color(60, 83, 147));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -228,7 +236,7 @@ public class Conversor extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlCompraNacion, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -741,78 +749,11 @@ public class Conversor extends javax.swing.JInternalFrame {
         jCDivisas.setBackground(new java.awt.Color(204, 204, 204));
         jCDivisas.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
         jCDivisas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Oficial BBVA", "Oficial Hipotecario", "Oficial Patagonia", "Oficial Macro", "Oficial ICBC", "Oficial HSBC", "Oficial Santander", "Oficial Supervielle", "Oficial Nacion", "Oficial Galicia", "Solidario", "MEP", "BLUE", "MEP AL30", "MEP AL30 Plazo CI", "MEP GD30", "MEP GD30 Plazo CI", "CCL", "CCL AL30", "CCL AL30 Plazo CI", "CCL GD30", "CCL GD30 Plazo CI", "CCB (Dólar Contado con Bitcoin o Dólar Cripto)" }));
-
-        jPanel11.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel31.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel31.setText("MONTO ($)");
-
-        jtMontoAConvertir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtMontoAConvertirActionPerformed(evt);
+        jCDivisas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCDivisasItemStateChanged(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jtMontoAConvertir)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
-                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtMontoAConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel12.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel12.setPreferredSize(new java.awt.Dimension(269, 77));
-
-        jLabel32.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("TOTAL ($)");
-
-        jtMontoTotal.setEditable(false);
-        jtMontoTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtMontoTotalActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jtMontoTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
-        );
 
         jbConvertir.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
         jbConvertir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coin_icon_151439 muymuy chico.png"))); // NOI18N
@@ -839,6 +780,124 @@ public class Conversor extends javax.swing.JInternalFrame {
         jlFecha.setForeground(new java.awt.Color(255, 255, 255));
         jlFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jPanel13.setBackground(new java.awt.Color(60, 83, 147));
+        jPanel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel13.setPreferredSize(new java.awt.Dimension(140, 140));
+
+        jlTipoDolar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jlTipoDolar.setForeground(new java.awt.Color(255, 255, 255));
+        jlTipoDolar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlTipoDolar.setPreferredSize(new java.awt.Dimension(90, 30));
+
+        jlCotizacionTipoDolar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jlCotizacionTipoDolar.setForeground(new java.awt.Color(255, 255, 255));
+        jlCotizacionTipoDolar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jlCotizacionTipoDolar1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jlCotizacionTipoDolar1.setForeground(new java.awt.Color(255, 255, 255));
+        jlCotizacionTipoDolar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlCotizacionTipoDolar1.setText("VAR:");
+
+        jlVariacion.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jlVariacion.setForeground(new java.awt.Color(255, 255, 255));
+        jlVariacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlTipoDolar, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlCotizacionTipoDolar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jlCotizacionTipoDolar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlVariacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(jlTipoDolar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlCotizacionTipoDolar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlCotizacionTipoDolar1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlVariacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel14.setBackground(new java.awt.Color(60, 83, 147));
+        jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel14.setPreferredSize(new java.awt.Dimension(140, 140));
+
+        jLabel.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel.setText("MONTO A CONVERTIR ($)");
+        jLabel.setPreferredSize(new java.awt.Dimension(90, 30));
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                    .addComponent(jtMontoAConvertir, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jtMontoAConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+
+        jPanel15.setBackground(new java.awt.Color(60, 83, 147));
+        jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel15.setPreferredSize(new java.awt.Dimension(140, 140));
+
+        jLabel31.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel31.setText("TOTAL ($)");
+        jLabel31.setPreferredSize(new java.awt.Dimension(90, 30));
+
+        jlMontoConvertido.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jlMontoConvertido.setForeground(new java.awt.Color(255, 255, 255));
+        jlMontoConvertido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlMontoConvertido.setPreferredSize(new java.awt.Dimension(90, 30));
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                    .addComponent(jlMontoConvertido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlMontoConvertido, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -847,42 +906,54 @@ public class Conversor extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jbConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCDivisas, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jlFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jbConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(106, 106, 106))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jlFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCDivisas, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -902,20 +973,20 @@ public class Conversor extends javax.swing.JInternalFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCDivisas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbLimpiar))
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                    .addComponent(jCDivisas)
+                    .addComponent(jbLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbConvertir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(279, 279, 279))
         );
 
         pack();
@@ -926,22 +997,146 @@ public class Conversor extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
-    private void jtMontoAConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtMontoAConvertirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtMontoAConvertirActionPerformed
-
-    private void jtMontoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtMontoTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtMontoTotalActionPerformed
-
     private void jbConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConvertirActionPerformed
 
 
     }//GEN-LAST:event_jbConvertirActionPerformed
 
+    private void jCDivisasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCDivisasItemStateChanged
+        
+        float var=0;
+        
+        if(jCDivisas.getSelectedItem().toString().equals("Oficial BBVA")){
+            jlTipoDolar.setText("Oficial BBVA");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaBBVA));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Oficial Hipotecario")){
+            jlTipoDolar.setText("Oficial Hipotecario");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaHipotecario));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Oficial Patagonia")){
+            jlTipoDolar.setText("Oficial Patagonia");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaPatagonia));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Oficial Macro")){
+            jlTipoDolar.setText("Oficial Macro");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaMacro));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Oficial ICBC")){
+            jlTipoDolar.setText("Oficial ICBC");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaICBC));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Oficial HSBC")){
+            jlTipoDolar.setText("Oficial HSBC");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaHSBC));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Oficial Santander")){
+            jlTipoDolar.setText("Oficial Santander");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaSantander));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Oficial Supervielle")){
+            jlTipoDolar.setText("Oficial Supervielle");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaSupervielle));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Oficial Nacion")){
+            jlTipoDolar.setText("Oficial Nacion");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaNacion));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Oficial Galicia")){
+            jlTipoDolar.setText("Oficial Galicia");
+            jlCotizacionTipoDolar.setText("$" + divisaData.cotizacionVenta(divisaGalicia));
+        } else if(jCDivisas.getSelectedItem().toString().equals("Solidario")){
+            divisa.setBanco("solidario");
+            jlTipoDolar.setText("Solidario");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("MEP")){
+            divisa.setBanco("mep");
+            divisa.setVariacion("mep_var");
+            jlTipoDolar.setText("MEP");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+            var=divisaData1.variacionTipoDolar(divisa);
+            if(var>=0.0){
+            jlVariacion.setForeground(Color.GREEN);
+            jlVariacion.setText("↑ "+var+"%");
+            }else if(var<0.0){
+            jlVariacion.setForeground(Color.RED);
+            jlVariacion.setText("↓ "+var+"%");
+            }
+        } else if(jCDivisas.getSelectedItem().toString().equals("BLUE")){
+            divisa.setBanco("blue");
+            divisa.setVariacion("blue_var");
+            jlTipoDolar.setText("BLUE");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+            var=divisaData1.variacionTipoDolar(divisa);
+            if(var>=0.0){
+            jlVariacion.setForeground(Color.GREEN);
+            jlVariacion.setText("↑ "+var+"%");
+            }else{
+            jlVariacion.setForeground(Color.RED);
+            jlVariacion.setText("↓ "+var+"%");
+            }
+        } else if(jCDivisas.getSelectedItem().toString().equals("MEP AL30")){
+            divisa.setBanco("mepal30");
+            jlTipoDolar.setText("MEP AL30");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("MEP AL30 Plazo CI")){
+            divisa.setBanco("mepal30ci");
+            jlTipoDolar.setText("MEP AL30 Plazo CI");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("MEP GD30")){
+            divisa.setBanco("mepgd30");
+            jlTipoDolar.setText("MEP GD30");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("MEP GD30 Plazo CI")){
+            divisa.setBanco("mepgd30ci");
+            jlTipoDolar.setText("MEP GD30 Plazo CI");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("MEP GD30")){
+            divisa.setBanco("mepgd30");
+            jlTipoDolar.setText("MEP GD30 Plazo CI");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("CCL")){
+            divisa.setBanco("ccl");
+            divisa.setVariacion("ccl_var");
+            jlTipoDolar.setText("CCL");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+            var=divisaData1.variacionTipoDolar(divisa);
+            if(var>=0.0){
+            jlVariacion.setForeground(Color.GREEN);
+            jlVariacion.setText("↑ "+var+"%");
+            }else{
+            jlVariacion.setForeground(Color.RED);
+            jlVariacion.setText("↓ "+var+"%");
+            }
+        } else if(jCDivisas.getSelectedItem().toString().equals("CCL AL30")){
+            divisa.setBanco("cclal30");
+            jlTipoDolar.setText("CCL AL30");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("CCL AL30 Plazo CI")){
+            divisa.setBanco("cclal30ci");
+            jlTipoDolar.setText("CCL AL30 Plazo CI");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("CCL GD30")){
+            divisa.setBanco("cclgd30");
+            jlTipoDolar.setText("CCL GD30");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("CCL GD30 Plazo CI")){
+            divisa.setBanco("cclgd30ci");
+            jlTipoDolar.setText("CCL GD30 Plazo CI");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+        } else if(jCDivisas.getSelectedItem().toString().equals("CCB (Dólar Contado con Bitcoin o Dólar Cripto)")){
+            divisa.setBanco("ccb");
+            divisa.setVariacion("ccb_var");
+            jlTipoDolar.setText("Dolar Cripto");
+            jlCotizacionTipoDolar.setText("$" + divisaData1.cotizacionTipoDolar(divisa));
+            var=divisaData1.variacionTipoDolar(divisa);
+            if(var>=0.0){
+            jlVariacion.setForeground(Color.GREEN);
+            jlVariacion.setText("↑ "+var+"%");
+            }else if (var<0.0){
+            jlVariacion.setForeground(Color.RED);
+            jlVariacion.setText("↓ "+var+"%");
+            }
+        }
+        
+            
+    }//GEN-LAST:event_jCDivisasItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCDivisas;
+    private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -967,7 +1162,6 @@ public class Conversor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -977,8 +1171,9 @@ public class Conversor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -999,7 +1194,12 @@ public class Conversor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlCompraPatagonia;
     private javax.swing.JLabel jlCompraSantander;
     private javax.swing.JLabel jlCompraSupervielle;
+    private javax.swing.JLabel jlCotizacionTipoDolar;
+    private javax.swing.JLabel jlCotizacionTipoDolar1;
     private javax.swing.JLabel jlFecha;
+    private javax.swing.JLabel jlMontoConvertido;
+    private javax.swing.JLabel jlTipoDolar;
+    private javax.swing.JLabel jlVariacion;
     private javax.swing.JLabel jlVentaBBVA;
     private javax.swing.JLabel jlVentaGalicia;
     private javax.swing.JLabel jlVentaHSBC;
@@ -1011,7 +1211,6 @@ public class Conversor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlVentaSantander;
     private javax.swing.JLabel jlVentaSupervielle;
     private javax.swing.JTextField jtMontoAConvertir;
-    private javax.swing.JTextField jtMontoTotal;
     // End of variables declaration//GEN-END:variables
 
     private void armarCotizaciones() {

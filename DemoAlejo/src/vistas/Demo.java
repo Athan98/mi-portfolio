@@ -5,17 +5,24 @@
  */
 package vistas;
 
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author Usuario
  */
 public class Demo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Conversor
-     */
+    Loading l = new Loading();
+
     public Demo() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        escritorio.moveToFront(l);
+        escritorio.add(l);
+        l.setVisible(false);
+        centrarLoading(l);
+
     }
 
     /**
@@ -31,7 +38,7 @@ public class Demo extends javax.swing.JFrame {
         jbConversor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 700));
 
         jbConversor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/1486564179-finance-saving_81499.png"))); // NOI18N
         jbConversor.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/1486564179-finance-saving_81499.png"))); // NOI18N
@@ -58,7 +65,7 @@ public class Demo extends javax.swing.JFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addComponent(jbConversor)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -76,13 +83,8 @@ public class Demo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConversorActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        Conversor c = new Conversor();
-        c.setVisible(true);
-        escritorio.add(c);
-        escritorio.moveToFront(c);
-        escritorio.add(jbConversor);
+
+        new Carga().show();
     }//GEN-LAST:event_jbConversorActionPerformed
 
     /**
@@ -122,7 +124,41 @@ public class Demo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
+    public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jbConversor;
     // End of variables declaration//GEN-END:variables
+
+    public class Carga implements Runnable {
+
+        public void show() {
+            new Thread(this).start();
+
+        }
+
+        public void run() {
+
+            l.setVisible(true);
+
+            Conversor c = new Conversor();
+            c.setVisible(true);
+            escritorio.add(c);
+            escritorio.moveToFront(c);
+
+            l.setVisible(false);
+
+        }
+
+    }
+    
+    private void centrarLoading(JInternalFrame intFrame){
+        int x =(escritorio.getWidth()/2)-(intFrame.getWidth()/2);
+        int y =(escritorio.getHeight()/2)-(intFrame.getHeight()/2);
+        intFrame.setLocation(x, y);
+   
+            
+        }
+        
+    
 }
+
+
