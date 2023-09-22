@@ -21,9 +21,7 @@ public class BancoCentral_data {
         LocalDate fechaActual = LocalDate.now();
         LocalDate fechaAnterior = inflacion.getFecha();
         DateTimeFormatter formatearFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        
 
-        
         for (int i = 0; i < jSONArray.length(); i++) {
             JSONObject jSONObject = jSONArray.getJSONObject(i);
             String fechaAPI = jSONObject.getString("d"); // Asume que "fecha" es el nombre del campo en el JSON
@@ -31,18 +29,19 @@ public class BancoCentral_data {
             if (fecha.isAfter(fechaAnterior) || fecha.isEqual(fechaAnterior)) {
                 // Fecha dentro del último año, obtener la tasa de cambio
                 double tasaCambio = jSONObject.getDouble("v"); // Asume el nombre del campo correcto
-                Inflacion inf=new Inflacion();
+                Inflacion inf = new Inflacion();
                 inf.setFecha(fecha);
                 inf.setTasa(tasaCambio);
                 inflacionList.add(inf);
-   
+
             }
         }
 
         return inflacionList;
     }
 
-    public void obtenerDatosEntreFechas(String fechaInicioStr, String fechaFinStr) {
+    public List obtenerDatosEntreFechas(String fechaInicioStr, String fechaFinStr) {
+        List<Inflacion> inflacionList = new ArrayList<>();
         // Parsear las fechas de inicio y fin desde las cadenas de texto
         DateTimeFormatter formatearFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fechaInicio = LocalDate.parse(fechaInicioStr, formatearFecha);
@@ -56,21 +55,50 @@ public class BancoCentral_data {
             if (!fecha.isBefore(fechaInicio) && !fecha.isAfter(fechaFin)) {
                 // Fecha dentro del rango, obtener la tasa de cambio
                 double tasaCambio = jSONObject.getDouble("v"); // Asume el nombre del campo correcto
-                System.out.println("Fecha: " + fechaAPI + ", Tasa de Cambio: " + tasaCambio);
+                Inflacion inf = new Inflacion();
+                inf.setFecha(fecha);
+                inf.setTasa(tasaCambio);
+                inflacionList.add(inf);
             }
         }
+        return inflacionList;
     }
 
-    public void obtenerDatoDeUnaFecha(LocalDate fechaIngresada) {
+    public Inflacion obtenerDatoDeUnaFecha(String fechaIngresada) {
+        Inflacion inflacion = new Inflacion();
         DateTimeFormatter formatearFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fechaIng = LocalDate.parse(fechaIngresada, formatearFecha);
         for (int i = 0; i < jSONArray.length(); i++) {
             JSONObject json = jSONArray.getJSONObject(i);
             String fechaAPI = json.getString("d");
             LocalDate fecha = LocalDate.parse(fechaAPI, formatearFecha);
-            if (fechaIngresada.isEqual(fecha)) {
+            if (fechaIng.isEqual(fecha)) {
                 double tasaInflacion = json.getDouble("v");
-                System.out.println("Fecha: " + fechaAPI + ", Tasa de Cambio: " + tasaInflacion);
+                inflacion.setFecha(fecha);
+                inflacion.setTasa(tasaInflacion);
+
             }
         }
+        return inflacion;
+    }
+
+    public Inflacion obtenerInflacionActual() {
+        Inflacion inflacion = new Inflacion();
+        LocalDate fechaActual = LocalDate.now();
+
+
+        for (int i = 0; i < jSONArray.length(); i++) {
+            JSONObject json = jSONArray.getJSONObject(i);
+            String fechaAPI = json.getString("d");
+            LocalDate fecha = LocalDate.parse(fechaAPI);
+
+            if (fechaActual.isEqual(fecha) || fechaActual.isAfter(fecha)) {
+                double tasaInflacion = json.getDouble("v");
+                inflacion.setFecha(fecha);
+                inflacion.setTasa(tasaInflacion);
+            }
+        }
+
+        return inflacion;
     }
 }

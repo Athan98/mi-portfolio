@@ -40,7 +40,7 @@ public class Inflacion {
 
     @Override
     public String toString() {
-        return "Fecha=" + fecha + ", Tasa=" + tasa;
+        return "Fecha (yyyy-mm-dd): " + fecha + ", Tasa (%): " + tasa;
     }
     
     

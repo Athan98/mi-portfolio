@@ -28,6 +28,7 @@ public class Demo extends javax.swing.JFrame {
         jbInflacion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1200, 750));
 
         jbConversor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/1486564179-finance-saving_81499.png"))); // NOI18N
         jbConversor.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/1486564179-finance-saving_81499.png"))); // NOI18N
