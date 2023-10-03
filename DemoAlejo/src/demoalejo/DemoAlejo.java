@@ -11,7 +11,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
@@ -36,6 +35,9 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -224,97 +226,24 @@ public class DemoAlejo {
 //    }
 //    
 // 
-    
+//    public static void main(String[] args) {
+//        ConexionBancoCentral conexion=new ConexionBancoCentral("https://api.estadisticasbcra.com/inflacion_interanual_oficial");
+//        BancoCentral_data bcra=new BancoCentral_data(conexion);
+//        Inflacion inf=new Inflacion();
+//        inf.setFecha(LocalDate.of(2020, 01, 01));
+//        List<Inflacion>inflacionList=bcra.obtenerDatosFechaAnteriorHastaActualidad(inf);
+//        System.out.println(inflacionList);
+//    }
+//    
+//    
 
+
+}
+    
       
 //        System.out.println(bc.obtenerDatosFechaAnteriorHastaActualidad(inf));
 
     
 
 
-public class XYLineAndShapeChartDemo extends JFrame {
 
-    JFreeChart chart;//declaramos un objeto de la clase JFreeChart para construir el grafico
-
-    public XYLineAndShapeChartDemo() {
-        //crear el JFrame
-        super("Ejemplo de XYLineAndShapeChart");
-        setSize(800, 600);
-        setLayout(null);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        crearGrafico();//metodo para cargar los datos y crear el grafico
-
-        ChartPanel panel = new ChartPanel(chart, false);//ChartPanel es una clase del paquete JFreeChart
-        //es igual que JPanel de swing. Sobre el ChartPanel se crea el grafico
-        panel.setBounds(10, 20, 760, 520);//damos ubicacion y tama�o al panel
-        add(panel);//anadimos el panel al JFrame
-
-        setVisible(true);   //mostrar el JFrame  
-    }
-
-    public void crearGrafico() {
-        XYSeries seriesPA = new XYSeries("Producto A");
-        
-        int y[] = {100, 85, 135, 100, 45, 60, 10, 50, 36, 74, 89, 110};
-        for (int i = 0; i < y.length; i++) {
-            seriesPA.add(i+1, y[i]);
-        }
-        
-        //vamos a graficar otra serie
-        XYSeries seriesPB = new XYSeries("Producto B");
-        // Asignar datos
-        seriesPB.add(1, 50);
-        seriesPB.add(2, 210);
-        seriesPB.add(3, 125);
-        seriesPB.add(4, 100);
-        seriesPB.add(5, 80);
-        seriesPB.add(6, 130);
-        seriesPB.add(7, 210);
-        seriesPB.add(8, 185);
-        seriesPB.add(9, 165);
-        seriesPB.add(10, 110);
-        seriesPB.add(11, 265);
-        seriesPB.add(12, 285);
-
-        XYSeries seriesPC = new XYSeries("Producto C");
-        seriesPC.add(1, 10);
-        seriesPC.add(2, 20);
-        seriesPC.add(3, 35);
-        seriesPC.add(4, 30);
-        seriesPC.add(5, 40);
-        seriesPC.add(6, 48);
-
-        //despues de cargar los datos de las series a graficar, las adicionamos a un conjunto de series
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(seriesPA);//anadir la serie 1
-        dataset.addSeries(seriesPB);//anadir la serie 2
-        dataset.addSeries(seriesPC);//anadir la serie 3
-        
-        chart = ChartFactory.createXYLineChart(
-                "Ventas 2014", 
-                "Meses", 
-                "Cantidad", 
-                dataset,// Datos
-                PlotOrientation.VERTICAL,
-                true, true, true);
-                
-        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-        renderer.setSeriesPaint(0, Color.ORANGE);
-        renderer.setSeriesPaint(1, Color.BLUE);
-        renderer.setSeriesPaint(2, Color.RED);
-        renderer.setSeriesStroke(0, new BasicStroke(2));
-        renderer.setSeriesStroke(1, new BasicStroke(2));
-        renderer.setSeriesStroke(2, new BasicStroke(2));
-        chart.getXYPlot().setRenderer(renderer);
-    }
-    
-    public static void main(String[] args) {
-        XYLineAndShapeChartDemo demo = new XYLineAndShapeChartDemo();
-         ConexionBancoCentral cbc=new ConexionBancoCentral("https://api.estadisticasbcra.com/inflacion_mensual_oficial");
-        BancoCentral_data bc=new BancoCentral_data(cbc);
-        Inflacion inf=new Inflacion(LocalDate.of(2022, 1, 02));
-    }
-}}

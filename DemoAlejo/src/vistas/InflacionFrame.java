@@ -5,10 +5,15 @@ import data.*;
 import entidades.Inflacion;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -24,32 +29,30 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.chart.labels.XYItemLabelGenerator;
 import static vistas.Demo.escritorio;
+import javax.swing.JPanel;
 
-/**
- *
- * @author Nicolas
- */
 public class InflacionFrame extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
+    JFreeChart grafico;
+    Loading l = new Loading();
+    Fondo fondo = new Fondo();
+    Panel panel =new Panel();
+    Panel2 panel2=new Panel2();
 
     public boolean isCellEditable(int fila, int col) {
         return false;
     }
 
-    JFreeChart grafico;
-
-    Loading l = new Loading();
-
-//    ConexionBancoCentral con2=new ConexionBancoCentral("https://api.estadisticasbcra.com/inflacion_interanual_oficial");
-//    ConexionBancoCentral con3=new ConexionBancoCentral("https://api.estadisticasbcra.com/inflacion_esperada_oficial");
     public InflacionFrame() {
+        this.setContentPane(fondo);
         initComponents();
         armarCabeceraTabla();
         escritorio.moveToFront(l);
         escritorio.add(l);
         l.setVisible(false);
         centrarLoading(l);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -58,47 +61,37 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
 
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new Panel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtInflacion = new javax.swing.JTable();
-        jbBuscarInflacionMensual = new javax.swing.JButton();
-        jbBorrarInflacionMensual = new javax.swing.JButton();
-        jbGraficarInflacionMensual = new javax.swing.JButton();
-        jtFecha2 = new javax.swing.JTextField();
-        Fecha2Label = new javax.swing.JLabel();
-        Fecha2Label1 = new javax.swing.JLabel();
-        jtFecha1 = new javax.swing.JTextField();
-        jcInflacionMensualOficial = new javax.swing.JComboBox<>();
+        jbBuscar = new javax.swing.JButton();
+        jbBorrar = new javax.swing.JButton();
+        jbGraficar = new javax.swing.JButton();
+        jcInflacion = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jtInflacion2 = new javax.swing.JTable();
-        jbBuscarInflacionMensual2 = new javax.swing.JButton();
-        jbBorrarInflacionMensual2 = new javax.swing.JButton();
-        jbGraficarInflacionMensual2 = new javax.swing.JButton();
-        jtFecha5 = new javax.swing.JTextField();
-        Fecha2Label4 = new javax.swing.JLabel();
-        Fecha2Label5 = new javax.swing.JLabel();
-        jtFecha6 = new javax.swing.JTextField();
-        jcInflacionMensualOficial2 = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtInflacion1 = new javax.swing.JTable();
-        jbBuscarInflacionMensual1 = new javax.swing.JButton();
-        jbBorrarInflacionMensual1 = new javax.swing.JButton();
-        jbGraficarInflacionMensual1 = new javax.swing.JButton();
-        jtFecha3 = new javax.swing.JTextField();
-        Fecha2Label2 = new javax.swing.JLabel();
-        Fecha2Label3 = new javax.swing.JLabel();
-        jtFecha4 = new javax.swing.JTextField();
-        jcInflacionMensualOficial1 = new javax.swing.JComboBox<>();
+        jpFechas = new Panel2();
+        Fecha1LabelInflacionMensual = new javax.swing.JLabel();
+        Fecha2LabelInflacionMensual = new javax.swing.JLabel();
+        jtFecha1 = new javax.swing.JTextField();
+        jtFecha2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new Panel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jlTasaCalculada = new javax.swing.JLabel();
+        jlFechaTasaCalculada = new javax.swing.JLabel();
+        jPanel3 = new Panel2();
+        jtValorAnterior = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jbConvertirValor = new javax.swing.JButton();
+        jlValorConvertido = new javax.swing.JLabel();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(1000, 600));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Inflacion/Deflacion");
 
@@ -118,334 +111,231 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtInflacion);
 
-        jbBuscarInflacionMensual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
-        jbBuscarInflacionMensual.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
-        jbBuscarInflacionMensual.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
-        jbBuscarInflacionMensual.addActionListener(new java.awt.event.ActionListener() {
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
+        jbBuscar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
+        jbBuscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarInflacionMensualActionPerformed(evt);
+                jbBuscarActionPerformed(evt);
             }
         });
 
-        jbBorrarInflacionMensual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
-        jbBorrarInflacionMensual.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
-        jbBorrarInflacionMensual.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
-        jbBorrarInflacionMensual.addActionListener(new java.awt.event.ActionListener() {
+        jbBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
+        jbBorrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
+        jbBorrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
+        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBorrarInflacionMensualActionPerformed(evt);
+                jbBorrarActionPerformed(evt);
             }
         });
 
-        jbGraficarInflacionMensual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
-        jbGraficarInflacionMensual.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
-        jbGraficarInflacionMensual.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
-        jbGraficarInflacionMensual.addActionListener(new java.awt.event.ActionListener() {
+        jbGraficar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
+        jbGraficar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
+        jbGraficar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
+        jbGraficar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbGraficarInflacionMensualActionPerformed(evt);
+                jbGraficarActionPerformed(evt);
             }
         });
 
-        Fecha2Label.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        Fecha2Label.setText("Fecha 2 (yyyy-mm-dd):");
-
-        Fecha2Label1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        Fecha2Label1.setText("Fecha 1 (yyyy-mm-dd):");
-
-        jcInflacionMensualOficial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione un tipo-", "Actualidad", "Entre una fecha y la actualidad", "Entre fecha y fecha ingresadas", " " }));
-        jcInflacionMensualOficial.addItemListener(new java.awt.event.ItemListener() {
+        jcInflacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jcInflacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione un tipo-", "Inflacion mensual actual", "Inflacion mensual en un periodo", "Inflacion acumulada actual", "Inflacion acumulada en un periodo", "Inflacion Interanual actual", "Inflacion Interanual esperada" }));
+        jcInflacion.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcInflacionMensualOficialItemStateChanged(evt);
+                jcInflacionItemStateChanged(evt);
             }
         });
 
-        jLabel1.setText("Inflacion/Deflacion Mensual Oficial");
+        jpFechas.setBackground(new java.awt.Color(255, 0, 51));
+
+        Fecha1LabelInflacionMensual.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        Fecha1LabelInflacionMensual.setText("Fecha anterior:");
+
+        Fecha2LabelInflacionMensual.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        Fecha2LabelInflacionMensual.setText("Fecha posterior:");
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Ingrese la/s fecha/s (yyyy-mm-dd)");
+
+        javax.swing.GroupLayout jpFechasLayout = new javax.swing.GroupLayout(jpFechas);
+        jpFechas.setLayout(jpFechasLayout);
+        jpFechasLayout.setHorizontalGroup(
+            jpFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFechasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                    .addGroup(jpFechasLayout.createSequentialGroup()
+                        .addGroup(jpFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Fecha2LabelInflacionMensual)
+                            .addComponent(Fecha1LabelInflacionMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtFecha1)
+                            .addComponent(jtFecha2))
+                        .addGap(6, 6, 6)))
+                .addContainerGap())
+        );
+        jpFechasLayout.setVerticalGroup(
+            jpFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpFechasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Fecha1LabelInflacionMensual)
+                    .addComponent(jtFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Fecha2LabelInflacionMensual)
+                    .addComponent(jtFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(jbGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpFechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jcInflacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcInflacionMensualOficial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Fecha2Label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtFecha2))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Fecha2Label1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtFecha1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jbBuscarInflacionMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                                .addComponent(jbBorrarInflacionMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbGraficarInflacionMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jcInflacionMensualOficial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Fecha2Label1)
-                    .addComponent(jtFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Fecha2Label)
-                    .addComponent(jtFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcInflacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpFechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbBorrarInflacionMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscarInflacionMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbGraficarInflacionMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel3.setPreferredSize(new java.awt.Dimension(326, 471));
+        jPanel2.setBackground(new java.awt.Color(255, 0, 0));
+        jPanel2.setPreferredSize(new java.awt.Dimension(326, 471));
 
-        jtInflacion2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jtInflacion2);
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("TASA (%):");
 
-        jbBuscarInflacionMensual2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
-        jbBuscarInflacionMensual2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
-        jbBuscarInflacionMensual2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
-        jbBuscarInflacionMensual2.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("FECHA (yyyy-mm-dd):");
+
+        jlTasaCalculada.setFont(new java.awt.Font("Arial Black", 2, 14)); // NOI18N
+        jlTasaCalculada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jlFechaTasaCalculada.setFont(new java.awt.Font("Arial Black", 2, 14)); // NOI18N
+        jlFechaTasaCalculada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel7.setFont(new java.awt.Font("Arial Narrow", 3, 24)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("LO QUE ANTES VALÍA:");
+
+        jbConvertirValor.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jbConvertirValor.setText("AHORA VALE...");
+        jbConvertirValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarInflacionMensual2ActionPerformed(evt);
+                jbConvertirValorActionPerformed(evt);
             }
         });
 
-        jbBorrarInflacionMensual2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
-        jbBorrarInflacionMensual2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
-        jbBorrarInflacionMensual2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
-        jbBorrarInflacionMensual2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBorrarInflacionMensual2ActionPerformed(evt);
-            }
-        });
-
-        jbGraficarInflacionMensual2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
-        jbGraficarInflacionMensual2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
-        jbGraficarInflacionMensual2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
-        jbGraficarInflacionMensual2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbGraficarInflacionMensual2ActionPerformed(evt);
-            }
-        });
-
-        Fecha2Label4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        Fecha2Label4.setText("Fecha 2 (yyyy-mm-dd):");
-
-        Fecha2Label5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        Fecha2Label5.setText("Fecha 1 (yyyy-mm-dd):");
-
-        jcInflacionMensualOficial2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione un tipo-", "Actualidad", "Entre una fecha y la actualidad", "Entre fecha y fecha ingresadas", " " }));
-        jcInflacionMensualOficial2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcInflacionMensualOficial2ItemStateChanged(evt);
-            }
-        });
-
-        jLabel4.setText("Inflacion/Deflacion Mensual Oficial");
+        jlValorConvertido.setFont(new java.awt.Font("Arial Narrow", 3, 24)); // NOI18N
+        jlValorConvertido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jLabel4)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(Fecha2Label4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtFecha5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcInflacionMensualOficial2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(Fecha2Label5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtFecha6))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jbBuscarInflacionMensual2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbBorrarInflacionMensual2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbGraficarInflacionMensual2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                .addGap(97, 97, 97)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbConvertirValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtValorAnterior)
+                    .addComponent(jlValorConvertido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jcInflacionMensualOficial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Fecha2Label5)
-                    .addComponent(jtFecha6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jtValorAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Fecha2Label4)
-                    .addComponent(jtFecha5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jbConvertirValor, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbBorrarInflacionMensual2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscarInflacionMensual2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbGraficarInflacionMensual2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jlValorConvertido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2.setPreferredSize(new java.awt.Dimension(326, 471));
-
-        jtInflacion1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jtInflacion1);
-
-        jbBuscarInflacionMensual1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
-        jbBuscarInflacionMensual1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
-        jbBuscarInflacionMensual1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
-        jbBuscarInflacionMensual1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarInflacionMensual1ActionPerformed(evt);
-            }
-        });
-
-        jbBorrarInflacionMensual1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
-        jbBorrarInflacionMensual1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
-        jbBorrarInflacionMensual1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
-        jbBorrarInflacionMensual1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBorrarInflacionMensual1ActionPerformed(evt);
-            }
-        });
-
-        jbGraficarInflacionMensual1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
-        jbGraficarInflacionMensual1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
-        jbGraficarInflacionMensual1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
-        jbGraficarInflacionMensual1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbGraficarInflacionMensual1ActionPerformed(evt);
-            }
-        });
-
-        Fecha2Label2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        Fecha2Label2.setText("Fecha 2 (yyyy-mm-dd):");
-
-        Fecha2Label3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        Fecha2Label3.setText("Fecha 1 (yyyy-mm-dd):");
-
-        jcInflacionMensualOficial1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione un tipo-", "Actualidad", "Entre una fecha y la actualidad", "Entre fecha y fecha ingresadas", " " }));
-        jcInflacionMensualOficial1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcInflacionMensualOficial1ItemStateChanged(evt);
-            }
-        });
-
-        jLabel2.setText("Inflacion/Deflacion Mensual Oficial");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(Fecha2Label2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtFecha3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlFechaTasaCalculada, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcInflacionMensualOficial1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(Fecha2Label3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtFecha4))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jbBuscarInflacionMensual1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbBorrarInflacionMensual1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbGraficarInflacionMensual1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlTasaCalculada, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 46, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 37, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jcInflacionMensualOficial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Fecha2Label3)
-                    .addComponent(jtFecha4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Fecha2Label2)
-                    .addComponent(jtFecha3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbBorrarInflacionMensual1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscarInflacionMensual1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbGraficarInflacionMensual1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlFechaTasaCalculada, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlTasaCalculada, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -457,42 +347,56 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(973, 973, 973))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbBuscarInflacionMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarInflacionMensualActionPerformed
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
-        CargaInflacionMensual cargaInflacionMensual = new CargaInflacionMensual();
-        cargaInflacionMensual.start();
-    }//GEN-LAST:event_jbBuscarInflacionMensualActionPerformed
+        if (jcInflacion.getSelectedItem().equals("-Seleccione un tipo-")) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un elemento de la lista");
+        } else if (jcInflacion.getSelectedItem().equals("Inflacion mensual en un periodo")
+                || jcInflacion.getSelectedItem().equals("Inflacion mensual actual")) {
+            CargaInflacionMensual cargaInflacionMensual = new CargaInflacionMensual();
+            cargaInflacionMensual.start();
+        } else if (jcInflacion.getSelectedItem().equals("Inflacion acumulada actual")
+                || jcInflacion.getSelectedItem().equals("Inflacion acumulada en un periodo")) {
+            CargarInflacionAcumulada cia = new CargarInflacionAcumulada();
+            cia.start();
+        } else if (jcInflacion.getSelectedItem().equals("Inflacion Interanual actual")) {
 
-    private void jbGraficarInflacionMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGraficarInflacionMensualActionPerformed
+            CargarInflacionInterAnual ciia = new CargarInflacionInterAnual();
+            ciia.start();
+
+        } else if (jcInflacion.getSelectedItem().equals("Inflacion Interanual esperada")) {
+
+            CargarInflacionEsperada cie = new CargarInflacionEsperada();
+            cie.start();
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGraficarActionPerformed
         ArrayList<String> fechas = new ArrayList<>();
-        if (jcInflacionMensualOficial.getSelectedItem().equals("Entre una fecha y la actualidad")) {
+        if (jcInflacion.getSelectedItem().equals("Inflacion mensual en un periodo")) {
             XYSeries infMensual = new XYSeries("Inflacion mensual oficial");
             for (int i = 0; i < jtInflacion.getRowCount(); i++) {
                 LocalDate fecha = (LocalDate) modelo.getValueAt(i, 0);
@@ -553,174 +457,109 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
             ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             ventana.add(panel);
 
-        }else if(jcInflacionMensualOficial.getSelectedItem().equals("Entre fecha y fecha ingresadas")){
-             XYSeries infMensual = new XYSeries("Inflacion mensual oficial");
-            for (int i = 0; i < jtInflacion.getRowCount(); i++) {
-                LocalDate fecha = (LocalDate) modelo.getValueAt(i, 0);
-                Object tasa = modelo.getValueAt(i, 1);
+        }
 
-                // Asegurarse de que fecha y tasa sean valores numéricos antes de agregarlos al gráfico
-                if (fecha instanceof LocalDate && tasa instanceof Double) {
-                    long fechaLong = fecha.toEpochDay();
-                    infMensual.add(fechaLong, (Double) tasa);
-                    LocalDate fechaLD = LocalDate.ofEpochDay(fechaLong);
-                    String fechaFormat = fechaLD.format(DateTimeFormatter.ofPattern("yyyy/MM"));
-                    fechas.add(fechaFormat);
+    }//GEN-LAST:event_jbGraficarActionPerformed
 
-                }
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+        jtFecha1.setText("");
+        jtFecha2.setText("");
+        jcInflacion.setSelectedIndex(0);
+        jlValorConvertido.setText("");
+        jtValorAnterior.setText("");
+    }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void jcInflacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcInflacionItemStateChanged
+        Fecha1LabelInflacionMensual.setVisible(true);
+        jtFecha1.setEditable(true);
+        jbGraficar.setEnabled(true);
+        jbBorrar.setEnabled(true);
+        Fecha2LabelInflacionMensual.setVisible(true);
+        jtFecha2.setEditable(true);
+        jpFechas.setVisible(true);
+        jtFecha1.setText("");
+        jtFecha2.setText("");
+        jlFechaTasaCalculada.setText("");
+        jlTasaCalculada.setText("");
+        jlValorConvertido.setText("");
+        jtValorAnterior.setText("");
+        if (jcInflacion.getSelectedItem().equals("Inflacion mensual actual")) {
+            jtFecha1.setEditable(false);
+            jtFecha2.setEditable(false);
+            jbGraficar.setEnabled(false);
+            borrarFilas(modelo);
+        } else if (jcInflacion.getSelectedItem().equals("Inflacion acumulada actual")) {
+            jtFecha1.setEditable(false);
+            jtFecha2.setEditable(false);
+            jbGraficar.setEnabled(false);
+            borrarFilas(modelo);
+        } else if (jcInflacion.getSelectedItem().equals("Inflacion Interanual actual")) {
+            jtFecha1.setEditable(false);
+            jtFecha2.setEditable(false);
+            jbGraficar.setEnabled(false);
+            borrarFilas(modelo);
+        } else if (jcInflacion.getSelectedItem().equals("Inflacion Interanual esperada")) {
+            jtFecha1.setEditable(false);
+            jtFecha2.setEditable(false);
+            jbGraficar.setEnabled(false);
+            borrarFilas(modelo);
+        }
+    }//GEN-LAST:event_jcInflacionItemStateChanged
+
+    private void jbConvertirValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConvertirValorActionPerformed
+        try {
+            if (jtValorAnterior.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(this, "Debe ingresar un monto");
+                jtValorAnterior.setText("");
+
+            } else {
+
+                Float montoConvertido = Float.parseFloat(jtValorAnterior.getText()) * Float.parseFloat(jlTasaCalculada.getText());
+                DecimalFormat decimalFormat = new DecimalFormat("#.##"); // Cambia el número de decimales según tus necesidades
+                String montoConvertidoFormatted = decimalFormat.format(montoConvertido);
+
+                jlValorConvertido.setText("$"+montoConvertidoFormatted);
 
             }
+        } catch (NumberFormatException | NullPointerException e) {
 
-            XYSeriesCollection dataset = new XYSeriesCollection(infMensual);
+            JOptionPane.showMessageDialog(this, "Llene el campo correctamente");
 
-            grafico = ChartFactory.createXYLineChart(
-                    "Inflacion Mensual Oficial",
-                    "Fecha",
-                    "Tasa",
-                    dataset,
-                    PlotOrientation.VERTICAL, true, true, true);
+        } catch (Exception e) {
 
-            XYPlot plot = grafico.getXYPlot();
-
-            NumberAxis xAxis = (NumberAxis) plot.getDomainAxis();
-            xAxis.setTickLabelsVisible(false);
-
-            XYItemLabelGenerator generator = new XYItemLabelGenerator() {
-                @Override
-                public String generateLabel(XYDataset dataset, int series, int item) {
-                    // Obtén el índice del array correspondiente al punto de datos actual
-                    if (item >= 0 && item < fechas.size()) {
-                        return fechas.get(item); // Devuelve la fecha del array como etiqueta
-                    }
-                    return ""; // Devuelve una cadena vacía si el índice está fuera de rango
-                }
-            };
-
-            // Diseño de las líneas del gráfico
-            XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-            renderer.setDefaultItemLabelGenerator(generator);
-            renderer.setDefaultItemLabelsVisible(true);
-            renderer.setSeriesPaint(0, Color.RED);
-            renderer.setSeriesStroke(0, new BasicStroke(2));
-
-            plot.setRenderer(renderer);
-
-            // Crear panel y mostrar el gráfico
-            ChartPanel panel = new ChartPanel(grafico);
-
-            JFrame ventana = new JFrame("Gráfica");
-            ventana.setVisible(true);
-            ventana.setSize(1000, 700);
-            ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            ventana.add(panel);
-
-        
+            JOptionPane.showMessageDialog(this, "Error. Intentelo nuevamente");
         }
-
-    }//GEN-LAST:event_jbGraficarInflacionMensualActionPerformed
-
-    private void jbBorrarInflacionMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarInflacionMensualActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbBorrarInflacionMensualActionPerformed
-
-    private void jcInflacionMensualOficialItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcInflacionMensualOficialItemStateChanged
-        if (jcInflacionMensualOficial.getSelectedItem().equals("Entre una fecha y la actualidad")) {
-            Fecha2Label1.setVisible(true);
-            jtFecha1.setVisible(true);
-            jbGraficarInflacionMensual.setEnabled(true);
-            jbBorrarInflacionMensual.setEnabled(true);
-            Fecha2Label.setVisible(false);
-            jtFecha2.setVisible(false);
-        } else if (jcInflacionMensualOficial.getSelectedItem().equals("Actualidad")) {
-            Fecha2Label.setVisible(false);
-            Fecha2Label1.setVisible(false);
-            jtFecha1.setVisible(false);
-            jtFecha2.setVisible(false);
-            jbGraficarInflacionMensual.setEnabled(false);
-            jbBorrarInflacionMensual.setEnabled(false);
-        } else {
-            Fecha2Label.setVisible(true);
-            Fecha2Label1.setVisible(true);
-            jtFecha1.setVisible(true);
-            jtFecha2.setVisible(true);
-            jbGraficarInflacionMensual.setEnabled(true);
-            jbBorrarInflacionMensual.setEnabled(true);
-        }
-
-    }//GEN-LAST:event_jcInflacionMensualOficialItemStateChanged
-
-    private void jbBuscarInflacionMensual1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarInflacionMensual1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbBuscarInflacionMensual1ActionPerformed
-
-    private void jbBorrarInflacionMensual1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarInflacionMensual1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbBorrarInflacionMensual1ActionPerformed
-
-    private void jbGraficarInflacionMensual1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGraficarInflacionMensual1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbGraficarInflacionMensual1ActionPerformed
-
-    private void jcInflacionMensualOficial1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcInflacionMensualOficial1ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcInflacionMensualOficial1ItemStateChanged
-
-    private void jbBuscarInflacionMensual2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarInflacionMensual2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbBuscarInflacionMensual2ActionPerformed
-
-    private void jbBorrarInflacionMensual2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarInflacionMensual2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbBorrarInflacionMensual2ActionPerformed
-
-    private void jbGraficarInflacionMensual2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGraficarInflacionMensual2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbGraficarInflacionMensual2ActionPerformed
-
-    private void jcInflacionMensualOficial2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcInflacionMensualOficial2ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcInflacionMensualOficial2ItemStateChanged
+    }//GEN-LAST:event_jbConvertirValorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Fecha2Label;
-    private javax.swing.JLabel Fecha2Label1;
-    private javax.swing.JLabel Fecha2Label2;
-    private javax.swing.JLabel Fecha2Label3;
-    private javax.swing.JLabel Fecha2Label4;
-    private javax.swing.JLabel Fecha2Label5;
+    private javax.swing.JLabel Fecha1LabelInflacionMensual;
+    private javax.swing.JLabel Fecha2LabelInflacionMensual;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton jbBorrarInflacionMensual;
-    private javax.swing.JButton jbBorrarInflacionMensual1;
-    private javax.swing.JButton jbBorrarInflacionMensual2;
-    private javax.swing.JButton jbBuscarInflacionMensual;
-    private javax.swing.JButton jbBuscarInflacionMensual1;
-    private javax.swing.JButton jbBuscarInflacionMensual2;
-    private javax.swing.JButton jbGraficarInflacionMensual;
-    private javax.swing.JButton jbGraficarInflacionMensual1;
-    private javax.swing.JButton jbGraficarInflacionMensual2;
-    private javax.swing.JComboBox<String> jcInflacionMensualOficial;
-    private javax.swing.JComboBox<String> jcInflacionMensualOficial1;
-    private javax.swing.JComboBox<String> jcInflacionMensualOficial2;
+    private javax.swing.JButton jbBorrar;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbConvertirValor;
+    private javax.swing.JButton jbGraficar;
+    private javax.swing.JComboBox<String> jcInflacion;
+    private javax.swing.JLabel jlFechaTasaCalculada;
+    private javax.swing.JLabel jlTasaCalculada;
+    private javax.swing.JLabel jlValorConvertido;
+    private javax.swing.JPanel jpFechas;
     private javax.swing.JTextField jtFecha1;
     private javax.swing.JTextField jtFecha2;
-    private javax.swing.JTextField jtFecha3;
-    private javax.swing.JTextField jtFecha4;
-    private javax.swing.JTextField jtFecha5;
-    private javax.swing.JTextField jtFecha6;
     private javax.swing.JTable jtInflacion;
-    private javax.swing.JTable jtInflacion1;
-    private javax.swing.JTable jtInflacion2;
+    private javax.swing.JTextField jtValorAnterior;
     // End of variables declaration//GEN-END:variables
 
     public void armarCabeceraTabla() {
@@ -741,6 +580,7 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
 
     public class CargaInflacionMensual extends Thread {
 
+        @Override
         public void run() {
             l.setVisible(true);
             ConexionBancoCentral con = new ConexionBancoCentral("https://api.estadisticasbcra.com/inflacion_mensual_oficial");
@@ -748,40 +588,141 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
             l.setVisible(false);
 
             borrarFilas(modelo);
-            if (jcInflacionMensualOficial.getSelectedItem().equals("Entre una fecha y la actualidad")) {
-                String fechaIngresada = jtFecha1.getText();
-                DateTimeFormatter formatearFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate fechaFormat = LocalDate.parse(fechaIngresada, formatearFecha);
-                Inflacion inflacion = new Inflacion();
-                inflacion.setFecha(fechaFormat);
-                List<Inflacion> inflacionList = inflacionMensual.obtenerDatosFechaAnteriorHastaActualidad(inflacion);
-                for (Inflacion inf : inflacionList) {
-                    modelo.addRow(new Object[]{
-                        inf.getFecha(),
-                        inf.getTasa()
-                    });
+
+            try {
+                if (jcInflacion.getSelectedItem().equals("Inflacion mensual en un periodo")) {
+
+                    List<Inflacion> inflacionList = inflacionMensual.obtenerDatosEntreFechas(jtFecha1.getText(), jtFecha2.getText());
+                    for (Inflacion inf : inflacionList) {
+                        modelo.addRow(new Object[]{
+                            inf.getFecha(),
+                            inf.getTasa()
+                        });
+                    }
+
+                } else if (jcInflacion.getSelectedItem().equals("Inflacion mensual actual")) {
+
+                    Inflacion inflacion = inflacionMensual.obtenerInflacionActual();
+                    jlFechaTasaCalculada.setText(inflacion.getFecha() + "");
+                    jlTasaCalculada.setText(inflacion.getTasa() + "");
+
                 }
 
-            }else if(jcInflacionMensualOficial.getSelectedItem().equals("Entre fecha y fecha ingresadas")){
-            
-                List<Inflacion> inflacionList =inflacionMensual.obtenerDatosEntreFechas(jtFecha1.getText(), jtFecha2.getText());
-                for (Inflacion inf : inflacionList) {
-                    modelo.addRow(new Object[]{
-                        inf.getFecha(),
-                        inf.getTasa()
-                    });
-                }
-                
-                
-            }else if(jcInflacionMensualOficial.getSelectedItem().equals("Actualidad")){
-                
-                Inflacion inflacion=inflacionMensual.obtenerInflacionActual();
-                JOptionPane.showMessageDialog(null, inflacion.toString());
-            
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error. Vuelva a intentarlo");
+                jtFecha1.setText("");
+                jtFecha2.setText("");
+                jcInflacion.setSelectedIndex(0);
+
             }
 
         }
 
+        @Override
+        public UncaughtExceptionHandler getUncaughtExceptionHandler() {
+            return super.getUncaughtExceptionHandler(); //To change body of generated methods, choose Tools | Templates.
+        }
+
+    }
+
+    public class CargarInflacionAcumulada extends Thread {
+
+        @Override
+        public void run() {
+            l.setVisible(true);
+            ConexionBancoCentral con = new ConexionBancoCentral("https://api.estadisticasbcra.com/inflacion_mensual_oficial");
+            BancoCentral_data inflacion = new BancoCentral_data(con);
+            l.setVisible(false);
+
+            borrarFilas(modelo);
+            double inflacionAcumulada = 0;
+            try {
+                if (jcInflacion.getSelectedItem().equals("Inflacion acumulada en un periodo")) {
+
+                    List<Inflacion> inflacionList = inflacion.obtenerDatosEntreFechas(jtFecha1.getText(), jtFecha2.getText());
+                    for (Inflacion inf : inflacionList) {
+                        inflacionAcumulada = inflacionAcumulada + inf.getTasa();
+                    }
+                    jlFechaTasaCalculada.setText(" " + jtFecha1.getText() + " ---> " + jtFecha2.getText());
+                    jlTasaCalculada.setText(inflacionAcumulada + "");
+
+                } else if (jcInflacion.getSelectedItem().equals("Inflacion acumulada actual")) {
+
+                    inflacionAcumulada = inflacion.obtenerInflacionAcumuladaActual();
+                    jlFechaTasaCalculada.setText(LocalDate.now().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth()) + "");
+                    jlTasaCalculada.setText(inflacionAcumulada + "");
+
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error. Vuelva a intentarlo");
+                jtFecha1.setText("");
+                jtFecha2.setText("");
+                jcInflacion.setSelectedIndex(0);
+            }
+        }
+    }
+
+    public class CargarInflacionInterAnual extends Thread {
+
+        @Override
+        public void run() {
+            l.setVisible(true);
+            ConexionBancoCentral con = new ConexionBancoCentral("https://api.estadisticasbcra.com/inflacion_interanual_oficial");
+            BancoCentral_data inflacion = new BancoCentral_data(con);
+            l.setVisible(false);
+
+            Inflacion inf = new Inflacion();
+
+            borrarFilas(modelo);
+
+            try {
+
+                if (jcInflacion.getSelectedItem().equals("Inflacion Interanual actual")) {
+
+                    inf = inflacion.obtenerInflacionInterAnual();
+                    jlFechaTasaCalculada.setText(inf.getFecha() + "");
+                    jlTasaCalculada.setText(inf.getTasa() + "");
+
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error. Vuelva a intentarlo");
+                jtFecha1.setText("");
+                jtFecha2.setText("");
+                jcInflacion.setSelectedIndex(0);
+            }
+
+        }
+    }
+
+    public class CargarInflacionEsperada extends Thread {
+
+        @Override
+        public void run() {
+            l.setVisible(true);
+            ConexionBancoCentral con = new ConexionBancoCentral("https://api.estadisticasbcra.com/inflacion_esperada_oficial");
+            BancoCentral_data inflacion = new BancoCentral_data(con);
+            l.setVisible(false);
+
+            Inflacion inf = new Inflacion();
+
+            borrarFilas(modelo);
+
+            try {
+                if (jcInflacion.getSelectedItem().equals("Inflacion Interanual esperada")) {
+
+                    inf = inflacion.obtenerInflacionEsperada();
+                    jlFechaTasaCalculada.setText(inf.getFecha() + "");
+                    jlTasaCalculada.setText(inf.getTasa() + "");
+
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error. Vuelva a intentarlo");
+                jtFecha1.setText("");
+                jtFecha2.setText("");
+                jcInflacion.setSelectedIndex(0);
+            }
+        }
     }
 
     private void centrarLoading(JInternalFrame intFrame) {
@@ -789,5 +730,54 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
         int y = (escritorio.getHeight() / 2) - (intFrame.getHeight() / 2);
         intFrame.setLocation(x, y);
 
+    }
+    
+    public class Fondo extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+
+            imagen = new ImageIcon(getClass().getResource("/icons/fondoMacroeconomia.jpg")).getImage();
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+
+            setOpaque(false);
+
+            super.paint(g);
+        }
+    }
+    
+    public class Panel extends JPanel {
+
+        private Image imagen;
+
+        public void paint(Graphics g) {
+
+            imagen = new ImageIcon(getClass().getResource("/icons/muro-hormigon-negro.jpg")).getImage();
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+
+            setOpaque(false);
+
+            super.paint(g);
+        }
+    }
+    
+    public class Panel2 extends JPanel {
+
+        private Image imagen;
+
+        public void paint(Graphics g) {
+
+            imagen = new ImageIcon(getClass().getResource("/icons/fondoAcuarela.jpg")).getImage();
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+
+            setOpaque(false);
+
+            super.paint(g);
+        }
     }
 }

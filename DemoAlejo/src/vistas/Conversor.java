@@ -16,8 +16,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
-
 public class Conversor extends javax.swing.JInternalFrame {
 
     FondoPanel fondo = new FondoPanel();
