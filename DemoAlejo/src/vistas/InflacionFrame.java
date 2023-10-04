@@ -69,7 +69,7 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
         jbGraficar = new javax.swing.JButton();
         jcInflacion = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jpFechas = new Panel2();
+        jpFechas = new javax.swing.JPanel();
         Fecha1LabelInflacionMensual = new javax.swing.JLabel();
         Fecha2LabelInflacionMensual = new javax.swing.JLabel();
         jtFecha1 = new javax.swing.JTextField();
@@ -80,7 +80,7 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jlTasaCalculada = new javax.swing.JLabel();
         jlFechaTasaCalculada = new javax.swing.JLabel();
-        jPanel3 = new Panel2();
+        jPanel3 = new javax.swing.JPanel();
         jtValorAnterior = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jbConvertirValor = new javax.swing.JButton();
@@ -95,9 +95,11 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Inflacion/Deflacion");
 
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setPreferredSize(new java.awt.Dimension(326, 471));
 
+        jtInflacion.setBackground(new java.awt.Color(66, 66, 66));
+        jtInflacion.setForeground(new java.awt.Color(255, 255, 255));
         jtInflacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -109,8 +111,12 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtInflacion.setSelectionBackground(new java.awt.Color(0, 153, 204));
+        jtInflacion.setSelectionForeground(new java.awt.Color(153, 153, 153));
         jScrollPane1.setViewportView(jtInflacion);
 
+        jbBuscar.setBackground(new java.awt.Color(66, 66, 66));
+        jbBuscar.setForeground(new java.awt.Color(66, 66, 66));
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
         jbBuscar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
         jbBuscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-social-web-network-internet_340_icon-icons.com_61497.png"))); // NOI18N
@@ -120,6 +126,8 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jbBorrar.setBackground(new java.awt.Color(66, 66, 66));
+        jbBorrar.setForeground(new java.awt.Color(66, 66, 66));
         jbBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
         jbBorrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
         jbBorrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BORRAR.png"))); // NOI18N
@@ -129,6 +137,8 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jbGraficar.setBackground(new java.awt.Color(66, 66, 66));
+        jbGraficar.setForeground(new java.awt.Color(66, 66, 66));
         jbGraficar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
         jbGraficar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
         jbGraficar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graph_finance_growth_information_statistic_investment_progress_chart_data_icon_233836.png"))); // NOI18N
@@ -138,7 +148,9 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jcInflacion.setBackground(new java.awt.Color(66, 66, 66));
         jcInflacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jcInflacion.setForeground(new java.awt.Color(255, 255, 255));
         jcInflacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione un tipo-", "Inflacion mensual actual", "Inflacion mensual en un periodo", "Inflacion acumulada actual", "Inflacion acumulada en un periodo", "Inflacion Interanual actual", "Inflacion Interanual esperada" }));
         jcInflacion.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -146,15 +158,24 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jpFechas.setBackground(new java.awt.Color(255, 0, 51));
+        jpFechas.setBackground(new java.awt.Color(66, 66, 66));
+        jpFechas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jpFechas.setForeground(new java.awt.Color(66, 66, 66));
+        jpFechas.setToolTipText("");
 
+        Fecha1LabelInflacionMensual.setBackground(new java.awt.Color(255, 255, 255));
         Fecha1LabelInflacionMensual.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        Fecha1LabelInflacionMensual.setForeground(new java.awt.Color(255, 255, 255));
         Fecha1LabelInflacionMensual.setText("Fecha anterior:");
 
+        Fecha2LabelInflacionMensual.setBackground(new java.awt.Color(255, 255, 255));
         Fecha2LabelInflacionMensual.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        Fecha2LabelInflacionMensual.setForeground(new java.awt.Color(255, 255, 255));
         Fecha2LabelInflacionMensual.setText("Fecha posterior:");
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Ingrese la/s fecha/s (yyyy-mm-dd)");
 
@@ -198,7 +219,7 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,35 +254,50 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
                     .addComponent(jbBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(66, 66, 66));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setPreferredSize(new java.awt.Dimension(326, 471));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("TASA (%):");
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("FECHA (yyyy-mm-dd):");
 
-        jlTasaCalculada.setFont(new java.awt.Font("Arial Black", 2, 14)); // NOI18N
+        jlTasaCalculada.setBackground(new java.awt.Color(255, 255, 255));
+        jlTasaCalculada.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jlTasaCalculada.setForeground(new java.awt.Color(255, 255, 255));
         jlTasaCalculada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jlFechaTasaCalculada.setFont(new java.awt.Font("Arial Black", 2, 14)); // NOI18N
+        jlFechaTasaCalculada.setBackground(new java.awt.Color(255, 255, 255));
+        jlFechaTasaCalculada.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jlFechaTasaCalculada.setForeground(new java.awt.Color(255, 255, 255));
         jlFechaTasaCalculada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jPanel3.setBackground(new java.awt.Color(66, 66, 66));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.setForeground(new java.awt.Color(66, 66, 66));
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Arial Narrow", 3, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("LO QUE ANTES VALÍA:");
 
+        jbConvertirValor.setBackground(new java.awt.Color(66, 66, 66));
         jbConvertirValor.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jbConvertirValor.setForeground(new java.awt.Color(255, 255, 255));
         jbConvertirValor.setText("AHORA VALE...");
         jbConvertirValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,7 +305,9 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jlValorConvertido.setFont(new java.awt.Font("Arial Narrow", 3, 24)); // NOI18N
+        jlValorConvertido.setBackground(new java.awt.Color(255, 255, 255));
+        jlValorConvertido.setFont(new java.awt.Font("Arial Black", 3, 24)); // NOI18N
+        jlValorConvertido.setForeground(new java.awt.Color(255, 255, 255));
         jlValorConvertido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -281,9 +319,12 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbConvertirValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtValorAnterior)
-                    .addComponent(jlValorConvertido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jtValorAnterior))
                 .addContainerGap(99, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlValorConvertido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,9 +335,9 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
                 .addComponent(jtValorAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbConvertirValor, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlValorConvertido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -317,7 +358,7 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
                         .addComponent(jlTasaCalculada, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 46, Short.MAX_VALUE)
+                        .addGap(0, 39, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 37, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -333,7 +374,7 @@ public class InflacionFrame extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlTasaCalculada, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
