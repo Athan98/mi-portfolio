@@ -37,7 +37,6 @@ public class Principal extends javax.swing.JFrame {
         jmReservas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 800));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -77,6 +76,11 @@ public class Principal extends javax.swing.JFrame {
         jReservas.setText("Reservas");
 
         jmReservas.setText("Gestionar");
+        jmReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmReservasActionPerformed(evt);
+            }
+        });
         jReservas.add(jmReservas);
 
         jMenuBar1.add(jReservas);
@@ -114,6 +118,15 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(h);
         escritorio.moveToFront(h);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jmReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReservasActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        Reserva_Vista rv = new Reserva_Vista();
+        rv.setVisible(true);
+        escritorio.add(rv);
+        escritorio.moveToFront(rv);
+    }//GEN-LAST:event_jmReservasActionPerformed
 
     /**
      * @param args the command line arguments

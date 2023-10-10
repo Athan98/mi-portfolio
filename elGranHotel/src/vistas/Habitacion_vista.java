@@ -20,6 +20,7 @@ public class Habitacion_vista extends javax.swing.JInternalFrame {
         PanePrincipal.addTab("Agregar Habitacion",panelGH);
         //PanePrincipal.addTab("Busqueda",panelBH);
         PanePrincipal.setSelectedComponent(panelGH);
+        
     }
 
     /**

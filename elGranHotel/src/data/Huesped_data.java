@@ -153,19 +153,21 @@ public class Huesped_data {
         return h;
     }
 
-    public void modificarHuesped(int dni, String apellido, String nombre, int telefono, String correo, String direccion, boolean estado) {
-        String sql = "UPDATE huesped SET apellido=?,nombre=?,telefono=?,correo=?,direccion=?,estado=? WHERE dni=?";
+    public void modificarHuesped(String dni, String apellido, String nombre, String telefono, String correo, String direccion, boolean estado, FileInputStream fotoHuesped, String direccionFoto) {
+        String sql = "UPDATE huesped SET apellido=?,nombre=?,telefono=?,correo=?,direccion=?,estado=?,fotoHuesped=?,nombreFotoHuesped=? WHERE dni=?";
 
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
 
             ps.setString(1, apellido);
             ps.setString(2, nombre);
-            ps.setInt(3, telefono);
+            ps.setString(3, telefono);
             ps.setString(4, correo);
             ps.setString(5, direccion);
             ps.setBoolean(6, estado);
-            ps.setInt(7, dni);
+            ps.setBinaryStream(7, fotoHuesped);
+            ps.setString(8, direccionFoto);
+            ps.setString(9, dni);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Los datos del huesped han sido actualizados");
             ps.close();
@@ -175,19 +177,4 @@ public class Huesped_data {
 
     }
 
-    public void eliminarHuesped(int dni) {
-
-        String sql = "DELETE FROM huesped WHERE dni=?";
-
-        try {
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, dni);
-            ps.executeUpdate();
-
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de sentencia");
-        }
-
-    }
 }

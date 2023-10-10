@@ -20,6 +20,10 @@ public class Huesped_vista extends javax.swing.JInternalFrame {
         PanePrincipal.addTab("Agregar Huesped",panelGH);
         PanePrincipal.addTab("Busqueda",panelBH);
         PanePrincipal.setSelectedComponent(panelGH);
+        if(panelBH.isSelected()){
+        panelBH.actualizarLista();
+        }
+        
     }
 
     

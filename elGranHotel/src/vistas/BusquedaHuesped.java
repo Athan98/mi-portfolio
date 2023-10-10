@@ -10,6 +10,7 @@ import data.Huesped_data;
 import entidades.Huesped;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,18 +19,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class BusquedaHuesped extends javax.swing.JInternalFrame {
-
+    
     DefaultTableModel modelo = new DefaultTableModel();
     Conexion con = new Conexion("jdbc:mariadb://localhost:3306/elgranhotel", "root", "");
     Huesped_data hd = new Huesped_data(con);
-
+    
     public BusquedaHuesped() {
         initComponents();
         armarCabeceraTabla();
+        actualizarLista();
+        jbGUARDAR.setEnabled(false);
+        jbCambiarFoto.setEnabled(false);
     }
 
     /**
@@ -67,6 +72,8 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jrEstado = new javax.swing.JRadioButton();
         jbGUARDAR = new javax.swing.JButton();
+        jtDireccionFoto = new javax.swing.JTextField();
+        jbCambiarFoto = new javax.swing.JButton();
         jbLlenarCampos = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
@@ -160,6 +167,21 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
 
         jbGUARDAR.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jbGUARDAR.setText("GUARDAR");
+        jbGUARDAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGUARDARActionPerformed(evt);
+            }
+        });
+
+        jtDireccionFoto.setEditable(false);
+
+        jbCambiarFoto.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
+        jbCambiarFoto.setText("Cambiar");
+        jbCambiarFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCambiarFotoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -169,19 +191,12 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbGUARDAR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtCorreo))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(paneFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 72, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,51 +204,65 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jtDireccion)
                                     .addComponent(jtNombre)
                                     .addComponent(jtApellido)
-                                    .addComponent(jtDni))))
+                                    .addComponent(jtDni)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtDireccion))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtCorreo))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(paneFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jtDireccionFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbCambiarFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jbGUARDAR, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jrEstado))
+                        .addComponent(jrEstado)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(paneFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                .addContainerGap()
+                .addComponent(paneFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel9)
+                    .addComponent(jtDireccionFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbCambiarFoto))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,9 +271,9 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jrEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbGUARDAR, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(68, 68, 68))
         );
 
         jbLlenarCampos.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -274,43 +303,42 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbLlenarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(232, 232, 232))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbLlenarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 179, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaKeyReleased
-
+        
         borrarFilas(modelo);
-
+        
         List<Huesped> huespedList = new ArrayList<>();
-
+        
         huespedList = hd.listarHuespedes();
-
+        
         for (Huesped huesped : huespedList) {
             if (huesped.getApellido().startsWith(jtBusqueda.getText()) || huesped.getNombre().startsWith(jtBusqueda.getText()) || huesped.getDni().startsWith(jtBusqueda.getText())) {
-
+                
                 modelo.addRow(new Object[]{
                     huesped.getIdHuesped(),
                     huesped.getDni(),
                     huesped.getApellido(),
                     huesped.getNombre(),
                     huesped.getTelefono()
-
+                
                 });
             }
         }
@@ -318,13 +346,13 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtBusquedaKeyReleased
 
     private void jbLlenarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLlenarCamposActionPerformed
-
+        
         Huesped h = new Huesped();
         try {
             String dni = modelo.getValueAt(jtableHuespedes.getSelectedRow(), 1) + "";
-
+            
             h = hd.buscarHuespedPorDni(dni);
-
+            
             jtDni.setText(h.getDni());
             jtApellido.setText(h.getApellido());
             jtNombre.setText(h.getNombre());
@@ -332,37 +360,103 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
             jtCorreo.setText(h.getCorreo());
             jtDireccion.setText(h.getDireccion());
             jrEstado.setSelected(h.isEstado());
+            jtDireccionFoto.setText(h.getNombreFotoHuesped());
 
             //Convertir FileInputStream(Bytes) a imagen//
             // 1- Armar arreglo del tamaño del InputStream
-            if(h.getFotoHuesped() != null){
-            byte[] imageBytes = new byte[h.getFotoHuesped().available()];
+            if (h.getFotoHuesped() != null) {
+                byte[] imageBytes = new byte[h.getFotoHuesped().available()];
 
-            // 2- Leer arreglo de Bytes
-            h.getFotoHuesped().read(imageBytes);
+                // 2- Leer arreglo de Bytes
+                h.getFotoHuesped().read(imageBytes);
 
-            // 3- Convierte los bytes en una imagen
-            Image imagen = Toolkit.getDefaultToolkit().createImage(imageBytes);
-            imagen = imagen.getScaledInstance(110, 110, Image.SCALE_DEFAULT);
-            
-            // 4- Establecer imagen a JLabel
-            
-            jlFoto.setText("");
-            jlFoto.setIcon(new ImageIcon(imagen));
-            
-            }else{
+                // 3- Convierte los bytes en una imagen
+                Image imagen = Toolkit.getDefaultToolkit().createImage(imageBytes);
+                imagen = imagen.getScaledInstance(110, 110, Image.SCALE_DEFAULT);
+
+                // 4- Establecer imagen a JLabel
+                jlFoto.setText("");
+                jlFoto.setIcon(new ImageIcon(imagen));
+                
+            } else {
                 jlFoto.setIcon(null);
                 jlFoto.setText("*Sin foto*");
                 
             }
             
-
+            jbGUARDAR.setEnabled(true);
+            jbCambiarFoto.setEnabled(true);
+            
+            
+            
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error");
         }
-
+        
 
     }//GEN-LAST:event_jbLlenarCamposActionPerformed
+
+    private void jbGUARDARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGUARDARActionPerformed
+        
+        try {
+            
+            String dni = jtDni.getText();
+            String apellido = jtApellido.getText();
+            String nombre = jtNombre.getText();
+            String telefono = jtTelefono.getText();
+            String correo = jtCorreo.getText();
+            String direccion = jtDireccion.getText();
+            boolean estado = jrEstado.isSelected();
+            FileInputStream fotoHuesped = new FileInputStream(jtDireccionFoto.getText());
+            String direccionFoto = jtDireccionFoto.getText();
+            
+            hd.modificarHuesped(dni, apellido, nombre, telefono, correo, direccion, estado, fotoHuesped, direccionFoto);
+            
+            jlFoto.setIcon(null);
+            jlFoto.setText("*Sin foto*");
+            jtDireccionFoto.setText("");
+            jtApellido.setText("");
+            jtNombre.setText("");
+            jtDni.setText("");
+            jtTelefono.setText("");
+            jtDireccion.setText("");
+            jrEstado.setSelected(false);
+            jtCorreo.setText("");
+            jbGUARDAR.setEnabled(false);
+            jbCambiarFoto.setEnabled(false);
+            jtBusqueda.setText("");
+            
+            
+            borrarFilas(modelo);
+            actualizarLista();
+            
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
+        }
+        
+
+    }//GEN-LAST:event_jbGUARDARActionPerformed
+
+    private void jbCambiarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarFotoActionPerformed
+        
+        JFileChooser archivo = new JFileChooser();
+        int ventana = archivo.showOpenDialog(null);
+
+        //CREAR FILTRO JP
+        if (ventana == JFileChooser.APPROVE_OPTION) {
+            //CARGAR FOTO DESDE ARCHIVO
+            File file = archivo.getSelectedFile();
+            jtDireccionFoto.setText(String.valueOf(file));
+            //CARGAR FOTO SELECCIONADA EN LABEL
+            Image foto = getToolkit().getImage(jtDireccionFoto.getText());
+            foto = foto.getScaledInstance(110, 110, Image.SCALE_DEFAULT);
+            jlFoto.setText("");
+            jlFoto.setIcon(new ImageIcon(foto));
+            
+        }
+
+    }//GEN-LAST:event_jbCambiarFotoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -380,6 +474,7 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree1;
+    private javax.swing.JButton jbCambiarFoto;
     private javax.swing.JButton jbGUARDAR;
     private javax.swing.JButton jbLlenarCampos;
     private javax.swing.JLabel jlFoto;
@@ -388,6 +483,7 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtBusqueda;
     private javax.swing.JTextField jtCorreo;
     private javax.swing.JTextField jtDireccion;
+    private javax.swing.JTextField jtDireccionFoto;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtTelefono;
@@ -400,18 +496,39 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
         for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
-
+        
     }
-
+    
     private void armarCabeceraTabla() {
-
+        
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
         modelo.addColumn("Telefono");
-
+        
         jtableHuespedes.setModel(modelo);
-
+        
+    }
+    
+    public void actualizarLista() {
+        
+        List<Huesped> huespedList = new ArrayList<>();
+        
+        huespedList = hd.listarHuespedes();
+        
+        for (Huesped huesped : huespedList) {
+            
+            modelo.addRow(new Object[]{
+                huesped.getIdHuesped(),
+                huesped.getDni(),
+                huesped.getApellido(),
+                huesped.getNombre(),
+                huesped.getTelefono()
+            
+            });
+            
+        }
+        
     }
 }
