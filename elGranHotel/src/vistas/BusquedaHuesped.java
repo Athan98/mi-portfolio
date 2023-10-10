@@ -8,17 +8,25 @@ package vistas;
 import data.Conexion;
 import data.Huesped_data;
 import entidades.Huesped;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 
 public class BusquedaHuesped extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo=new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel();
     Conexion con = new Conexion("jdbc:mariadb://localhost:3306/elgranhotel", "root", "");
     Huesped_data hd = new Huesped_data(con);
-   
+
     public BusquedaHuesped() {
         initComponents();
         armarCabeceraTabla();
@@ -286,50 +294,74 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaKeyReleased
-        
-        borrarFilas(modelo);
-        
-        List<Huesped>huespedList=new ArrayList<>();
- 
-        huespedList=hd.listarHuespedes();
-        
-        for(Huesped huesped:huespedList){
-        if(huesped.getApellido().startsWith(jtBusqueda.getText()) || huesped.getNombre().startsWith(jtBusqueda.getText()) || huesped.getDni().startsWith(jtBusqueda.getText())){
 
-            modelo.addRow(new Object[]{
-                huesped.getIdHuesped(),
-                huesped.getDni(),
-                huesped.getApellido(),
-                huesped.getNombre(),
-                huesped.getTelefono()
-            
-            });}
+        borrarFilas(modelo);
+
+        List<Huesped> huespedList = new ArrayList<>();
+
+        huespedList = hd.listarHuespedes();
+
+        for (Huesped huesped : huespedList) {
+            if (huesped.getApellido().startsWith(jtBusqueda.getText()) || huesped.getNombre().startsWith(jtBusqueda.getText()) || huesped.getDni().startsWith(jtBusqueda.getText())) {
+
+                modelo.addRow(new Object[]{
+                    huesped.getIdHuesped(),
+                    huesped.getDni(),
+                    huesped.getApellido(),
+                    huesped.getNombre(),
+                    huesped.getTelefono()
+
+                });
+            }
         }
-        
+
     }//GEN-LAST:event_jtBusquedaKeyReleased
 
     private void jbLlenarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLlenarCamposActionPerformed
-        
-        Huesped h=new Huesped();
-        
-        String dni=modelo.getValueAt(jtableHuespedes.getSelectedRow(), 1)+"";
-        
-        h=hd.buscarHuespedPorDni(dni);
-        
-        jtDni.setText(h.getDni());
-        jtApellido.setText(h.getApellido());
-        jtNombre.setText(h.getNombre());
-        jtTelefono.setText(h.getTelefono());
-        jtCorreo.setText(h.getCorreo());
-        jtDireccion.setText(h.getDireccion());
-        jrEstado.setSelected(h.isEstado());
-        
-        
-        
-        
-        
-        
-        
+
+        Huesped h = new Huesped();
+        try {
+            String dni = modelo.getValueAt(jtableHuespedes.getSelectedRow(), 1) + "";
+
+            h = hd.buscarHuespedPorDni(dni);
+
+            jtDni.setText(h.getDni());
+            jtApellido.setText(h.getApellido());
+            jtNombre.setText(h.getNombre());
+            jtTelefono.setText(h.getTelefono());
+            jtCorreo.setText(h.getCorreo());
+            jtDireccion.setText(h.getDireccion());
+            jrEstado.setSelected(h.isEstado());
+
+            //Convertir FileInputStream(Bytes) a imagen//
+            // 1- Armar arreglo del tamaño del InputStream
+            if(h.getFotoHuesped() != null){
+            byte[] imageBytes = new byte[h.getFotoHuesped().available()];
+
+            // 2- Leer arreglo de Bytes
+            h.getFotoHuesped().read(imageBytes);
+
+            // 3- Convierte los bytes en una imagen
+            Image imagen = Toolkit.getDefaultToolkit().createImage(imageBytes);
+            imagen = imagen.getScaledInstance(110, 110, Image.SCALE_DEFAULT);
+            
+            // 4- Establecer imagen a JLabel
+            
+            jlFoto.setText("");
+            jlFoto.setIcon(new ImageIcon(imagen));
+            
+            }else{
+                jlFoto.setIcon(null);
+                jlFoto.setText("*Sin foto*");
+                
+            }
+            
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+
+
     }//GEN-LAST:event_jbLlenarCamposActionPerformed
 
 
@@ -363,7 +395,6 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JPanel paneFoto;
     // End of variables declaration//GEN-END:variables
 
-
     private void borrarFilas(DefaultTableModel modelo) {
         int f = modelo.getRowCount() - 1;
         for (; f >= 0; f--) {
@@ -371,16 +402,16 @@ public class BusquedaHuesped extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    private void armarCabeceraTabla(){
-    
+
+    private void armarCabeceraTabla() {
+
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
         modelo.addColumn("Telefono");
-        
+
         jtableHuespedes.setModel(modelo);
-        
+
     }
 }

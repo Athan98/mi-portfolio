@@ -1,7 +1,12 @@
 package data;
 
 import entidades.*;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -11,6 +16,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Huesped_data {
@@ -85,7 +92,7 @@ public class Huesped_data {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                h=new Huesped();
+                h = new Huesped();
                 h.setIdHuesped(rs.getInt("idHuesped"));
                 h.setDni(rs.getString("dni"));
                 h.setApellido(rs.getString("apellido"));
@@ -111,20 +118,38 @@ public class Huesped_data {
             ps.setString(1, dni);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               
+                h = new Huesped();
                 h.setIdHuesped(rs.getInt("idHuesped"));
                 h.setDni(rs.getString("dni"));
                 h.setApellido(rs.getString("apellido"));
                 h.setNombre(rs.getString("nombre"));
                 h.setTelefono(rs.getString("telefono"));
                 h.setCorreo(rs.getString("correo"));
-                h.setCorreo(rs.getString("direccion"));
+                h.setDireccion(rs.getString("direccion"));
                 h.setEstado(rs.getBoolean("estado"));
+                //Convertir foto de BD a Bytes 
+                Blob fotoBlob = rs.getBlob("fotoHuesped");
+                if (fotoBlob != null) {
+                    //Convertir Blob a arreglo binario. La imagen viene de la base de datos en bytes
+                    byte[] fotoBytes = fotoBlob.getBytes(1, (int) fotoBlob.length());
+                    //Crear archivo temporal y se escriben los bytes del arreglo
+                    File archivo = File.createTempFile("tempfile", ".tmp");
+                    try (FileOutputStream fileOutputStream = new FileOutputStream(archivo)) {
+                        fileOutputStream.write(fotoBytes);
+                    }
+                    //Leer el archivo temporal para setearlo a Huesped
+                    FileInputStream fileInputStream = new FileInputStream(archivo);
+                    h.setFotoHuesped(fileInputStream);
+                }
+                h.setNombreFotoHuesped(rs.getString("nombreFotoHuesped"));
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de sentencia");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error de lectura/escritura");
         }
+  
         return h;
     }
 
