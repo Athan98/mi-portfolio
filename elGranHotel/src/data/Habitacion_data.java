@@ -95,6 +95,7 @@ public class Habitacion_data {
                 h.setNroHabitacion(rs.getInt("nroHabitacion"));
                 h.setPiso(rs.getInt("piso"));
                 h.setOcupada(rs.getBoolean("ocupada"));
+                th.setIdTipoHabitacion(rs.getInt("idTipoHabitacion"));
                 th.setTipo(rs.getString("tipo"));
                 th.setCantidadCamas(rs.getInt("cantidadCamas"));
                 th.setCantidadPersonas(rs.getInt("cantidadPersonas"));
@@ -111,7 +112,7 @@ public class Habitacion_data {
 
     public void modificarHabitacion(TipoHabitacion tipo, int nro, int piso) {
 
-        String sql = "UPDATE habitacion SET idTipoHabitacion=?, WHERE nroHabitacion=? AND piso=?";
+        String sql = "UPDATE habitacion SET idTipoHabitacion=? WHERE nroHabitacion=? AND piso=?";
 
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);

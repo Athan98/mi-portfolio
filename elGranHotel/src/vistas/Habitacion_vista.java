@@ -12,13 +12,14 @@ package vistas;
 public class Habitacion_vista extends javax.swing.JInternalFrame {
 
    
-    AgregarHabitacion panelGH=new AgregarHabitacion();
-    //BusquedaHabitacion panelBH=new BusquedaHabitacion();
+    GestionHabitacion panelGH = new GestionHabitacion();
+    GestionPrecio panelGP = new GestionPrecio();
+    
     
     public Habitacion_vista() {
         initComponents();
-        PanePrincipal.addTab("Agregar Habitacion",panelGH);
-        //PanePrincipal.addTab("Busqueda",panelBH);
+        PanePrincipal.addTab("Gestionar Habitaciones",panelGH);
+        PanePrincipal.addTab("Gestionar Precios",panelGP);
         PanePrincipal.setSelectedComponent(panelGH);
         
     }

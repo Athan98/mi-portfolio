@@ -70,4 +70,22 @@ public class User_data {
     return userList;
     }
     
+    public void modificarPass(String userString, String passString){
+    
+        String sql="UPDATE login SET pass=? WHERE user LIKE ?";
+        
+        try{
+            
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ps.setString(1, passString);
+            ps.setString(2, userString);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "La contraseña ha sido actualizada");
+            ps.close();
+        
+        }catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Error de sentencia");
+        }
+    }
+    
 }

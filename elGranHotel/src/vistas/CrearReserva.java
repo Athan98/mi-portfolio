@@ -10,11 +10,12 @@ import entidades.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
-
-
 
 /**
  *
@@ -22,17 +23,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CrearReserva extends javax.swing.JInternalFrame {
 
-    Conexion con = new Conexion("jdbc:mariadb://localhost:3306/elgranhotel", "root", "");
+    Conexion con = new Conexion("jdbc:mariadb://localhost:3306/granhotel", "root", "");
     Huesped_data hd = new Huesped_data(con);
-    Habitacion_data habD= new Habitacion_data(con);
+    Habitacion_data habD = new Habitacion_data(con);
     Reserva_data rd = new Reserva_data(con);
-    
+
     DefaultTableModel modeloH = new DefaultTableModel();
     DefaultTableModel modeloR = new DefaultTableModel();
-       
-    
-    
-    
+
     public CrearReserva() {
         initComponents();
         cargarCabeceras();
@@ -438,22 +436,82 @@ public class CrearReserva extends javax.swing.JInternalFrame {
         jlDireccion.setText(h.getDireccion());
         jlNombre.setText(h.getNombre());
         jlTelefono.setText(h.getTelefono());
-        
+
     }//GEN-LAST:event_jbBuscarDNIActionPerformed
 
     private void jbBuscarHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarHabActionPerformed
-     if(jdIngreso==null || jdSalida==null || jdIngreso.getDate().before(Date.valueOf(LocalDate.now())) ){
-         JOptionPane.showMessageDialog(null,"Ingrese fecha de ingreso y/o salida válida.");
-         
-     }else{
-         LocalDate ingreso = jdIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-         LocalDate salida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-     }
-         
-     
-     
-     
-        
+        borrarFilas(modeloH);
+        try {
+            int personas =(int) Integer.parseInt(jtCantPersonas.getText());
+                                                                                            //Validaciones fecha y cant personas
+            if (personas == 0 || jdIngreso == null || jdSalida == null || jdIngreso.getDate().before(Date.valueOf(LocalDate.now()))) {      
+                JOptionPane.showMessageDialog(null, "Ingrese datos válidos.");
+
+            } else {
+                LocalDate ingreso = jdIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate salida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+                List<Habitacion> lista = new ArrayList<>();
+                
+                switch (personas) {                                             //Switch para llenar lista 
+                    case 1:
+                        lista.clear();
+                        lista = habD.listarPorCategoria("Simple");
+                        lista.addAll(habD.listarPorCategoria("Suite Lujo"));
+
+                        break;
+                    case 2:
+                        lista.clear();
+                        lista = habD.listarPorCategoria("Doble");
+                        lista.addAll(habD.listarPorCategoria("Suite Lujo"));
+                        lista.addAll(habD.listarPorCategoria("Triple"));
+
+                        break;
+                    case 3:
+                        lista.clear();
+                        lista = habD.listarPorCategoria("Triple");
+                        break;
+
+                }
+                                                                                  // Reservas que coinciden con las fechas de ingreso y salida, o estan en el medio.
+                List<ReservaHuesped> reservas = rd.buscarReservasXfecha(ingreso, salida);
+
+                for (int i = lista.size() - 1; i >= 0; i--) {
+                    boolean ocupada = false;
+                    Habitacion hab = lista.get(i);
+
+                    for (ReservaHuesped reserva : reservas) {
+
+                        if (reserva.getIdHabitacion().getIdHabitacion() == hab.getIdHabitacion()) {
+                            ocupada = true;
+                            break;
+                        }
+
+                    }
+                    if (ocupada == true) {                                      // Elimino de la lista las habitacion ocupadas en esa fecha, segun las reservas obtenidas.
+                        lista.remove(i);
+                    }
+                }
+
+                for (Habitacion habitacion : lista) {
+                    modeloH.addRow(new Object[]{
+                        habitacion.getPiso(),
+                        habitacion.getNroHabitacion(),
+                        habitacion.getIdTipoHabitacion().getTipo(),
+                        habitacion.getIdTipoHabitacion().getCantidadCamas(),
+                        habitacion.getIdTipoHabitacion().getTipoCamas(),
+                        habitacion.getIdTipoHabitacion().getPrecioPorNoche()
+
+                    });
+                }
+
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null,"Error de formato");
+
+        }
+
+
     }//GEN-LAST:event_jbBuscarHabActionPerformed
 
 
@@ -496,20 +554,16 @@ public class CrearReserva extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtReserv;
     // End of variables declaration//GEN-END:variables
 
-
-
-    public void cargarCabeceras(){
+    public void cargarCabeceras() {
         modeloH.addColumn("Piso");
         modeloH.addColumn("N°");
         modeloH.addColumn("Tipo");
-        
-       
+
         modeloH.addColumn("Cama/s");
         modeloH.addColumn("T.Cama/s");
-        modeloH.addColumn("P.N($)");
+        modeloH.addColumn("Precio X noche($");
         jtHab.setModel(modeloH);
-        
-       
+
         modeloR.addColumn("DNI");
         modeloR.addColumn("Ingreso");
         modeloR.addColumn("Salida");
@@ -517,10 +571,15 @@ public class CrearReserva extends javax.swing.JInternalFrame {
         modeloR.addColumn("Piso");
         modeloR.addColumn("Precio");
         jtReserv.setModel(modeloR);
-        
-        
-    }
-    
-   
-}
 
+    }
+
+    public void borrarFilas(DefaultTableModel modelo) {
+        int f = modelo.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+
+    }
+
+}
