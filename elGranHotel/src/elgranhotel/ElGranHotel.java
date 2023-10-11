@@ -29,7 +29,8 @@ public class ElGranHotel {
         Habitacion hab2 = new Habitacion(2, th,24 , 1, false);
         
         //habd.agregarHabitacion(thd.tipoRandom(), 12, 4, true);
-       
+        System.out.println(habd.listarHabitaciones());;
+        System.out.println(habd.listarHabitaciones().get(habd.listarHabitaciones().size() - 1));;
                 
          //h.setIdHuesped(2);
         

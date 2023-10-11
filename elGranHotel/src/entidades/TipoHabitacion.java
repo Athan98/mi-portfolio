@@ -83,7 +83,7 @@ public class TipoHabitacion {
 
     @Override
     public String toString() {
-        return tipo + ": "+ cantidadCamas +" Cama " + tipoCamas;
+        return tipo + ": "+ tipoCamas;
     }
 
     

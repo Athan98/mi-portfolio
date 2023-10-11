@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Habitacion_data {
@@ -76,6 +74,7 @@ public class Habitacion_data {
             } else {
                 JOptionPane.showMessageDialog(null, "Error al obtener el ID");
             }
+            JOptionPane.showMessageDialog(null, "Habitacion cargada exitosamente");
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de sentencia");
@@ -110,16 +109,15 @@ public class Habitacion_data {
         return h;
     }
 
-    public void modificarHabitacion(TipoHabitacion tipo, int nro, int piso, boolean ocupada) {
+    public void modificarHabitacion(TipoHabitacion tipo, int nro, int piso) {
 
-        String sql = "UPDATE habitacion SET idTipoHabitacion=?, ocupada=? WHERE nroHabitacion=? AND piso=?";
+        String sql = "UPDATE habitacion SET idTipoHabitacion=?, WHERE nroHabitacion=? AND piso=?";
 
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, tipo.getIdTipoHabitacion());
-            ps.setBoolean(2, ocupada);
-            ps.setInt(3, nro);
-            ps.setInt(4, piso);
+            ps.setInt(1, tipo.getIdTipoHabitacion());            
+            ps.setInt(2, nro);
+            ps.setInt(3, piso);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "La habitacion ha sido actualizada");
             ps.close();
@@ -174,8 +172,8 @@ public class Habitacion_data {
             ps.setString(1, tipo);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                h = null;
-                th = null;
+                h = new Habitacion();
+                th = new TipoHabitacion();
                 h.setIdHabitacion(rs.getInt("idHabitacion"));
                 h.setNroHabitacion(rs.getInt("nroHabitacion"));
                 h.setPiso(rs.getInt("piso"));
