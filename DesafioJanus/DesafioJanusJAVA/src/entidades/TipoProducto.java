@@ -1,6 +1,8 @@
 
 package entidades;
 
+import java.util.Objects;
+
 
 public class TipoProducto {
     
@@ -51,4 +53,31 @@ public class TipoProducto {
     public String toString() {
         return categoria;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.categoria);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoProducto other = (TipoProducto) obj;
+        if (!Objects.equals(this.categoria, other.categoria)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

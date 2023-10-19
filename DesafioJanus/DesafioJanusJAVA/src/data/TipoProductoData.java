@@ -30,7 +30,6 @@ public class TipoProductoData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 tp.setIdTipoProducto(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Tipo de producto agregado exitosamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al obtener el ID");
             }

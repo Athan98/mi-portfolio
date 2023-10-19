@@ -19,7 +19,12 @@ public class DesafioJanusJAVA {
         
         Producto prod1=new Producto(tp1, "7889", "Martillo", 2563, true);
         
-        sd.sp_InsertarProducto(prod1,1000);
+//        sd.sp_InsertarProducto(prod1,1000);
+        
+        Producto prod2=new Producto(tp1, "1236458", "Destornillador", 654, true);
+
+sd.sp_InsertarProducto(prod2, 254);
+        
     }
     
 }

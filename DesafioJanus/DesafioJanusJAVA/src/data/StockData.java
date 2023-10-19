@@ -99,7 +99,11 @@ public class StockData {
                 prod.setCodigo(rs.getString("codigo"));
                 prod.setNombre(rs.getString("nombre"));
                 prod.setPrecio(rs.getDouble("precio"));
-                prod.setEstado(rs.getBoolean("estado"));
+                if (stock.getCantidad() > 0) {
+                    prod.setEstado(rs.getBoolean("estado"));
+                } else {
+                    prod.setEstado(false);
+                }
 
                 stock.setIdProducto(prod);
 
@@ -144,7 +148,11 @@ public class StockData {
                 prod.setCodigo(rs.getString("codigo"));
                 prod.setNombre(rs.getString("nombre"));
                 prod.setPrecio(rs.getDouble("precio"));
-                prod.setEstado(rs.getBoolean("estado"));
+                if (stock.getCantidad() > 0) {
+                    prod.setEstado(rs.getBoolean("estado"));
+                } else {
+                    prod.setEstado(false);
+                }
 
                 stock.setIdProducto(prod);
             }
@@ -180,6 +188,24 @@ public class StockData {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
 
+    }
+
+    public void modificarStock(int idStock, int stock) {
+
+        String sql = "UPDATE stock s SET s.cantidad=? WHERE s.idStock=?";
+
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, stock);
+            ps.setInt(2, idStock);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Stock actualizado");
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de sintaxis o conexion");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }
 
 }
