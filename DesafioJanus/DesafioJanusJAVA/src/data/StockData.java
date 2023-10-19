@@ -175,7 +175,10 @@ public class StockData {
             ps.setInt(1, stock.getCantidad());
             ps.setString(2, prod.getNombre());
             ps.setDouble(3, prod.getPrecio());
+            if(stock.getCantidad()>0){
             ps.setBoolean(4, prod.isEstado());
+            }else{
+            ps.setBoolean(4, false);}
             ps.setString(5, tp.getDescripcion());
             ps.setString(6, tp.getCategoria());
             ps.setInt(7, stock.getIdStock());

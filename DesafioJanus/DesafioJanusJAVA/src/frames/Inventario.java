@@ -465,7 +465,7 @@ public class Inventario extends javax.swing.JInternalFrame {
 
         for (Stock s : stockList) {
             try {
-                if (s.getIdProducto().getNombre().startsWith(campoBusq.toUpperCase())
+                if ((s.getIdProducto().getNombre().toUpperCase()).startsWith(campoBusq.toUpperCase())
                         || s.getIdProducto().getCodigo().startsWith(campoBusq)
                         || s.getIdProducto().getIdTipoProducto().getCategoria().startsWith(campoBusq.toUpperCase())) {
                     modelo.addRow(new Object[]{
@@ -538,7 +538,7 @@ public class Inventario extends javax.swing.JInternalFrame {
         Stock s;
         TipoProducto tp;
 
-        if (jtCodigo.getText().isEmpty() || jtNombre.getText().isEmpty() || jtPrecio.getText().isEmpty() || jtStock.getText().isEmpty() || jcCategoria.getSelectedIndex() == -1 || (Double.parseDouble(jtPrecio.getText())<=0) || (Integer.parseInt(jtStock.getText())<=0)) {
+        if (jtCodigo.getText().isEmpty() || jtNombre.getText().isEmpty() || jtPrecio.getText().isEmpty() || jtStock.getText().isEmpty() || jcCategoria.getSelectedIndex() == -1 || (Double.parseDouble(jtPrecio.getText()) <= 0) || (Integer.parseInt(jtStock.getText()) <= 0)) {
             JOptionPane.showMessageDialog(this, "Por favor, complete los datos requeridos correctamente");
         } else {
 
