@@ -17,7 +17,7 @@ public class DesafioJanusJAVA {
         TipoProducto tp1=new TipoProducto("Metalico", "HERRAMIENTAS");
         tpd.agregarTipoProducto(tp1);
         
-        Producto prod1=new Producto(tp1, 7889, "Martillo", 2563, true);
+        Producto prod1=new Producto(tp1, "7889", "Martillo", 2563, true);
         
         sd.sp_InsertarProducto(prod1,1000);
     }

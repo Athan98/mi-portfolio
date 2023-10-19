@@ -26,7 +26,7 @@ public class StockData {
         try {
             PreparedStatement psProd = conexion.prepareStatement(sqlProd, PreparedStatement.RETURN_GENERATED_KEYS);
             psProd.setInt(1, prod.getIdTipoProducto().getIdTipoProducto());
-            psProd.setInt(2, prod.getCodigo());
+            psProd.setString(2, prod.getCodigo());
             psProd.setString(3, prod.getNombre());
             psProd.setDouble(4, prod.getPrecio());
             psProd.setBoolean(5, true);
@@ -96,7 +96,7 @@ public class StockData {
 
                 prod.setIdProducto(rs.getInt("idProducto"));
                 prod.setIdTipoProducto(tp);
-                prod.setCodigo(rs.getInt("codigo"));
+                prod.setCodigo(rs.getString("codigo"));
                 prod.setNombre(rs.getString("nombre"));
                 prod.setPrecio(rs.getDouble("precio"));
                 prod.setEstado(rs.getBoolean("estado"));
@@ -115,9 +115,52 @@ public class StockData {
         return productosLista;
     }
 
+    public Stock buscarProductoPorCodigo(int idStock) {
+
+        String sql = "SELECT * FROM stock s JOIN productos p ON(s.idProducto=p.idProducto) JOIN tipoproducto tp ON(p.idTipoProducto=tp.idTipoProducto) WHERE s.idStock=?";
+
+        Stock stock = null;
+        Producto prod = null;
+        TipoProducto tp = null;
+
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idStock);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                stock = new Stock();
+                prod = new Producto();
+                tp = new TipoProducto();
+
+                stock.setIdStock(rs.getInt("idStock"));
+                stock.setCantidad(rs.getInt("cantidad"));
+
+                tp.setIdTipoProducto(rs.getInt("idTipoProducto"));
+                tp.setDescripcion(rs.getString("descripcion"));
+                tp.setCategoria(rs.getString("categoria"));
+
+                prod.setIdProducto(rs.getInt("idProducto"));
+                prod.setIdTipoProducto(tp);
+                prod.setCodigo(rs.getString("codigo"));
+                prod.setNombre(rs.getString("nombre"));
+                prod.setPrecio(rs.getDouble("precio"));
+                prod.setEstado(rs.getBoolean("estado"));
+
+                stock.setIdProducto(prod);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de sintaxis o conexion");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+
+        return stock;
+    }
+
     public void sp_ModificarProducto(Producto prod, TipoProducto tp, Stock stock) {
 
-        String sql = "UPDATE stock s JOIN productos p ON(s.idProducto=p.idProducto) JOIN tipoproducto tp ON(tp.idTipoProducto=p.idTipoProducto) SET s.cantidad=?, p.nombre=?, p.precio=?, p.estado=?, tp.descripcion=?, tp.categoria=? WHERE s.idStock=? OR p.codigo=? OR p.idProducto=?";
+        String sql = "UPDATE stock s JOIN productos p ON(s.idProducto=p.idProducto) JOIN tipoproducto tp ON(tp.idTipoProducto=p.idTipoProducto) SET s.cantidad=?, p.nombre=?, p.precio=?, p.estado=?, tp.descripcion=?, tp.categoria=? WHERE s.idStock=?";
 
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -125,11 +168,9 @@ public class StockData {
             ps.setString(2, prod.getNombre());
             ps.setDouble(3, prod.getPrecio());
             ps.setBoolean(4, prod.isEstado());
-            ps.setString(6, tp.getDescripcion());
-            ps.setString(7, tp.getCategoria());
-            ps.setInt(8, stock.getIdStock());
-            ps.setInt(9, prod.getCodigo());
-            ps.setInt(10, prod.getIdProducto());
+            ps.setString(5, tp.getDescripcion());
+            ps.setString(6, tp.getCategoria());
+            ps.setInt(7, stock.getIdStock());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "El producto ha sido actualizado");
             ps.close();

@@ -4,7 +4,7 @@ public class Producto {
 
     private int idProducto=-1;
     private TipoProducto idTipoProducto;
-    private int codigo;
+    private String codigo;
     private String nombre;
     private double precio;
     private boolean estado;
@@ -13,7 +13,7 @@ public class Producto {
         this.idProducto=-1;
     }
 
-    public Producto(int idProducto, TipoProducto idTipoProducto, int codigo, String nombre, double precio, boolean estado) {
+    public Producto(int idProducto, TipoProducto idTipoProducto, String codigo, String nombre, double precio, boolean estado) {
         this.idProducto = idProducto;
         this.idTipoProducto = idTipoProducto;
         this.codigo = codigo;
@@ -22,7 +22,7 @@ public class Producto {
         this.estado = estado;
     }
 
-    public Producto(TipoProducto idTipoProducto, int codigo, String nombre, double precio, boolean estado) {
+    public Producto(TipoProducto idTipoProducto, String codigo, String nombre, double precio, boolean estado) {
         this.idTipoProducto = idTipoProducto;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -46,11 +46,11 @@ public class Producto {
         this.idTipoProducto = idTipoProducto;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
