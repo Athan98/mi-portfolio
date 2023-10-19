@@ -1,0 +1,16 @@
+Creacion base de datos:
+1) Elaboracion de script para crear base de datos llamada "test", con sus respectivas tablas, PK y FK.
+2) Importar txt.
+
+*NOTA 1: se agregaron filas "codigo" y "estado". El ultimo mencionado es para poder realizar borrado logico. Tambien se agregaron categorias a la tabla
+de TipoProductos por si necesitamos calsificar. 
+Además se condiciono al campo "codigo" como unico, para que no existan dos productos con el mismo codigo en la BD.
+
+*NOTA 2: Agrego libreria "mariadb", requerida para conectarse con la base de datos
+
+Desarrollo app:
+1)Creacion de paquete entidades con sus atributos, constructores y getters and setters
+2)Creacion de paquete data, la cual contendrá las clases que tendran de hacer la conexion con la base de datos anteriormente mencionada y hacer las
+inserciones, consultas, etc.
+3)Prueba desde el main
+4)Creacion paquete vistas, que contendra todos los frames necesarios para la interaccion con el usuario

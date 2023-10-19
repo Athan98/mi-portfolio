@@ -1,0 +1,33 @@
+CREATE DATABASE test;
+
+USE test;
+
+CREATE TABLE `test`.`tipoproducto` (
+`idTipoProducto` INT(11) NOT NULL AUTO_INCREMENT COMMENT "ID del tipo de producto" ,
+`categoria` VARCHAR(60) NOT NULL COMMENT "Categoria del producto", 
+`descripcion` VARCHAR(120) NULL COMMENT "Descripcion del tipo de producto" , 
+PRIMARY KEY (`idTipoProducto`)) ENGINE = InnoDB;
+
+CREATE TABLE `test`.`productos` (
+ `idProducto` INT(11) NOT NULL AUTO_INCREMENT COMMENT "ID del producto" , 
+ `idTipoProducto` INT(11) NOT NULL COMMENT "ID del tipo de producto o categoria" ,
+ `codigo` INT(30) NOT NULL COMMENT "Codigo del producto" , 
+ `nombre` VARCHAR(60) NOT NULL COMMENT "Nombre del producto" , 
+ `precio` DOUBLE NOT NULL COMMENT "Precio del producto" , 
+ `estado` BOOLEAN NOT NULL COMMENT "Disponibilidad del producto",
+ PRIMARY KEY (`idProducto`),
+ UNIQUE (codigo), 
+ FOREIGN KEY (`idTipoProducto`) REFERENCES `test`.`tipoproducto`(`idTipoProducto`)
+) ENGINE = InnoDB;
+
+
+CREATE TABLE `test`.`stock` (
+`idStock` INT(11) NOT NULL AUTO_INCREMENT COMMENT "ID stock", 
+`idProducto` INT(11) NOT NULL COMMENT "ID del producto", 
+`cantidad` INT(20) NOT NULL COMMENT "Existencias del producto", 
+PRIMARY KEY (`idStock`),
+FOREIGN KEY (`idProducto`) REFERENCES `test`.`productos`(`idProducto`)
+) ENGINE = InnoDB;
+
+
+
