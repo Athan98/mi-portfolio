@@ -59,6 +59,10 @@ PARA RETIRAR PRODUCTOS
 2)Clickamos en "Retirar"
 3)Ingresamos la cantidad y confimamos
 
+*NOTA: En el caso de que retiremos todas las existencias de un producto, su estado cambiara a "No disponible" automaticamente. Ese estado 
+podremos cambiarlo a "Disponible" en el caso que editemos la informacion del producto, agreguemos productos al stock y marquemos 
+la casilla de disponibilidad.
+
 PARA EXPORTAR A EXCEL
 1)Clickamos el boton "Exportar a Excel"
 2)Determinamos la direccion donde queramos guardar el archivo
