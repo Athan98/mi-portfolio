@@ -11,12 +11,12 @@ PRIMARY KEY (`idTipoProducto`)) ENGINE = InnoDB;
 CREATE TABLE `test`.`productos` (
  `idProducto` INT(11) NOT NULL AUTO_INCREMENT COMMENT "ID del producto" , 
  `idTipoProducto` INT(11) NOT NULL COMMENT "ID del tipo de producto o categoria" ,
- `codigo` INT(30) NOT NULL COMMENT "Codigo del producto" , 
+ `codigo` VARCHAR(30) NOT NULL COMMENT "Codigo del producto" ,  -- Cambiado a VARCHAR
  `nombre` VARCHAR(60) NOT NULL COMMENT "Nombre del producto" , 
  `precio` DOUBLE NOT NULL COMMENT "Precio del producto" , 
  `estado` BOOLEAN NOT NULL COMMENT "Disponibilidad del producto",
  PRIMARY KEY (`idProducto`),
- UNIQUE (codigo), 
+ UNIQUE (codigo),
  FOREIGN KEY (`idTipoProducto`) REFERENCES `test`.`tipoproducto`(`idTipoProducto`)
 ) ENGINE = InnoDB;
 

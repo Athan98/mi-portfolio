@@ -8,9 +8,55 @@ Además se condiciono al campo "codigo" como unico, para que no existan dos prod
 
 *NOTA 2: Agrego libreria "mariadb", requerida para conectarse con la base de datos
 
+*NOTA 3: Agrego libreria "poi", requerida para hacer los exports a Excel.
+
 Desarrollo app:
 1)Creacion de paquete entidades con sus atributos, constructores y getters and setters
 2)Creacion de paquete data, la cual contendrá las clases que tendran de hacer la conexion con la base de datos anteriormente mencionada y hacer las
 inserciones, consultas, etc.
 3)Prueba desde el main
 4)Creacion paquete vistas, que contendra todos los frames necesarios para la interaccion con el usuario
+
+USO APP:
+1)Inicializar XAAMP
+
+2)Cargar base de datos con script proporcionado
+.
+3)Ejecute el jar que se encuentra en la carpeta dist.
+
+4)Se encuentra con un Frame principal. En la parte superior hay un Menu. Despliegue "Administracion" y podra acceder a la gestion de productos. 
+"SALIR" cerrará el programa totalmente.
+
+5)Se abre ventana de inventario
+
+-Campos "Codigo", "Precio", y "Stock" solo aceptan numeros.
+-"Nombre" solo acepta letras y espacios.
+
+PARA CARGAR UN NUEVO PRODUCTO:
+1)Llenamos todos los campos. "Estado" no es necesario marcarlo ya que cuando se da el alta del producto automaticamente se setea en true.
+2)Guardamos
+3)Confirmamos
+
+PARA EDITAR PRODUCTOS
+1)Seleccionamos un elemento de la lista y clickamos en "Editar"
+2)Modificamos los campos a nuestro deseo
+3)Guardamos
+
+PARA RETIRAR PRODUCTOS
+1)Seleccionamos un producto de la lista
+2)Clickamos en "Retirar"
+3)Ingresamos la cantidad y confimamos
+
+PARA EXPORTAR A EXCEL
+1)Clickamos el boton "Exportar a Excel"
+2)Determinamos la direccion donde queramos guardar el archivo
+3)Confirmamos
+
+PARA  AGREGAR NUEVAS CATEGORIAS
+1)Clickamos "Agregar categoria"
+2)Se nos abre nueva ventana. Ingresamos el nombre de la categoria
+3)Clickamos "Agregar".
+Podemos volver atras con la flecha
+
+CUALQUIER DUDA O CONSULTA ENVIAR E-MAIL A LA SIGUIENTE DIRECCION: nicoroldan15@outlook.com.ar 
+O AL TELEFONO: 2657314713
