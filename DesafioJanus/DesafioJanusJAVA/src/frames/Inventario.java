@@ -710,6 +710,14 @@ public class Inventario extends javax.swing.JInternalFrame {
                 if (existRetiradas > 0 && stock.getCantidad() >= existRetiradas) {
                     stock.setCantidad(stock.getCantidad() - existRetiradas);
                     sd.sp_ModificarProducto(prod, tp, stock);
+                    jlId.setText("-");
+                    jtCodigo.setText("");
+                    jcCategoria.setSelectedIndex(-1);
+                    jtNombre.setText("");
+                    jtaDescripcion.setText("");
+                    jtPrecio.setText("");
+                    jtStock.setText("");
+                    jrEstado.setSelected(false);
                     borrarFilas();
                     actualizarLista();
                 } else {
@@ -836,7 +844,7 @@ public class Inventario extends javax.swing.JInternalFrame {
 
     public void cargarCombo() {
         jcCategoria.removeAllItems();
-        
+
         List<TipoProducto> tiposProdList = new ArrayList<>();
         tiposProdList = tpd.listarTiposProductos();
 

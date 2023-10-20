@@ -34,8 +34,20 @@ USO APP:
 
 PARA CARGAR UN NUEVO PRODUCTO:
 1)Llenamos todos los campos. "Estado" no es necesario marcarlo ya que cuando se da el alta del producto automaticamente se setea en true.
+
+* NOTA: Si no existe ninguna categoria cargada en la BD, no podremos insertar el producto. Remitirse al siguiente subtitulo "PARA AGREGAR NUEVAS
+CATEGORIAS".
+
 2)Guardamos
 3)Confirmamos
+
+PARA  AGREGAR NUEVAS CATEGORIAS
+1)Clickamos "Agregar categoria"
+2)Se nos abre nueva ventana. Ingresamos el nombre de la categoria
+3)Clickamos "Agregar".
+
+*NOTA 1: Podemos volver atras con la flecha
+*NOTA 2: Se pueden agregar muchas categorias a la vez
 
 PARA EDITAR PRODUCTOS
 1)Seleccionamos un elemento de la lista y clickamos en "Editar"
@@ -52,11 +64,6 @@ PARA EXPORTAR A EXCEL
 2)Determinamos la direccion donde queramos guardar el archivo
 3)Confirmamos
 
-PARA  AGREGAR NUEVAS CATEGORIAS
-1)Clickamos "Agregar categoria"
-2)Se nos abre nueva ventana. Ingresamos el nombre de la categoria
-3)Clickamos "Agregar".
-Podemos volver atras con la flecha
 
 CUALQUIER DUDA O CONSULTA ENVIAR E-MAIL A LA SIGUIENTE DIRECCION: nicoroldan15@outlook.com.ar 
 O AL TELEFONO: 2657314713
