@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/entidades/TipoProducto.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/entidades/Stock.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/data/ConexionBD.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/frames/NuevaCategoria.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/frames/Inventario.java</file>
             <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/data/StockData.java</file>
             <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/data/TipoProductoData.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/frames/Principal.java</file>
             <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/entidades/Producto.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/desafiojanusjava/DesafioJanusJAVA.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/DesafioJanusJAVA/src/exportarExcel/Controlador.java</file>
         </group>
     </open-files>
 </project-private>

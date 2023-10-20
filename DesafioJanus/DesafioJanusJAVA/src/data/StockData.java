@@ -193,22 +193,4 @@ public class StockData {
 
     }
 
-    public void modificarStock(int idStock, int stock) {
-
-        String sql = "UPDATE stock s SET s.cantidad=? WHERE s.idStock=?";
-
-        try {
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, stock);
-            ps.setInt(2, idStock);
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Stock actualizado");
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de sintaxis o conexion");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
-        }
-    }
-
 }

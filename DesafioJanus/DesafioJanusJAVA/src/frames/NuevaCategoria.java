@@ -1,20 +1,18 @@
-
 package frames;
 
 import data.*;
 import entidades.*;
 
-
 public class NuevaCategoria extends javax.swing.JInternalFrame {
 
-    ConexionBD con=new ConexionBD("jdbc:mariadb://localhost:3306/test", "root", "");
-    TipoProductoData tpd=new TipoProductoData(con);
-    
+    ConexionBD con = new ConexionBD("jdbc:mariadb://localhost:3306/test", "root", "");
+    TipoProductoData tpd = new TipoProductoData(con);
+
     Inventario frameInv;
-    
+
     public NuevaCategoria(Inventario inv) {
         initComponents();
-        this.frameInv=inv;
+        this.frameInv = inv;
     }
 
     @SuppressWarnings("unchecked")
@@ -101,12 +99,12 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        String categoria=jtNombreCat.getText().toUpperCase();
-        
-        TipoProducto tp=new TipoProducto("", categoria);
-        
+        String categoria = jtNombreCat.getText().toUpperCase();
+
+        TipoProducto tp = new TipoProducto("", categoria);
+
         tpd.agregarTipoProducto(tp);
-        
+
         jtNombreCat.setText("");
     }//GEN-LAST:event_jbAgregarActionPerformed
 
