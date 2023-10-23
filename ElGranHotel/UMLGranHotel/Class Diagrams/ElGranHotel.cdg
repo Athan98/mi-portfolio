@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ElGranHotel">
+  <ClassDiagramComponents>
+    <Class name="Huesped" package="" visibility="public" xPosition="48.0" yPosition="6.0">
+      <Fields>
+        <Field name="idHuesped" type="int" visibility="private"/>
+        <Field name="dni" type="int" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="telefono" type="int" visibility="private"/>
+        <Field name="correo" type="String" visibility="private"/>
+        <Field name="direccion" type="String" visibility="private"/>
+        <Field name="estado" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Habitacion" package="" visibility="public" xPosition="673.0" yPosition="8.0">
+      <Fields>
+        <Field name="idHabitacion" type="int" visibility="private"/>
+        <Field name="nroHabitacion" type="int" visibility="private"/>
+        <Field name="piso" type="int" visibility="private"/>
+        <Field name="tipoHab" type="TipoHabitacion" visibility="private"/>
+        <Field name="ocupada" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="TipoHabitacion" package="" visibility="public" xPosition="463.0" yPosition="333.0">
+      <Fields>
+        <Field name="idTipoHabitacion" type="int" visibility="private"/>
+        <Field name="cantidadCamas" type="int" visibility="private"/>
+        <Field name="tipoCamas" type="String" visibility="private"/>
+        <Field name="precioPorNoche" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="ReservaHuesped" package="" visibility="public" xPosition="368.0" yPosition="8.0">
+      <Fields>
+        <Field name="idReserva" type="int" visibility="private"/>
+        <Field name="huesped" type="Huesped" visibility="private"/>
+        <Field name="habitacion" type="Habitacion" visibility="private"/>
+        <Field name="fechaIngreso" type="LocalDate" visibility="private"/>
+        <Field name="fechaSalida" type="LocalDate" visibility="private"/>
+        <Field name="monto" type="double" visibility="private"/>
+        <Field name="estado" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="tiene" source="Habitacion" target="TipoHabitacion" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <HasRelation name="tiene" source="ReservaHuesped" target="Habitacion" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="tiene" source="Huesped" target="ReservaHuesped" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
