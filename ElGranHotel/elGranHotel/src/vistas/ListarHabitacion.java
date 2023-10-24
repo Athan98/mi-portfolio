@@ -160,15 +160,21 @@ public class ListarHabitacion extends javax.swing.JInternalFrame {
             modelo.setRowCount(0);
             List<Habitacion> listahab = new ArrayList<>();
             listahab = hd.listarHabitaciones();
+            String ocupada = "";
             
             for (Habitacion hab : listahab) {
-                
+                if (hab.isOcupada() == false) {
+                ocupada = "Libre";
+            }else{
+                ocupada = "Ocupada";
+            }
                 modelo.addRow(new Object[]{
                     hab.getPiso(),
                     hab.getNroHabitacion(),
                     hab.getIdTipoHabitacion().getTipo(),
                     hab.getIdTipoHabitacion().getTipoCamas(),
-                    hab.getIdTipoHabitacion().getCantidadPersonas()
+                    hab.getIdTipoHabitacion().getCantidadPersonas(),
+                    ocupada
                 });
             }
         } else {
@@ -195,6 +201,7 @@ public class ListarHabitacion extends javax.swing.JInternalFrame {
         modelo.addColumn("Tipo de Habitacion");
         modelo.addColumn("Tipo de Cama");
         modelo.addColumn("Cant. Personas");
+        modelo.addColumn("Disponibilidad");
 
         jtHabitaciones.setModel(modelo);
     }
@@ -203,17 +210,24 @@ public class ListarHabitacion extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         TipoHabitacion th = (TipoHabitacion) jcbTipoHab.getSelectedItem();
         List<Habitacion> listahab = new ArrayList<>();
+        String ocupada = "";
         
         listahab = hd.listarPorCategoria(th);
         
         for (Habitacion hab : listahab) {
-
+            if (hab.isOcupada() == false) {
+                ocupada = "Libre";
+            }else{
+                ocupada = "Ocupada";
+            }
+            System.out.println(ocupada);
             modelo.addRow(new Object[]{
                 hab.getPiso(),
                 hab.getNroHabitacion(),
                 hab.getIdTipoHabitacion().getTipo(),
                 hab.getIdTipoHabitacion().getTipoCamas(),
-                hab.getIdTipoHabitacion().getCantidadPersonas()
+                hab.getIdTipoHabitacion().getCantidadPersonas(),                
+                ocupada
             });
 
         }

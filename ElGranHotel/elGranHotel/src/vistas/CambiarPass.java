@@ -26,42 +26,27 @@ public class CambiarPass extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtUsuarioBuscado = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jbVerificarUsuario = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtNuevaContraseña = new javax.swing.JTextField();
         jbEstablecerNuevaPass = new javax.swing.JButton();
         jlPreguntaBD = new javax.swing.JLabel();
         jbVerificarRespuesta = new javax.swing.JButton();
+        jtUsuarioBuscado = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jbVerificarUsuario = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
         setClosable(true);
         setForeground(new java.awt.Color(51, 51, 51));
 
-        jtUsuarioBuscado.setBackground(new java.awt.Color(102, 102, 102));
-        jtUsuarioBuscado.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
-        jtUsuarioBuscado.setForeground(new java.awt.Color(0, 0, 0));
-        jtUsuarioBuscado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Ingrese usuario:");
-
-        jbVerificarUsuario.setBackground(new java.awt.Color(102, 102, 102));
-        jbVerificarUsuario.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
-        jbVerificarUsuario.setForeground(new java.awt.Color(0, 0, 0));
-        jbVerificarUsuario.setText("Verificar Usuario");
-        jbVerificarUsuario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jbVerificarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVerificarUsuarioActionPerformed(evt);
-            }
-        });
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setForeground(new java.awt.Color(51, 51, 51));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setForeground(new java.awt.Color(51, 51, 51));
 
         jLabel1.setBackground(new java.awt.Color(51, 51, 51));
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 14)); // NOI18N
@@ -117,9 +102,8 @@ public class CambiarPass extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jbVerificarRespuesta, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jbEstablecerNuevaPass, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                                .addComponent(jtNuevaContraseña)))
+                            .addComponent(jbEstablecerNuevaPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtNuevaContraseña))
                         .addGap(0, 116, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,33 +122,65 @@ public class CambiarPass extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+        jtUsuarioBuscado.setBackground(new java.awt.Color(102, 102, 102));
+        jtUsuarioBuscado.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
+        jtUsuarioBuscado.setForeground(new java.awt.Color(0, 0, 0));
+        jtUsuarioBuscado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Ingrese usuario:");
+
+        jbVerificarUsuario.setBackground(new java.awt.Color(102, 102, 102));
+        jbVerificarUsuario.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
+        jbVerificarUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        jbVerificarUsuario.setText("Verificar Usuario");
+        jbVerificarUsuario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jbVerificarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVerificarUsuarioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtUsuarioBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbVerificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jbVerificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtUsuarioBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbVerificarUsuario))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -172,28 +188,34 @@ public class CambiarPass extends javax.swing.JInternalFrame {
 
     private void jbVerificarRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerificarRespuestaActionPerformed
 
-        boolean val = false;
-        int intentos = 3;
-        do {
-            String entrada = JOptionPane.showInputDialog(this, "Ingrese la respuesta");
-            if (entrada != user.getRespuesta() || entrada == null) {
-                JOptionPane.showMessageDialog(null, "Respuesta incorrecta. Le quedan " + intentos + " intentos");
-                intentos = intentos - 1;
+        try {
+            boolean val = false;
+            int intentos = 3;
+            do {
+                String entrada = JOptionPane.showInputDialog(this, "Ingrese la respuesta");
+                if (!entrada.equals(user.getRespuesta())) {
+                    JOptionPane.showMessageDialog(null, "Respuesta incorrecta. Le quedan " + intentos + " intentos");
+                    intentos = intentos - 1;
+                } else {
+                    val = true;
+                    JOptionPane.showMessageDialog(null, "¡Respuesta CORRECTA!");
+                    break;
 
+                }
+            } while (intentos >= 0);
+
+            if (val == true) {
+                jtNuevaContraseña.setEditable(true);
+                jbEstablecerNuevaPass.setEnabled(true);
             } else {
-                val = true;
-                JOptionPane.showMessageDialog(null, "¡Respuesta CORRECTA!");
-                break;
-
+                JOptionPane.showMessageDialog(null, "Se han terminado los intentos. El programa se cerrará");
+                System.exit(0);
             }
-        } while (intentos >= 0);
+        } catch (NullPointerException ex) {
 
-        if (val == true) {
-            jtNuevaContraseña.setEditable(true);
-            jbEstablecerNuevaPass.setEnabled(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Se han terminado los intentos. El programa se cerrará");
-            System.exit(0);
+            JOptionPane.showMessageDialog(null, "Error. Debe llenar los campos correctamente");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jbVerificarRespuestaActionPerformed
 
@@ -225,6 +247,7 @@ public class CambiarPass extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbEstablecerNuevaPass;
     private javax.swing.JButton jbVerificarRespuesta;
     private javax.swing.JButton jbVerificarUsuario;
