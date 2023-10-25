@@ -22,3 +22,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+#Forzar libs
+!poi-3.12-20150511.jar
+!mariadb-java-client-3.0.11.jar
