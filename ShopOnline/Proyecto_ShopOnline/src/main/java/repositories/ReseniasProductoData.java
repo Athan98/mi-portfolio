@@ -25,7 +25,7 @@ public class ReseniasProductoData implements Repository<ReseniasProducto> {
     @Override
     public List<ReseniasProducto> listarTodo() {
         Transaction trans = session.beginTransaction();
-        List<ReseniasProducto> resenias = session.createQuery("FROM reseniasproductos", ReseniasProducto.class).getResultList();
+        List<ReseniasProducto> resenias = session.createQuery("FROM reseniasproducto", ReseniasProducto.class).getResultList();
         trans.commit();
         return resenias;
     }
@@ -33,7 +33,7 @@ public class ReseniasProductoData implements Repository<ReseniasProducto> {
     @Override
     public ReseniasProducto encontrarPorID(int id) {
         Transaction trans = session.beginTransaction();
-        ReseniasProducto resenia = session.createQuery("FROM reseniasproductos WHERE idResenias=:id", ReseniasProducto.class).setParameter("id", id).getSingleResult();
+        ReseniasProducto resenia = session.createQuery("FROM reseniasproducto WHERE idResenias=:id", ReseniasProducto.class).setParameter("id", id).getSingleResult();
         trans.commit();
         return resenia;
     }

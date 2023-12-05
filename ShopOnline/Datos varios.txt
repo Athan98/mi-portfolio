@@ -1,0 +1,6 @@
+El usuario entra como comprador y agrega productos al carrito (CarritoCompras).
+Cuando el usuario decide completar la compra, se crea una "Orden" (Orden) asociada al usuario.
+Los detalles de la orden, es decir, los productos específicos y sus cantidades, se registran en la tabla DetalleOrden.
+Con esta estructura, puedes rastrear las compras realizadas por cada usuario y los productos asociados a esas compras. 
+Ten en cuenta que esta es una estructura básica, y podrías necesitar ajustarla según los requisitos específicos de tu aplicación.
+ Además, asegúrate de manejar adecuadamente la gestión de inventario y otros aspectos relacionados con las transacciones.
