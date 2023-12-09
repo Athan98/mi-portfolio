@@ -1,0 +1,67 @@
+CREATE DATABASE IF NOT EXISTS mercado_frontera;
+USE mercado_frontera;
+
+CREATE TABLE `mercado_frontera`.`usuario` (
+`idUsuario` INT(11) NOT NULL AUTO_INCREMENT , 
+`nombre` VARCHAR(60) NOT NULL ,
+`contrasenia` VARCHAR(60) NOT NULL , 
+`acceso` INT(11) NOT NULL ,
+ PRIMARY KEY (`idUsuario`), UNIQUE (`nombre`)) ENGINE = InnoDB;
+
+CREATE TABLE `mercado_frontera`.`categoria` (
+`idCategoria` INT(11) NOT NULL AUTO_INCREMENT , 
+`nombre` VARCHAR(60) NOT NULL , 
+PRIMARY KEY (`idCategoria`), UNIQUE (`nombre`)) ENGINE = InnoDB;
+
+CREATE TABLE `mercado_frontera`.`producto` (
+`idProducto` INT(11) NOT NULL AUTO_INCREMENT , 
+`idCategoria` INT(11) NOT NULL , 
+`nombre` VARCHAR(60) NOT NULL , 
+`descripcion` VARCHAR(120) NULL ,
+`codigo` INT(30) NOT NULL , 
+`precioVenta` DOUBLE NULL , 
+PRIMARY KEY (`idProducto`), 
+UNIQUE (`codigo`)) ENGINE = InnoDB;
+
+CREATE TABLE `mercado_frontera`.`proveedor` (
+`idProveedor` INT(11) NOT NULL AUTO_INCREMENT , 
+`nombre` VARCHAR(60) NOT NULL , 
+`telefono` VARCHAR(60) NULL , 
+`direccion` VARCHAR(120) NULL , 
+PRIMARY KEY (`idProveedor`)) ENGINE = InnoDB;
+
+CREATE TABLE `mercado_frontera`.`pedido` (
+`idPedido` INT(11) NOT NULL AUTO_INCREMENT , 
+`idProveedor` INT(11) NOT NULL ,
+ `fecha` DATE NOT NULL ,
+ PRIMARY KEY (`idPedido`)) ENGINE = InnoDB;
+
+CREATE TABLE `mercado_frontera`.`detallepedido` (
+`idPedido` INT(11) NOT NULL , 
+`idProducto` INT(11) NOT NULL , 
+`cantidad` INT(11) NOT NULL , 
+`precioCosto` DOUBLE NOT NULL ) ENGINE = InnoDB;
+
+CREATE TABLE `mercado_frontera`.`venta` (
+`idVenta` INT(11) NOT NULL AUTO_INCREMENT ,
+ `idUsuario` INT(11) NOT NULL , 
+`fecha` DATE NOT NULL , 
+PRIMARY KEY (`idVenta`)) ENGINE = InnoDB;
+
+CREATE TABLE `mercado_frontera`.`detalleventa` (
+`idVenta` INT(11) NOT NULL , 
+`idProducto` INT(11) NOT NULL , 
+`cantidad` INT(60) NOT NULL ) ENGINE = InnoDB;
+
+ALTER TABLE `detallepedido` ADD FOREIGN KEY (`idPedido`) REFERENCES `pedido`(`idPedido`) ON DELETE RESTRICT ON UPDATE RESTRICT; ALTER TABLE `detallepedido` ADD FOREIGN KEY (`idProducto`) REFERENCES `producto`(`idProducto`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `detalleventa` ADD FOREIGN KEY (`idProducto`) REFERENCES `producto`(`idProducto`) ON DELETE RESTRICT ON UPDATE RESTRICT; ALTER TABLE `detalleventa` ADD FOREIGN KEY (`idVenta`) REFERENCES `venta`(`idVenta`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `pedido` ADD FOREIGN KEY (`idProveedor`) REFERENCES `proveedor`(`idProveedor`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `venta` ADD FOREIGN KEY (`idUsuario`) REFERENCES `usuario`(`idUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `producto` ADD FOREIGN KEY (`idCategoria`) REFERENCES `categoria`(`idCategoria`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
