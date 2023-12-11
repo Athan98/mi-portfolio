@@ -9,16 +9,16 @@ import javax.persistence.*;
 @Table(name = "detallepedido")
 public class DetallePedido implements Serializable {
 
-    @EmbeddedId
-    private DetallePedido_id idDetallePedido;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idDetallePedido")
+    private int idDetallePedido;
 
     @ManyToOne
-    @MapsId("idPedido")
     @JoinColumn(name = "idPedido", nullable = false)
     private Pedido pedido;
 
     @ManyToOne
-    @MapsId("idProducto")
     @JoinColumn(name = "idProducto", nullable = false)
     private Producto producto;
 
@@ -35,22 +35,14 @@ public class DetallePedido implements Serializable {
         this.precioCosto = precioCosto;
     }
 
-    public DetallePedido(DetallePedido_id idDetallePedido, Pedido pedido, Producto producto, int cantidad, Double precioCosto) {
-        this.idDetallePedido = idDetallePedido;
-        this.pedido = pedido;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.precioCosto = precioCosto;
-    }
-
     public DetallePedido() {
     }
 
-    public DetallePedido_id getIdDetallePedido() {
+    public int getIdDetallePedido() {
         return idDetallePedido;
     }
 
-    public void setIdDetallePedido(DetallePedido_id idDetallePedido) {
+    public void setIdDetallePedido(int idDetallePedido) {
         this.idDetallePedido = idDetallePedido;
     }
 

@@ -17,9 +17,10 @@
         <mapping class="entidades.Usuario"/>
         <mapping class="entidades.Categoria"/>
         <mapping class="entidades.Producto"/>
-        <mapping class="entidades.Carro"/>
-        <mapping class="entidades.DetalleCarro"/>
-        <mapping class="entidades.OrdenCompra"/>
-        <mapping class="entidades.ReseniasProducto"/>
+        <mapping class="entidades.Proveedor"/>
+        <mapping class="entidades.Pedido"/>
+        <mapping class="entidades.DetallePedido"/>
+        <mapping class="entidades.Venta"/>
+        <mapping class="entidades.DetalleVenta"/>
     </session-factory>
 </hibernate-configuration>
