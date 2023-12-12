@@ -106,7 +106,7 @@ public class Loading extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarBarra() {
-        Timer timer = new Timer(70, (ActionEvent e) -> {
+        Timer timer = new Timer(20, (ActionEvent e) -> {
             barraCarga.setValue(barraCarga.getValue() + 1);
             barraCarga.setBackground(Color.pink);
             barraCarga.setStringPainted(true);

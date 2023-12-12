@@ -1,9 +1,11 @@
 package frames;
 
 import config.HibernateConfig;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
 /**
@@ -12,9 +14,12 @@ import org.hibernate.Session;
  */
 public class Principal extends javax.swing.JFrame {
 
+    Loading l = new Loading();
+
     public Principal() {
         initComponents();
         this.setExtendedState(Principal.MAXIMIZED_BOTH);
+//        ejectuarXAMPP();
     }
 
     @SuppressWarnings("unchecked")
@@ -107,13 +112,31 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosActionPerformed
-        Session session = HibernateConfig.get().openSession();
-        Thread hilo = new Thread(loading(10000));
-        hilo.start();
-        session.close();
+        // Crear e iniciar el hilo para ejecutar la carga en segundo plano
+        Thread cargaThread = new Thread(() -> {
+            // Mostrar el frame de carga
+            Loading loading = new Loading();
+            loading.setVisible(true);
+
+            try {
+                // Simular carga demorada (puedes realizar tareas más significativas aquí)
+                Thread.sleep(2000);
+                Productos productos = new Productos();
+                productos.setVisible(true);
+                escritorio.add(productos);
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            // Cerrar el frame de carga
+            loading.dispose();
+        });
+
+        // Iniciar el hilo
+        cargaThread.start();
     }//GEN-LAST:event_jbProductosActionPerformed
 
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -173,6 +196,37 @@ public class Principal extends javax.swing.JFrame {
         };
 
         return run;
+    }
+
+    private void ejectuarXAMPP() {
+        Process proceso = null;
+        try {
+            System.out.println("Ejecutando XAMPP");
+            String rutaXAMPP = "E:\\XAMPP\\xampp_start.exe";
+            proceso = Runtime.getRuntime().exec(rutaXAMPP);
+            System.out.println("XAMPP inicializado");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo ejecutar XAMPP");
+        }
+    }
+
+    private void detenerXAAMP() {
+        Process proceso = null;
+        try {
+            System.out.println("Deteniendo XAAMP");
+            String rutaXAMPP = "E:\\XAMPP\\xampp_stop.exe";
+            proceso = Runtime.getRuntime().exec(rutaXAMPP);
+            int exitCode = proceso.waitFor();
+            System.out.println("XAMPP detenido con código de salida: " + exitCode);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo ejecutar XAMPP");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (proceso != null) {
+                proceso.destroy();
+            }
+        }
     }
 
 }
