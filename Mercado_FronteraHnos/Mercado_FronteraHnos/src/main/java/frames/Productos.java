@@ -438,15 +438,15 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        // TODO add your handling code here:
+        limpiarCampos();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbAgregarCategoria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarCategoria1ActionPerformed
-        Double costoUnitario=Double.parseDouble(jtCostoUnitario.getText());
-        Double porcentajeGanancia=Double.parseDouble(jtGanancia.getText())/100;
-        Double resultado=costoUnitario+(costoUnitario*porcentajeGanancia);
-        
-        jtPrecioVenta.setText(resultado+"");
+        Double costoUnitario = Double.parseDouble(jtCostoUnitario.getText());
+        Double porcentajeGanancia = Double.parseDouble(jtGanancia.getText()) / 100;
+        Double resultado = costoUnitario + (costoUnitario * porcentajeGanancia);
+
+        jtPrecioVenta.setText(resultado + "");
     }//GEN-LAST:event_jbAgregarCategoria1ActionPerformed
 
 
@@ -535,7 +535,7 @@ public class Productos extends javax.swing.JInternalFrame {
         modelo.addColumn("Costo unitario");
         modelo.addColumn("Precio venta unitario");
         modelo.addColumn("Stock");
-        
+
         jTableProductos.setModel(modelo);
     }
 }
