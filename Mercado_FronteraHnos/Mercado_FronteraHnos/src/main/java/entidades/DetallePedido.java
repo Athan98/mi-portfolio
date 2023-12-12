@@ -3,8 +3,6 @@ package entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-
 @Entity
 @Table(name = "detallepedido")
 public class DetallePedido implements Serializable {
@@ -25,14 +23,15 @@ public class DetallePedido implements Serializable {
     @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
-    @Column(name = "precioCosto", nullable = false)
-    private Double precioCosto;
+    @ManyToOne
+    @JoinColumn(name = "idFormaDePago", nullable = false)
+    private FormaDePago formaDePago;
 
-    public DetallePedido(Pedido pedido, Producto producto, int cantidad, Double precioCosto) {
+    public DetallePedido(Pedido pedido, Producto producto, int cantidad, FormaDePago formaDePago) {
         this.pedido = pedido;
         this.producto = producto;
         this.cantidad = cantidad;
-        this.precioCosto = precioCosto;
+        this.formaDePago = formaDePago;
     }
 
     public DetallePedido() {
@@ -70,17 +69,17 @@ public class DetallePedido implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Double getPrecioCosto() {
-        return precioCosto;
+    public FormaDePago getFormaDePago() {
+        return formaDePago;
     }
 
-    public void setPrecioCosto(Double precioCosto) {
-        this.precioCosto = precioCosto;
+    public void setFormaDePago(FormaDePago formaDePago) {
+        this.formaDePago = formaDePago;
     }
 
     @Override
     public String toString() {
-        return "DetallePedido{" + "idDetallePedido=" + idDetallePedido + ", pedido=" + pedido + ", producto=" + producto + ", cantidad=" + cantidad + ", precioCosto=" + precioCosto + '}';
+        return "DetallePedido{" + "idDetallePedido=" + idDetallePedido + ", pedido=" + pedido + ", producto=" + producto + ", cantidad=" + cantidad + ", formaDePago=" + formaDePago + '}';
     }
 
 }

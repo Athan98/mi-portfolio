@@ -15,7 +15,7 @@ public class Producto {
     @JoinColumn(name = "idCategoria", nullable = false)
     private Categoria categoria;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
     @Column(name = "descripcion")
@@ -24,29 +24,32 @@ public class Producto {
     @Column(name = "codigo", unique = true)
     private String codigo;
 
-    @Column(name = "precioVenta")
-    private Double precioVenta;
+    @Column(name = "precioVentaUnitario", nullable = false)
+    private Double precioVentaUnitario;
+    
+    @Column(name = "precioCostoUnitario", nullable = false)
+    private Double precioCostoUnitario;
 
-    @Column(name = "stock")
+    @Column(name = "stock", nullable = false)
     private int stock;
 
-    public Producto(Categoria categoria, String nombre, String descripcion, String codigo, Double precioVenta, int stock) {
+    public Producto(Categoria categoria, String nombre, String descripcion, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock) {
         this.categoria = categoria;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.codigo = codigo;
-        this.precioVenta = precioVenta;
+        this.precioVentaUnitario = precioVentaUnitario;
+        this.precioCostoUnitario = precioCostoUnitario;
         this.stock = stock;
     }
 
-    public Producto(Categoria categoria, String nombre, String codigo, int stock) {
+    public Producto(Categoria categoria, String nombre, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock) {
         this.categoria = categoria;
         this.nombre = nombre;
         this.codigo = codigo;
+        this.precioVentaUnitario = precioVentaUnitario;
+        this.precioCostoUnitario = precioCostoUnitario;
         this.stock = stock;
-    }
-
-    public Producto() {
     }
 
     public int getIdProducto() {
@@ -89,12 +92,20 @@ public class Producto {
         this.codigo = codigo;
     }
 
-    public Double getPrecioVenta() {
-        return precioVenta;
+    public Double getPrecioVentaUnitario() {
+        return precioVentaUnitario;
     }
 
-    public void setPrecioVenta(Double precioVenta) {
-        this.precioVenta = precioVenta;
+    public void setPrecioVentaUnitario(Double precioVentaUnitario) {
+        this.precioVentaUnitario = precioVentaUnitario;
+    }
+
+    public Double getPrecioCostoUnitario() {
+        return precioCostoUnitario;
+    }
+
+    public void setPrecioCostoUnitario(Double precioCostoUnitario) {
+        this.precioCostoUnitario = precioCostoUnitario;
     }
 
     public int getStock() {
@@ -107,7 +118,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", categoria=" + categoria + ", nombre=" + nombre + ", descripcion=" + descripcion + ", codigo=" + codigo + ", precioVenta=" + precioVenta + ", stock=" + stock + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", categoria=" + categoria + ", nombre=" + nombre + ", descripcion=" + descripcion + ", codigo=" + codigo + ", precioVentaUnitario=" + precioVentaUnitario + ", precioCostoUnitario=" + precioCostoUnitario + ", stock=" + stock + '}';
     }
 
 }

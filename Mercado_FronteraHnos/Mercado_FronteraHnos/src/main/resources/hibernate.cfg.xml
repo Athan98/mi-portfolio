@@ -22,5 +22,6 @@
         <mapping class="entidades.DetallePedido"/>
         <mapping class="entidades.Venta"/>
         <mapping class="entidades.DetalleVenta"/>
+        <mapping class="entidades.FormaDePago"/>
     </session-factory>
 </hibernate-configuration>

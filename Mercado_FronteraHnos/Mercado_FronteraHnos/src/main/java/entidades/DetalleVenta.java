@@ -1,4 +1,3 @@
-
 package entidades;
 
 import java.io.Serializable;
@@ -7,27 +6,32 @@ import javax.persistence.*;
 @Entity
 @Table(name = "detalleventa")
 public class DetalleVenta implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetalleVenta")
     private int idDetalleVenta;
 
     @ManyToOne
-    @JoinColumn(name = "idVenta")
+    @JoinColumn(name = "idVenta", nullable = false)
     private Venta venta;
 
     @ManyToOne
-    @JoinColumn(name = "idProducto")
+    @JoinColumn(name = "idProducto", nullable = false)
     private Producto producto;
 
-    @Column(name = "cantidad")
+    @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
-    public DetalleVenta(Venta venta, Producto producto, int cantidad) {
+    @ManyToOne
+    @JoinColumn(name = "idFormaDePago", nullable = false)
+    private FormaDePago formaDePago;
+
+    public DetalleVenta(Venta venta, Producto producto, int cantidad, FormaDePago formaDePago) {
         this.venta = venta;
         this.producto = producto;
         this.cantidad = cantidad;
+        this.formaDePago = formaDePago;
     }
 
     public DetalleVenta() {
@@ -65,9 +69,17 @@ public class DetalleVenta implements Serializable {
         this.cantidad = cantidad;
     }
 
+    public FormaDePago getFormaDePago() {
+        return formaDePago;
+    }
+
+    public void setFormaDePago(FormaDePago formaDePago) {
+        this.formaDePago = formaDePago;
+    }
+
     @Override
     public String toString() {
-        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", venta=" + venta + ", producto=" + producto + ", cantidad=" + cantidad + '}';
+        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", venta=" + venta + ", producto=" + producto + ", cantidad=" + cantidad + ", formaDePago=" + formaDePago + '}';
     }
 
 }

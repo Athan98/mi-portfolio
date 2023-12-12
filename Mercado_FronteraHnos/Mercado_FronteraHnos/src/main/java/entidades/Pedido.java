@@ -19,9 +19,13 @@ public class Pedido {
     @Column(name = "fecha", nullable = false)
     private Date fecha;
 
-    public Pedido(Proveedor proveedor, Date fecha) {
+    @Column(name = "precioTotalCosto", nullable = false)
+    private Double precioTotalCosto;
+
+    public Pedido(Proveedor proveedor, Date fecha, Double precioTotalCosto) {
         this.proveedor = proveedor;
         this.fecha = fecha;
+        this.precioTotalCosto = precioTotalCosto;
     }
 
     public Pedido() {
@@ -51,8 +55,17 @@ public class Pedido {
         this.fecha = fecha;
     }
 
+    public Double getPrecioTotalCosto() {
+        return precioTotalCosto;
+    }
+
+    public void setPrecioTotalCosto(Double precioTotalCosto) {
+        this.precioTotalCosto = precioTotalCosto;
+    }
+
     @Override
     public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", proveedor=" + proveedor + ", fecha=" + fecha + '}';
-    } 
+        return "Pedido{" + "idPedido=" + idPedido + ", proveedor=" + proveedor + ", fecha=" + fecha + ", precioTotalCosto=" + precioTotalCosto + '}';
+    }
+
 }
