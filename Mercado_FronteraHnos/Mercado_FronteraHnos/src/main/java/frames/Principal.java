@@ -1,5 +1,11 @@
 package frames;
 
+import config.HibernateConfig;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
+import org.hibernate.Session;
+
 /**
  *
  * @author Nicolas Roldan
@@ -26,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setForeground(new java.awt.Color(153, 153, 153));
 
+        jbProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/productos.png"))); // NOI18N
         jbProductos.setText("Productos");
         jbProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,7 +53,7 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jbProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(jbProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -58,7 +65,7 @@ public class Principal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGap(0, 405, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
@@ -100,16 +107,13 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosActionPerformed
-
-        Productos prod=new Productos();
-        prod.setVisible(true);
-        escritorio.add(prod);
-        
+        Session session = HibernateConfig.get().openSession();
+        Thread hilo = new Thread(loading(10000));
+        hilo.start();
+        session.close();
     }//GEN-LAST:event_jbProductosActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -143,9 +147,32 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
+    public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbProductos;
     // End of variables declaration//GEN-END:variables
+
+    private Runnable loading(int segundos) {
+        Runnable run = () -> {
+            Loading l = new Loading();
+            l.setVisible(true);
+
+            try {
+                Thread.sleep(segundos);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            l.dispose();
+
+            Productos prod = new Productos();
+            prod.setVisible(true);
+            escritorio.add(prod);
+
+        };
+
+        return run;
+    }
+
 }
