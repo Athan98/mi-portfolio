@@ -54,4 +54,9 @@ public class Venta_data implements Repository<Venta> {
         trans.commit();
     }
 
+    @Override
+    public void eliminarPorID(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

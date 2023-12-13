@@ -27,8 +27,8 @@
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
                   <Component id="escritorio" max="32767" attributes="0"/>
+                  <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -66,7 +66,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jbProductos" min="-2" pref="135" max="-2" attributes="0"/>
-                  <EmptySpace pref="503" max="32767" attributes="0"/>
+                  <EmptySpace pref="548" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -130,7 +130,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="239" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="194" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

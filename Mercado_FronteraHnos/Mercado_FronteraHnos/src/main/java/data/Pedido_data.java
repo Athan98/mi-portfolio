@@ -55,5 +55,10 @@ public class Pedido_data implements Repository<Pedido> {
         JOptionPane.showMessageDialog(null, "El pedido con ID: " + t.getIdPedido() + " ha sido eliminado");
         trans.commit();
     }
+
+    @Override
+    public void eliminarPorID(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

@@ -54,4 +54,9 @@ public class FormaDePago_data implements Repository<FormaDePago> {
         trans.commit();
     }
 
+    @Override
+    public void eliminarPorID(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

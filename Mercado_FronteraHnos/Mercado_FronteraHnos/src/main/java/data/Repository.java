@@ -10,4 +10,5 @@ public interface Repository<T> {
     T encontrarPorID(int id);
     void actualizar(T t);
     void eliminar(T t);
+    void eliminarPorID(int id);
 }

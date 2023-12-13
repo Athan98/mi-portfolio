@@ -54,4 +54,9 @@ public class DetallePedido_data implements Repository<DetallePedido> {
         trans.commit();
     }
 
+    @Override
+    public void eliminarPorID(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

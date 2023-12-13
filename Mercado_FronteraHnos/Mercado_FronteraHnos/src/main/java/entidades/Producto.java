@@ -1,4 +1,3 @@
-
 package entidades;
 
 import javax.persistence.*;
@@ -6,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "producto")
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProducto")
@@ -26,7 +26,7 @@ public class Producto {
 
     @Column(name = "precioVentaUnitario", nullable = false)
     private Double precioVentaUnitario;
-    
+
     @Column(name = "precioCostoUnitario", nullable = false)
     private Double precioCostoUnitario;
 
@@ -50,6 +50,20 @@ public class Producto {
         this.precioVentaUnitario = precioVentaUnitario;
         this.precioCostoUnitario = precioCostoUnitario;
         this.stock = stock;
+    }
+
+    public Producto(int idProducto, Categoria categoria, String nombre, String descripcion, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock) {
+        this.idProducto = idProducto;
+        this.categoria = categoria;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.codigo = codigo;
+        this.precioVentaUnitario = precioVentaUnitario;
+        this.precioCostoUnitario = precioCostoUnitario;
+        this.stock = stock;
+    }
+
+    public Producto() {
     }
 
     public int getIdProducto() {
