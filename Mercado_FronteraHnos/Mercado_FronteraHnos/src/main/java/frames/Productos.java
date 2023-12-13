@@ -5,7 +5,9 @@ import data.Categoria_data;
 import data.Producto_data;
 import entidades.Categoria;
 import entidades.Producto;
+import exportarExcel.Controlador;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -352,7 +354,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(jbAgregar)
                     .addComponent(jbLimpiar)
                     .addComponent(jbGuardar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Búsqueda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 20))); // NOI18N
@@ -410,6 +412,11 @@ public class Productos extends javax.swing.JInternalFrame {
         jbExportarExcel.setForeground(new java.awt.Color(51, 153, 0));
         jbExportarExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/excel.png"))); // NOI18N
         jbExportarExcel.setText("EXPORTAR");
+        jbExportarExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExportarExcelActionPerformed(evt);
+            }
+        });
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actualizar precios masivamente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
@@ -520,14 +527,12 @@ public class Productos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbExportarExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jbEditarProducto)
-                        .addContainerGap())
-                    .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jbEditarProducto)
+                    .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbExportarExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -839,6 +844,18 @@ public class Productos extends javax.swing.JInternalFrame {
         session.close();
 
     }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbExportarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExportarExcelActionPerformed
+         Controlador obj;
+        try {
+            obj = new Controlador();
+            obj.exportarExcel(jTableProductos);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error de archivo");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jbExportarExcelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
