@@ -21,11 +21,23 @@ public class Venta {
 
     @Column(name = "precioTotalVenta", nullable = false)
     private Double precioTotalVenta;
+    
+    @Column(name = "cliente", nullable = false)
+    private String cliente;
 
-    public Venta(Usuario usuario, Date fecha, Double precioTotalVenta) {
+    public Venta(int idVenta, Usuario usuario, Date fecha, Double precioTotalVenta, String cliente) {
+        this.idVenta = idVenta;
         this.usuario = usuario;
         this.fecha = fecha;
         this.precioTotalVenta = precioTotalVenta;
+        this.cliente = cliente;
+    }
+
+    public Venta(Usuario usuario, Date fecha, Double precioTotalVenta, String cliente) {
+        this.usuario = usuario;
+        this.fecha = fecha;
+        this.precioTotalVenta = precioTotalVenta;
+        this.cliente = cliente;
     }
 
     public Venta() {
@@ -63,9 +75,17 @@ public class Venta {
         this.precioTotalVenta = precioTotalVenta;
     }
 
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", usuario=" + usuario + ", fecha=" + fecha + ", precioTotalVenta=" + precioTotalVenta + '}';
+        return "Venta{" + "idVenta=" + idVenta + ", usuario=" + usuario + ", fecha=" + fecha + ", precioTotalVenta=" + precioTotalVenta + ", cliente=" + cliente + '}';
     }
 
 }

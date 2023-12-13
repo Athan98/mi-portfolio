@@ -17,7 +17,7 @@ public class Loading extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setBackground(transparent);
 
-        ImagenQuantum imagen = new ImagenQuantum(panelBack, "/imagenes/LOGO3.png");
+        ImagenQuantum imagen = new ImagenQuantum(panelBack, "/imagenes/QuantumScript.png");
         panelBack.add(imagen).repaint();
         panelBack.setOpaque(false);
         panelBack.setBorder(null);
