@@ -13,10 +13,6 @@ public class DetalleVenta implements Serializable {
     private int idDetalleVenta;
 
     @ManyToOne
-    @JoinColumn(name = "idVenta", nullable = false)
-    private Venta venta;
-
-    @ManyToOne
     @JoinColumn(name = "idProducto", nullable = false)
     private Producto producto;
 
@@ -24,14 +20,20 @@ public class DetalleVenta implements Serializable {
     private int cantidad;
 
     @ManyToOne
-    @JoinColumn(name = "idFormaDePago", nullable = false)
-    private FormaDePago formaDePago;
+    @JoinColumn(name = "idVenta", nullable = true)
+    private Venta venta;
 
-    public DetalleVenta(Venta venta, Producto producto, int cantidad, FormaDePago formaDePago) {
-        this.venta = venta;
+    public DetalleVenta(int idDetalleVenta, Producto producto, int cantidad, Venta venta) {
+        this.idDetalleVenta = idDetalleVenta;
         this.producto = producto;
         this.cantidad = cantidad;
-        this.formaDePago = formaDePago;
+        this.venta = venta;
+    }
+
+    public DetalleVenta(Producto producto, int cantidad, Venta venta) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.venta = venta;
     }
 
     public DetalleVenta() {
@@ -43,14 +45,6 @@ public class DetalleVenta implements Serializable {
 
     public void setIdDetalleVenta(int idDetalleVenta) {
         this.idDetalleVenta = idDetalleVenta;
-    }
-
-    public Venta getVenta() {
-        return venta;
-    }
-
-    public void setVenta(Venta venta) {
-        this.venta = venta;
     }
 
     public Producto getProducto() {
@@ -69,17 +63,17 @@ public class DetalleVenta implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public FormaDePago getFormaDePago() {
-        return formaDePago;
+    public Venta getVenta() {
+        return venta;
     }
 
-    public void setFormaDePago(FormaDePago formaDePago) {
-        this.formaDePago = formaDePago;
+    public void setVenta(Venta venta) {
+        this.venta = venta;
     }
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", venta=" + venta + ", producto=" + producto + ", cantidad=" + cantidad + ", formaDePago=" + formaDePago + '}';
+        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", producto=" + producto + ", cantidad=" + cantidad + ", venta=" + venta + '}';
     }
 
 }

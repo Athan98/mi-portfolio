@@ -4,6 +4,8 @@ import config.HibernateConfig;
 import data.*;
 import entidades.*;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -12,19 +14,32 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 
 public class Ventas extends javax.swing.JInternalFrame {
-    
+
+    Double precioNeto = 0.0;
+    Double montoIva = 0.0;
+    Double montoTotal = 0.0;
+
+    private final DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fila, int col) {
+            return false;
+        }
+    };
+
     public Ventas() {
         initComponents();
         llenarComboUsers();
         jtFecha.setText(convertirFecha(LocalDate.now()));
-        jbEscanear.requestFocusInWindow();
-        
+        armarCabeceraTabla();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -52,22 +67,22 @@ public class Ventas extends javax.swing.JInternalFrame {
         jbCancelarCarro = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablePedido = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jlPrecioNeto = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtIVA = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jcFormaDePago = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jlTotalPagar = new javax.swing.JLabel();
+        jlMontoIVA = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jtPagaCon = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jlVuelto = new javax.swing.JLabel();
+        jbPagar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -163,6 +178,9 @@ public class Ventas extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Cantidad:");
 
+        jtCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtCantidad.setText("1");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -212,6 +230,11 @@ public class Ventas extends javax.swing.JInternalFrame {
         jbAgregarProducto.setForeground(new java.awt.Color(51, 153, 0));
         jbAgregarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carro.png"))); // NOI18N
         jbAgregarProducto.setText("Agregar al pedido");
+        jbAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarProductoActionPerformed(evt);
+            }
+        });
 
         jbEliminarProducto.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jbEliminarProducto.setForeground(new java.awt.Color(204, 0, 0));
@@ -228,32 +251,28 @@ public class Ventas extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(81, 81, 81)
                 .addComponent(jbAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbEliminarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbEliminarProducto)
                 .addGap(18, 18, 18)
                 .addComponent(jbCancelarCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jbEliminarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbCancelarCarro)
-                            .addComponent(jbAgregarProducto))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbCancelarCarro)
+                    .addComponent(jbAgregarProducto)
+                    .addComponent(jbEliminarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -264,7 +283,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablePedido);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -288,14 +307,14 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Precio Neto :");
 
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("-");
+        jlPrecioNeto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlPrecioNeto.setText("-");
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("I.V.A (%) :");
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("21.00");
+        jtIVA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtIVA.setText("21");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -312,39 +331,39 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Total a pagar :");
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(153, 0, 153));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("-");
+        jlTotalPagar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jlTotalPagar.setForeground(new java.awt.Color(153, 0, 153));
+        jlTotalPagar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlTotalPagar.setText("-");
 
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("-");
+        jlMontoIVA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlMontoIVA.setText("-");
 
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 0, 102));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Paga con ($) :");
 
-        jTextField2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtPagaCon.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jtPagaCon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(102, 0, 102));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Vuelto ($) :");
 
-        jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("-");
+        jlVuelto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jlVuelto.setForeground(new java.awt.Color(102, 0, 102));
+        jlVuelto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlVuelto.setText("-");
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 0));
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("$$$$$$$ PAGAR $$$$$$$");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbPagar.setBackground(new java.awt.Color(0, 153, 0));
+        jbPagar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jbPagar.setForeground(new java.awt.Color(0, 0, 0));
+        jbPagar.setText("$$$$$$$ PAGAR $$$$$$$");
+        jbPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbPagarActionPerformed(evt);
             }
         });
 
@@ -362,11 +381,11 @@ public class Ventas extends javax.swing.JInternalFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jTextField2))
+                                .addComponent(jtPagaCon))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                                .addComponent(jlVuelto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jbPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -377,11 +396,11 @@ public class Ventas extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(12, 12, 12)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtIVA, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlMontoIVA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlTotalPagar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jcFormaDePago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jlPrecioNeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -389,17 +408,17 @@ public class Ventas extends javax.swing.JInternalFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(jlPrecioNeto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14)
+                .addComponent(jlMontoIVA)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel13))
+                    .addComponent(jlTotalPagar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -407,13 +426,13 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtPagaCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jbPagar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel17)))
+                    .addComponent(jlVuelto)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -457,9 +476,9 @@ public class Ventas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcFormaDePagoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPagarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbPagarActionPerformed
 
     private void jbEscanearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscanearActionPerformed
         jtCodigo.setText("");
@@ -474,18 +493,66 @@ public class Ventas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtCodigoKeyPressed
 
+    private void jbAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProductoActionPerformed
+
+        Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
+        Double precioMasIVA = 0.0;
+        int cant = Integer.parseInt(jtCantidad.getText());
+        Usuario user = (Usuario) jcUsuarios.getSelectedItem();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date fecha = formatoFecha.parse(jtFecha.getText());
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener la fecha. Error: " + ex.getMessage());
+        }
+
+        if (!jtCodigo.getText().isEmpty() && !jtNombre.getText().isEmpty() && (cant <= 0)) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo de producto");
+        } else {
+            if (verificarProducto() == null) {
+                JOptionPane.showMessageDialog(null, "No se encontro el producto en la base de datos");
+            } else {
+
+                //AGREGAR PRODUCTO A LA LISTA
+                Producto p = verificarProducto();
+
+                modelo.addRow(new Object[]{
+                    p.getIdProducto(),
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),
+                    p.getPrecioVentaUnitario(),
+                    cant,});
+
+                precioNeto=precioNeto+(p.getPrecioVentaUnitario()*cant);
+                montoIva=montoIva+((IVA*p.getPrecioVentaUnitario())*cant);
+                montoTotal=(precioNeto+montoIva);
+                
+                DecimalFormat formato = new DecimalFormat("#.##");
+                
+                jlMontoIVA.setText(formato.format(montoIva));
+                jlPrecioNeto.setText(formato.format(precioNeto));
+                jlTotalPagar.setText(formato.format(montoTotal));
+                
+
+                limpiarCampos();
+
+
+            }
+
+        }
+
+
+    }//GEN-LAST:event_jbAgregarProductoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -493,7 +560,6 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -501,32 +567,37 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable jTablePedido;
     private javax.swing.JButton jbAgregarProducto;
     private javax.swing.JButton jbCancelarCarro;
     private javax.swing.JButton jbEliminarProducto;
     private javax.swing.JButton jbEscanear;
+    private javax.swing.JButton jbPagar;
     private javax.swing.JComboBox<String> jcClientes;
     private javax.swing.JComboBox<FormaDePago> jcFormaDePago;
     private javax.swing.JComboBox<Usuario> jcUsuarios;
+    private javax.swing.JLabel jlMontoIVA;
+    private javax.swing.JLabel jlPrecioNeto;
+    private javax.swing.JLabel jlTotalPagar;
+    private javax.swing.JLabel jlVuelto;
     private javax.swing.JTextField jtCantidad;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtFecha;
+    private javax.swing.JTextField jtIVA;
     private javax.swing.JTextField jtNombre;
+    private javax.swing.JTextField jtPagaCon;
     // End of variables declaration//GEN-END:variables
 
     private void llenarComboUsers() {
-        
+
         jcUsuarios.removeAllItems();
-        
+
         Session session = HibernateConfig.get().openSession();
         Usuario_data userd = new Usuario_data(session);
         List<Usuario> users = userd.listarTodo();
-        
+
         Set<String> usersAgregados = new HashSet<>();
-        
+
         for (Usuario u : users) {
             String nombreUser = u.getNombre();
             if (!usersAgregados.contains(nombreUser)) {
@@ -534,12 +605,12 @@ public class Ventas extends javax.swing.JInternalFrame {
                 usersAgregados.add(nombreUser);
             }
         }
-        
+
         jcUsuarios.setSelectedIndex(-1);
-        
+
         session.close();
     }
-    
+
     public String convertirFecha(LocalDate fechaActual) {
 
         // Crear un formateador para el formato dd-MM-yyyy
@@ -554,36 +625,79 @@ public class Ventas extends javax.swing.JInternalFrame {
         // Configurar el texto del TextField
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String fechaDateFormateada = sdf.format(fechaDate);
-        
+
         return fechaDateFormateada;
     }
-    
+
     private void procesarCodigo() {
-        
+
         if (jtCodigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El codigo no existe");
-            
+
         } else {
-            
+
             Session session = HibernateConfig.get().openSession();
             Producto_data pd = new Producto_data(session);
             List<Producto> productos = pd.listarTodo();
-            
+
             for (Producto p : productos) {
                 if (jtCodigo.getText().equals(p.getCodigo())) {
                     jtNombre.setText(p.getNombre());
                     break;
                 }
             }
-            
+
             session.close();
         }
     }
-    
+
     private void limpiarCampos() {
         jtCodigo.setText("");
         jtNombre.setText("");
-        jtCantidad.setText("");
+        jtCantidad.setText("1");
     }
-    
+
+    public void armarCabeceraTabla() {
+        modelo.setColumnCount(0);
+
+        modelo.addColumn("ID");
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Categoria");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Precio venta unitario");
+        modelo.addColumn("Cantidad");
+
+        jTablePedido.setModel(modelo);
+    }
+
+    private List<Producto> listarProductos() {
+
+        Session session = HibernateConfig.get().openSession();
+
+        Producto_data pd = new Producto_data(session);
+
+        List<Producto> productos = pd.listarTodo();
+
+        session.close();
+
+        return productos;
+
+    }
+
+    private Producto verificarProducto() {
+
+        List<Producto> productos = listarProductos();
+
+        for (Producto p : productos) {
+
+            if (jtCodigo.getText().equals(p.getCodigo()) && jtNombre.getText().equals(p.getNombre())) {
+                return p;
+
+            }
+        }
+
+        return null;
+
+    }
+
 }

@@ -354,7 +354,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(jbAgregar)
                     .addComponent(jbLimpiar)
                     .addComponent(jbGuardar))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Búsqueda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 20))); // NOI18N
@@ -421,6 +421,12 @@ public class Productos extends javax.swing.JInternalFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actualizar precios masivamente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         jLabel12.setText("Multiplicar por (%) :");
+
+        jtTasaActualizacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtTasaActualizacionKeyPressed(evt);
+            }
+        });
 
         jbActualizarMasiva.setForeground(new java.awt.Color(0, 153, 0));
         jbActualizarMasiva.setText("Actualizar $");
@@ -847,7 +853,7 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbExportarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExportarExcelActionPerformed
-         Controlador obj;
+        Controlador obj;
         try {
             obj = new Controlador();
             obj.exportarExcel(jTableProductos);
@@ -857,6 +863,14 @@ public class Productos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jbExportarExcelActionPerformed
+
+    private void jtTasaActualizacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTasaActualizacionKeyPressed
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            jtTasaActualizacion.setEditable(true);
+        } else {
+            jtTasaActualizacion.setEditable(false);
+        }
+    }//GEN-LAST:event_jtTasaActualizacionKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

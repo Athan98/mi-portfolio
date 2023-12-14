@@ -1,6 +1,7 @@
 package entidades;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -21,16 +22,34 @@ public class Venta {
 
     @Column(name = "precioTotalVenta", nullable = false)
     private Double precioTotalVenta;
-    
+
     @Column(name = "cliente", nullable = false)
     private String cliente;
 
-    public Venta(int idVenta, Usuario usuario, Date fecha, Double precioTotalVenta, String cliente) {
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    private List<DetalleVenta> detallesVenta;
+
+    @ManyToOne
+    @JoinColumn(name = "idFormaDePago", nullable = false)
+    private FormaDePago formaDePago;
+
+    public Venta(Usuario usuario, Date fecha, Double precioTotalVenta, String cliente, List<DetalleVenta> detallesVenta, FormaDePago formaDePago) {
+        this.usuario = usuario;
+        this.fecha = fecha;
+        this.precioTotalVenta = precioTotalVenta;
+        this.cliente = cliente;
+        this.detallesVenta = detallesVenta;
+        this.formaDePago = formaDePago;
+    }
+
+    public Venta(int idVenta, Usuario usuario, Date fecha, Double precioTotalVenta, String cliente, List<DetalleVenta> detallesVenta, FormaDePago formaDePago) {
         this.idVenta = idVenta;
         this.usuario = usuario;
         this.fecha = fecha;
         this.precioTotalVenta = precioTotalVenta;
         this.cliente = cliente;
+        this.detallesVenta = detallesVenta;
+        this.formaDePago = formaDePago;
     }
 
     public Venta(Usuario usuario, Date fecha, Double precioTotalVenta, String cliente) {
@@ -39,6 +58,8 @@ public class Venta {
         this.precioTotalVenta = precioTotalVenta;
         this.cliente = cliente;
     }
+    
+    
 
     public Venta() {
     }
@@ -83,9 +104,25 @@ public class Venta {
         this.cliente = cliente;
     }
 
-    @Override
-    public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", usuario=" + usuario + ", fecha=" + fecha + ", precioTotalVenta=" + precioTotalVenta + ", cliente=" + cliente + '}';
+    public List<DetalleVenta> getDetallesVenta() {
+        return detallesVenta;
     }
 
+    public void setDetallesVenta(List<DetalleVenta> detallesVenta) {
+        this.detallesVenta = detallesVenta;
+    }
+
+    public FormaDePago getFormaDePago() {
+        return formaDePago;
+    }
+
+    public void setFormaDePago(FormaDePago formaDePago) {
+        this.formaDePago = formaDePago;
+    }
+
+    @Override
+    public String toString() {
+        return "Venta{" + "idVenta=" + idVenta + ", usuario=" + usuario + ", fecha=" + fecha + ", precioTotalVenta=" + precioTotalVenta + ", cliente=" + cliente + ", detallesVenta=" + detallesVenta + ", formaDePago=" + formaDePago + '}';
+    }
+    
 }

@@ -58,7 +58,7 @@ public class Categorias extends javax.swing.JInternalFrame {
 
         jbVolver.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jbVolver.setForeground(new java.awt.Color(0, 0, 0));
-        jbVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volver.png"))); // NOI18N
+        jbVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volver_1.png"))); // NOI18N
         jbVolver.setText("VOLVER");
         jbVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,7 +68,7 @@ public class Categorias extends javax.swing.JInternalFrame {
 
         jbAgregarCategoria.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jbAgregarCategoria.setForeground(new java.awt.Color(0, 0, 0));
-        jbAgregarCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar.png"))); // NOI18N
+        jbAgregarCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar_1.png"))); // NOI18N
         jbAgregarCategoria.setText("AGREGAR CATEGORIA");
         jbAgregarCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +80,7 @@ public class Categorias extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 618, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(50, 50, 50)
@@ -90,9 +90,9 @@ public class Categorias extends javax.swing.JInternalFrame {
                             .addGap(18, 18, 18)
                             .addComponent(jtNuevaCategoria))
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jbVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                            .addComponent(jbAgregarCategoria)))
+                            .addComponent(jbVolver, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jbAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(50, 50, 50)))
         );
         jPanel2Layout.setVerticalGroup(

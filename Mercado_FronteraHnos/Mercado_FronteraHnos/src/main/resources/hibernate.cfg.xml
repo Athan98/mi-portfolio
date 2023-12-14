@@ -18,10 +18,11 @@
         <mapping class="entidades.Categoria"/>
         <mapping class="entidades.Producto"/>
         <mapping class="entidades.Proveedor"/>
-        <mapping class="entidades.Pedido"/>
         <mapping class="entidades.DetallePedido"/>
-        <mapping class="entidades.Venta"/>
+        <mapping class="entidades.Pedido"/>
         <mapping class="entidades.DetalleVenta"/>
         <mapping class="entidades.FormaDePago"/>
+        <mapping class="entidades.Venta"/>
+
     </session-factory>
 </hibernate-configuration>
