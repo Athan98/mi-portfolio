@@ -23,15 +23,22 @@ public class DetallePedido implements Serializable {
     @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
-    @ManyToOne
-    @JoinColumn(name = "idFormaDePago", nullable = false)
-    private FormaDePago formaDePago;
+    @Column(name = "precio", nullable = false)
+    private Double precio;
 
-    public DetallePedido(Pedido pedido, Producto producto, int cantidad, FormaDePago formaDePago) {
+    public DetallePedido(int idDetallePedido, Pedido pedido, Producto producto, int cantidad, Double precio) {
+        this.idDetallePedido = idDetallePedido;
         this.pedido = pedido;
         this.producto = producto;
         this.cantidad = cantidad;
-        this.formaDePago = formaDePago;
+        this.precio = precio;
+    }
+
+    public DetallePedido(Pedido pedido, Producto producto, int cantidad, Double precio) {
+        this.pedido = pedido;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.precio = precio;
     }
 
     public DetallePedido() {
@@ -69,17 +76,16 @@ public class DetallePedido implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public FormaDePago getFormaDePago() {
-        return formaDePago;
+    public Double getPrecio() {
+        return precio;
     }
 
-    public void setFormaDePago(FormaDePago formaDePago) {
-        this.formaDePago = formaDePago;
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 
     @Override
     public String toString() {
-        return "DetallePedido{" + "idDetallePedido=" + idDetallePedido + ", pedido=" + pedido + ", producto=" + producto + ", cantidad=" + cantidad + ", formaDePago=" + formaDePago + '}';
+        return "DetallePedido{" + "idDetallePedido=" + idDetallePedido + ", pedido=" + pedido + ", producto=" + producto + ", cantidad=" + cantidad + ", precio=" + precio + '}';
     }
-
 }

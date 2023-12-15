@@ -56,7 +56,18 @@ public class Proveedor_data implements Repository<Proveedor> {
 
     @Override
     public void eliminarPorID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Transaction trans = session.beginTransaction();
+
+        Proveedor proveedorAEliminar = session.get(Proveedor.class, id);
+
+        if (proveedorAEliminar != null) {
+            session.delete(proveedorAEliminar);
+            JOptionPane.showMessageDialog(null, "El producto con ID: " + id + " ha sido eliminado");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el producto con ID: " + id);
+        }
+
+        trans.commit();
     }
 
 }

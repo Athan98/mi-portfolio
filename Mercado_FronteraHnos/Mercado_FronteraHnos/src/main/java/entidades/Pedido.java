@@ -2,6 +2,8 @@ package entidades;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pedido")
@@ -22,10 +24,32 @@ public class Pedido {
     @Column(name = "precioTotalCosto", nullable = false)
     private Double precioTotalCosto;
 
-    public Pedido(Proveedor proveedor, Date fecha, Double precioTotalCosto) {
+    @ManyToOne
+    @JoinColumn(name = "idFormaDePago", nullable = false)
+    private FormaDePago formaDePago;
+
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private List<DetallePedido> detallesPedido = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario", nullable = false)
+    private Usuario usuario;
+
+    public Pedido(int idPedido, Proveedor proveedor, Date fecha, Double precioTotalCosto, FormaDePago formaDePago, Usuario usuario) {
+        this.idPedido = idPedido;
         this.proveedor = proveedor;
         this.fecha = fecha;
         this.precioTotalCosto = precioTotalCosto;
+        this.formaDePago = formaDePago;
+        this.usuario = usuario;
+    }
+
+    public Pedido(Proveedor proveedor, Date fecha, Double precioTotalCosto, FormaDePago formaDePago, Usuario usuario) {
+        this.proveedor = proveedor;
+        this.fecha = fecha;
+        this.precioTotalCosto = precioTotalCosto;
+        this.formaDePago = formaDePago;
+        this.usuario = usuario;
     }
 
     public Pedido() {
@@ -63,9 +87,33 @@ public class Pedido {
         this.precioTotalCosto = precioTotalCosto;
     }
 
+    public FormaDePago getFormaDePago() {
+        return formaDePago;
+    }
+
+    public void setFormaDePago(FormaDePago formaDePago) {
+        this.formaDePago = formaDePago;
+    }
+
+    public List<DetallePedido> getDetallesPedido() {
+        return detallesPedido;
+    }
+
+    public void setDetallesPedido(List<DetallePedido> detallesPedido) {
+        this.detallesPedido = detallesPedido;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", proveedor=" + proveedor + ", fecha=" + fecha + ", precioTotalCosto=" + precioTotalCosto + '}';
+        return "Pedido{" + "idPedido=" + idPedido + ", proveedor=" + proveedor + ", fecha=" + fecha + ", precioTotalCosto=" + precioTotalCosto + ", formaDePago=" + formaDePago + ", detallesPedido=" + detallesPedido + ", usuario=" + usuario + '}';
     }
 
 }

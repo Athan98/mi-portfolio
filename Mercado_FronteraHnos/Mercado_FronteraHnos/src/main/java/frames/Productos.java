@@ -85,6 +85,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("PRODUCTOS");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestión", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 20))); // NOI18N
 
@@ -576,11 +577,18 @@ public class Productos extends javax.swing.JInternalFrame {
         Double precioCostoUnitario = Double.parseDouble(jtCostoUnitario.getText());
         int stock = Integer.parseInt(jtStock.getText());
 
-        Producto prod = new Producto(cat, nombreProd, descripcion, codigo, precioVentaUnitario, precioCostoUnitario, stock);
+        if (jtCodigo.getText().isEmpty() || jtNombre.getText().isEmpty()
+                || jcCategorias.getSelectedIndex() == -1 || jtPrecioVenta.getText().isEmpty()
+                || jtCostoUnitario.getText().isEmpty() || jtStock.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar completos");
+        } else {
 
-        Producto_data pd = new Producto_data(session);
+            Producto prod = new Producto(cat, nombreProd, descripcion, codigo, precioVentaUnitario, precioCostoUnitario, stock);
 
-        pd.agregar(prod);
+            Producto_data pd = new Producto_data(session);
+
+            pd.agregar(prod);
+        }
 
         session.close();
 
@@ -843,10 +851,14 @@ public class Productos extends javax.swing.JInternalFrame {
 
         Producto_data prod_data = new Producto_data(session);
 
-        prod_data.eliminarPorID(idProducto);
+        int opcionSeleccionada = JOptionPane.showConfirmDialog(null, "¿Estás seguro que quieres eliminarlo?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
-        borrarFilas();
-        actualizarListaProductos();
+        if (opcionSeleccionada == JOptionPane.YES_OPTION) {
+            prod_data.eliminarPorID(idProducto);
+
+            borrarFilas();
+            actualizarListaProductos();
+        }
 
         session.close();
 

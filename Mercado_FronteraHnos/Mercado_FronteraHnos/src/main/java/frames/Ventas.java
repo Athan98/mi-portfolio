@@ -28,7 +28,6 @@ public class Ventas extends javax.swing.JInternalFrame {
     Double precioNeto = 0.0;
     Double montoIva = 0.0;
     Double montoTotal = 0.0;
-    boolean verificarStock = false;
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -88,6 +87,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jbPagar = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("VENTAS");
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

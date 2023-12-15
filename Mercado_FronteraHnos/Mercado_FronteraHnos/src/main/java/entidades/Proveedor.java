@@ -20,14 +20,22 @@ public class Proveedor {
     @Column(name = "direccion", length = 120)
     private String direccion;
 
-    public Proveedor(String nombre, String telefono, String direccion) {
+    @Column(name = "cuit", length = 60)
+    private String cuit;
+
+    public Proveedor(int idProveedor, String nombre, String telefono, String direccion, String cuit) {
+        this.idProveedor = idProveedor;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.cuit = cuit;
     }
 
-    public Proveedor(String nombre) {
+    public Proveedor(String nombre, String telefono, String direccion, String cuit) {
         this.nombre = nombre;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.cuit = cuit;
     }
 
     public Proveedor() {
@@ -65,8 +73,17 @@ public class Proveedor {
         this.direccion = direccion;
     }
 
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
+    }
+
     @Override
     public String toString() {
-        return "Proveedor{" + "idProveedor=" + idProveedor + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + '}';
+        return "Proveedor{" + "idProveedor=" + idProveedor + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", cuit=" + cuit + '}';
     }
+
 }
