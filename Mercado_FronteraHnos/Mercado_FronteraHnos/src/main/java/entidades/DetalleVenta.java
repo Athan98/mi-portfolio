@@ -22,22 +22,28 @@ public class DetalleVenta implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idVenta", nullable = true)
     private Venta venta;
+    
+    @Column(name = "precio", nullable = false)
+    private Double precio;
 
-    public DetalleVenta(int idDetalleVenta, Producto producto, int cantidad, Venta venta) {
+    public DetalleVenta(int idDetalleVenta, Producto producto, int cantidad, Venta venta, Double precio) {
         this.idDetalleVenta = idDetalleVenta;
         this.producto = producto;
         this.cantidad = cantidad;
         this.venta = venta;
+        this.precio = precio;
     }
 
-    public DetalleVenta(Producto producto, int cantidad, Venta venta) {
+    public DetalleVenta(Producto producto, int cantidad, Venta venta, Double precio) {
         this.producto = producto;
         this.cantidad = cantidad;
         this.venta = venta;
+        this.precio = precio;
     }
 
     public DetalleVenta() {
     }
+
 
     public int getIdDetalleVenta() {
         return idDetalleVenta;
@@ -71,9 +77,19 @@ public class DetalleVenta implements Serializable {
         this.venta = venta;
     }
 
-    @Override
-    public String toString() {
-        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", producto=" + producto + ", cantidad=" + cantidad + ", venta=" + venta + '}';
+    public Double getPrecio() {
+        return precio;
     }
 
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+
+    @Override
+    public String toString() {
+        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", producto=" + producto + ", cantidad=" + cantidad + ", venta=" + venta + ", precio=" + precio + '}';
+    }
+
+    
+    
 }

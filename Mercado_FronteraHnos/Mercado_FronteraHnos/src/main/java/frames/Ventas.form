@@ -377,6 +377,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Eliminar del pedido"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEliminarProductoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbCancelarCarro">
           <Properties>
@@ -391,6 +394,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelar carro"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCancelarCarroActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -467,20 +473,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel15" min="-2" pref="124" max="-2" attributes="0"/>
-                              <Component id="jLabel16" min="-2" pref="121" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                  <Component id="jtPagaCon" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jlVuelto" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jLabel15" min="-2" pref="124" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Component id="jtPagaCon" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jbPagar" alignment="0" pref="304" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
@@ -498,7 +493,7 @@
                               <Component id="jtIVA" alignment="1" max="32767" attributes="0"/>
                               <Component id="jlMontoIVA" alignment="1" max="32767" attributes="0"/>
                               <Component id="jlTotalPagar" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jcFormaDePago" max="32767" attributes="0"/>
+                              <Component id="jcFormasDePago" max="32767" attributes="0"/>
                               <Component id="jlPrecioNeto" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -529,7 +524,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jcFormaDePago" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcFormasDePago" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -537,12 +532,8 @@
                       <Component id="jtPagaCon" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jbPagar" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbPagar" pref="59" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlVuelto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -581,14 +572,14 @@
             <Property name="text" type="java.lang.String" value="Forma de pago :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jcFormaDePago">
+        <Component class="javax.swing.JComboBox" name="jcFormasDePago">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcFormaDePagoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcFormasDePagoActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;FormaDePago&gt;"/>
@@ -644,37 +635,13 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel16">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="0" red="66" type="rgb"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Vuelto ($) :"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jlVuelto">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="0" red="66" type="rgb"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="-"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="jbPagar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="99" red="0" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="14" style="1"/>
+              <Font name="Dialog" size="20" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>

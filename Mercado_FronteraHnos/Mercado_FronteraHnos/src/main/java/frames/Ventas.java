@@ -3,6 +3,7 @@ package frames;
 import config.HibernateConfig;
 import data.*;
 import entidades.*;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -10,12 +11,14 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
@@ -25,6 +28,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     Double precioNeto = 0.0;
     Double montoIva = 0.0;
     Double montoTotal = 0.0;
+    boolean verificarStock=false;
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -38,6 +42,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         llenarComboUsers();
         jtFecha.setText(convertirFecha(LocalDate.now()));
         armarCabeceraTabla();
+        cargarFormasDePago();
     }
 
     @SuppressWarnings("unchecked")
@@ -74,14 +79,12 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jtIVA = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jcFormaDePago = new javax.swing.JComboBox<>();
+        jcFormasDePago = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jlTotalPagar = new javax.swing.JLabel();
         jlMontoIVA = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jtPagaCon = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jlVuelto = new javax.swing.JLabel();
         jbPagar = new javax.swing.JButton();
 
         setClosable(true);
@@ -240,11 +243,21 @@ public class Ventas extends javax.swing.JInternalFrame {
         jbEliminarProducto.setForeground(new java.awt.Color(204, 0, 0));
         jbEliminarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eliminar.png"))); // NOI18N
         jbEliminarProducto.setText("Eliminar del pedido");
+        jbEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarProductoActionPerformed(evt);
+            }
+        });
 
         jbCancelarCarro.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jbCancelarCarro.setForeground(new java.awt.Color(0, 0, 0));
         jbCancelarCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelarCarro.png"))); // NOI18N
         jbCancelarCarro.setText("Cancelar carro");
+        jbCancelarCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarCarroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -320,9 +333,9 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Forma de pago :");
 
-        jcFormaDePago.addActionListener(new java.awt.event.ActionListener() {
+        jcFormasDePago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcFormaDePagoActionPerformed(evt);
+                jcFormasDePagoActionPerformed(evt);
             }
         });
 
@@ -347,18 +360,8 @@ public class Ventas extends javax.swing.JInternalFrame {
         jtPagaCon.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtPagaCon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Vuelto ($) :");
-
-        jlVuelto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jlVuelto.setForeground(new java.awt.Color(102, 0, 102));
-        jlVuelto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlVuelto.setText("-");
-
         jbPagar.setBackground(new java.awt.Color(0, 153, 0));
-        jbPagar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jbPagar.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jbPagar.setForeground(new java.awt.Color(0, 0, 0));
         jbPagar.setText("$$$$$$$ PAGAR $$$$$$$");
         jbPagar.addActionListener(new java.awt.event.ActionListener() {
@@ -375,16 +378,9 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jtPagaCon))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jlVuelto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jtPagaCon))
                     .addComponent(jbPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -399,7 +395,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                             .addComponent(jtIVA, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jlMontoIVA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlTotalPagar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcFormaDePago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcFormasDePago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlPrecioNeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -422,17 +418,14 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jcFormaDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcFormasDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jtPagaCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbPagar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jlVuelto)))
+                .addComponent(jbPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -472,12 +465,109 @@ public class Ventas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcFormaDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcFormaDePagoActionPerformed
+    private void jcFormasDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcFormasDePagoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jcFormaDePagoActionPerformed
+    }//GEN-LAST:event_jcFormasDePagoActionPerformed
 
     private void jbPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPagarActionPerformed
-        // TODO add your handling code here:
+        Session session = HibernateConfig.get().openSession();
+
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Desea confirmar la operacion ?", "Confirmación de venta", JOptionPane.YES_NO_OPTION);
+
+        if (opcion == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "Operacion cancelada");
+        } else {
+
+            if (jcUsuarios.getSelectedItem() == null || jcFormasDePago.getSelectedItem() == null || jtPagaCon.getText().isEmpty() || (Double.parseDouble(jtPagaCon.getText()) < (Double.parseDouble(jlTotalPagar.getText())))) {
+
+                JOptionPane.showMessageDialog(null, "Asegurese de llenar todos los campos correctamente");
+
+            } else {
+
+                try {
+
+                    Venta_data vd = new Venta_data(session);
+                    Producto_data pd = new Producto_data(session);
+                    DetalleVenta_data dvd = new DetalleVenta_data(session);
+
+                    //CREO LA VENTA
+                    String cliente = (String) jcClientes.getSelectedItem();
+                    Usuario user = (Usuario) jcUsuarios.getSelectedItem();
+
+                    String fechaTexto = jtFecha.getText();
+
+                    // Parsear la fecha usando el formato "dd-MM-yyyy"
+                    SimpleDateFormat formatoFechaEntrada = new SimpleDateFormat("dd-MM-yyyy");
+                    Date fecha = formatoFechaEntrada.parse(fechaTexto);
+
+                    // Formatear la fecha en el formato deseado ("yyyy-MM-dd")
+                    SimpleDateFormat formatoFechaSalida = new SimpleDateFormat("yyyy-MM-dd");
+                    String fechaFormateada = formatoFechaSalida.format(fecha);
+
+                    System.out.println(fechaFormateada);
+                    Double precioTotal = Double.parseDouble(jlTotalPagar.getText());
+                    FormaDePago fdp = (FormaDePago) jcFormasDePago.getSelectedItem();
+                    List<DetalleVenta> detallesVenta = new ArrayList<>();
+
+                    Venta venta = new Venta(user, fecha, precioTotal, cliente, detallesVenta, fdp);
+
+                    vd.agregar(venta);
+
+                    int filas = modelo.getRowCount();
+                    int idProducto = 0;
+                    int cantidad = 0;
+                    double precioUnitario = 0.0;
+                    double precio = 0.0;
+                    Producto p = null;
+                    DetalleVenta dv = null;
+
+                    for (int i = 0; i <= filas - 1; i++) {
+                        idProducto = (int) modelo.getValueAt(i, 0);
+                        cantidad = (int) modelo.getValueAt(i, 5);
+                        precioUnitario = (Double) modelo.getValueAt(i, 4);
+                        precio = precioUnitario * cantidad;
+
+                        //ENCONTRAR PRODUCTO EN BD
+                        p = pd.encontrarPorID(idProducto);
+
+                        //CREAR UN DETALLE DE VENTA
+                        dv = new DetalleVenta(p, cantidad, venta, precio);
+
+                        //AGREGAR A LA LISTA DE DETALLES DE VENTA PARA AGREGAR A LA VENTA
+                        detallesVenta.add(dv);
+                        dvd.agregar(dv);
+
+                        //ACTUALIZAR STOCK
+                        p.setStock(p.getStock() - cantidad);
+
+                    }
+
+                    venta.setDetallesVenta(detallesVenta);
+
+                    vd.actualizar(venta);
+
+                    //SETEAR CAMPOS DE PAGO Y VUELTO
+                    Double pagaCon = Double.parseDouble(jtPagaCon.getText());
+
+                    Double vuelto = pagaCon - montoTotal;
+
+                    DecimalFormat formato = new DecimalFormat("#.##");
+
+                    mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
+
+                    limpiarCamposNumericosYTabla();
+
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al castear clases");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+
+                }
+            }
+        }
+
+        session.close();
+
     }//GEN-LAST:event_jbPagarActionPerformed
 
     private void jbEscanearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscanearActionPerformed
@@ -496,54 +586,89 @@ public class Ventas extends javax.swing.JInternalFrame {
     private void jbAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProductoActionPerformed
 
         Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
-        Double precioMasIVA = 0.0;
         int cant = Integer.parseInt(jtCantidad.getText());
-        Usuario user = (Usuario) jcUsuarios.getSelectedItem();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date fecha = formatoFecha.parse(jtFecha.getText());
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo obtener la fecha. Error: " + ex.getMessage());
-        }
 
-        if (!jtCodigo.getText().isEmpty() && !jtNombre.getText().isEmpty() && (cant <= 0)) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo de producto");
+
+        if (jtCodigo.getText().isEmpty() || jtNombre.getText().isEmpty() || (cant <= 0)) {
+            JOptionPane.showMessageDialog(null, "Llene los campos correctamente");
         } else {
             if (verificarProducto() == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro el producto en la base de datos");
             } else {
-
                 //AGREGAR PRODUCTO A LA LISTA
                 Producto p = verificarProducto();
 
-                modelo.addRow(new Object[]{
-                    p.getIdProducto(),
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    p.getPrecioVentaUnitario(),
-                    cant,});
+                if (verificarStock==true) {
+                    JOptionPane.showMessageDialog(null, "No hay stock suficiente");
+                    verificarStock=false;
+                } else {
 
-                precioNeto=precioNeto+(p.getPrecioVentaUnitario()*cant);
-                montoIva=montoIva+((IVA*p.getPrecioVentaUnitario())*cant);
-                montoTotal=(precioNeto+montoIva);
-                
-                DecimalFormat formato = new DecimalFormat("#.##");
-                
-                jlMontoIVA.setText(formato.format(montoIva));
-                jlPrecioNeto.setText(formato.format(precioNeto));
-                jlTotalPagar.setText(formato.format(montoTotal));
-                
+                    modelo.addRow(new Object[]{
+                        p.getIdProducto(),
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        p.getPrecioVentaUnitario(),
+                        cant,});
 
-                limpiarCampos();
+                    precioNeto = precioNeto + (p.getPrecioVentaUnitario() * cant);
+                    montoIva = montoIva + ((IVA * p.getPrecioVentaUnitario()) * cant);
+                    montoTotal = (precioNeto + montoIva);
 
+                    DecimalFormat formato = new DecimalFormat("#.##");
 
+                    jlMontoIVA.setText(formato.format(montoIva));
+                    jlPrecioNeto.setText(formato.format(precioNeto));
+                    jlTotalPagar.setText(formato.format(montoTotal));
+
+                    limpiarCampos();
+                }
             }
-
         }
-
-
     }//GEN-LAST:event_jbAgregarProductoActionPerformed
+
+    private void jbEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarProductoActionPerformed
+        int filaSeleccionada = jTablePedido.getSelectedRow();
+        Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
+
+        if (filaSeleccionada != -1) {
+            Object idProducto = modelo.getValueAt(filaSeleccionada, 0);
+            Object cantidad = modelo.getValueAt(filaSeleccionada, 5);
+
+            Session session = HibernateConfig.get().openSession();
+            Producto_data pd = new Producto_data(session);
+
+            Producto p = pd.encontrarPorID((int) idProducto);
+
+            // Calcular los montos a restar
+            Double montoRestarNeto = p.getPrecioVentaUnitario() * (int) cantidad;
+            Double montoRestarIva = (IVA * p.getPrecioVentaUnitario()) * (int) cantidad;
+            Double montoRestarTotal = montoRestarNeto + montoRestarIva;
+
+            // Actualizar los montos
+            precioNeto -= montoRestarNeto;
+            montoIva -= montoRestarIva;
+            montoTotal -= montoRestarTotal;
+
+            // Actualizar las etiquetas
+            DecimalFormat formato = new DecimalFormat("#.##");
+            jlMontoIVA.setText(formato.format(montoIva));
+            jlPrecioNeto.setText(formato.format(precioNeto));
+            jlTotalPagar.setText(montoTotal + "");
+
+            // Eliminar la fila del modelo
+            modelo.removeRow(filaSeleccionada);
+
+            session.close();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar");
+        }
+    }//GEN-LAST:event_jbEliminarProductoActionPerformed
+
+    private void jbCancelarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarCarroActionPerformed
+        limpiarCamposNumericosYTabla();
+    }//GEN-LAST:event_jbCancelarCarroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -552,7 +677,6 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -574,12 +698,11 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbEscanear;
     private javax.swing.JButton jbPagar;
     private javax.swing.JComboBox<String> jcClientes;
-    private javax.swing.JComboBox<FormaDePago> jcFormaDePago;
+    private javax.swing.JComboBox<FormaDePago> jcFormasDePago;
     private javax.swing.JComboBox<Usuario> jcUsuarios;
     private javax.swing.JLabel jlMontoIVA;
     private javax.swing.JLabel jlPrecioNeto;
     private javax.swing.JLabel jlTotalPagar;
-    private javax.swing.JLabel jlVuelto;
     private javax.swing.JTextField jtCantidad;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtFecha;
@@ -588,8 +711,32 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtPagaCon;
     // End of variables declaration//GEN-END:variables
 
-    private void llenarComboUsers() {
+    private void limpiarCamposNumericosYTabla() {
+        borrarFilas();
+        montoTotal = 0.0;
+        precioNeto = 0.0;
+        montoIva = 0.0;
+        jcFormasDePago.setSelectedIndex(-1);
+        jtPagaCon.setText("");
+        jlPrecioNeto.setText("-");
+        jlMontoIVA.setText("-");
+        jlTotalPagar.setText("-");
+    }
 
+    public void borrarFilas() {
+        int f = modelo.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+
+    public static void mostrarVuelto(String mensaje) {
+        JLabel label = new JLabel(mensaje);
+        label.setFont(new Font("Arial", Font.PLAIN, 20));
+        JOptionPane.showMessageDialog(null, label);
+    }
+
+    private void llenarComboUsers() {
         jcUsuarios.removeAllItems();
 
         Session session = HibernateConfig.get().openSession();
@@ -612,7 +759,6 @@ public class Ventas extends javax.swing.JInternalFrame {
     }
 
     public String convertirFecha(LocalDate fechaActual) {
-
         // Crear un formateador para el formato dd-MM-yyyy
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -630,7 +776,6 @@ public class Ventas extends javax.swing.JInternalFrame {
     }
 
     private void procesarCodigo() {
-
         if (jtCodigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El codigo no existe");
 
@@ -671,7 +816,6 @@ public class Ventas extends javax.swing.JInternalFrame {
     }
 
     private List<Producto> listarProductos() {
-
         Session session = HibernateConfig.get().openSession();
 
         Producto_data pd = new Producto_data(session);
@@ -681,11 +825,9 @@ public class Ventas extends javax.swing.JInternalFrame {
         session.close();
 
         return productos;
-
     }
 
     private Producto verificarProducto() {
-
         List<Producto> productos = listarProductos();
 
         for (Producto p : productos) {
@@ -697,7 +839,44 @@ public class Ventas extends javax.swing.JInternalFrame {
         }
 
         return null;
+    }
 
+    public void cargarFormasDePago() {
+        jcFormasDePago.removeAllItems();
+
+        Session session = HibernateConfig.get().openSession();
+        FormaDePago_data fdpd = new FormaDePago_data(session);
+        List<FormaDePago> formasDePago = fdpd.listarTodo();
+
+        Set<String> formasDePagoAgregadas = new HashSet<>();
+
+        for (FormaDePago fp : formasDePago) {
+            String formaDePago = fp.getNombreFormaDePago();
+            if (!formasDePagoAgregadas.contains(formaDePago)) {
+                jcFormasDePago.addItem(fp);
+                formasDePagoAgregadas.add(formaDePago);
+            }
+        }
+
+        jcFormasDePago.setSelectedIndex(-1);
+
+        session.close();
+    }
+
+    public boolean verificarStock(int cantidadVendida) {
+        Session session = HibernateConfig.get().openSession();
+        Producto_data pd = new Producto_data(session);
+        List<Producto> productos = pd.listarTodo();
+
+        for (Producto p : productos) {
+            if (p.getStock() < cantidadVendida) {
+                verificarStock = true;
+                break;
+            }
+        }
+
+        session.close();
+        return verificarStock;
     }
 
 }

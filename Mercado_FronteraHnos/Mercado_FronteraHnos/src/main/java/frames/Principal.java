@@ -160,7 +160,7 @@ public class Principal extends javax.swing.JFrame {
             try {
                 // Simular carga demorada (puedes realizar tareas más significativas aquí)
                 Thread.sleep(2000);
-                Ventas ventas=new Ventas();
+                Ventas ventas = new Ventas();
                 ventas.setVisible(true);
                 escritorio.add(ventas);
 

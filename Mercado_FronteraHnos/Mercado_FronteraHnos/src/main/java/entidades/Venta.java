@@ -1,12 +1,14 @@
 package entidades;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "venta")
-public class Venta {
+public class Venta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +29,7 @@ public class Venta {
     private String cliente;
 
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
-    private List<DetalleVenta> detallesVenta;
+    private List<DetalleVenta> detallesVenta=new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "idFormaDePago", nullable = false)

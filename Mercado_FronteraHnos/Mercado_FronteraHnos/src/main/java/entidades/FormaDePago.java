@@ -39,7 +39,7 @@ public class FormaDePago {
 
     @Override
     public String toString() {
-        return "FormaDePago{" + "idFormaDePago=" + idFormaDePago + ", nombreFormaDePago=" + nombreFormaDePago + '}';
+        return nombreFormaDePago;
     }
 
 }
