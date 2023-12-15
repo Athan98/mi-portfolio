@@ -28,7 +28,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     Double precioNeto = 0.0;
     Double montoIva = 0.0;
     Double montoTotal = 0.0;
-    boolean verificarStock=false;
+    boolean verificarStock = false;
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -179,10 +179,21 @@ public class Ventas extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Nombre:");
 
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtNombreKeyPressed(evt);
+            }
+        });
+
         jLabel7.setText("Cantidad:");
 
         jtCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtCantidad.setText("1");
+        jtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtCantidadKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -578,6 +589,11 @@ public class Ventas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEscanearActionPerformed
 
     private void jtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCodigoKeyPressed
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            jtCodigo.setEditable(true);
+        } else {
+            jtCodigo.setEditable(false);
+        }
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             procesarCodigo();
         }
@@ -588,7 +604,6 @@ public class Ventas extends javax.swing.JInternalFrame {
         Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
         int cant = Integer.parseInt(jtCantidad.getText());
 
-
         if (jtCodigo.getText().isEmpty() || jtNombre.getText().isEmpty() || (cant <= 0)) {
             JOptionPane.showMessageDialog(null, "Llene los campos correctamente");
         } else {
@@ -597,10 +612,8 @@ public class Ventas extends javax.swing.JInternalFrame {
             } else {
                 //AGREGAR PRODUCTO A LA LISTA
                 Producto p = verificarProducto();
-
-                if (verificarStock==true) {
+                if (p.getStock() < cant) {
                     JOptionPane.showMessageDialog(null, "No hay stock suficiente");
-                    verificarStock=false;
                 } else {
 
                     modelo.addRow(new Object[]{
@@ -619,7 +632,7 @@ public class Ventas extends javax.swing.JInternalFrame {
 
                     jlMontoIVA.setText(formato.format(montoIva));
                     jlPrecioNeto.setText(formato.format(precioNeto));
-                    jlTotalPagar.setText(formato.format(montoTotal));
+                    jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0+"");
 
                     limpiarCampos();
                 }
@@ -669,6 +682,23 @@ public class Ventas extends javax.swing.JInternalFrame {
     private void jbCancelarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarCarroActionPerformed
         limpiarCamposNumericosYTabla();
     }//GEN-LAST:event_jbCancelarCarroActionPerformed
+
+    private void jtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyPressed
+        char x = evt.getKeyChar();
+        if (Character.isLetter(x) || Character.isISOControl(x) || (evt.getKeyChar() == ' ')) {
+            jtNombre.setEditable(true);
+        } else {
+            jtNombre.setEditable(false);
+        }
+    }//GEN-LAST:event_jtNombreKeyPressed
+
+    private void jtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCantidadKeyPressed
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            jtCantidad.setEditable(true);
+        } else {
+            jtCantidad.setEditable(false);
+        }
+    }//GEN-LAST:event_jtCantidadKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -861,22 +891,6 @@ public class Ventas extends javax.swing.JInternalFrame {
         jcFormasDePago.setSelectedIndex(-1);
 
         session.close();
-    }
-
-    public boolean verificarStock(int cantidadVendida) {
-        Session session = HibernateConfig.get().openSession();
-        Producto_data pd = new Producto_data(session);
-        List<Producto> productos = pd.listarTodo();
-
-        for (Producto p : productos) {
-            if (p.getStock() < cantidadVendida) {
-                verificarStock = true;
-                break;
-            }
-        }
-
-        session.close();
-        return verificarStock;
     }
 
 }
