@@ -29,6 +29,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jbProductos = new javax.swing.JButton();
         jbVentas = new javax.swing.JButton();
+        jbProveedores = new javax.swing.JButton();
+        jbPedidos = new javax.swing.JButton();
+        jbEstadisticas = new javax.swing.JButton();
         escritorio = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
 
@@ -38,6 +41,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setForeground(new java.awt.Color(153, 153, 153));
 
+        jbProductos.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jbProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/productos_1.png"))); // NOI18N
         jbProductos.setText("Productos");
         jbProductos.addActionListener(new java.awt.event.ActionListener() {
@@ -46,11 +50,39 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbVentas.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jbVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventas.png"))); // NOI18N
         jbVentas.setText("Ventas");
         jbVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbVentasActionPerformed(evt);
+            }
+        });
+
+        jbProveedores.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jbProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proveedor.png"))); // NOI18N
+        jbProveedores.setText("Proveedores");
+        jbProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbProveedoresActionPerformed(evt);
+            }
+        });
+
+        jbPedidos.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jbPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pedido.png"))); // NOI18N
+        jbPedidos.setText("Pedidos");
+        jbPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPedidosActionPerformed(evt);
+            }
+        });
+
+        jbEstadisticas.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jbEstadisticas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/estadisticas.png"))); // NOI18N
+        jbEstadisticas.setText("Estadisticas");
+        jbEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEstadisticasActionPerformed(evt);
             }
         });
 
@@ -60,18 +92,29 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbProductos)
                 .addGap(18, 18, 18)
                 .addComponent(jbVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jbProveedores)
+                .addGap(18, 18, 18)
+                .addComponent(jbPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbEstadisticas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbProductos)
+                        .addComponent(jbVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbPedidos)
+                        .addComponent(jbEstadisticas))
+                    .addComponent(jbProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -110,7 +153,8 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(escritorio)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +176,8 @@ public class Principal extends javax.swing.JFrame {
             loading.setVisible(true);
 
             try {
-                // Simular carga demorada (puedes realizar tareas más significativas aquí)
+                escritorio.removeAll();
+                escritorio.repaint();
                 Thread.sleep(2000);
                 Productos productos = new Productos();
                 productos.setVisible(true);
@@ -158,7 +203,8 @@ public class Principal extends javax.swing.JFrame {
             loading.setVisible(true);
 
             try {
-                // Simular carga demorada (puedes realizar tareas más significativas aquí)
+                escritorio.removeAll();
+                escritorio.repaint();
                 Thread.sleep(2000);
                 Ventas ventas = new Ventas();
                 ventas.setVisible(true);
@@ -175,6 +221,42 @@ public class Principal extends javax.swing.JFrame {
         // Iniciar el hilo
         cargaThread.start();
     }//GEN-LAST:event_jbVentasActionPerformed
+
+    private void jbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProveedoresActionPerformed
+        // Crear e iniciar el hilo para ejecutar la carga en segundo plano
+        Thread cargaThread = new Thread(() -> {
+            // Mostrar el frame de carga
+            Loading loading = new Loading();
+            loading.setVisible(true);
+
+            try {
+                escritorio.removeAll();
+                escritorio.repaint();
+                Thread.sleep(2000);
+                Proveedores prov = new Proveedores();
+                prov.setVisible(true);
+
+                escritorio.add(prov);
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            // Cerrar el frame de carga
+            loading.dispose();
+        });
+
+        // Iniciar el hilo
+        cargaThread.start();
+    }//GEN-LAST:event_jbProveedoresActionPerformed
+
+    private void jbPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPedidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbPedidosActionPerformed
+
+    private void jbEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadisticasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbEstadisticasActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -212,7 +294,10 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jbEstadisticas;
+    private javax.swing.JButton jbPedidos;
     private javax.swing.JButton jbProductos;
+    private javax.swing.JButton jbProveedores;
     private javax.swing.JButton jbVentas;
     // End of variables declaration//GEN-END:variables
 
