@@ -85,6 +85,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         jtPagaCon = new javax.swing.JTextField();
         jbPagar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("VENTAS");
@@ -381,6 +382,9 @@ public class Ventas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Monto I.V.A. ($) :");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -400,7 +404,8 @@ public class Ventas extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(12, 12, 12)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtIVA, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -421,7 +426,9 @@ public class Ventas extends javax.swing.JInternalFrame {
                     .addComponent(jtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlMontoIVA)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlMontoIVA)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -667,7 +674,7 @@ public class Ventas extends javax.swing.JInternalFrame {
             DecimalFormat formato = new DecimalFormat("#.##");
             jlMontoIVA.setText(formato.format(montoIva));
             jlPrecioNeto.setText(formato.format(precioNeto));
-            jlTotalPagar.setText(montoTotal + "");
+            jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0+"");
 
             // Eliminar la fila del modelo
             modelo.removeRow(filaSeleccionada);
@@ -714,6 +721,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
