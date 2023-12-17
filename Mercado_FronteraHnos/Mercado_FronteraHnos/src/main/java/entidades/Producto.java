@@ -24,13 +24,13 @@ public class Producto {
     @Column(name = "codigo", unique = true)
     private String codigo;
 
-    @Column(name = "precioVentaUnitario", nullable = false)
+    @Column(name = "precioVentaUnitario")
     private Double precioVentaUnitario;
 
-    @Column(name = "precioCostoUnitario", nullable = false)
+    @Column(name = "precioCostoUnitario")
     private Double precioCostoUnitario;
 
-    @Column(name = "stock", nullable = false)
+    @Column(name = "stock")
     private int stock;
 
     public Producto(Categoria categoria, String nombre, String descripcion, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock) {

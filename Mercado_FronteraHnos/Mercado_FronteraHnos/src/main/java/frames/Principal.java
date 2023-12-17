@@ -255,7 +255,30 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbPedidosActionPerformed
 
     private void jbEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadisticasActionPerformed
-        // TODO add your handling code here:
+        // Crear e iniciar el hilo para ejecutar la carga en segundo plano
+        Thread cargaThread = new Thread(() -> {
+            // Mostrar el frame de carga
+            Loading loading = new Loading();
+            loading.setVisible(true);
+
+            try {
+                escritorio.removeAll();
+                escritorio.repaint();
+                Thread.sleep(2000);
+                Estadisticas e = new Estadisticas();
+                e.setVisible(true);
+                escritorio.add(e);
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            // Cerrar el frame de carga
+            loading.dispose();
+        });
+
+        // Iniciar el hilo
+        cargaThread.start();
     }//GEN-LAST:event_jbEstadisticasActionPerformed
 
     public static void main(String args[]) {

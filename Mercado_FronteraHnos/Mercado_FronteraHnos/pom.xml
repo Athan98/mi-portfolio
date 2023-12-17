@@ -36,6 +36,24 @@
             <artifactId>poi-ooxml</artifactId>
             <version>4.1.2</version>
         </dependency>
+        <!-- JFreeChart -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version> <!-- Verifica la última versión disponible -->
+        </dependency>
+        <!-- JCommon -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jcommon</artifactId>
+            <version>1.0.23</version> <!-- Verifica la última versión disponible -->
+        </dependency>
+        <!-- Dependencia para JavaFX (utilizado por JFreeChart para el rendering en algunos entornos) -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17</version> <!-- Verifica la última versión disponible -->
+        </dependency>
     </dependencies>
     <build>
         <plugins>
