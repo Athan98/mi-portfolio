@@ -56,7 +56,18 @@ public class Venta_data implements Repository<Venta> {
 
     @Override
     public void eliminarPorID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Transaction trans = session.beginTransaction();
+
+        Venta ventaAEliminar = session.get(Venta.class, id);
+
+        if (ventaAEliminar != null) {
+            session.delete(ventaAEliminar);
+            JOptionPane.showMessageDialog(null, "La venta con ID: " + id + " ha sido eliminada");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la venta con ID: " + id);
+        }
+
+        trans.commit();
     }
 
 }

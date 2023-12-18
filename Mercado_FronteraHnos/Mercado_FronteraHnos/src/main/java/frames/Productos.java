@@ -228,7 +228,6 @@ public class Productos extends javax.swing.JInternalFrame {
             }
         });
 
-        jtStock.setEditable(false);
         jtStock.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtStockKeyPressed(evt);

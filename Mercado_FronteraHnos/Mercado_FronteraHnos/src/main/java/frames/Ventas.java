@@ -28,6 +28,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     Double precioNeto = 0.0;
     Double montoIva = 0.0;
     Double montoTotal = 0.0;
+    public static Venta venta;
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -339,11 +340,6 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Forma de pago :");
 
-        jcFormasDePago.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcFormasDePagoItemStateChanged(evt);
-            }
-        });
         jcFormasDePago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcFormasDePagoActionPerformed(evt);
@@ -405,7 +401,6 @@ public class Ventas extends javax.swing.JInternalFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jlPrecioNeto))
@@ -417,7 +412,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlMontoIVA)
                     .addComponent(jLabel9))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jlTotalPagar))
@@ -426,8 +421,8 @@ public class Ventas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel11)
                     .addComponent(jcFormasDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jbPagar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -460,7 +455,8 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -494,24 +490,15 @@ public class Ventas extends javax.swing.JInternalFrame {
                     //CREO LA VENTA
                     String cliente = (String) jcClientes.getSelectedItem();
                     Usuario user = (Usuario) jcUsuarios.getSelectedItem();
-
-                    String fechaTexto = jtFecha.getText();
-
-                    // Parsear la fecha usando el formato "dd-MM-yyyy"
                     SimpleDateFormat formatoFechaEntrada = new SimpleDateFormat("dd-MM-yyyy");
-                    Date fecha = formatoFechaEntrada.parse(fechaTexto);
-
-                    // Formatear la fecha en el formato deseado ("yyyy-MM-dd")
-                    SimpleDateFormat formatoFechaSalida = new SimpleDateFormat("yyyy-MM-dd");
-                    String fechaFormateada = formatoFechaSalida.format(fecha);
-
-                    System.out.println(fechaFormateada);
+                    Date fecha = formatoFechaEntrada.parse(jtFecha.getText());
                     Double precioTotal = Double.parseDouble(jlTotalPagar.getText());
                     FormaDePago fdp = (FormaDePago) jcFormasDePago.getSelectedItem();
                     List<DetalleVenta> detallesVenta = new ArrayList<>();
 
-                    Venta venta = new Venta(user, fecha, precioTotal, cliente, detallesVenta, fdp);
+                    venta = new Venta(user, fecha, precioTotal, cliente, detallesVenta, fdp);
 
+                    //AGREGO VENTA A LA BD
                     vd.agregar(venta);
 
                     int filas = modelo.getRowCount();
@@ -547,15 +534,18 @@ public class Ventas extends javax.swing.JInternalFrame {
 
                     vd.actualizar(venta);
 
-                    //SETEAR CAMPOS DE PAGO Y VUELTO
-                    Double pagaCon = Double.parseDouble(jtPagaCon.getText());
+                    Pago pago = new Pago();
+                    pago.setVisible(true);
+//                    
 
-                    Double vuelto = pagaCon - montoTotal;
-
-                    DecimalFormat formato = new DecimalFormat("#.##");
-
-                    mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
-
+//                    //SETEAR CAMPOS DE PAGO Y VUELTO
+//                    Double pagaCon = Double.parseDouble(jtPagaCon.getText());
+//
+//                    Double vuelto = pagaCon - montoTotal;
+//
+//                    DecimalFormat formato = new DecimalFormat("#.##");
+//
+//                    mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
                     limpiarCamposNumericosYTabla();
 
                 } catch (ParseException ex) {
@@ -678,13 +668,6 @@ public class Ventas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtCantidadKeyPressed
 
-    private void jcFormasDePagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcFormasDePagoItemStateChanged
-        if(jcFormasDePago.getSelectedItem().toString().equals("Efectivo/Credito")){
-        
-            JOptionPane.showMessageDialog(null, "Si");
-        }
-    }//GEN-LAST:event_jcFormasDePagoItemStateChanged
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -731,7 +714,6 @@ public class Ventas extends javax.swing.JInternalFrame {
         precioNeto = 0.0;
         montoIva = 0.0;
         jcFormasDePago.setSelectedIndex(-1);
-        jtPagaCon.setText("");
         jlPrecioNeto.setText("-");
         jlMontoIVA.setText("-");
         jlTotalPagar.setText("-");
