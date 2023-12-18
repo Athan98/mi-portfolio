@@ -208,7 +208,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precios y Stock", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Precio venta unitario sin IVA ($) :");
+        jLabel5.setText("Precio venta unitario ($) :");
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Precio costo unitario ($) :");
@@ -216,18 +216,25 @@ public class Productos extends javax.swing.JInternalFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Stock:");
 
+        jtCostoUnitario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtCostoUnitario.setText("0");
         jtCostoUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtCostoUnitarioKeyPressed(evt);
             }
         });
 
+        jtPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtPrecioVenta.setText("0");
         jtPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtPrecioVentaKeyPressed(evt);
             }
         });
 
+        jtStock.setEditable(false);
+        jtStock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtStock.setText("0");
         jtStock.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtStockKeyPressed(evt);
@@ -237,6 +244,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Ganancia (%):");
 
+        jtGanancia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtGanancia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtGananciaKeyPressed(evt);

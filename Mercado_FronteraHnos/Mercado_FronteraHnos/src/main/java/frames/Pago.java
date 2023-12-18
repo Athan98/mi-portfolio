@@ -211,24 +211,40 @@ public class Pago extends javax.swing.JFrame {
             Double credito = Double.parseDouble(jtCredito.getText());
             Double montoTotal = Double.parseDouble(jlTOTAL.getText());
 
-            Double vuelto = (pagaCon + credito) - montoTotal;
+            if ((pagaCon + credito) < montoTotal) {
 
-            DecimalFormat formato = new DecimalFormat("#.##");
+                JOptionPane.showMessageDialog(null, "El dinero no es suficiente");
 
-            mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
+            } else {
+
+                Double vuelto = (pagaCon + credito) - montoTotal;
+
+                DecimalFormat formato = new DecimalFormat("#.##");
+
+                mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
+
+                this.setVisible(false);
+            }
 
         } else {
             Double pagaCon = Double.parseDouble(jtMonto.getText());
             Double montoTotal = Double.parseDouble(jlTOTAL.getText());
 
-            Double vuelto = pagaCon - montoTotal;
+            if (pagaCon < montoTotal) {
 
-            DecimalFormat formato = new DecimalFormat("#.##");
+                JOptionPane.showMessageDialog(null, "El dinero no es suficiente");
 
-            mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
+            } else {
+
+                Double vuelto = pagaCon - montoTotal;
+
+                DecimalFormat formato = new DecimalFormat("#.##");
+
+                mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
+
+                this.setVisible(false);
+            }
         }
-        
-        this.setVisible(false);
     }//GEN-LAST:event_jbAceptarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
