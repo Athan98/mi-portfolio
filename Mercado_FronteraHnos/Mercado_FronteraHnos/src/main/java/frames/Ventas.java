@@ -549,7 +549,7 @@ public class Ventas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Operacion cancelada");
         } else {
 
-            if (jcUsuarios.getSelectedItem() == null || jcFormasDePago.getSelectedItem() == null) {
+            if (jcUsuarios.getSelectedIndex()==-1 || jcFormasDePago.getSelectedIndex()==-1) {
 
                 JOptionPane.showMessageDialog(null, "Asegurese de llenar todos los campos correctamente");
 
@@ -628,46 +628,6 @@ public class Ventas extends javax.swing.JInternalFrame {
 
     private void jbAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProductoActionPerformed
 
-//        Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
-//        int cant = Integer.parseInt(jtCantidad.getText());
-//        Double montoSUELTOS = Double.parseDouble(jtMONTOSUELTOS.getText());
-//
-//        if (cant <= 0) {
-//            JOptionPane.showMessageDialog(null, "La cantidad no puede ser menor a 1");
-//        } else if (jtCodigo.getText().isEmpty() && jtNOMBRESUELTOS.getText().isEmpty()) {
-//
-//        } else {
-//            if (verificarProducto() == null) {
-//                JOptionPane.showMessageDialog(null, "No se encontro el producto en la base de datos");
-//            } else {
-//                //AGREGAR PRODUCTO A LA LISTA
-//                Producto p = verificarProducto();
-//
-//                modelo.addRow(new Object[]{
-//                    p.getIdProducto(),
-//                    p.getCodigo(),
-//                    p.getCategoria().getNombre(),
-//                    p.getNombre(),
-//                    p.getPrecioVentaUnitario(),
-//                    if(!jtCodigoSUELTOS.getText().isEmpty() && !jtNOMBRESUELTOS.getText().isEmpty() && !jtMONTOSUELTOS.getText().isEmpty()){
-//                    montoSUELTOS
-//                    }
-//                    cant,});
-//
-//                precioNeto = precioNeto + (p.getPrecioVentaUnitario() * cant);
-//                montoIva = montoIva + ((IVA * p.getPrecioVentaUnitario()) * cant);
-//                montoTotal = (precioNeto + montoIva);
-//
-//                DecimalFormat formato = new DecimalFormat("#.##");
-//
-//                jlMontoIVA.setText(formato.format(montoIva));
-//                jlPrecioNeto.setText(formato.format(precioNeto));
-//                jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
-//
-//                limpiarCampos();
-//
-//            }
-//        }
         Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
         int cant = Integer.parseInt(jtCantidad.getText());
         Double montoSUELTOS = Double.parseDouble(jtMONTOSUELTOS.getText());
@@ -702,7 +662,7 @@ public class Ventas extends javax.swing.JInternalFrame {
 
             jlMontoIVA.setText(formato.format(montoIva));
             jlPrecioNeto.setText(formato.format(precioNeto));
-            jlTotalPagar.setText(formato.format(montoTotal));
+            jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
 
             limpiarCampos();
 
@@ -714,23 +674,12 @@ public class Ventas extends javax.swing.JInternalFrame {
         Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
 
         if (filaSeleccionada != -1) {
-            Object idProducto = modelo.getValueAt(filaSeleccionada, 0);
-            Object cantidad = modelo.getValueAt(filaSeleccionada, 5);
+            Double precioVenta = (Double) modelo.getValueAt(filaSeleccionada, 4);
+            int cantidad = (int) modelo.getValueAt(filaSeleccionada, 5);
 
-            Session session = HibernateConfig.get().openSession();
-            Producto_data pd = new Producto_data(session);
-
-            Producto p = pd.encontrarPorID((int) idProducto);
-
-            // Calcular los montos a restar
-            Double montoRestarNeto = p.getPrecioVentaUnitario() * (int) cantidad;
-            Double montoRestarIva = (IVA * p.getPrecioVentaUnitario()) * (int) cantidad;
-            Double montoRestarTotal = montoRestarNeto + montoRestarIva;
-
-            // Actualizar los montos
-            precioNeto -= montoRestarNeto;
-            montoIva -= montoRestarIva;
-            montoTotal -= montoRestarTotal;
+            precioNeto = precioNeto - (precioVenta * cantidad);
+            montoIva = montoIva + ((IVA * precioVenta) * cantidad);
+            montoTotal = (precioNeto + montoIva);
 
             // Actualizar las etiquetas
             DecimalFormat formato = new DecimalFormat("#.##");
@@ -740,8 +689,6 @@ public class Ventas extends javax.swing.JInternalFrame {
 
             // Eliminar la fila del modelo
             modelo.removeRow(filaSeleccionada);
-
-            session.close();
 
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar");
