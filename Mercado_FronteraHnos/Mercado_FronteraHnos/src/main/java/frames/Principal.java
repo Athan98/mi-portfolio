@@ -32,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
         jbProveedores = new javax.swing.JButton();
         jbPedidos = new javax.swing.JButton();
         jbEstadisticas = new javax.swing.JButton();
+        jbConsultas = new javax.swing.JButton();
         escritorio = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
 
@@ -86,6 +87,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbConsultas.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jbConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/consultar.png"))); // NOI18N
+        jbConsultas.setText("Consultas");
+        jbConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -101,7 +111,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jbPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbEstadisticas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jbConsultas)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +125,8 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jbVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbPedidos)
-                        .addComponent(jbEstadisticas))
+                        .addComponent(jbEstadisticas)
+                        .addComponent(jbConsultas))
                     .addComponent(jbProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -152,8 +165,8 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(escritorio)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(escritorio))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -304,6 +317,10 @@ public class Principal extends javax.swing.JFrame {
         cargaThread.start();
     }//GEN-LAST:event_jbEstadisticasActionPerformed
 
+    private void jbConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbConsultasActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -340,6 +357,7 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jbConsultas;
     private javax.swing.JButton jbEstadisticas;
     private javax.swing.JButton jbPedidos;
     private javax.swing.JButton jbProductos;
