@@ -1,13 +1,19 @@
 package frames;
 
 import config.HibernateConfig;
+import data.DetallePedido_data;
+import data.Pedido_data;
 import data.Venta_data;
+import entidades.DetallePedido;
+import entidades.Pedido;
 import entidades.Venta;
 import exportarExcel.Controlador;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,8 +24,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-
-public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
+public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -28,9 +33,7 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
         }
     };
 
-    JFreeChart grafico;
-
-    public VentasPorMesEstadisticas() {
+    public CostosPorMesEstadisticas() {
         initComponents();
         armarCabeceraTabla();
         borrarFilas();
@@ -41,7 +44,6 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableVentas = new javax.swing.JTable();
@@ -51,10 +53,6 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jbGraficar = new javax.swing.JButton();
         jbExportar = new javax.swing.JButton();
-
-        setClosable(true);
-        setTitle("ESTADISTICAS : \"VENTAS TOTALES POR MES\"");
-        setPreferredSize(new java.awt.Dimension(630, 486));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -87,11 +85,11 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jbBuscar)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -100,14 +98,14 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -139,7 +137,7 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jbExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -153,40 +151,114 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+//        modelo.setRowCount(0);
+//
+//        Session session = HibernateConfig.get().openSession();
+//
+//        DetallePedido_data dpd = new DetallePedido_data(session);
+//
+//        List<DetallePedido> detalles = dpd.listarTodo();
+//
+//        for (DetallePedido dp : detalles) {
+//            String yearString = jtAnio.getText();
+//
+//            // Verifica si la cadena es un número entero válido
+//            // Convierte la cadena a un número entero
+//            int yearInTextField = Integer.parseInt(yearString);
+//
+//            // Obtén la fecha del Date
+//            Date date = dp.getPedido().getFecha();
+//            Calendar calendar = Calendar.getInstance();
+//            calendar.setTime(date);
+//
+//            // Obtén el año de la fecha
+//            int yearInDate = calendar.get(Calendar.YEAR);
+//
+//            // Compara el año del Date con el año ingresado en el TextField
+//            if (yearInDate == yearInTextField) {
+//                modelo.addRow(new Object[]{
+//                    dp.getPedido().getIdPedido(),
+//                    dp.getPedido().getFecha(),
+//                    dp.getPedido().getPrecioTotalCosto(),
+//                    dp.getProveedor().getNombre(),
+//                    dp.getPedido().getUsuario().getNombre()});
+//
+//            }
+//
+//        }
+//
+//        session.close();
+        modelo.setRowCount(0);
+
+        Session session = HibernateConfig.get().openSession();
+
+        DetallePedido_data dpd = new DetallePedido_data(session);
+
+        List<DetallePedido> detalles = dpd.listarTodo();
+
+// Utilizar un conjunto para mantener un registro de los idPedido ya agregados
+        Set<Integer> idPedidosAgregados = new HashSet<>();
+
+        for (DetallePedido dp : detalles) {
+            String yearString = jtAnio.getText();
+
+            // Verifica si la cadena es un número entero válido
+            // Convierte la cadena a un número entero
+            int yearInTextField = Integer.parseInt(yearString);
+
+            // Obtén la fecha del Date
+            Date date = dp.getPedido().getFecha();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            // Obtén el año de la fecha
+            int yearInDate = calendar.get(Calendar.YEAR);
+
+            // Compara el año del Date con el año ingresado en el TextField
+            if (yearInDate == yearInTextField) {
+                int idPedido = dp.getPedido().getIdPedido();
+
+                // Verificar si el idPedido ya ha sido agregado
+                if (!idPedidosAgregados.contains(idPedido)) {
+                    modelo.addRow(new Object[]{
+                        idPedido,
+                        dp.getPedido().getFecha(),
+                        dp.getPedido().getPrecioTotalCosto(),
+                        dp.getProveedor().getNombre(),
+                        dp.getPedido().getUsuario().getNombre()});
+
+                    // Agregar el idPedido al conjunto para evitar repeticiones
+                    idPedidosAgregados.add(idPedido);
+                }
+            }
+        }
+
+        session.close();
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGraficarActionPerformed
 
@@ -243,21 +315,21 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
         }
 
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        datos.setValue(enero, "Ventas", "Enero");
-        datos.setValue(feb, "Ventas", "Febrero");
-        datos.setValue(mar, "Ventas", "Marzo");
-        datos.setValue(abr, "Ventas", "Abril");
-        datos.setValue(may, "Ventas", "Mayo");
-        datos.setValue(jun, "Ventas", "Junio");
-        datos.setValue(jul, "Ventas", "Julio");
-        datos.setValue(agost, "Ventas", "Agosto");
-        datos.setValue(sep, "Ventas", "Septiembre");
-        datos.setValue(oct, "Ventas", "Octubre");
-        datos.setValue(nov, "Ventas", "Noviembre");
-        datos.setValue(dic, "Ventas", "Diciembre");
+        datos.setValue(enero, "Costos", "Enero");
+        datos.setValue(feb, "Costos", "Febrero");
+        datos.setValue(mar, "Costos", "Marzo");
+        datos.setValue(abr, "Costos", "Abril");
+        datos.setValue(may, "Costos", "Mayo");
+        datos.setValue(jun, "Costos", "Junio");
+        datos.setValue(jul, "Costos", "Julio");
+        datos.setValue(agost, "Costos", "Agosto");
+        datos.setValue(sep, "Costos", "Septiembre");
+        datos.setValue(oct, "Costos", "Octubre");
+        datos.setValue(nov, "Costos", "Noviembre");
+        datos.setValue(dic, "Costos", "Diciembre");
 
         JFreeChart graficoBarras = ChartFactory.createBarChart(
-                "Ventas totales por mes",
+                "Costos totales por mes",
                 "Mes",
                 "Monto ($)",
                 datos,
@@ -275,7 +347,6 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ventana.add(panel);
 
-
     }//GEN-LAST:event_jbGraficarActionPerformed
 
     private void jbExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExportarActionPerformed
@@ -290,55 +361,9 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbExportarActionPerformed
 
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        modelo.setRowCount(0);
-
-        Session session = HibernateConfig.get().openSession();
-
-        Venta_data provd = new Venta_data(session);
-
-        List<Venta> ventas = provd.listarTodo();
-
-        try {
-
-            for (Venta v : ventas) {
-                String yearString = jtAnio.getText();
-
-                // Verifica si la cadena es un número entero válido
-                // Convierte la cadena a un número entero
-                int yearInTextField = Integer.parseInt(yearString);
-
-                // Obtén la fecha del Date
-                Date date = v.getFecha();
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(date);
-
-                // Obtén el año de la fecha
-                int yearInDate = calendar.get(Calendar.YEAR);
-
-                // Compara el año del Date con el año ingresado en el TextField
-                if (yearInDate == yearInTextField) {
-                    modelo.addRow(new Object[]{
-                        v.getIdVenta(),
-                        v.getFecha(),
-                        v.getPrecioTotalVenta(),
-                        v.getFormaDePago(),
-                        v.getUsuario()});
-
-                }
-
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
-        }
-        session.close();
-
-    }//GEN-LAST:event_jbBuscarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -359,33 +384,64 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
     public void armarCabeceraTabla() {
         modelo.setColumnCount(0);
 
-        modelo.addColumn("ID");
+        modelo.addColumn("ID Pedido");
         modelo.addColumn("Fecha");
         modelo.addColumn("Monto ($)");
-        modelo.addColumn("Formas de pago");
-        modelo.addColumn("Vendedor");
+        modelo.addColumn("Proveedor");
+        modelo.addColumn("Usuario");
 
         jtableVentas.setModel(modelo);
     }
 
+//    public void actualizarTabla() {
+//
+//        modelo.setRowCount(0);
+//
+//        Session session = HibernateConfig.get().openSession();
+//
+//        DetallePedido_data dpd = new DetallePedido_data(session);
+//
+//        List<DetallePedido> detalles = dpd.listarTodo();
+//
+//        for (DetallePedido dp : detalles) {
+//            modelo.addRow(new Object[]{
+//                dp.getPedido().getIdPedido(),
+//                dp.getPedido().getFecha(),
+//                dp.getPedido().getPrecioTotalCosto(),
+//                dp.getProveedor().getNombre(),
+//                dp.getPedido().getUsuario().getNombre()});
+//        }
+//        session.close();
+//    }
     public void actualizarTabla() {
-
         modelo.setRowCount(0);
 
         Session session = HibernateConfig.get().openSession();
 
-        Venta_data provd = new Venta_data(session);
+        DetallePedido_data dpd = new DetallePedido_data(session);
 
-        List<Venta> ventas = provd.listarTodo();
+        List<DetallePedido> detalles = dpd.listarTodo();
 
-        for (Venta v : ventas) {
-            modelo.addRow(new Object[]{
-                v.getIdVenta(),
-                v.getFecha(),
-                v.getPrecioTotalVenta(),
-                v.getFormaDePago(),
-                v.getUsuario()});
+        // Utilizar un conjunto para mantener un registro de los idPedido ya agregados
+        Set<Integer> idPedidosAgregados = new HashSet<>();
+
+        for (DetallePedido dp : detalles) {
+            int idPedido = dp.getPedido().getIdPedido();
+
+            // Verificar si el idPedido ya ha sido agregado
+            if (!idPedidosAgregados.contains(idPedido)) {
+                modelo.addRow(new Object[]{
+                    idPedido,
+                    dp.getPedido().getFecha(),
+                    dp.getPedido().getPrecioTotalCosto(),
+                    dp.getProveedor().getNombre(),
+                    dp.getPedido().getUsuario().getNombre()});
+
+                // Agregar el idPedido al conjunto para evitar repeticiones
+                idPedidosAgregados.add(idPedido);
+            }
         }
+
         session.close();
     }
 
