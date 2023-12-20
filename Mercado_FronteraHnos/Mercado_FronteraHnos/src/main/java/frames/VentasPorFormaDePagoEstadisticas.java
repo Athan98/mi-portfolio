@@ -7,6 +7,8 @@ import entidades.Venta;
 import exportarExcel.Controlador;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JFrame;
@@ -164,26 +166,42 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
     private void jbGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGraficarActionPerformed
 
         int efectivo = 0;
+        int efectivoCredito = 0;
         int debito = 0;
         int credito = 0;
         int mp = 0;
         int uala = 0;
+        int trans = 0;
+
+        Date fechaActual = new Date();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaActual);
+        calendar.add(Calendar.YEAR, -1);
+        Date fechaLimite = calendar.getTime();
 
         for (int i = 0; i < jtableVentas.getRowCount(); i++) {
+            Date fechaVenta = (Date) modelo.getValueAt(i, 1);
 
-            FormaDePago pago = (FormaDePago) modelo.getValueAt(i, 3);
-            String formaDePago = pago.getNombreFormaDePago();
+            if (fechaVenta.after(fechaLimite) || fechaVenta.equals(fechaLimite)) {
+                FormaDePago pago = (FormaDePago) modelo.getValueAt(i, 3);
+                String formaDePago = pago.getNombreFormaDePago();
 
-            if (formaDePago.equals("Efectivo")) {
-                efectivo = efectivo + 1;
-            } else if (formaDePago.equals("Mercado Pago")) {
-                mp = mp + 1;
-            } else if (formaDePago.equals("Tarjeta de debito")) {
-                debito = debito + 1;
-            } else if (formaDePago.equals("Tarjeta de credito")) {
-                credito = credito + 1;
-            } else if (formaDePago.equals("Uala")) {
-                uala = uala + 1;
+                if (formaDePago.equals("Efectivo")) {
+                    efectivo = efectivo + 1;
+                } else if (formaDePago.equals("Mercado Pago")) {
+                    mp = mp + 1;
+                } else if (formaDePago.equals("Tarjeta de debito")) {
+                    debito = debito + 1;
+                } else if (formaDePago.equals("Tarjeta de credito")) {
+                    credito = credito + 1;
+                } else if (formaDePago.equals("Uala")) {
+                    uala = uala + 1;
+                } else if (formaDePago.equals("Efectivo/Credito")) {
+                    efectivoCredito = efectivoCredito + 1;
+                } else if (formaDePago.equals("Transferencia bancaria")) {
+                    trans = trans + 1;
+                }
             }
         }
 
@@ -193,9 +211,11 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
         datos.setValue("Credito", credito);
         datos.setValue("Debito", debito);
         datos.setValue("Uala", uala);
+        datos.setValue("Efectivo/Credito", efectivoCredito);
+        datos.setValue("Transferencia bancaria", trans);
 
         JFreeChart graficoCircular = ChartFactory.createPieChart(
-                "Ventas por formas de pago",
+                "Ventas por formas de pago del ultimo año",
                 datos,
                 true,
                 true,

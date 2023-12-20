@@ -28,7 +28,6 @@ public class Productos extends javax.swing.JInternalFrame {
         initComponents();
         jbGuardar.setEnabled(false);
         jbAgregar.setEnabled(true);
-        jbBuscar.setEnabled(false);
         cargarComboBox();
         armarCabeceraTabla();
         actualizarListaProductos();
@@ -81,7 +80,6 @@ public class Productos extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jtTasaActualizacion = new javax.swing.JTextField();
         jbActualizarMasiva = new javax.swing.JButton();
-        jbBuscar = new javax.swing.JButton();
         jbLimpiarCodigo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
 
@@ -208,13 +206,14 @@ public class Productos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAgregarCategoria)
-                    .addComponent(jcCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbAgregarCategoria)
+                        .addComponent(jcCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precios y Stock", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
@@ -397,6 +396,9 @@ public class Productos extends javax.swing.JInternalFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtBusquedaCodigoKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtBusquedaCodigoKeyReleased(evt);
+            }
         });
 
         jbEscanear.setText("Escanear");
@@ -481,13 +483,6 @@ public class Productos extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jbBuscar.setText("Buscar");
-        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarActionPerformed(evt);
-            }
-        });
-
         jbLimpiarCodigo.setText("Limpiar");
         jbLimpiarCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -523,11 +518,9 @@ public class Productos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
                         .addComponent(jtBusquedaCodigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jbEscanear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jbLimpiarCodigo))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -535,7 +528,8 @@ public class Productos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(jbExportarExcel)))
+                        .addComponent(jbExportarExcel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -550,7 +544,6 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel11)
                     .addComponent(jtBusquedaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEscanear)
-                    .addComponent(jbBuscar)
                     .addComponent(jbLimpiarCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -679,7 +672,6 @@ public class Productos extends javax.swing.JInternalFrame {
         jtBusquedaCodigo.setText("");
         JOptionPane.showMessageDialog(null, "Presione ACEPTAR y escanee el producto");
         jtBusquedaCodigo.requestFocus();
-        jbBuscar.setEnabled(true);
     }//GEN-LAST:event_jbEscanearActionPerformed
 
     private void jtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCodigoKeyPressed
@@ -774,34 +766,6 @@ public class Productos extends javax.swing.JInternalFrame {
         session.close();
     }//GEN-LAST:event_jtBuscarPorNombreKeyReleased
 
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        Session session = HibernateConfig.get().openSession();
-
-        Producto_data pd = new Producto_data(session);
-
-        List<Producto> productos = pd.listarTodo();
-        String campoCodigo = jtBusquedaCodigo.getText();
-
-        borrarFilas();
-
-        for (Producto p : productos) {
-            if (p.getCodigo().startsWith(campoCodigo)) {
-                modelo.addRow(new Object[]{
-                    p.getIdProducto(),
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    p.getPrecioCostoUnitario(),
-                    p.getPrecioVentaUnitario(),
-                    p.getStock(),});
-            }
-        }
-
-        jbBuscar.setEnabled(false);
-
-        session.close();
-    }//GEN-LAST:event_jbBuscarActionPerformed
-
     private void jbEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarProductoActionPerformed
         jbAgregar.setEnabled(false);
         jbGuardar.setEnabled(true);
@@ -840,7 +804,6 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEditarProductoActionPerformed
 
     private void jbLimpiarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCodigoActionPerformed
-        jbBuscar.setEnabled(false);
         jtBusquedaCodigo.setText("");
         actualizarListaProductos();
     }//GEN-LAST:event_jbLimpiarCodigoActionPerformed
@@ -909,6 +872,32 @@ public class Productos extends javax.swing.JInternalFrame {
         cargarComboBox();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jtBusquedaCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaCodigoKeyReleased
+        Session session = HibernateConfig.get().openSession();
+
+        Producto_data pd = new Producto_data(session);
+
+        List<Producto> productos = pd.listarTodo();
+        String campoBuscarCodigo = jtBusquedaCodigo.getText();
+
+        borrarFilas();
+
+        for (Producto p : productos) {
+            if (p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) {
+                modelo.addRow(new Object[]{
+                    p.getIdProducto(),
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),
+                    p.getPrecioCostoUnitario(),
+                    p.getPrecioVentaUnitario(),
+                    p.getStock(),});
+            }
+        }
+
+        session.close();
+    }//GEN-LAST:event_jtBusquedaCodigoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -935,7 +924,6 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbActualizarMasiva;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbAgregarCategoria;
-    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCalcularPrecioVenta;
     private javax.swing.JButton jbEditarProducto;
     private javax.swing.JButton jbEliminar;
@@ -995,7 +983,6 @@ public class Productos extends javax.swing.JInternalFrame {
         jtBusquedaCodigo.setText("");
         jbAgregar.setEnabled(true);
         jbGuardar.setEnabled(false);
-        jbBuscar.setEnabled(false);
     }
 
     public void armarCabeceraTabla() {

@@ -222,6 +222,7 @@ public class Principal extends javax.swing.JFrame {
                 Ventas ventas = new Ventas();
                 ventas.setVisible(true);
                 escritorio.add(ventas);
+                ventas.setLocation((Principal.escritorio.getWidth() - ventas.getWidth()) / 2, (Principal.escritorio.getHeight() - ventas.getHeight()) / 2);
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -248,8 +249,8 @@ public class Principal extends javax.swing.JFrame {
                 Thread.sleep(2000);
                 Proveedores prov = new Proveedores();
                 prov.setVisible(true);
-
                 escritorio.add(prov);
+                prov.setLocation((Principal.escritorio.getWidth() - prov.getWidth()) / 2, (Principal.escritorio.getHeight() - prov.getHeight()) / 2);
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -277,6 +278,7 @@ public class Principal extends javax.swing.JFrame {
                 Pedidos p = new Pedidos();
                 p.setVisible(true);
                 escritorio.add(p);
+                p.setLocation((Principal.escritorio.getWidth() - p.getWidth()) / 2, (Principal.escritorio.getHeight() - p.getHeight()) / 2);
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -304,6 +306,7 @@ public class Principal extends javax.swing.JFrame {
                 Estadisticas e = new Estadisticas();
                 e.setVisible(true);
                 escritorio.add(e);
+                e.setLocation((Principal.escritorio.getWidth() - e.getWidth()) / 2, (Principal.escritorio.getHeight() - e.getHeight()) / 2);
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -318,7 +321,30 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEstadisticasActionPerformed
 
     private void jbConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultasActionPerformed
-        // TODO add your handling code here:
+        // Crear e iniciar el hilo para ejecutar la carga en segundo plano
+        Thread cargaThread = new Thread(() -> {
+            // Mostrar el frame de carga
+            Loading loading = new Loading();
+            loading.setVisible(true);
+
+            try {
+                Thread.sleep(2000);
+                Consultas c = new Consultas();
+                c.setVisible(true);
+                escritorio.add(c);
+                escritorio.moveToFront(c);
+                c.setLocation((Principal.escritorio.getWidth() - c.getWidth()) / 2, (Principal.escritorio.getHeight() - c.getHeight()) / 2);
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            // Cerrar el frame de carga
+            loading.dispose();
+        });
+
+        // Iniciar el hilo
+        cargaThread.start();
     }//GEN-LAST:event_jbConsultasActionPerformed
 
     public static void main(String args[]) {

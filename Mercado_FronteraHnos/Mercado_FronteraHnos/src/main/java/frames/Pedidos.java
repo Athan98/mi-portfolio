@@ -1,18 +1,6 @@
 package frames;
 
-import config.HibernateConfig;
-import data.*;
-import entidades.*;
-import static frames.Principal.escritorio;
-import java.awt.event.KeyEvent;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import org.hibernate.Session;
+
 
 public class Pedidos extends javax.swing.JInternalFrame {
 

@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package frames;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Usuario
- */
+
 public class Estadisticas extends javax.swing.JInternalFrame {
 
     /**
@@ -146,7 +140,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         estadisticasPane.setLayout(estadisticasPaneLayout);
         estadisticasPaneLayout.setHorizontalGroup(
             estadisticasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 608, Short.MAX_VALUE)
+            .addGap(0, 630, Short.MAX_VALUE)
         );
         estadisticasPaneLayout.setVerticalGroup(
             estadisticasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
