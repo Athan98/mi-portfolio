@@ -1,18 +1,14 @@
-
 package frames;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class Estadisticas extends javax.swing.JInternalFrame {
 
-    
     public Estadisticas() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -24,8 +20,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         jbVentasPorFormasDePago = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbProductosMasVendidos = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jbCostosPorMes = new javax.swing.JButton();
         jbCostosPorDia = new javax.swing.JButton();
@@ -85,9 +80,12 @@ public class Estadisticas extends javax.swing.JInternalFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
-        jButton1.setText("Mas vendidos");
-
-        jButton3.setText("Mas vendidos por mes");
+        jbProductosMasVendidos.setText("Mas vendidos");
+        jbProductosMasVendidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbProductosMasVendidosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -95,18 +93,14 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jbProductosMasVendidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(jbProductosMasVendidos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -127,6 +121,11 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         });
 
         jbCostosPorProveedor.setText("Costos por proveedor");
+        jbCostosPorProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCostosPorProveedorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -169,11 +168,11 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         estadisticasPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -227,7 +226,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbVentasTotalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVentasTotalesActionPerformed
-         Thread cargaThread = new Thread(() -> {
+        Thread cargaThread = new Thread(() -> {
             // Mostrar el frame de carga
             Loading loading = new Loading();
             loading.setVisible(true);
@@ -236,7 +235,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 estadisticasPane.removeAll();
                 estadisticasPane.repaint();
                 Thread.sleep(2000);
-                VentasPorMesEstadisticas ve=new VentasPorMesEstadisticas();
+                VentasPorMesEstadisticas ve = new VentasPorMesEstadisticas();
                 ve.setVisible(true);
                 estadisticasPane.add(ve);
 
@@ -253,7 +252,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbVentasTotalesActionPerformed
 
     private void jbVentasPorFormasDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVentasPorFormasDePagoActionPerformed
-       Thread cargaThread = new Thread(() -> {
+        Thread cargaThread = new Thread(() -> {
             // Mostrar el frame de carga
             Loading loading = new Loading();
             loading.setVisible(true);
@@ -262,7 +261,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 estadisticasPane.removeAll();
                 estadisticasPane.repaint();
                 Thread.sleep(2000);
-                VentasPorFormaDePagoEstadisticas vpfp=new VentasPorFormaDePagoEstadisticas();
+                VentasPorFormaDePagoEstadisticas vpfp = new VentasPorFormaDePagoEstadisticas();
                 vpfp.setVisible(true);
                 estadisticasPane.add(vpfp);
 
@@ -288,7 +287,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 estadisticasPane.removeAll();
                 estadisticasPane.repaint();
                 Thread.sleep(2000);
-                VentasPorDiaEstadisticas vpd=new VentasPorDiaEstadisticas();
+                VentasPorDiaEstadisticas vpd = new VentasPorDiaEstadisticas();
                 vpd.setVisible(true);
                 estadisticasPane.add(vpd);
 
@@ -314,7 +313,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 estadisticasPane.removeAll();
                 estadisticasPane.repaint();
                 Thread.sleep(2000);
-                CostosPorMesEstadisticas cpm=new CostosPorMesEstadisticas();
+                CostosPorMesEstadisticas cpm = new CostosPorMesEstadisticas();
                 cpm.setVisible(true);
                 estadisticasPane.add(cpm);
 
@@ -340,7 +339,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 estadisticasPane.removeAll();
                 estadisticasPane.repaint();
                 Thread.sleep(2000);
-                CostosPorDiaEstadisticas cpd=new CostosPorDiaEstadisticas();
+                CostosPorDiaEstadisticas cpd = new CostosPorDiaEstadisticas();
                 cpd.setVisible(true);
                 estadisticasPane.add(cpd);
 
@@ -356,11 +355,61 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         cargaThread.start();
     }//GEN-LAST:event_jbCostosPorDiaActionPerformed
 
+    private void jbCostosPorProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCostosPorProveedorActionPerformed
+        Thread cargaThread = new Thread(() -> {
+            // Mostrar el frame de carga
+            Loading loading = new Loading();
+            loading.setVisible(true);
+
+            try {
+                estadisticasPane.removeAll();
+                estadisticasPane.repaint();
+                Thread.sleep(2000);
+                CostosPorProveedorEstadisticas cpp = new CostosPorProveedorEstadisticas();
+                cpp.setVisible(true);
+                estadisticasPane.add(cpp);
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            // Cerrar el frame de carga
+            loading.dispose();
+        });
+
+        // Iniciar el hilo
+        cargaThread.start();
+    }//GEN-LAST:event_jbCostosPorProveedorActionPerformed
+
+    private void jbProductosMasVendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosMasVendidosActionPerformed
+        Thread cargaThread = new Thread(() -> {
+            // Mostrar el frame de carga
+            Loading loading = new Loading();
+            loading.setVisible(true);
+
+            try {
+                estadisticasPane.removeAll();
+                estadisticasPane.repaint();
+                Thread.sleep(2000);
+                ProductosMasVendidosEstadisticas pmv = new ProductosMasVendidosEstadisticas();
+                pmv.setVisible(true);
+                estadisticasPane.add(pmv);
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            // Cerrar el frame de carga
+            loading.dispose();
+        });
+
+        // Iniciar el hilo
+        cargaThread.start();
+    }//GEN-LAST:event_jbProductosMasVendidosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane estadisticasPane;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -370,9 +419,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbCostosPorDia;
     private javax.swing.JButton jbCostosPorMes;
     private javax.swing.JButton jbCostosPorProveedor;
+    private javax.swing.JButton jbProductosMasVendidos;
     private javax.swing.JButton jbVentasPorFormasDePago;
     private javax.swing.JButton jbVentasTotales;
     // End of variables declaration//GEN-END:variables
-
 
 }

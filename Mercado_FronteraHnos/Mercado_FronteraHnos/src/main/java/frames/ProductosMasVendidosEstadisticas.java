@@ -2,18 +2,14 @@ package frames;
 
 import config.HibernateConfig;
 import data.DetallePedido_data;
-import data.Pedido_data;
-import data.Venta_data;
+import data.DetalleVenta_data;
 import entidades.DetallePedido;
-import entidades.Pedido;
-import entidades.Venta;
+import entidades.DetalleVenta;
 import exportarExcel.Controlador;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +20,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
+public class ProductosMasVendidosEstadisticas extends javax.swing.JInternalFrame {
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -33,7 +29,7 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
         }
     };
 
-    public CostosPorMesEstadisticas() {
+    public ProductosMasVendidosEstadisticas() {
         initComponents();
         armarCabeceraTabla();
         borrarFilas();
@@ -47,9 +43,6 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableVentas = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jtAnio = new javax.swing.JTextField();
-        jbBuscar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jbGraficar = new javax.swing.JButton();
         jbExportar = new javax.swing.JButton();
@@ -69,43 +62,21 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtableVentas);
 
-        jLabel1.setText("AÑO :");
-
-        jbBuscar.setText("Buscar");
-        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbBuscar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -137,7 +108,7 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jbExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -174,127 +145,29 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-
-        modelo.setRowCount(0);
-
-        Session session = HibernateConfig.get().openSession();
-
-        DetallePedido_data dpd = new DetallePedido_data(session);
-
-        List<DetallePedido> detalles = dpd.listarTodo();
-
-// Utilizar un conjunto para mantener un registro de los idPedido ya agregados
-        Set<Integer> idPedidosAgregados = new HashSet<>();
-
-        for (DetallePedido dp : detalles) {
-            String yearString = jtAnio.getText();
-
-            // Verifica si la cadena es un número entero válido
-            // Convierte la cadena a un número entero
-            int yearInTextField = Integer.parseInt(yearString);
-
-            // Obtén la fecha del Date
-            Date date = dp.getPedido().getFecha();
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-
-            // Obtén el año de la fecha
-            int yearInDate = calendar.get(Calendar.YEAR);
-
-            // Compara el año del Date con el año ingresado en el TextField
-            if (yearInDate == yearInTextField) {
-                int idPedido = dp.getPedido().getIdPedido();
-
-                // Verificar si el idPedido ya ha sido agregado
-                if (!idPedidosAgregados.contains(idPedido)) {
-                    modelo.addRow(new Object[]{
-                        idPedido,
-                        dp.getPedido().getFecha(),
-                        dp.getPedido().getPrecioTotalCosto(),
-                        dp.getProveedor().getNombre(),
-                        dp.getPedido().getUsuario().getNombre()});
-
-                    // Agregar el idPedido al conjunto para evitar repeticiones
-                    idPedidosAgregados.add(idPedido);
-                }
-            }
-        }
-
-        session.close();
-    }//GEN-LAST:event_jbBuscarActionPerformed
-
     private void jbGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGraficarActionPerformed
 
-        double enero = 0;
-        double feb = 0;
-        double mar = 0;
-        double abr = 0;
-        double may = 0;
-        double jun = 0;
-        double jul = 0;
-        double agost = 0;
-        double sep = 0;
-        double oct = 0;
-        double nov = 0;
-        double dic = 0;
+        int filas = modelo.getRowCount();
 
-        int fila = modelo.getRowCount();
+        Map<String, Double> montosPorProducto = new HashMap<>();
 
-        for (int i = 0; i < fila; i++) {
-            double monto = (double) jtableVentas.getValueAt(i, 2);
+        for (int i = 0; i <= filas - 1; i++) {
+            String nombreProducto = (String) modelo.getValueAt(i, 0);
+            double montoTotal = (double) modelo.getValueAt(i, 1);
 
-            Date fecha = (Date) jtableVentas.getValueAt(i, 1);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(fecha);
-
-            // Obtener el valor del mes (los meses en Java comienzan desde 0)
-            int mes = calendar.get(Calendar.MONTH);
-
-            if (mes == Calendar.JANUARY) {
-                enero = enero + monto;
-            } else if (mes == Calendar.FEBRUARY) {
-                feb = feb + monto;
-            } else if (mes == Calendar.MARCH) {
-                mar = mar + monto;
-            } else if (mes == Calendar.APRIL) {
-                abr = abr + monto;
-            } else if (mes == Calendar.MAY) {
-                may = may + monto;
-            } else if (mes == Calendar.JUNE) {
-                jun = jun + monto;
-            } else if (mes == Calendar.JULY) {
-                jul = jul + monto;
-            } else if (mes == Calendar.AUGUST) {
-                agost = agost + monto;
-            } else if (mes == Calendar.SEPTEMBER) {
-                sep = sep + monto;
-            } else if (mes == Calendar.OCTOBER) {
-                oct = oct + monto;
-            } else if (mes == Calendar.NOVEMBER) {
-                nov = nov + monto;
-            } else if (mes == Calendar.DECEMBER) {
-                dic = dic + monto;
-            }
+            montosPorProducto.put(nombreProducto, montoTotal);
         }
 
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        datos.setValue(enero, "Costos", "Enero");
-        datos.setValue(feb, "Costos", "Febrero");
-        datos.setValue(mar, "Costos", "Marzo");
-        datos.setValue(abr, "Costos", "Abril");
-        datos.setValue(may, "Costos", "Mayo");
-        datos.setValue(jun, "Costos", "Junio");
-        datos.setValue(jul, "Costos", "Julio");
-        datos.setValue(agost, "Costos", "Agosto");
-        datos.setValue(sep, "Costos", "Septiembre");
-        datos.setValue(oct, "Costos", "Octubre");
-        datos.setValue(nov, "Costos", "Noviembre");
-        datos.setValue(dic, "Costos", "Diciembre");
+
+        // Agregar los valores del Map al dataset
+        for (Map.Entry<String, Double> entry : montosPorProducto.entrySet()) {
+            datos.addValue(entry.getValue(), "Monto Total", entry.getKey());
+        }
 
         JFreeChart graficoBarras = ChartFactory.createBarChart(
-                "Costos totales por mes",
-                "Mes",
+                "Productos mas vendidos",
+                "Productos",
                 "Monto ($)",
                 datos,
                 PlotOrientation.VERTICAL,
@@ -310,7 +183,6 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
         ventana.setSize(1000, 700);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ventana.add(panel);
-
     }//GEN-LAST:event_jbGraficarActionPerformed
 
     private void jbExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExportarActionPerformed
@@ -327,14 +199,11 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbExportar;
     private javax.swing.JButton jbGraficar;
-    private javax.swing.JTextField jtAnio;
     private javax.swing.JTable jtableVentas;
     // End of variables declaration//GEN-END:variables
 
@@ -348,11 +217,8 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
     public void armarCabeceraTabla() {
         modelo.setColumnCount(0);
 
-        modelo.addColumn("ID Pedido");
-        modelo.addColumn("Fecha");
-        modelo.addColumn("Monto ($)");
         modelo.addColumn("Proveedor");
-        modelo.addColumn("Usuario");
+        modelo.addColumn("Monto ($)");
 
         jtableVentas.setModel(modelo);
     }
@@ -362,31 +228,36 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
 
         Session session = HibernateConfig.get().openSession();
 
-        DetallePedido_data dpd = new DetallePedido_data(session);
+        DetalleVenta_data dvd = new DetalleVenta_data(session);
 
-        List<DetallePedido> detalles = dpd.listarTodo();
+        List<DetalleVenta> detalles = dvd.listarTodo();
 
-        // Utilizar un conjunto para mantener un registro de los idPedido ya agregados
-        Set<Integer> idPedidosAgregados = new HashSet<>();
+        // Utilizar un mapa para mantener un registro de los montos asociados a cada producto
+        Map<String, Double> montosPorProducto = new HashMap<>();
 
-        for (DetallePedido dp : detalles) {
-            int idPedido = dp.getPedido().getIdPedido();
+        for (DetalleVenta dv : detalles) {
+            String nombreProducto = dv.getProducto().getNombre();
+            double montoActual = dv.getPrecio();
 
-            // Verificar si el idPedido ya ha sido agregado
-            if (!idPedidosAgregados.contains(idPedido)) {
-                modelo.addRow(new Object[]{
-                    idPedido,
-                    dp.getPedido().getFecha(),
-                    dp.getPedido().getPrecioTotalCosto(),
-                    dp.getProveedor().getNombre(),
-                    dp.getPedido().getUsuario().getNombre()});
-
-                // Agregar el idPedido al conjunto para evitar repeticiones
-                idPedidosAgregados.add(idPedido);
+            // Verificar si el producto ya ha sido agregado al mapa
+            if (montosPorProducto.containsKey(nombreProducto)) {
+                // Sumar el monto actual al monto existente
+                double montoExistente = montosPorProducto.get(nombreProducto);
+                montosPorProducto.put(nombreProducto, montoExistente + montoActual);
+            } else {
+                // Agregar el producto al mapa con el monto actual
+                montosPorProducto.put(nombreProducto, montoActual);
             }
+        }
+
+        // Iterar sobre el mapa y agregar las filas a la tabla
+        for (Map.Entry<String, Double> entry : montosPorProducto.entrySet()) {
+            modelo.addRow(new Object[]{
+                entry.getKey(), // Nombre del producto
+                entry.getValue() // Monto total del producto
+            });
         }
 
         session.close();
     }
-
 }
