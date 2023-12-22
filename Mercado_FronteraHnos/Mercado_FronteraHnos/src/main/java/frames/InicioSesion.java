@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package frames;
 
 import config.HibernateConfig;
@@ -11,12 +7,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
-/**
- *
- * @author Usuario
- */
 public class InicioSesion extends javax.swing.JFrame {
 
     public InicioSesion() {
@@ -46,8 +39,8 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jtUser = new javax.swing.JTextField();
         jtPass = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbIniciar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -92,23 +85,23 @@ public class InicioSesion extends javax.swing.JFrame {
         jtPass.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtPass.setForeground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setBackground(java.awt.Color.gray);
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Iniciar sesion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbIniciar.setBackground(java.awt.Color.gray);
+        jbIniciar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbIniciar.setForeground(new java.awt.Color(0, 0, 0));
+        jbIniciar.setText("Iniciar sesion");
+        jbIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbIniciarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(java.awt.Color.gray);
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbSalir.setBackground(java.awt.Color.gray);
+        jbSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbSalirActionPerformed(evt);
             }
         });
 
@@ -129,9 +122,9 @@ public class InicioSesion extends javax.swing.JFrame {
                             .addComponent(jtUser)
                             .addComponent(jtPass)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jbIniciar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -150,8 +143,8 @@ public class InicioSesion extends javax.swing.JFrame {
                     .addComponent(jtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jbIniciar)
+                    .addComponent(jbSalir))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -201,17 +194,27 @@ public class InicioSesion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIniciarActionPerformed
 
-        String user=jtUser.getText();
-        String pass=jtPass.getText();
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String user = jtUser.getText();
+        String pass = jtPass.getText();
+
+        Usuario usuario = returnUser(user, pass);
+
+        if (usuario != null) {
+            Principal p = new Principal(usuario);
+            p.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+        }
+
+
+    }//GEN-LAST:event_jbIniciarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -246,8 +249,6 @@ public class InicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -256,6 +257,8 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton jbIniciar;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JPasswordField jtPass;
     private javax.swing.JTextField jtUser;
     private javax.swing.JPanel panelBack;

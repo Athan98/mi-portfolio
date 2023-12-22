@@ -213,7 +213,7 @@ public class Productos extends javax.swing.JInternalFrame {
                         .addComponent(jcCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54))
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precios y Stock", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
@@ -975,9 +975,9 @@ public class Productos extends javax.swing.JInternalFrame {
         jtCodigo.setText("");
         jtNombre.setText("");
         jtDescripcion.setText("");
-        jtCostoUnitario.setText("");
-        jtPrecioVenta.setText("");
-        jtGanancia.setText("");
+        jtCostoUnitario.setText("0");
+        jtPrecioVenta.setText("0");
+        jtGanancia.setText("0");
         jtStock.setText("0");
         jtBuscarPorNombre.setText("");
         jtBusquedaCodigo.setText("");
