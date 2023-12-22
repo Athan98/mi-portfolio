@@ -50,11 +50,11 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
         jtableVentas = new javax.swing.JTable();
 
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(634, 503));
+        setPreferredSize(new java.awt.Dimension(634, 540));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jbGraficar.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jbGraficar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jbGraficar.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.selection.color2"));
         jbGraficar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficarx64.png"))); // NOI18N
         jbGraficar.setText("  GRAFICAR");
@@ -64,7 +64,7 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
             }
         });
 
-        jbExportar.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jbExportar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jbExportar.setForeground(new java.awt.Color(0, 153, 0));
         jbExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/excelx64.png"))); // NOI18N
         jbExportar.setText("EXPORTAR");
