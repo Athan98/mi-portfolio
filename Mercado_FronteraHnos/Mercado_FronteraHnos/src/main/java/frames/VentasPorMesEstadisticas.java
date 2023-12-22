@@ -53,8 +53,7 @@ public class VentasPorMesEstadisticas extends javax.swing.JInternalFrame {
         jbExportar = new javax.swing.JButton();
 
         setClosable(true);
-        setTitle("ESTADISTICAS : \"VENTAS TOTALES POR MES\"");
-        setPreferredSize(new java.awt.Dimension(630, 486));
+        setPreferredSize(new java.awt.Dimension(634, 503));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 

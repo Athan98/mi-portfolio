@@ -77,17 +77,17 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/passIcon.png"))); // NOI18N
 
-        jtUser.setBackground(java.awt.Color.darkGray);
-        jtUser.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jtUser.setBackground(new java.awt.Color(51, 51, 51));
+        jtUser.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         jtUser.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtPass.setBackground(java.awt.Color.darkGray);
-        jtPass.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jtPass.setBackground(new java.awt.Color(51, 51, 51));
+        jtPass.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         jtPass.setForeground(new java.awt.Color(255, 255, 255));
 
-        jbIniciar.setBackground(java.awt.Color.gray);
-        jbIniciar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jbIniciar.setForeground(new java.awt.Color(0, 0, 0));
+        jbIniciar.setBackground(new java.awt.Color(51, 51, 51));
+        jbIniciar.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 20)); // NOI18N
+        jbIniciar.setForeground(new java.awt.Color(255, 255, 255));
         jbIniciar.setText("Iniciar sesion");
         jbIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,9 +95,9 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
-        jbSalir.setBackground(java.awt.Color.gray);
-        jbSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
+        jbSalir.setBackground(new java.awt.Color(51, 51, 51));
+        jbSalir.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 20)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,12 +155,12 @@ public class InicioSesion extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59))
         );

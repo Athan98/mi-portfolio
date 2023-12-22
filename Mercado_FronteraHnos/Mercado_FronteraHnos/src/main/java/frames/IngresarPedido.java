@@ -27,6 +27,8 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
             return false;
         }
     };
+    
+    Usuario user=Principal.user;
 
     Double costoTotal = 0.0;
     Pedido ped;
@@ -39,6 +41,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
         llenarComboUsers();
         llenarComboProveedores();
         jtFecha.setText(convertirFecha(LocalDate.now()));
+        setearUser(user);
     }
 
     @SuppressWarnings("unchecked")
@@ -644,6 +647,18 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
 
         modelo.setColumnCount(0);
 
+    }
+    
+      private void setearUser(Usuario usuarioBuscado) {
+        for (int i = 0; i <= jcUsuarios.getItemCount(); i++) {
+            Usuario usuario = (Usuario) jcUsuarios.getItemAt(i);
+
+            if (usuario.getNombre().equals(usuarioBuscado.getNombre())) {
+
+                jcUsuarios.setSelectedItem(usuario);
+                break;
+            }
+        }
     }
 
     private void limpiarCampos() {

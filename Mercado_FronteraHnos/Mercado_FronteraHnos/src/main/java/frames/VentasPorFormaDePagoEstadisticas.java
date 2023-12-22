@@ -50,8 +50,7 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
         jtableVentas = new javax.swing.JTable();
 
         setClosable(true);
-        setTitle("ESTADISTICAS : \"VENTAS POR FORMAS DE PAGO\"");
-        setPreferredSize(new java.awt.Dimension(630, 486));
+        setPreferredSize(new java.awt.Dimension(634, 503));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 

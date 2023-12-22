@@ -2,10 +2,15 @@ package frames;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 public class Estadisticas extends javax.swing.JInternalFrame {
 
     public Estadisticas() {
+        this.setBorder(null);
         initComponents();
     }
 
@@ -25,15 +30,30 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         jbCostosPorMes = new javax.swing.JButton();
         jbCostosPorDia = new javax.swing.JButton();
         jbCostosPorProveedor = new javax.swing.JButton();
-        estadisticasPane = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/estadisticas.png"));
+        Image image = icon.getImage();
+        estadisticasPane = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
 
         setClosable(true);
         setTitle("ESTADISTICAS");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBackground(java.awt.Color.darkGray);
+        jPanel1.setForeground(java.awt.Color.darkGray);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ventas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setBackground(java.awt.Color.darkGray);
+        jPanel2.setForeground(java.awt.Color.darkGray);
 
+        jPanel3.setBackground(java.awt.Color.darkGray);
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ventas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setForeground(java.awt.Color.darkGray);
+
+        jbVentasTotales.setBackground(new java.awt.Color(51, 51, 51));
+        jbVentasTotales.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jbVentasTotales.setForeground(new java.awt.Color(255, 255, 255));
         jbVentasTotales.setText("Ventas por mes");
         jbVentasTotales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -41,6 +61,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             }
         });
 
+        jbVentasPorFormasDePago.setBackground(new java.awt.Color(51, 51, 51));
+        jbVentasPorFormasDePago.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jbVentasPorFormasDePago.setForeground(new java.awt.Color(255, 255, 255));
         jbVentasPorFormasDePago.setText("Ventas por formas de pago");
         jbVentasPorFormasDePago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -48,6 +71,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton6.setBackground(new java.awt.Color(51, 51, 51));
+        jButton6.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Ventas por dia");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,8 +104,13 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel5.setBackground(java.awt.Color.darkGray);
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel5.setForeground(java.awt.Color.darkGray);
 
+        jbProductosMasVendidos.setBackground(new java.awt.Color(51, 51, 51));
+        jbProductosMasVendidos.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jbProductosMasVendidos.setForeground(new java.awt.Color(255, 255, 255));
         jbProductosMasVendidos.setText("Mas vendidos");
         jbProductosMasVendidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,8 +135,13 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Costos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel4.setBackground(java.awt.Color.darkGray);
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Costos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel4.setForeground(java.awt.Color.darkGray);
 
+        jbCostosPorMes.setBackground(new java.awt.Color(51, 51, 51));
+        jbCostosPorMes.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jbCostosPorMes.setForeground(new java.awt.Color(255, 255, 255));
         jbCostosPorMes.setText("Costos por mes");
         jbCostosPorMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +149,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             }
         });
 
+        jbCostosPorDia.setBackground(new java.awt.Color(51, 51, 51));
+        jbCostosPorDia.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jbCostosPorDia.setForeground(new java.awt.Color(255, 255, 255));
         jbCostosPorDia.setText("Costos por dia");
         jbCostosPorDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +159,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             }
         });
 
+        jbCostosPorProveedor.setBackground(new java.awt.Color(51, 51, 51));
+        jbCostosPorProveedor.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jbCostosPorProveedor.setForeground(new java.awt.Color(255, 255, 255));
         jbCostosPorProveedor.setText("Costos por proveedor");
         jbCostosPorProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,12 +197,12 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -168,20 +210,20 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        estadisticasPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        estadisticasPane.setPreferredSize(new java.awt.Dimension(634, 503));
 
         javax.swing.GroupLayout estadisticasPaneLayout = new javax.swing.GroupLayout(estadisticasPane);
         estadisticasPane.setLayout(estadisticasPaneLayout);
         estadisticasPaneLayout.setHorizontalGroup(
             estadisticasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+            .addGap(0, 662, Short.MAX_VALUE)
         );
         estadisticasPaneLayout.setVerticalGroup(
             estadisticasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,17 +238,14 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estadisticasPane)
-                .addContainerGap())
+                .addComponent(estadisticasPane, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(estadisticasPane))
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(estadisticasPane, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,7 +258,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         pack();

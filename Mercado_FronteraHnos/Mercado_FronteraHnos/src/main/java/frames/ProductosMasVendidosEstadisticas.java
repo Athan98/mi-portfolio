@@ -47,6 +47,8 @@ public class ProductosMasVendidosEstadisticas extends javax.swing.JInternalFrame
         jbGraficar = new javax.swing.JButton();
         jbExportar = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(634, 503));
+
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jtableVentas.setModel(new javax.swing.table.DefaultTableModel(
@@ -75,7 +77,7 @@ public class ProductosMasVendidosEstadisticas extends javax.swing.JInternalFrame
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -108,7 +110,7 @@ public class ProductosMasVendidosEstadisticas extends javax.swing.JInternalFrame
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jbExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );

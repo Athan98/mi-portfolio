@@ -47,6 +47,8 @@ public class CostosPorProveedorEstadisticas extends javax.swing.JInternalFrame {
         jbGraficar = new javax.swing.JButton();
         jbExportar = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(634, 503));
+
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jtableVentas.setModel(new javax.swing.table.DefaultTableModel(
