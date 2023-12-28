@@ -54,6 +54,9 @@ public class FormasDePagoPedidos implements Serializable {
         this.pedido = pedido;
     }
 
+    public FormasDePagoPedidos() {
+    }
+
     public int getIdFormaDePagoPedido() {
         return idFormaDePagoPedido;
     }

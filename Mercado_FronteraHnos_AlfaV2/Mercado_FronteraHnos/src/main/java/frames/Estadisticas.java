@@ -465,7 +465,29 @@ public class Estadisticas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbProductosMasVendidosActionPerformed
 
     private void jbCostosFDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCostosFDPActionPerformed
-        // TODO add your handling code here:
+         Thread cargaThread = new Thread(() -> {
+            // Mostrar el frame de carga
+            Loading loading = new Loading();
+            loading.setVisible(true);
+
+            try {
+                estadisticasPane.removeAll();
+                estadisticasPane.repaint();
+                Thread.sleep(2000);
+                CostosPorFormaDePagoEstadisticas cpfdp = new CostosPorFormaDePagoEstadisticas();
+                cpfdp.setVisible(true);
+                estadisticasPane.add(cpfdp);
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            // Cerrar el frame de carga
+            loading.dispose();
+        });
+
+        // Iniciar el hilo
+        cargaThread.start();
     }//GEN-LAST:event_jbCostosFDPActionPerformed
 
 
