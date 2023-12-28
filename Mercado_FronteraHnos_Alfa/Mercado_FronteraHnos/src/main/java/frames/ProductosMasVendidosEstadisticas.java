@@ -7,6 +7,7 @@ import entidades.DetallePedido;
 import entidades.DetalleVenta;
 import exportarExcel.Controlador;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,10 +162,16 @@ public class ProductosMasVendidosEstadisticas extends javax.swing.JInternalFrame
             montosPorProducto.put(nombreProducto, montoTotal);
         }
 
+// Crear una lista ordenada de las entradas del mapa
+        List<Map.Entry<String, Double>> listaMontos = new ArrayList<>(montosPorProducto.entrySet());
+
+// Ordenar la lista en orden descendente por montos
+        listaMontos.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
 
-        // Agregar los valores del Map al dataset
-        for (Map.Entry<String, Double> entry : montosPorProducto.entrySet()) {
+// Agregar los valores de la lista ordenada al dataset
+        for (Map.Entry<String, Double> entry : listaMontos) {
             datos.addValue(entry.getValue(), "Monto Total", entry.getKey());
         }
 
@@ -253,8 +260,14 @@ public class ProductosMasVendidosEstadisticas extends javax.swing.JInternalFrame
             }
         }
 
-        // Iterar sobre el mapa y agregar las filas a la tabla
-        for (Map.Entry<String, Double> entry : montosPorProducto.entrySet()) {
+        // Convertir las entradas del mapa a una lista
+        List<Map.Entry<String, Double>> listaMontos = new ArrayList<>(montosPorProducto.entrySet());
+
+        // Ordenar la lista por montos en orden descendente
+        listaMontos.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
+        // Iterar sobre la lista ordenada y agregar las filas a la tabla
+        for (Map.Entry<String, Double> entry : listaMontos) {
             modelo.addRow(new Object[]{
                 entry.getKey(), // Nombre del producto
                 entry.getValue() // Monto total del producto

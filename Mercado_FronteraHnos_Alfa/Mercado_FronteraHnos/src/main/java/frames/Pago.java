@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
 public class Pago extends javax.swing.JFrame {
-
+    
     private Color transparent;
     private Color gris;
     private Color negro;
     Venta venta = Ventas.venta;
-
+    
     public Pago() {
         transparent = new Color(0, 0, 0, 0);
         gris = new Color(192, 192, 192, 128);
@@ -30,14 +30,14 @@ public class Pago extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setBackground(transparent);
         cargarFormasDePago();
-
+        
         if (!venta.getFormaDePago().getNombreFormaDePago().equals("Otro")) {
             jtForma2.setEditable(false);
             setearFDP();
         }
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -228,10 +228,10 @@ public class Pago extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
-
+        
         Session session = HibernateConfig.get().openSession();
         FormasDePagoVentas_data fdpvd = new FormasDePagoVentas_data(session);
-
+        
         if (venta.getFormaDePago().getNombreFormaDePago().equals("Otro")) {
             Double montoForma1 = Double.parseDouble(jtForma1.getText());
             Double montoForma2 = Double.parseDouble(jtForma2.getText());
@@ -239,53 +239,64 @@ public class Pago extends javax.swing.JFrame {
             FormaDePago fdp1 = (FormaDePago) jcForma1.getSelectedItem();
             FormaDePago fdp2 = (FormaDePago) jcForma2.getSelectedItem();
             FormasDePagoVentas fdpv = new FormasDePagoVentas(fdp1, montoForma1, fdp2, montoForma2, venta);
-
+            
             if ((montoForma1 + montoForma2) < montoTotal) {
-
+                
                 JOptionPane.showMessageDialog(null, "El dinero no es suficiente");
-
+                
             } else {
-
-                fdpvd.agregar(fdpv);
-
+                
                 Double vuelto = (montoForma1 + montoForma2) - montoTotal;
-
+                
+                if (fdpv.getFpd1().getNombreFormaDePago().equals("Efectivo")) {
+                    
+                    fdpv.setMontoFDP1(montoForma1 - vuelto);
+                    
+                } else if (fdpv.getFpd2().getNombreFormaDePago().equals("Efectivo")) {
+                    
+                    fdpv.setMontoFDP2(montoForma2 - vuelto);
+                }
+                
+                fdpvd.agregar(fdpv);
+                
                 DecimalFormat formato = new DecimalFormat("#.##");
-
+                
                 mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
-
+                
                 this.setVisible(false);
             }
-
+            
         } else {
             Double montoForma1 = Double.parseDouble(jtForma1.getText());
             FormaDePago fdp1 = (FormaDePago) jcForma1.getSelectedItem();
             Double montoTotal = Double.parseDouble(jlTotal.getText());
             FormasDePagoVentas fdpv = new FormasDePagoVentas(fdp1, montoForma1, venta);
-
+            
             if (montoForma1 < montoTotal) {
-
+                
                 JOptionPane.showMessageDialog(null, "El dinero no es suficiente");
-
+                
             } else {
-
-                fdpvd.agregar(fdpv);
-
+                
                 Double vuelto = montoForma1 - montoTotal;
-
+                
+                fdpv.setMontoFDP1(montoForma1 - vuelto);
+                
+                fdpvd.agregar(fdpv);
+                
                 DecimalFormat formato = new DecimalFormat("#.##");
-
+                
                 mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
-
+                
                 this.setVisible(false);
             }
         }
-
+        
         session.close();
     }//GEN-LAST:event_jbAceptarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-
+        
         Session session = HibernateConfig.get().openSession();
         Venta_data vd = new Venta_data(session);
         vd.eliminarPorID(venta.getIdVenta());
@@ -293,7 +304,7 @@ public class Pago extends javax.swing.JFrame {
         this.setVisible(false);
 
     }//GEN-LAST:event_jbCancelarActionPerformed
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -346,23 +357,23 @@ public class Pago extends javax.swing.JFrame {
         jlFDP.setText(venta.getFormaDePago().getNombreFormaDePago());
         jlTotal.setText(venta.getPrecioTotalVenta() + "");
     }
-
+    
     public static void mostrarVuelto(String mensaje) {
         JLabel label = new JLabel(mensaje);
         label.setFont(new Font("Arial", Font.PLAIN, 20));
         JOptionPane.showMessageDialog(null, label);
     }
-
+    
     public void cargarFormasDePago() {
         jcForma1.removeAllItems();
         jcForma2.removeAllItems();
-
+        
         Session session = HibernateConfig.get().openSession();
         FormaDePago_data fdpd = new FormaDePago_data(session);
         List<FormaDePago> formasDePago = fdpd.listarTodo();
-
+        
         Set<String> formasDePagoAgregadas = new HashSet<>();
-
+        
         for (FormaDePago fp : formasDePago) {
             String formaDePago = fp.getNombreFormaDePago();
             if (!formasDePagoAgregadas.contains(formaDePago)) {
@@ -371,23 +382,23 @@ public class Pago extends javax.swing.JFrame {
                 formasDePagoAgregadas.add(formaDePago);
             }
         }
-
+        
         jcForma1.setSelectedIndex(-1);
         jcForma2.setSelectedIndex(-1);
-
+        
         session.close();
     }
-
+    
     private void setearFDP() {
-
+        
         String fdp = jlFDP.getText();
-
+        
         for (int i = 0; i <= jcForma1.getItemCount(); i++) {
             if (jcForma1.getItemAt(i).getNombreFormaDePago().equals(fdp)) {
                 jcForma1.setSelectedIndex(i);
                 break;
             }
         }
-
+        
     }
 }

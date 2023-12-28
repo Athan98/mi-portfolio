@@ -1,8 +1,10 @@
 package frames;
 
 import config.HibernateConfig;
+import data.FormasDePagoVentas_data;
 import data.Venta_data;
 import entidades.FormaDePago;
+import entidades.FormasDePagoVentas;
 import entidades.Venta;
 import exportarExcel.Controlador;
 import java.io.IOException;
@@ -164,13 +166,12 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
 
     private void jbGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGraficarActionPerformed
 
-        int efectivo = 0;
-        int efectivoCredito = 0;
-        int debito = 0;
-        int credito = 0;
-        int mp = 0;
-        int uala = 0;
-        int trans = 0;
+        double efectivo = 0;
+        double debito = 0;
+        double credito = 0;
+        double mp = 0;
+        double uala = 0;
+        double trans = 0;
 
         Date fechaActual = new Date();
 
@@ -180,27 +181,63 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
         Date fechaLimite = calendar.getTime();
 
         for (int i = 0; i < jtableVentas.getRowCount(); i++) {
-            Date fechaVenta = (Date) modelo.getValueAt(i, 1);
+            Date fechaVenta = (Date) modelo.getValueAt(i, 0);
 
             if (fechaVenta.after(fechaLimite) || fechaVenta.equals(fechaLimite)) {
-                FormaDePago pago = (FormaDePago) modelo.getValueAt(i, 3);
-                String formaDePago = pago.getNombreFormaDePago();
+                String fdp1 = (String) modelo.getValueAt(i, 1);
+                String fdp2 = (String) modelo.getValueAt(i, 3);
 
-                if (formaDePago.equals("Efectivo")) {
-                    efectivo = efectivo + 1;
-                } else if (formaDePago.equals("Mercado Pago")) {
-                    mp = mp + 1;
-                } else if (formaDePago.equals("Tarjeta de debito")) {
-                    debito = debito + 1;
-                } else if (formaDePago.equals("Tarjeta de credito")) {
-                    credito = credito + 1;
-                } else if (formaDePago.equals("Uala")) {
-                    uala = uala + 1;
-                } else if (formaDePago.equals("Efectivo/Credito")) {
-                    efectivoCredito = efectivoCredito + 1;
-                } else if (formaDePago.equals("Transferencia bancaria")) {
-                    trans = trans + 1;
+                Object valorFDP1 = modelo.getValueAt(i, 2);
+                Object valorFDP2 = modelo.getValueAt(i, 4);
+
+                if (valorFDP1 instanceof Double) {
+
+                    double montoFDP1 = (double) valorFDP1;
+
+                    if (fdp1 != "-") {
+                        if (fdp1.equals("Efectivo")) {
+                            efectivo = efectivo + montoFDP1;
+                        } else if (fdp1.equals("Debito")) {
+                            debito = debito + montoFDP1;
+                        } else if (fdp1.equals("Credito")) {
+                            credito = credito + montoFDP1;
+                        } else if (fdp1.equals("Mercado Pago")) {
+                            mp = mp + montoFDP1;
+                        } else if (fdp1.equals("Uala")) {
+                            uala = uala + montoFDP1;
+                        } else if (fdp1.equals("Transferencia")) {
+                            trans = trans + montoFDP1;
+                        }
+                    }
+
+                } else if (valorFDP1 instanceof String) {
+                    System.out.println("Es un string");
                 }
+
+                if (valorFDP2 instanceof Double) {
+
+                    double montoFDP2 = (double) valorFDP2;
+
+                    if (fdp2 != "-") {
+                        if (fdp2.equals("Efectivo")) {
+                            efectivo = efectivo + montoFDP2;
+                        } else if (fdp2.equals("Debito")) {
+                            debito = debito + montoFDP2;
+                        } else if (fdp2.equals("Credito")) {
+                            credito = credito + montoFDP2;
+                        } else if (fdp2.equals("Mercado Pago")) {
+                            mp = mp + montoFDP2;
+                        } else if (fdp2.equals("Uala")) {
+                            uala = uala + montoFDP2;
+                        } else if (fdp2.equals("Transferencia")) {
+                            trans = trans + montoFDP2;
+                        }
+                    } else if (valorFDP2 instanceof String) {
+                        System.out.println("Es un string");
+                    }
+
+                }
+
             }
         }
 
@@ -210,7 +247,6 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
         datos.setValue("Credito", credito);
         datos.setValue("Debito", debito);
         datos.setValue("Uala", uala);
-        datos.setValue("Efectivo/Credito", efectivoCredito);
         datos.setValue("Transferencia bancaria", trans);
 
         JFreeChart graficoCircular = ChartFactory.createPieChart(
@@ -265,10 +301,11 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
     public void armarCabeceraTabla() {
         modelo.setColumnCount(0);
 
-        modelo.addColumn("ID");
         modelo.addColumn("Fecha");
+        modelo.addColumn("Forma de pago 1");
         modelo.addColumn("Monto ($)");
-        modelo.addColumn("Formas de pago");
+        modelo.addColumn("Forma de pago 2");
+        modelo.addColumn("Monto ($)");
         modelo.addColumn("Vendedor");
 
         jtableVentas.setModel(modelo);
@@ -280,18 +317,22 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
 
         Session session = HibernateConfig.get().openSession();
 
-        Venta_data provd = new Venta_data(session);
+        FormasDePagoVentas_data provd = new FormasDePagoVentas_data(session);
 
-        List<Venta> ventas = provd.listarTodo();
+        List<FormasDePagoVentas> fdpvs = provd.listarTodo();
 
-        for (Venta v : ventas) {
+        for (FormasDePagoVentas fdpv : fdpvs) {
             modelo.addRow(new Object[]{
-                v.getIdVenta(),
-                v.getFecha(),
-                v.getPrecioTotalVenta(),
-                v.getFormaDePago(),
-                v.getUsuario()});
+                fdpv.getVenta().getFecha(),
+                fdpv.getFpd1().getNombreFormaDePago(),
+                fdpv.getMontoFDP1(),
+                (fdpv.getFpd2() != null) ? fdpv.getFpd2().getNombreFormaDePago() : "-",
+                (fdpv.getMontoFDP2() != null) ? fdpv.getMontoFDP2() : "0.0",
+                fdpv.getVenta().getUsuario().getNombre()
+            });
+
         }
+
         session.close();
     }
 
