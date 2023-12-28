@@ -22,9 +22,9 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("PEDIDOS");
-        setPreferredSize(new java.awt.Dimension(590, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
-        PanelPedidos.setPreferredSize(new java.awt.Dimension(570, 590));
+        PanelPedidos.setPreferredSize(new java.awt.Dimension(800, 600));
         PanelPedidos.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 PanelPedidosStateChanged(evt);
@@ -37,14 +37,14 @@ public class Pedidos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                .addComponent(PanelPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
