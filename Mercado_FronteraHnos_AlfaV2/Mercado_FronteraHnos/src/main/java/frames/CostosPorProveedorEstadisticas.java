@@ -1,10 +1,11 @@
 package frames;
 
 import config.HibernateConfig;
-import data.FormasDePagoPedidos_data;
-import entidades.DetallePedido;
+import data.*;
+import entidades.*;
 import exportarExcel.Controlador;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -47,6 +48,7 @@ public class CostosPorProveedorEstadisticas extends javax.swing.JInternalFrame {
         jbGraficar = new javax.swing.JButton();
         jbExportar = new javax.swing.JButton();
 
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(634, 540));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -153,17 +155,23 @@ public class CostosPorProveedorEstadisticas extends javax.swing.JInternalFrame {
 
         Map<String, Double> montosPorProveedor = new HashMap<>();
 
-        for (int i = 0; i <= filas-1; i++) {
+        for (int i = 0; i <= filas - 1; i++) {
             String nombreProveedor = (String) modelo.getValueAt(i, 0);
             double montoTotal = (double) modelo.getValueAt(i, 1);
 
             montosPorProveedor.put(nombreProveedor, montoTotal);
         }
 
+        // Crear una lista ordenada de las entradas del mapa
+        List<Map.Entry<String, Double>> listaMontos = new ArrayList<>(montosPorProveedor.entrySet());
+
+        // Ordenar la lista en orden descendente por montos
+        listaMontos.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
 
-        // Agregar los valores del Map al dataset
-        for (Map.Entry<String, Double> entry : montosPorProveedor.entrySet()) {
+        // Agregar los valores de la lista ordenada al dataset
+        for (Map.Entry<String, Double> entry : listaMontos) {
             datos.addValue(entry.getValue(), "Monto Total", entry.getKey());
         }
 
@@ -230,16 +238,16 @@ public class CostosPorProveedorEstadisticas extends javax.swing.JInternalFrame {
 
         Session session = HibernateConfig.get().openSession();
 
-        FormasDePagoPedidos_data dpd = new FormasDePagoPedidos_data(session);
+        Pedido_data pd = new Pedido_data(session);
 
-        List<DetallePedido> detalles = dpd.listarTodo();
+        List<Pedido> pedidos = pd.listarTodo();
 
         // Utilizar un mapa para mantener un registro de los montos asociados a cada proveedor
         Map<String, Double> montosPorProveedor = new HashMap<>();
 
-        for (DetallePedido dp : detalles) {
-            String nombreProveedor = dp.getProveedor().getNombre();
-            double montoActual = dp.getPedido().getPrecioTotalCosto();
+        for (Pedido p : pedidos) {
+            String nombreProveedor = p.getProv().getNombre();
+            double montoActual = p.getPrecioTotalCosto();
 
             // Verificar si el proveedor ya ha sido agregado al mapa
             if (montosPorProveedor.containsKey(nombreProveedor)) {

@@ -1,12 +1,8 @@
 package frames;
 
 import config.HibernateConfig;
-import data.FormasDePagoPedidos_data;
-import data.Pedido_data;
-import data.Venta_data;
-import entidades.DetallePedido;
-import entidades.Pedido;
-import entidades.Venta;
+import data.*;
+import entidades.*;
 import exportarExcel.Controlador;
 import java.io.IOException;
 import java.util.Calendar;
@@ -54,6 +50,7 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
         jbGraficar = new javax.swing.JButton();
         jbExportar = new javax.swing.JButton();
 
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(634, 540));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -182,14 +179,14 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
 
         Session session = HibernateConfig.get().openSession();
 
-        FormasDePagoPedidos_data dpd = new FormasDePagoPedidos_data(session);
+        Pedido_data pd = new Pedido_data(session);
 
-        List<DetallePedido> detalles = dpd.listarTodo();
+        List<Pedido> pedidos = pd.listarTodo();
 
 // Utilizar un conjunto para mantener un registro de los idPedido ya agregados
         Set<Integer> idPedidosAgregados = new HashSet<>();
 
-        for (DetallePedido dp : detalles) {
+        for (Pedido p : pedidos) {
             String yearString = jtAnio.getText();
 
             // Verifica si la cadena es un número entero válido
@@ -197,7 +194,7 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
             int yearInTextField = Integer.parseInt(yearString);
 
             // Obtén la fecha del Date
-            Date date = dp.getPedido().getFecha();
+            Date date = p.getFecha();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
 
@@ -206,16 +203,16 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
 
             // Compara el año del Date con el año ingresado en el TextField
             if (yearInDate == yearInTextField) {
-                int idPedido = dp.getPedido().getIdPedido();
+                int idPedido = p.getIdPedido();
 
                 // Verificar si el idPedido ya ha sido agregado
                 if (!idPedidosAgregados.contains(idPedido)) {
                     modelo.addRow(new Object[]{
                         idPedido,
-                        dp.getPedido().getFecha(),
-                        dp.getPedido().getPrecioTotalCosto(),
-                        dp.getProveedor().getNombre(),
-                        dp.getPedido().getUsuario().getNombre()});
+                        p.getFecha(),
+                        p.getPrecioTotalCosto(),
+                        p.getProv().getNombre(),
+                        p.getUsuario().getNombre()});
 
                     // Agregar el idPedido al conjunto para evitar repeticiones
                     idPedidosAgregados.add(idPedido);
@@ -364,24 +361,24 @@ public class CostosPorMesEstadisticas extends javax.swing.JInternalFrame {
 
         Session session = HibernateConfig.get().openSession();
 
-        FormasDePagoPedidos_data dpd = new FormasDePagoPedidos_data(session);
+        Pedido_data pd = new Pedido_data(session);
 
-        List<DetallePedido> detalles = dpd.listarTodo();
+        List<Pedido> pedidos = pd.listarTodo();
 
         // Utilizar un conjunto para mantener un registro de los idPedido ya agregados
         Set<Integer> idPedidosAgregados = new HashSet<>();
 
-        for (DetallePedido dp : detalles) {
-            int idPedido = dp.getPedido().getIdPedido();
+        for (Pedido p : pedidos) {
+            int idPedido = p.getIdPedido();
 
             // Verificar si el idPedido ya ha sido agregado
             if (!idPedidosAgregados.contains(idPedido)) {
                 modelo.addRow(new Object[]{
                     idPedido,
-                    dp.getPedido().getFecha(),
-                    dp.getPedido().getPrecioTotalCosto(),
-                    dp.getProveedor().getNombre(),
-                    dp.getPedido().getUsuario().getNombre()});
+                    p.getFecha(),
+                    p.getPrecioTotalCosto(),
+                    p.getProv().getNombre(),
+                    p.getUsuario().getNombre()});
 
                 // Agregar el idPedido al conjunto para evitar repeticiones
                 idPedidosAgregados.add(idPedido);

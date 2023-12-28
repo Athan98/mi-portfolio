@@ -30,6 +30,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         jbCostosPorMes = new javax.swing.JButton();
         jbCostosPorDia = new javax.swing.JButton();
         jbCostosPorProveedor = new javax.swing.JButton();
+        jbCostosFDP = new javax.swing.JButton();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/fondoEscritorio.png"));
         Image image = icon.getImage();
         estadisticasPane = new javax.swing.JDesktopPane(){
@@ -53,7 +54,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
 
         jbVentasTotales.setBackground(java.awt.Color.gray);
         jbVentasTotales.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbVentasTotales.setForeground(new java.awt.Color(255, 255, 255));
+        jbVentasTotales.setForeground(new java.awt.Color(0, 0, 0));
         jbVentasTotales.setText("Ventas por mes");
         jbVentasTotales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +64,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
 
         jbVentasPorFormasDePago.setBackground(java.awt.Color.gray);
         jbVentasPorFormasDePago.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbVentasPorFormasDePago.setForeground(new java.awt.Color(255, 255, 255));
+        jbVentasPorFormasDePago.setForeground(new java.awt.Color(0, 0, 0));
         jbVentasPorFormasDePago.setText("Ventas por formas de pago");
         jbVentasPorFormasDePago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +74,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
 
         jButton6.setBackground(java.awt.Color.gray);
         jButton6.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setText("Ventas por dia");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +111,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
 
         jbProductosMasVendidos.setBackground(java.awt.Color.gray);
         jbProductosMasVendidos.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbProductosMasVendidos.setForeground(new java.awt.Color(255, 255, 255));
+        jbProductosMasVendidos.setForeground(new java.awt.Color(0, 0, 0));
         jbProductosMasVendidos.setText("Mas vendidos");
         jbProductosMasVendidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +142,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
 
         jbCostosPorMes.setBackground(java.awt.Color.gray);
         jbCostosPorMes.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbCostosPorMes.setForeground(new java.awt.Color(255, 255, 255));
+        jbCostosPorMes.setForeground(new java.awt.Color(0, 0, 0));
         jbCostosPorMes.setText("Costos por mes");
         jbCostosPorMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +152,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
 
         jbCostosPorDia.setBackground(java.awt.Color.gray);
         jbCostosPorDia.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbCostosPorDia.setForeground(new java.awt.Color(255, 255, 255));
+        jbCostosPorDia.setForeground(new java.awt.Color(0, 0, 0));
         jbCostosPorDia.setText("Costos por dia");
         jbCostosPorDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,11 +162,21 @@ public class Estadisticas extends javax.swing.JInternalFrame {
 
         jbCostosPorProveedor.setBackground(java.awt.Color.gray);
         jbCostosPorProveedor.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbCostosPorProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        jbCostosPorProveedor.setForeground(new java.awt.Color(0, 0, 0));
         jbCostosPorProveedor.setText("Costos por proveedor");
         jbCostosPorProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCostosPorProveedorActionPerformed(evt);
+            }
+        });
+
+        jbCostosFDP.setBackground(java.awt.Color.gray);
+        jbCostosFDP.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jbCostosFDP.setForeground(new java.awt.Color(0, 0, 0));
+        jbCostosFDP.setText("Costos por formas de pago");
+        jbCostosFDP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCostosFDPActionPerformed(evt);
             }
         });
 
@@ -178,7 +189,8 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbCostosPorMes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbCostosPorDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbCostosPorProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbCostosPorProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbCostosFDP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -188,7 +200,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 .addComponent(jbCostosPorMes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbCostosPorDia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCostosFDP)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jbCostosPorProveedor)
                 .addContainerGap())
         );
@@ -212,9 +226,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         estadisticasPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -224,7 +238,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         estadisticasPane.setLayout(estadisticasPaneLayout);
         estadisticasPaneLayout.setHorizontalGroup(
             estadisticasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 658, Short.MAX_VALUE)
+            .addGap(0, 676, Short.MAX_VALUE)
         );
         estadisticasPaneLayout.setVerticalGroup(
             estadisticasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,13 +253,13 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estadisticasPane, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE))
+                .addComponent(estadisticasPane, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(estadisticasPane, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                    .addComponent(estadisticasPane, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -450,6 +464,10 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         cargaThread.start();
     }//GEN-LAST:event_jbProductosMasVendidosActionPerformed
 
+    private void jbCostosFDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCostosFDPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbCostosFDPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane estadisticasPane;
@@ -459,6 +477,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JButton jbCostosFDP;
     private javax.swing.JButton jbCostosPorDia;
     private javax.swing.JButton jbCostosPorMes;
     private javax.swing.JButton jbCostosPorProveedor;

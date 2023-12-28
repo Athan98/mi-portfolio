@@ -47,6 +47,7 @@ public class ProductosMasVendidosEstadisticas extends javax.swing.JInternalFrame
         jbGraficar = new javax.swing.JButton();
         jbExportar = new javax.swing.JButton();
 
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(634, 540));
         setRequestFocusEnabled(false);
 

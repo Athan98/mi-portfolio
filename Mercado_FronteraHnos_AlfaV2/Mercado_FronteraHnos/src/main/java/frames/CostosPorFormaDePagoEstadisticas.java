@@ -17,7 +17,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame {
+public class CostosPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame {
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -26,7 +26,7 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
         }
     };
 
-    public VentasPorFormaDePagoEstadisticas() {
+    public CostosPorFormaDePagoEstadisticas() {
         initComponents();
         armarCabeceraTabla();
         borrarFilas();
@@ -250,7 +250,7 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
         datos.setValue("Cuenta corriente", cta);
 
         JFreeChart graficoCircular = ChartFactory.createPieChart(
-                "Ventas por formas de pago del ultimo año",
+                "Costos por formas de pago del ultimo año",
                 datos,
                 true,
                 true,
@@ -317,18 +317,18 @@ public class VentasPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
 
         Session session = HibernateConfig.get().openSession();
 
-        FormasDePagoVentas_data provd = new FormasDePagoVentas_data(session);
+        FormasDePagoPedidos_data fdppd = new FormasDePagoPedidos_data(session);
 
-        List<FormasDePagoVentas> fdpvs = provd.listarTodo();
+        List<FormasDePagoPedidos> fdpps = fdppd.listarTodo();
 
-        for (FormasDePagoVentas fdpv : fdpvs) {
+        for (FormasDePagoPedidos fdp : fdpps) {
             modelo.addRow(new Object[]{
-                fdpv.getVenta().getFecha(),
-                fdpv.getFpd1().getNombreFormaDePago(),
-                fdpv.getMontoFDP1(),
-                (fdpv.getFpd2() != null) ? fdpv.getFpd2().getNombreFormaDePago() : "-",
-                (fdpv.getMontoFDP2() != null) ? fdpv.getMontoFDP2() : "0.0",
-                fdpv.getVenta().getUsuario().getNombre()
+                fdp.getPedido().getFecha(),
+                fdp.getFpd1().getNombreFormaDePago(),
+                fdp.getMontoFDP1(),
+                (fdp.getFpd2() != null) ? fdp.getFpd2().getNombreFormaDePago() : "-",
+                (fdp.getMontoFDP2() != null) ? fdp.getMontoFDP2() : "0.0",
+                fdp.getPedido().getUsuario().getNombre()
             });
 
         }
