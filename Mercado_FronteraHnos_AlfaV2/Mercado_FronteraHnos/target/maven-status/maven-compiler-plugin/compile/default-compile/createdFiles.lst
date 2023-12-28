@@ -1,16 +1,18 @@
+frames\PagoPedido$1.class
 frames\Categorias$1.class
 frames\Proveedores$3.class
 frames\ProductosMasVendidosEstadisticas.class
 frames\Productos$3.class
 frames\Estadisticas$8.class
 frames\Ventas$7.class
+data\FormasDePagoPedidos_data.class
 frames\Productos$17.class
 data\Venta_data.class
 frames\ConsultaCodigos$5.class
 frames\CostosPorDiaEstadisticas$3.class
 frames\InicioSesion$3.class
 frames\Productos$9.class
-frames\IngresarPedido$8.class
+frames\CostosPorFormaDePagoEstadisticas$1.class
 frames\AgregarProductoPedido$7.class
 frames\Pago$3.class
 frames\ActualizarStock$1.class
@@ -31,8 +33,10 @@ frames\ConsultasStock$4.class
 frames\Principal$5.class
 frames\Estadisticas$2.class
 frames\VentasPorDiaEstadisticas$2.class
+entidades\FormasDePagoPedidos.class
 frames\CostosPorProveedorEstadisticas$1.class
 data\Proveedor_data.class
+frames\PagoPedido$2.class
 data\DetalleVenta_data.class
 frames\Estadisticas$7.class
 frames\IngresarPedido$3.class
@@ -43,9 +47,9 @@ frames\AgregarProductoPedido$2.class
 frames\Productos$11.class
 data\FormasDePagoVentas_data.class
 frames\VentasPorDiaEstadisticas$3.class
+frames\PagoPedido.class
 frames\InicioSesion$4.class
 frames\Productos$18.class
-entidades\DetallePedido.class
 frames\InicioSesion.class
 frames\ConsultaCodigos$4.class
 frames\Productos$23.class
@@ -59,6 +63,7 @@ frames\IngresarPedido$1.class
 entidades\FormasDePagoVentas.class
 frames\ConsultasStock.class
 frames\Productos$10.class
+frames\Estadisticas$9.class
 frames\Pedidos.class
 frames\Proveedores$7.class
 frames\VentasPorDiaEstadisticas$1.class
@@ -84,6 +89,7 @@ data\Categoria_data.class
 frames\Productos$14.class
 frames\ConsultasPromociones.class
 frames\CostosPorProveedorEstadisticas$3.class
+frames\CostosPorFormaDePagoEstadisticas.class
 frames\VentasPorFormaDePagoEstadisticas$2.class
 frames\Loading$1.class
 frames\Productos$6.class
@@ -93,7 +99,6 @@ frames\CostosPorMesEstadisticas$2.class
 frames\ProductosMasVendidosEstadisticas$2.class
 frames\Principal$3.class
 frames\Productos$21.class
-frames\IngresarPedido$5.class
 frames\Ventas$4.class
 frames\Principal$9.class
 exportarExcel\Controlador.class
@@ -104,10 +109,10 @@ entidades\FormaDePago.class
 frames\ConsultaCodigos$3.class
 frames\Proveedores$5.class
 frames\Productos$19.class
-data\DetallePedido_data.class
 frames\ConsultasPromociones$1.class
 frames\Iniciar.class
 frames\VentasPorMesEstadisticas$2.class
+frames\PagoPedido$3.class
 frames\Productos$22.class
 data\Repository.class
 frames\Ventas$3.class
@@ -125,7 +130,6 @@ frames\Productos$5.class
 frames\CostosPorMesEstadisticas$3.class
 frames\Principal$10.class
 frames\ConsultasStock$2.class
-frames\IngresarPedido$7.class
 frames\Categorias.class
 frames\VentasPorMesEstadisticas$3.class
 frames\Estadisticas$4.class
@@ -139,6 +143,7 @@ frames\Ventas$8.class
 frames\Proveedores$4.class
 frames\ConsultasPromociones$5.class
 frames\CostosPorDiaEstadisticas$4.class
+frames\CostosPorFormaDePagoEstadisticas$2.class
 frames\Productos$7.class
 entidades\Categoria.class
 entidades\Pedido.class
@@ -156,12 +161,12 @@ frames\Productos$8.class
 frames\ConsultasPromociones$4.class
 frames\Principal$2.class
 frames\ProductosMasVendidosEstadisticas$1.class
+frames\CostosPorFormaDePagoEstadisticas$3.class
 frames\Ventas$5.class
 frames\CostosPorDiaEstadisticas$1.class
 entidades\Producto.class
 frames\ConsultasStock$1.class
 frames\CostosPorMesEstadisticas$1.class
-frames\IngresarPedido$6.class
 frames\VentasPorMesEstadisticas$4.class
 quantumscript\mercado_fronterahnos\Main_prueba.class
 frames\Estadisticas$5.class
