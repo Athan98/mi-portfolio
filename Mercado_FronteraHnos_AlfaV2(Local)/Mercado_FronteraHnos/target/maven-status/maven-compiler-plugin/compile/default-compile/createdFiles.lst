@@ -13,6 +13,7 @@ frames\CostosPorDiaEstadisticas$3.class
 frames\InicioSesion$3.class
 frames\Productos$9.class
 frames\CostosPorFormaDePagoEstadisticas$1.class
+frames\AgregarProductoPedido$7.class
 frames\Pago$3.class
 frames\ActualizarStock$1.class
 frames\Principal$6.class
@@ -25,6 +26,7 @@ frames\Pedidos$1.class
 frames\CostosPorMesEstadisticas.class
 frames\IngresarPedido$2.class
 frames\Ventas$2.class
+frames\AgregarProductoPedido$1.class
 frames\Productos$12.class
 frames\Productos$4.class
 frames\ConsultasStock$4.class
@@ -41,6 +43,7 @@ frames\IngresarPedido$3.class
 frames\CostosPorMesEstadisticas$4.class
 data\Producto_data.class
 frames\ActualizarStock$6.class
+frames\AgregarProductoPedido$2.class
 frames\Productos$11.class
 data\FormasDePagoVentas_data.class
 frames\VentasPorDiaEstadisticas$3.class
@@ -54,6 +57,8 @@ frames\Pago$2.class
 frames\Principal$7.class
 frames\ConsultaCodigos$1.class
 frames\ActualizarStock.class
+frames\AgregarProductoPedido$3.class
+frames\AgregarProductoPedido$6.class
 frames\IngresarPedido$1.class
 entidades\FormasDePagoVentas.class
 frames\ConsultasStock.class
@@ -66,11 +71,13 @@ frames\VentasPorFormaDePagoEstadisticas$3.class
 frames\Productos.class
 frames\InicioSesion$2.class
 frames\CostosPorDiaEstadisticas.class
+frames\AgregarProductoPedido.class
 frames\CostosPorProveedorEstadisticas.class
 frames\Ventas$10.class
 data\FormaDePago_data.class
 frames\Proveedores.class
 frames\Loading.class
+frames\AgregarProductoPedido$5.class
 frames\Pago$1.class
 frames\Productos$1.class
 frames\Proveedores$8.class
@@ -95,6 +102,7 @@ frames\Productos$21.class
 frames\Ventas$4.class
 frames\Principal$9.class
 exportarExcel\Controlador.class
+frames\AgregarProductoPedido$4.class
 frames\Estadisticas$6.class
 frames\VentasPorDiaEstadisticas.class
 entidades\FormaDePago.class
@@ -160,6 +168,7 @@ entidades\Producto.class
 frames\ConsultasStock$1.class
 frames\CostosPorMesEstadisticas$1.class
 frames\VentasPorMesEstadisticas$4.class
+frames\Principal$11.class
 quantumscript\mercado_fronterahnos\Main_prueba.class
 frames\Estadisticas$5.class
 frames\ActualizarStock$3.class
