@@ -6,10 +6,12 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
     IngresarPedido ip = new IngresarPedido();
     ActualizarStock as = new ActualizarStock();
+    GestionPedidosExistentes gpe=new GestionPedidosExistentes();
 
     public Pedidos() {
         initComponents();
-        PanelPedidos.addTab("Nuevo ingreso", ip);
+        PanelPedidos.addTab("Nuevos pedidos", ip);
+        PanelPedidos.addTab("Pedidos existentes", gpe);
         PanelPedidos.addTab("Actualizar stock´s", as);
         PanelPedidos.setSelectedComponent(ip);
     }
@@ -54,6 +56,8 @@ public class Pedidos extends javax.swing.JInternalFrame {
     private void PanelPedidosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_PanelPedidosStateChanged
         as.borrarFilas();
         as.actualizarListaProductos();
+        gpe.borrarFilas();
+        gpe.actualizarListaPedidos();
     }//GEN-LAST:event_PanelPedidosStateChanged
 
 

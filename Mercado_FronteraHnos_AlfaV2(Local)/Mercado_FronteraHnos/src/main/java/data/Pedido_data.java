@@ -1,4 +1,3 @@
-
 package data;
 
 import entidades.Pedido;
@@ -7,9 +6,8 @@ import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
 public class Pedido_data implements Repository<Pedido> {
-    
+
     private final Session session;
 
     public Pedido_data(Session session) {
@@ -55,6 +53,18 @@ public class Pedido_data implements Repository<Pedido> {
 
     @Override
     public void eliminarPorID(int id) {
+        Transaction trans = session.beginTransaction();
+
+        Pedido pedidoAEliminar = session.get(Pedido.class, id);
+
+        if (pedidoAEliminar != null) {
+            session.delete(pedidoAEliminar);
+            JOptionPane.showMessageDialog(null, "El pedido con ID: " + id + " ha sido eliminado");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el pedido con ID: " + id);
+        }
+
+        trans.commit();
     }
-    
+
 }

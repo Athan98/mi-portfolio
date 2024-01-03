@@ -53,7 +53,16 @@ public class FormasDePagoPedidos_data implements Repository<FormasDePagoPedidos>
 
     @Override
     public void eliminarPorID(int id) {
+        Transaction trans = session.beginTransaction();
+
+        FormasDePagoPedidos fdpp = session.get(FormasDePagoPedidos.class, id);
+
+        if (fdpp != null) {
+            session.delete(fdpp);
+        } else {
+        }
+
+        trans.commit();
     }
 
-   
 }
