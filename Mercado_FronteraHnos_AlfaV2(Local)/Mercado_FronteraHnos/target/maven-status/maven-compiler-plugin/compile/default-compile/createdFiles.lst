@@ -21,6 +21,7 @@ frames\Ventas$1.class
 entidades\Venta.class
 entidades\DetalleVenta.class
 frames\ConsultasStock$3.class
+frames\GestionPedidosExistentes$3.class
 frames\Estadisticas$3.class
 frames\Pedidos$1.class
 frames\CostosPorMesEstadisticas.class
@@ -59,6 +60,8 @@ frames\ConsultaCodigos$1.class
 frames\ActualizarStock.class
 frames\AgregarProductoPedido$3.class
 frames\AgregarProductoPedido$6.class
+frames\GestionPedidosExistentes$1.class
+frames\GestionPedidosExistentes$4.class
 frames\IngresarPedido$1.class
 entidades\FormasDePagoVentas.class
 frames\ConsultasStock.class
@@ -68,6 +71,7 @@ frames\Pedidos.class
 frames\Proveedores$7.class
 frames\VentasPorDiaEstadisticas$1.class
 frames\VentasPorFormaDePagoEstadisticas$3.class
+frames\GestionPedidosExistentes.class
 frames\Productos.class
 frames\InicioSesion$2.class
 frames\CostosPorDiaEstadisticas.class
@@ -78,6 +82,7 @@ data\FormaDePago_data.class
 frames\Proveedores.class
 frames\Loading.class
 frames\AgregarProductoPedido$5.class
+frames\GestionPedidosExistentes$2.class
 frames\Pago$1.class
 frames\Productos$1.class
 frames\Proveedores$8.class
@@ -104,6 +109,7 @@ frames\Principal$9.class
 exportarExcel\Controlador.class
 frames\AgregarProductoPedido$4.class
 frames\Estadisticas$6.class
+frames\GestionPedidosExistentes$6.class
 frames\VentasPorDiaEstadisticas.class
 entidades\FormaDePago.class
 frames\ConsultaCodigos$3.class
@@ -117,6 +123,7 @@ frames\Productos$22.class
 data\Repository.class
 frames\Ventas$3.class
 frames\VentasPorFormaDePagoEstadisticas$1.class
+frames\GestionPedidosExistentes$5.class
 frames\Proveedores$6.class
 frames\Principal.class
 frames\VentasPorMesEstadisticas$1.class
@@ -143,6 +150,7 @@ frames\Ventas$8.class
 frames\Proveedores$4.class
 frames\ConsultasPromociones$5.class
 frames\CostosPorDiaEstadisticas$4.class
+frames\GestionPedidosExistentes$7.class
 frames\CostosPorFormaDePagoEstadisticas$2.class
 frames\Productos$7.class
 entidades\Categoria.class
@@ -164,6 +172,7 @@ frames\ProductosMasVendidosEstadisticas$1.class
 frames\CostosPorFormaDePagoEstadisticas$3.class
 frames\Ventas$5.class
 frames\CostosPorDiaEstadisticas$1.class
+frames\GestionPedidosExistentes$9.class
 entidades\Producto.class
 frames\ConsultasStock$1.class
 frames\CostosPorMesEstadisticas$1.class
@@ -184,4 +193,5 @@ frames\ConsultasPromociones$3.class
 entidades\Proveedor.class
 entidades\Usuario.class
 frames\CostosPorDiaEstadisticas$2.class
+frames\GestionPedidosExistentes$8.class
 frames\Principal$1.class

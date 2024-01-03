@@ -18,6 +18,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class CostosPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame {
+    
+    public static Double cta;
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -41,7 +43,6 @@ public class CostosPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
         jPanel3 = new javax.swing.JPanel();
         jbGraficar = new javax.swing.JButton();
         jbExportar = new javax.swing.JButton();
-        jbCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableVentas = new javax.swing.JTable();
@@ -71,32 +72,24 @@ public class CostosPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
             }
         });
 
-        jbCancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jbCancelar.setForeground(new java.awt.Color(0, 0, 0));
-        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
-        jbCancelar.setText("Cancelar Ctas Corrientes");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbGraficar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbExportar)
-                .addContainerGap())
+                .addGap(109, 109, 109)
+                .addComponent(jbGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jbCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbGraficar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbExportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbExportar)
+                    .addComponent(jbGraficar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -121,7 +114,7 @@ public class CostosPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -169,13 +162,13 @@ public class CostosPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
 
     private void jbGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGraficarActionPerformed
 
-        double efectivo = 0;
-        double debito = 0;
-        double credito = 0;
-        double mp = 0;
-        double uala = 0;
-        double trans = 0;
-        double cta = 0;
+        double efectivo = 0.0;
+        double debito = 0.0;
+        double credito = 0.0;
+        double mp = 0.0;
+        double uala = 0.0;
+        double trans = 0.0;
+        cta = 0.0;
 
         Date fechaActual = new Date();
 
@@ -295,7 +288,6 @@ public class CostosPorFormaDePagoEstadisticas extends javax.swing.JInternalFrame
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbExportar;
     private javax.swing.JButton jbGraficar;
     private javax.swing.JTable jtableVentas;
