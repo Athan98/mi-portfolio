@@ -5,6 +5,7 @@ import data.*;
 import entidades.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.List;
@@ -84,8 +85,18 @@ public class PagoPedido extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jtForma1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jtForma1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtForma1KeyPressed(evt);
+            }
+        });
 
         jtForma2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jtForma2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtForma2KeyPressed(evt);
+            }
+        });
 
         jbAceptar.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jbAceptar.setForeground(new java.awt.Color(0, 153, 0));
@@ -308,6 +319,22 @@ public class PagoPedido extends javax.swing.JFrame {
         this.setVisible(false);
 
     }//GEN-LAST:event_jbCancelarActionPerformed
+
+    private void jtForma1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtForma1KeyPressed
+         if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            jtForma1.setEditable(true);
+        } else {
+            jtForma1.setEditable(false);
+        }
+    }//GEN-LAST:event_jtForma1KeyPressed
+
+    private void jtForma2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtForma2KeyPressed
+         if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            jtForma2.setEditable(true);
+        } else {
+            jtForma2.setEditable(false);
+        }
+    }//GEN-LAST:event_jtForma2KeyPressed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

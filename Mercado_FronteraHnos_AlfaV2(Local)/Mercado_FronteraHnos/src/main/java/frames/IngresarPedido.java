@@ -4,6 +4,7 @@ import config.HibernateConfig;
 import data.*;
 import entidades.*;
 import static frames.Principal.escritorio;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -70,6 +71,11 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
 
         jtCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtCosto.setText("0");
+        jtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtCostoKeyPressed(evt);
+            }
+        });
 
         jbAgregarProveedor.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         jbAgregarProveedor.setText("NUEVO");
@@ -320,6 +326,14 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         limpiarCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtCostoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCostoKeyPressed
+         if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            jtCosto.setEditable(true);
+        } else {
+            jtCosto.setEditable(false);
+        }
+    }//GEN-LAST:event_jtCostoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -178,6 +178,11 @@ public class Ventas extends javax.swing.JInternalFrame {
 
         jtMONTOSUELTOS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtMONTOSUELTOS.setText("0");
+        jtMONTOSUELTOS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtMONTOSUELTOSKeyPressed(evt);
+            }
+        });
 
         jtCodigoSUELTOS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtCodigoSUELTOS.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -764,6 +769,14 @@ public class Ventas extends javax.swing.JInternalFrame {
     private void jcFormasDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcFormasDePagoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcFormasDePagoActionPerformed
+
+    private void jtMONTOSUELTOSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtMONTOSUELTOSKeyPressed
+         if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            jtMONTOSUELTOS.setEditable(true);
+        } else {
+            jtMONTOSUELTOS.setEditable(false);
+        }
+    }//GEN-LAST:event_jtMONTOSUELTOSKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
