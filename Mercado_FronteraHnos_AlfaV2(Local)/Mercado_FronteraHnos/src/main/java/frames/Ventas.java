@@ -174,6 +174,12 @@ public class Ventas extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Nombre:");
 
+        jtNOMBRESUELTOS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtNOMBRESUELTOSKeyPressed(evt);
+            }
+        });
+
         jLabel16.setText("Monto ($) :");
 
         jtMONTOSUELTOS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -474,6 +480,12 @@ public class Ventas extends javax.swing.JInternalFrame {
 
         jLabel14.setText("Nombre:");
 
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtNombreKeyPressed(evt);
+            }
+        });
+
         jLabel15.setText("Cantidad:");
 
         jtCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -771,12 +783,26 @@ public class Ventas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcFormasDePagoActionPerformed
 
     private void jtMONTOSUELTOSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtMONTOSUELTOSKeyPressed
-         if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
             jtMONTOSUELTOS.setEditable(true);
         } else {
             jtMONTOSUELTOS.setEditable(false);
         }
     }//GEN-LAST:event_jtMONTOSUELTOSKeyPressed
+
+    private void jtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jtNombre.requestFocus();
+            procesarCodigoNombre1();
+        }
+    }//GEN-LAST:event_jtNombreKeyPressed
+
+    private void jtNOMBRESUELTOSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNOMBRESUELTOSKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jtNOMBRESUELTOS.requestFocus();
+            procesarCodigoNombre2();
+        }
+    }//GEN-LAST:event_jtNOMBRESUELTOSKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -913,8 +939,51 @@ public class Ventas extends javax.swing.JInternalFrame {
                 jtNOMBRESUELTOS.setText(p.getNombre());
                 break;
             }
-            session.close();
+
         }
+        session.close();
+    }
+
+    private void procesarCodigoNombre1() {
+        Session session = HibernateConfig.get().openSession();
+        Producto_data pd = new Producto_data(session);
+        List<Producto> productos = pd.listarTodo();
+
+        String nombreIngresado1 = jtNombre.getText().toUpperCase();
+
+        for (Producto p : productos) {
+            String nombreProducto = p.getNombre().toUpperCase();
+
+            if (nombreProducto.startsWith(nombreIngresado1)) {
+                jtNombre.setText(p.getNombre());
+                jtCodigo.setText(p.getCodigo());
+                break;
+            }
+
+        }
+
+        session.close();
+    }
+
+    private void procesarCodigoNombre2() {
+        Session session = HibernateConfig.get().openSession();
+        Producto_data pd = new Producto_data(session);
+        List<Producto> productos = pd.listarTodo();
+
+        String nombreIngresado1 = jtNOMBRESUELTOS.getText().toUpperCase();
+
+        for (Producto p : productos) {
+            String nombreProducto = p.getNombre().toUpperCase();
+
+            if (nombreProducto.startsWith(nombreIngresado1)) {
+                jtNOMBRESUELTOS.setText(p.getNombre());
+                jtCodigoSUELTOS.setText(p.getCodigo());
+                break;
+            }
+
+        }
+
+        session.close();
     }
 
     private void limpiarCampos() {

@@ -1,7 +1,6 @@
 frames\PagoPedido$1.class
 frames\Categorias$1.class
 frames\Proveedores$3.class
-frames\Productos$24.class
 frames\ProductosMasVendidosEstadisticas.class
 frames\Productos$3.class
 frames\Estadisticas$8.class
@@ -35,6 +34,7 @@ frames\ConsultasStock$4.class
 frames\Principal$5.class
 frames\Pago$4.class
 frames\Estadisticas$2.class
+frames\Ventas$13.class
 frames\VentasPorDiaEstadisticas$2.class
 entidades\FormasDePagoPedidos.class
 frames\CostosPorProveedorEstadisticas$1.class
@@ -133,6 +133,7 @@ frames\Principal$4.class
 frames\Pago$5.class
 frames\Estadisticas.class
 frames\Estadisticas$1.class
+frames\Ventas$12.class
 frames\Ventas$9.class
 frames\ConsultasStock$5.class
 frames\Productos$5.class
