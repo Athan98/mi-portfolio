@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
 
     Loading l = new Loading();
     public static Usuario user;
+    private SwingWorker<Void, Void> cargaWorker;
 
     public Principal(Usuario user) {
         initComponents();
@@ -308,92 +310,134 @@ public class Principal extends javax.swing.JFrame {
     private void jbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosActionPerformed
 
         if (user.getAcceso() == 2) {
+            // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
+            if (cargaWorker != null && !cargaWorker.isDone()) {
+                JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+                return;
+            }
 
-            // Crear e iniciar el hilo para ejecutar la carga en segundo plano
-            Thread cargaThread = new Thread(() -> {
-                // Mostrar el frame de carga
+            // Crear e iniciar el hilo SwingWorker
+            cargaWorker = new SwingWorker<Void, Void>() {
                 Loading loading = new Loading();
-                loading.setVisible(true);
 
-                try {
-                    escritorio.removeAll();
-                    escritorio.repaint();
-                    Thread.sleep(2000);
-                    Productos productos = new Productos();
-                    productos.setVisible(true);
-                    escritorio.add(productos);
+                @Override
+                protected Void doInBackground() throws Exception {
+                    // Mostrar el frame de carga
 
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    loading.setVisible(true);
+
+                    try {
+                        escritorio.removeAll();
+                        escritorio.repaint();
+                        Thread.sleep(2000);
+                        Productos productos = new Productos();
+                        productos.setVisible(true);
+                        escritorio.add(productos);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    return null;
                 }
 
-                // Cerrar el frame de carga
-                loading.dispose();
-            });
+                @Override
+                protected void done() {
+                    // Cerrar el frame de carga después de que la tarea haya terminado
+                    loading.dispose();
+                }
+            };
 
-            // Iniciar el hilo
-            cargaThread.start();
+            cargaWorker.execute();
         } else {
             JOptionPane.showMessageDialog(null, "No posee los permisos suficientes");
         }
     }//GEN-LAST:event_jbProductosActionPerformed
 
     private void jbVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVentasActionPerformed
-        // Crear e iniciar el hilo para ejecutar la carga en segundo plano
-        Thread cargaThread = new Thread(() -> {
-            // Mostrar el frame de carga
+
+// Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
+        if (cargaWorker != null && !cargaWorker.isDone()) {
+            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+            return;
+        }
+
+        // Crear e iniciar el hilo SwingWorker
+        cargaWorker = new SwingWorker<Void, Void>() {
             Loading loading = new Loading();
-            loading.setVisible(true);
 
-            try {
-                escritorio.removeAll();
-                escritorio.repaint();
-                Thread.sleep(2000);
-                Ventas ventas = new Ventas();
-                ventas.setVisible(true);
-                escritorio.add(ventas);
-                ventas.setLocation((Principal.escritorio.getWidth() - ventas.getWidth()) / 2, (Principal.escritorio.getHeight() - ventas.getHeight()) / 2);
-
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            // Cerrar el frame de carga
-            loading.dispose();
-        });
-
-        // Iniciar el hilo
-        cargaThread.start();
-    }//GEN-LAST:event_jbVentasActionPerformed
-
-    private void jbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProveedoresActionPerformed
-
-        if (user.getAcceso() == 2) {
-            // Crear e iniciar el hilo para ejecutar la carga en segundo plano
-            Thread cargaThread = new Thread(() -> {
+            @Override
+            protected Void doInBackground() throws Exception {
                 // Mostrar el frame de carga
-                Loading loading = new Loading();
+
                 loading.setVisible(true);
 
                 try {
                     escritorio.removeAll();
                     escritorio.repaint();
                     Thread.sleep(2000);
-                    Proveedores prov = new Proveedores();
-                    prov.setVisible(true);
-                    escritorio.add(prov);
-                    prov.setLocation((Principal.escritorio.getWidth() - prov.getWidth()) / 2, (Principal.escritorio.getHeight() - prov.getHeight()) / 2);
-
+                    Ventas ventas = new Ventas();
+                    ventas.setVisible(true);
+                    escritorio.add(ventas);
+                    ventas.setLocation((Principal.escritorio.getWidth() - ventas.getWidth()) / 2, (Principal.escritorio.getHeight() - ventas.getHeight()) / 2);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                // Cerrar el frame de carga
-                loading.dispose();
-            });
+                return null;
+            }
 
-            // Iniciar el hilo
-            cargaThread.start();
+            @Override
+            protected void done() {
+                // Cerrar el frame de carga después de que la tarea haya terminado
+                loading.dispose();
+            }
+        };
+
+        cargaWorker.execute();
+    }//GEN-LAST:event_jbVentasActionPerformed
+
+    private void jbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProveedoresActionPerformed
+
+        if (user.getAcceso() == 2) {
+            // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
+            if (cargaWorker != null && !cargaWorker.isDone()) {
+                JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+                return;
+            }
+
+            // Crear e iniciar el hilo SwingWorker
+            cargaWorker = new SwingWorker<Void, Void>() {
+                Loading loading = new Loading();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    // Mostrar el frame de carga
+
+                    loading.setVisible(true);
+
+                    try {
+                        escritorio.removeAll();
+                        escritorio.repaint();
+                        Thread.sleep(2000);
+                        Proveedores prov = new Proveedores();
+                        prov.setVisible(true);
+                        escritorio.add(prov);
+                        prov.setLocation((Principal.escritorio.getWidth() - prov.getWidth()) / 2, (Principal.escritorio.getHeight() - prov.getHeight()) / 2);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    // Cerrar el frame de carga después de que la tarea haya terminado
+                    loading.dispose();
+                }
+            };
+
+            cargaWorker.execute();
         } else {
             JOptionPane.showMessageDialog(null, "No posee los permisos suficientes");
         }
@@ -402,32 +446,45 @@ public class Principal extends javax.swing.JFrame {
     private void jbPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPedidosActionPerformed
 
         if (user.getAcceso() == 2) {
+            // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
+            if (cargaWorker != null && !cargaWorker.isDone()) {
+                JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+                return;
+            }
 
-            // Crear e iniciar el hilo para ejecutar la carga en segundo plano
-            Thread cargaThread = new Thread(() -> {
-                // Mostrar el frame de carga
+            // Crear e iniciar el hilo SwingWorker
+            cargaWorker = new SwingWorker<Void, Void>() {
                 Loading loading = new Loading();
-                loading.setVisible(true);
 
-                try {
-                    escritorio.removeAll();
-                    escritorio.repaint();
-                    Thread.sleep(2000);
-                    Pedidos p = new Pedidos();
-                    p.setVisible(true);
-                    escritorio.add(p);
-                    p.setLocation((Principal.escritorio.getWidth() - p.getWidth()) / 2, (Principal.escritorio.getHeight() - p.getHeight()) / 2);
+                @Override
+                protected Void doInBackground() throws Exception {
+                    // Mostrar el frame de carga
 
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    loading.setVisible(true);
+
+                    try {
+                        escritorio.removeAll();
+                        escritorio.repaint();
+                        Thread.sleep(2000);
+                        Pedidos p = new Pedidos();
+                        p.setVisible(true);
+                        escritorio.add(p);
+                        p.setLocation((Principal.escritorio.getWidth() - p.getWidth()) / 2, (Principal.escritorio.getHeight() - p.getHeight()) / 2);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    return null;
                 }
 
-                // Cerrar el frame de carga
-                loading.dispose();
-            });
+                @Override
+                protected void done() {
+                    // Cerrar el frame de carga después de que la tarea haya terminado
+                    loading.dispose();
+                }
+            };
 
-            // Iniciar el hilo
-            cargaThread.start();
+            cargaWorker.execute();
         } else {
             JOptionPane.showMessageDialog(null, "No posee los permisos suficientes");
         }
@@ -436,73 +493,99 @@ public class Principal extends javax.swing.JFrame {
     private void jbEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadisticasActionPerformed
 
         if (user.getAcceso() == 2) {
+            // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
+            if (cargaWorker != null && !cargaWorker.isDone()) {
+                JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+                return;
+            }
 
-            // Crear e iniciar el hilo para ejecutar la carga en segundo plano
-            Thread cargaThread = new Thread(() -> {
-                // Mostrar el frame de carga
+            // Crear e iniciar el hilo SwingWorker
+            cargaWorker = new SwingWorker<Void, Void>() {
                 Loading loading = new Loading();
-                loading.setVisible(true);
 
-                try {
-                    escritorio.removeAll();
-                    escritorio.repaint();
-                    Thread.sleep(2000);
-                    Estadisticas e = new Estadisticas();
-                    e.setVisible(true);
-                    escritorio.add(e);
-                    e.setLocation((Principal.escritorio.getWidth() - e.getWidth()) / 2, (Principal.escritorio.getHeight() - e.getHeight()) / 2);
+                @Override
+                protected Void doInBackground() throws Exception {
+                    // Mostrar el frame de carga
 
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    loading.setVisible(true);
+
+                    try {
+                        escritorio.removeAll();
+                        escritorio.repaint();
+                        Thread.sleep(2000);
+                        Estadisticas e = new Estadisticas();
+                        e.setVisible(true);
+                        escritorio.add(e);
+                        e.setLocation((Principal.escritorio.getWidth() - e.getWidth()) / 2, (Principal.escritorio.getHeight() - e.getHeight()) / 2);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    return null;
                 }
 
-                // Cerrar el frame de carga
-                loading.dispose();
-            });
+                @Override
+                protected void done() {
+                    // Cerrar el frame de carga después de que la tarea haya terminado
+                    loading.dispose();
+                }
+            };
 
-            // Iniciar el hilo
-            cargaThread.start();
+            cargaWorker.execute();
         } else {
             JOptionPane.showMessageDialog(null, "No posee los permisos suficientes");
         }
     }//GEN-LAST:event_jbEstadisticasActionPerformed
 
     private void jbConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultasActionPerformed
-        // Crear e iniciar el hilo para ejecutar la carga en segundo plano
-        Thread cargaThread = new Thread(() -> {
-            // Mostrar el frame de carga
+
+        if (cargaWorker != null && !cargaWorker.isDone()) {
+            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+            return;
+        }
+        // Crear e iniciar el hilo SwingWorker
+        cargaWorker = new SwingWorker<Void, Void>() {
             Loading loading = new Loading();
-            loading.setVisible(true);
 
-            try {
-                Thread.sleep(2000);
-                Consultas c = new Consultas();
-                c.setVisible(true);
-                escritorio.add(c);
-                escritorio.moveToFront(c);
-                c.setLocation((Principal.escritorio.getWidth() - c.getWidth()) / 2, (Principal.escritorio.getHeight() - c.getHeight()) / 2);
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Mostrar el frame de carga
 
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                loading.setVisible(true);
+
+                try {
+                    Thread.sleep(2000);
+                    Consultas c = new Consultas();
+                    c.setVisible(true);
+                    escritorio.add(c);
+                    escritorio.moveToFront(c);
+                    c.setLocation((Principal.escritorio.getWidth() - c.getWidth()) / 2, (Principal.escritorio.getHeight() - c.getHeight()) / 2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return null;
             }
 
-            // Cerrar el frame de carga
-            loading.dispose();
-        });
+            @Override
+            protected void done() {
+                // Cerrar el frame de carga después de que la tarea haya terminado
+                loading.dispose();
+            }
+        };
 
-        // Iniciar el hilo
-        cargaThread.start();
+        cargaWorker.execute();
     }//GEN-LAST:event_jbConsultasActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         System.exit(0);
-        user=null;
+        user = null;
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbVolverAlInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverAlInicioActionPerformed
         InicioSesion is = new InicioSesion();
         is.setVisible(true);
-        user=null;
+        user = null;
         this.dispose();
     }//GEN-LAST:event_jbVolverAlInicioActionPerformed
 
@@ -546,7 +629,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jpBotonera;
     private javax.swing.JPanel jpInicio;
     // End of variables declaration//GEN-END:variables
-
 
     private void ejectuarXAMPP() {
         Process proceso = null;

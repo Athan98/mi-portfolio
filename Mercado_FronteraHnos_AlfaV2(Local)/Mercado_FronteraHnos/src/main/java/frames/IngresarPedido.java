@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 
@@ -24,6 +25,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
 
     Usuario user = Principal.user;
     public static Pedido ped;
+    private SwingWorker<Void, Void> cargaWorker;
 
     public IngresarPedido() {
         initComponents();
@@ -250,30 +252,43 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAgregarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProveedorActionPerformed
-        // Crear e iniciar el hilo para ejecutar la carga en segundo plano
-        Thread cargaThread = new Thread(() -> {
-            // Mostrar el frame de carga
+        // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
+        if (cargaWorker != null && !cargaWorker.isDone()) {
+            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+            return;
+        }
+
+        // Crear e iniciar el hilo SwingWorker
+        cargaWorker = new SwingWorker<Void, Void>() {
             Loading loading = new Loading();
-            loading.setVisible(true);
 
-            try {
-                Thread.sleep(2000);
-                Proveedores prov = new Proveedores();
-                prov.setVisible(true);
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Mostrar el frame de carga
 
-                escritorio.add(prov);
-                escritorio.moveToFront(prov);
+                loading.setVisible(true);
 
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    Thread.sleep(2000);
+                    Proveedores p = new Proveedores();
+                    p.setVisible(true);
+                    escritorio.add(p);
+                    p.setLocation((escritorio.getWidth() - p.getWidth()) / 2, (escritorio.getHeight() - p.getHeight()) / 2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return null;
             }
 
-            // Cerrar el frame de carga
-            loading.dispose();
-        });
+            @Override
+            protected void done() {
+                // Cerrar el frame de carga después de que la tarea haya terminado
+                loading.dispose();
+            }
+        };
 
-        // Iniciar el hilo
-        cargaThread.start();
+        cargaWorker.execute();
     }//GEN-LAST:event_jbAgregarProveedorActionPerformed
 
     private void jbActualizarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarProveedoresActionPerformed
@@ -328,7 +343,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtCostoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCostoKeyPressed
-         if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
             jtCosto.setEditable(true);
         } else {
             jtCosto.setEditable(false);
