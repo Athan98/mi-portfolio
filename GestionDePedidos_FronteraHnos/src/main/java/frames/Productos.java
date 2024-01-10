@@ -3,12 +3,16 @@ package frames;
 import config.HibernateConfig;
 import data.*;
 import entidades.*;
+import exportarExcel.Controlador;
 import static frames.Principal.escritorio;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
@@ -271,7 +275,7 @@ public class Productos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jbAgregar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbGuardar)
+                .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jbLimpiar)
                 .addContainerGap())
@@ -485,9 +489,11 @@ public class Productos extends javax.swing.JInternalFrame {
         DetalleProducto dp = new DetalleProducto(prod, prov, precioUnitario, cantidad, valorPaquete);
 
         try {
+
             dpd.agregar(dp);
             limpiarCampos();
             actualizarListaProductos();
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
@@ -498,7 +504,15 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExportarActionPerformed
-        // TODO add your handling code here:
+        Controlador obj;
+        try {
+            obj = new Controlador();
+            obj.exportarExcel(jTableProductos);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error de archivo");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jbExportarActionPerformed
 
     private void jbCalcularPackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularPackActionPerformed
@@ -594,40 +608,40 @@ public class Productos extends javax.swing.JInternalFrame {
         jbAgregar.setEnabled(false);
 
         try {
-        int filaSeleccionada = jTableProductos.getSelectedRow();
-        if (filaSeleccionada == -1) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-            return;
-        }
-
-        int idDP = (int) modelo.getValueAt(filaSeleccionada, 0);
-
-        Session session = HibernateConfig.get().openSession();
-        DetalleProducto_data dpd = new DetalleProducto_data(session);
-        DetalleProducto dp = dpd.encontrarPorID(idDP);
-
-        session.close();
-
-        for (int i = 0; i < jcProductos.getItemCount(); i++) {
-            Producto prod = jcProductos.getItemAt(i);
-            if (prod.getNombre().toUpperCase().equals(dp.getProducto().getNombre().toUpperCase())) {
-                jcProductos.setSelectedIndex(i);
-                break;
+            int filaSeleccionada = jTableProductos.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+                return;
             }
-        }
 
-        for (int i = 0; i < jcProveedores.getItemCount(); i++) {
-            Proveedor prov = jcProveedores.getItemAt(i);
-            if (prov.getNombre().toUpperCase().equals(dp.getProveedor().getNombre().toUpperCase())) {
-                jcProveedores.setSelectedIndex(i);
-                break;
+            int idDP = (int) modelo.getValueAt(filaSeleccionada, 0);
+
+            Session session = HibernateConfig.get().openSession();
+            DetalleProducto_data dpd = new DetalleProducto_data(session);
+            DetalleProducto dp = dpd.encontrarPorID(idDP);
+
+            session.close();
+
+            for (int i = 0; i < jcProductos.getItemCount(); i++) {
+                Producto prod = jcProductos.getItemAt(i);
+                if (prod.getNombre().toUpperCase().equals(dp.getProducto().getNombre().toUpperCase())) {
+                    jcProductos.setSelectedIndex(i);
+                    break;
+                }
             }
-        }
 
-        jtPrecioUnitario.setText(dp.getPrecioCosto() + "");
-        jtCantidadPorPaquete.setText(dp.getUnidadesPorPaquete() + "");
-        jtValorPaquete.setText(dp.getPrecioPorPaquete() + "");
-        jlID.setText(dp.getIdDetalleProducto() + "");
+            for (int i = 0; i < jcProveedores.getItemCount(); i++) {
+                Proveedor prov = jcProveedores.getItemAt(i);
+                if (prov.getNombre().toUpperCase().equals(dp.getProveedor().getNombre().toUpperCase())) {
+                    jcProveedores.setSelectedIndex(i);
+                    break;
+                }
+            }
+
+            jtPrecioUnitario.setText(dp.getPrecioCosto() + "");
+            jtCantidadPorPaquete.setText(dp.getUnidadesPorPaquete() + "");
+            jtValorPaquete.setText(dp.getPrecioPorPaquete() + "");
+            jlID.setText(dp.getIdDetalleProducto() + "");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());

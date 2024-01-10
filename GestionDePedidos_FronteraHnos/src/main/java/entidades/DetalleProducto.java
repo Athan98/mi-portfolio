@@ -29,27 +29,13 @@ public class DetalleProducto implements Serializable {
     @Column(name = "precioPorPaquete")
     private float precioPorPaquete;
 
-    @ManyToOne
-    @JoinColumn(name = "idOferta")
-    private Oferta oferta;
-
-    public DetalleProducto(int idDetalleProducto, Producto producto, Proveedor proveedor, float precioCosto, int unidadesPorPaquete, float precioPorPaquete, Oferta oferta) {
+    public DetalleProducto(int idDetalleProducto, Producto producto, Proveedor proveedor, float precioCosto, int unidadesPorPaquete, float precioPorPaquete) {
         this.idDetalleProducto = idDetalleProducto;
         this.producto = producto;
         this.proveedor = proveedor;
         this.precioCosto = precioCosto;
         this.unidadesPorPaquete = unidadesPorPaquete;
         this.precioPorPaquete = precioPorPaquete;
-        this.oferta = oferta;
-    }
-
-    public DetalleProducto(Producto producto, Proveedor proveedor, float precioCosto, int unidadesPorPaquete, float precioPorPaquete, Oferta oferta) {
-        this.producto = producto;
-        this.proveedor = proveedor;
-        this.precioCosto = precioCosto;
-        this.unidadesPorPaquete = unidadesPorPaquete;
-        this.precioPorPaquete = precioPorPaquete;
-        this.oferta = oferta;
     }
 
     public DetalleProducto(Producto producto, Proveedor proveedor, float precioCosto, int unidadesPorPaquete, float precioPorPaquete) {
@@ -59,17 +45,7 @@ public class DetalleProducto implements Serializable {
         this.unidadesPorPaquete = unidadesPorPaquete;
         this.precioPorPaquete = precioPorPaquete;
     }
-
-    public DetalleProducto(int idDetalleProducto, Producto producto, Proveedor proveedor, float precioCosto, int unidadesPorPaquete, float precioPorPaquete) {
-        this.idDetalleProducto = idDetalleProducto;
-        this.producto = producto;
-        this.proveedor = proveedor;
-        this.precioCosto = precioCosto;
-        this.unidadesPorPaquete = unidadesPorPaquete;
-        this.precioPorPaquete = precioPorPaquete;
-    }
     
-
     public DetalleProducto() {
     }
 
@@ -121,17 +97,9 @@ public class DetalleProducto implements Serializable {
         this.precioPorPaquete = precioPorPaquete;
     }
 
-    public Oferta getOferta() {
-        return oferta;
-    }
-
-    public void setOferta(Oferta oferta) {
-        this.oferta = oferta;
-    }
-
     @Override
     public String toString() {
-        return "DetalleProducto{" + "idDetalleProducto=" + idDetalleProducto + ", producto=" + producto + ", proveedor=" + proveedor + ", precioCosto=" + precioCosto + ", unidadesPorPaquete=" + unidadesPorPaquete + ", precioPorPaquete=" + precioPorPaquete + ", oferta=" + oferta + '}';
+        return "DetalleProducto{" + "idDetalleProducto=" + idDetalleProducto + ", producto=" + producto + ", proveedor=" + proveedor + ", precioCosto=" + precioCosto + ", unidadesPorPaquete=" + unidadesPorPaquete + ", precioPorPaquete=" + precioPorPaquete + '}';
     }
 
 }
