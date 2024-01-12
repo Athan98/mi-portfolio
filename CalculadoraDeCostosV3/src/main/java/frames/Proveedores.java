@@ -1,21 +1,31 @@
 package frames;
 
 import config.HibernateConfig;
+import config_tables.Render;
 import data.*;
 import entidades.*;
 import exportarExcel.Controlador;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.hibernate.Session;
 
 public class Proveedores extends javax.swing.JInternalFrame {
 
+    Class tipo[] = new Class[]{java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class};
+
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int fila, int col) {
-            return false;
+            return col == 0;  // Hacer la primera columna (checkbox) editable
+        }
+
+        @Override
+        public Class getColumnClass(int index) {
+            return tipo[index];
         }
     };
 
@@ -86,7 +96,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jbAgregar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbAgregar.setForeground(new java.awt.Color(0, 204, 0));
         jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add.png"))); // NOI18N
-        jbAgregar.setText("AGREGAR");
+        jbAgregar.setText("Agregar");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarActionPerformed(evt);
@@ -96,7 +106,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jbLimpiar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbLimpiar.setForeground(new java.awt.Color(0, 0, 0));
         jbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar.png"))); // NOI18N
-        jbLimpiar.setText("LIMPIAR");
+        jbLimpiar.setText("Limpiar");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbLimpiarActionPerformed(evt);
@@ -106,7 +116,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jbGuardar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbGuardar.setForeground(new java.awt.Color(0, 0, 0));
         jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar.png"))); // NOI18N
-        jbGuardar.setText("GUARDAR");
+        jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
@@ -235,7 +245,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jbEditar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbEditar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
-        jbEditar.setText("EDITAR");
+        jbEditar.setText("Editar");
         jbEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEditarActionPerformed(evt);
@@ -245,7 +255,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jbEliminar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbEliminar.setForeground(new java.awt.Color(204, 0, 0));
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/remove.png"))); // NOI18N
-        jbEliminar.setText("ELIMINAR");
+        jbEliminar.setText("Eliminar seleccionados");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarActionPerformed(evt);
@@ -255,7 +265,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jbExportar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbExportar.setForeground(new java.awt.Color(0, 153, 0));
         jbExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excel.png"))); // NOI18N
-        jbExportar.setText("EXPORTAR");
+        jbExportar.setText("Exportar");
         jbExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbExportarActionPerformed(evt);
@@ -267,11 +277,11 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbEliminar)
+                .addContainerGap()
+                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jbEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jbExportar)
                 .addContainerGap())
         );
@@ -395,7 +405,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
         Proveedor prov = new Proveedor();
 
-        int idProv = (int) modelo.getValueAt(jTableProv.getSelectedRow(), 0);
+        int idProv = (int) modelo.getValueAt(jTableProv.getSelectedRow(), 1);
 
         Session session = HibernateConfig.get().openSession();
         Proveedor_data provd = new Proveedor_data(session);
@@ -420,6 +430,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         for (Proveedor p : proveedores) {
             if (p.getNombre().toUpperCase().startsWith(busquedaNombre)) {
                 modelo.addRow(new Object[]{
+                    false,
                     p.getIdProveedor(),
                     p.getCuit(),
                     p.getNombre(),});
@@ -440,6 +451,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         for (Proveedor p : proveedores) {
             if (p.getCuit().toUpperCase().startsWith(busquedaCUIT)) {
                 modelo.addRow(new Object[]{
+                    false,
                     p.getIdProveedor(),
                     p.getCuit(),
                     p.getNombre(),});
@@ -482,21 +494,41 @@ public class Proveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        int idProv = (int) modelo.getValueAt(jTableProv.getSelectedRow(), 0);
+        try {
+            Session session = HibernateConfig.get().openSession();
+            Proveedor_data pd = new Proveedor_data(session);
 
-        Session session = HibernateConfig.get().openSession();
-        Proveedor_data provd = new Proveedor_data(session);
+            List<Proveedor> proveedores = pd.listarTodo();
+            List<Proveedor> proveedoresAEliminar = new ArrayList<>(); // Inicializar la lista
 
-        int opcionSeleccionada = JOptionPane.showConfirmDialog(null, "¿Estás seguro que quieres eliminarlo?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            boolean ver;
+            Proveedor p;
 
-        if (opcionSeleccionada == JOptionPane.YES_OPTION) {
-            provd.eliminarPorID(idProv);
+            for (int i = 0; i < proveedores.size(); i++) {
+                ver = (boolean) modelo.getValueAt(i, 0);
+                p = pd.encontrarPorID((int) modelo.getValueAt(i, 1));
+                if (ver) {
+                    proveedoresAEliminar.add(p);
+                }
+            }
 
-            borrarFilas();
-            actualizarTabla();
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Realmente desea eliminar las filas seleccionadas?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                for (Proveedor ps : proveedoresAEliminar) {
+                    pd.eliminar(ps);
+                }
+                JOptionPane.showMessageDialog(null, "Elementos eliminados exitosamente");
+                borrarFilas();
+                actualizarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Operacion cancelada");
+            }
+
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        session.close();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExportarActionPerformed
@@ -549,11 +581,22 @@ public class Proveedores extends javax.swing.JInternalFrame {
     public void armarCabeceraTabla() {
         modelo.setColumnCount(0);
 
+        jTableProv.setDefaultRenderer(Object.class, new Render());
+
+        jTableProv.setRowHeight(25);
+
+        modelo.addColumn(" ");
         modelo.addColumn("ID");
         modelo.addColumn("CUIT");
         modelo.addColumn("Nombre");
 
         jTableProv.setModel(modelo);
+
+        TableColumn column1 = jTableProv.getColumnModel().getColumn(1);
+        TableColumn column0 = jTableProv.getColumnModel().getColumn(0);
+
+        column1.setPreferredWidth(25);
+        column0.setPreferredWidth(20);
     }
 
     public void actualizarTabla() {
@@ -568,6 +611,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
         for (Proveedor p : proveedores) {
             modelo.addRow(new Object[]{
+                false,
                 p.getIdProveedor(),
                 p.getCuit(),
                 p.getNombre(),});

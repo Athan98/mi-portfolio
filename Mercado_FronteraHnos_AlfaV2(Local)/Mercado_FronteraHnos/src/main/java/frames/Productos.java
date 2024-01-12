@@ -109,6 +109,11 @@ public class Productos extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Código:");
 
+        jtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtCodigoActionPerformed(evt);
+            }
+        });
         jtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtCodigoKeyPressed(evt);
@@ -967,6 +972,10 @@ public class Productos extends javax.swing.JInternalFrame {
         jcCategoriasAct.setSelectedIndex(-1);
         session.close();
     }//GEN-LAST:event_jbActualizarCatActionPerformed
+
+    private void jtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtCodigoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -175,17 +175,27 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         try {
             String nombre = jtNombre.getText();
-            Session session = HibernateConfig.get().openSession();
-            Producto_data pd = new Producto_data(session);
-            Producto p = new Producto(nombre);
-            pd.agregar(p);
-            session.close();
-            JOptionPane.showMessageDialog(null, "El producto ha sido agregado a la base de datos");
-            jtNombre.setText("");
+
+            // Mostrar un cuadro de diálogo de confirmación
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de ingresar el producto: " + nombre + "?", "Confirmar ingreso", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                // El usuario ha confirmado, procede con la lógica de ingreso del producto
+                Session session = HibernateConfig.get().openSession();
+                Producto_data pd = new Producto_data(session);
+                Producto p = new Producto(nombre);
+                pd.agregar(p);
+                session.close();
+
+                JOptionPane.showMessageDialog(null, "El producto ha sido agregado a la base de datos");
+                jtNombre.setText("");
+            } else {
+                // El usuario ha cancelado la operación
+                JOptionPane.showMessageDialog(null, "Ingreso de producto cancelado");
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
     }//GEN-LAST:event_jbAgregarActionPerformed
 
 

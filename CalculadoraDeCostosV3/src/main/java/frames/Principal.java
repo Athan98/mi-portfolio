@@ -7,6 +7,7 @@ import entidades.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -42,10 +43,18 @@ public class Principal extends javax.swing.JFrame {
         }
     };
 
+    Class tipo[] = new Class[]{java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+        java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+        java.lang.Object.class, java.lang.Object.class,};
+
     private final DefaultTableModel modelo2 = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int fila, int col) {
-            return false;
+            return col == 0;  // Hacer la primera columna (checkbox) editable
+        }
+
+        public Class getColumnClass(int index) {
+            return tipo[index];
         }
     };
 
@@ -54,6 +63,7 @@ public class Principal extends javax.swing.JFrame {
         jpBotonera.setOpaque(false);
         jpBusqueda.setOpaque(false);
         jpDesktop.setOpaque(false);
+        jpAviso.setOpaque(false);
         this.setExtendedState(Principal.MAXIMIZED_BOTH);
         setButton(boton, "/icons/oferta.png");
         setButton(botonEliminar, "/icons/borrarx18.png");
@@ -101,6 +111,12 @@ public class Principal extends javax.swing.JFrame {
         jpPromociones = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableOfertas = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jbSumarOf = new javax.swing.JButton();
+        jbLimpiarTotal = new javax.swing.JButton();
+        jbEliminarOf = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jlTotalOf = new javax.swing.JLabel();
         jpBusqueda = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtBuscar = new javax.swing.JTextField();
@@ -109,6 +125,8 @@ public class Principal extends javax.swing.JFrame {
         jbLimpiar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jbActualizar = new javax.swing.JButton();
+        jpAviso = new javax.swing.JPanel();
+        jlAviso = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -189,7 +207,7 @@ public class Principal extends javax.swing.JFrame {
         jpProductosLayout.setVerticalGroup(
             jpProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpProductosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -213,19 +231,108 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableOfertas);
 
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jbSumarOf.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jbSumarOf.setForeground(new java.awt.Color(0, 255, 0));
+        jbSumarOf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addx18.png"))); // NOI18N
+        jbSumarOf.setText("Sumar seleccionados");
+        jbSumarOf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSumarOfActionPerformed(evt);
+            }
+        });
+
+        jbLimpiarTotal.setFont(new java.awt.Font("Dialog", 3, 13)); // NOI18N
+        jbLimpiarTotal.setForeground(new java.awt.Color(0, 0, 0));
+        jbLimpiarTotal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiarx18.png"))); // NOI18N
+        jbLimpiarTotal.setText("Limpiar campo de suma");
+        jbLimpiarTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarTotalActionPerformed(evt);
+            }
+        });
+
+        jbEliminarOf.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jbEliminarOf.setForeground(new java.awt.Color(255, 0, 0));
+        jbEliminarOf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/removex18.png"))); // NOI18N
+        jbEliminarOf.setText("Eliminar seleccionados");
+        jbEliminarOf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarOfActionPerformed(evt);
+            }
+        });
+
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel4.setForeground(new java.awt.Color(0, 0, 0));
+
+        jlTotalOf.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jlTotalOf.setForeground(new java.awt.Color(0, 255, 0));
+        jlTotalOf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlTotalOf.setText("0");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlTotalOf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlTotalOf, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jbSumarOf, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbLimpiarTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbEliminarOf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbEliminarOf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbSumarOf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbLimpiarTotal))
+        );
+
         javax.swing.GroupLayout jpPromocionesLayout = new javax.swing.GroupLayout(jpPromociones);
         jpPromociones.setLayout(jpPromocionesLayout);
         jpPromocionesLayout.setHorizontalGroup(
             jpPromocionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPromocionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                .addGroup(jpPromocionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpPromocionesLayout.setVerticalGroup(
             jpPromocionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPromocionesLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -316,15 +423,35 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jlAviso.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jlAviso.setForeground(new java.awt.Color(255, 255, 0));
+        jlAviso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlAviso.setText("*ANTE CUALQUIER INCONVENIENTE, PRESIONE EL BOTON AMARILLO PARA ACTUALIZAR LA VENTANA*");
+
+        javax.swing.GroupLayout jpAvisoLayout = new javax.swing.GroupLayout(jpAviso);
+        jpAviso.setLayout(jpAvisoLayout);
+        jpAvisoLayout.setHorizontalGroup(
+            jpAvisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAvisoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpAvisoLayout.setVerticalGroup(
+            jpAvisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlAviso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jpDesktopLayout = new javax.swing.GroupLayout(jpDesktop);
         jpDesktop.setLayout(jpDesktopLayout);
         jpDesktopLayout.setHorizontalGroup(
             jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpDesktopLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDesktopLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jpDesktopLayout.createSequentialGroup()
+                .addGroup(jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jpAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpBusqueda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDesktopLayout.createSequentialGroup()
                         .addComponent(jpProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -336,9 +463,13 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpAviso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpDesktopLayout.createSequentialGroup()
+                        .addComponent(jpPromociones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -352,7 +483,9 @@ public class Principal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpDesktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addComponent(jpDesktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -539,6 +672,7 @@ public class Principal extends javax.swing.JFrame {
             for (Oferta o : ofertas) {
                 if (o.getProducto().getNombre().toUpperCase().startsWith(campoBuscarNombre)) {
                     modelo2.addRow(new Object[]{
+                        false,
                         o.getIdOferta(),
                         o.getFecha(),
                         o.getProducto().getNombre(),
@@ -547,8 +681,7 @@ public class Principal extends javax.swing.JFrame {
                         o.getTasaDesc(),
                         o.getPrecioFinalUnitario(),
                         o.getPrecioFinalPack(),
-                        o.getPrecioFinalTotal(),
-                        botonEliminar});
+                        o.getPrecioFinalTotal(), /*botonEliminar*/});
                 }
             }
 
@@ -592,6 +725,7 @@ public class Principal extends javax.swing.JFrame {
             for (Oferta o : ofertas) {
                 if (o.getProveedor().getNombre().equals(prov.getNombre())) {
                     modelo2.addRow(new Object[]{
+                        false,
                         o.getIdOferta(),
                         o.getFecha(),
                         o.getProducto().getNombre(),
@@ -600,8 +734,7 @@ public class Principal extends javax.swing.JFrame {
                         o.getTasaDesc(),
                         o.getPrecioFinalUnitario(),
                         o.getPrecioFinalPack(),
-                        o.getPrecioFinalTotal(),
-                        botonEliminar});
+                        o.getPrecioFinalTotal(), /*botonEliminar*/});
                 }
             }
 
@@ -615,6 +748,7 @@ public class Principal extends javax.swing.JFrame {
         jcProveedores.setSelectedIndex(-1);
         actualizarListaProductos();
         actualizarListaOfertas();
+        jtBuscar.setText("");
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
@@ -622,40 +756,118 @@ public class Principal extends javax.swing.JFrame {
         actualizarListaProductos();
         borrarFilas2();
         actualizarListaOfertas();
+        cargarProveedores();
+        jtBuscar.setText("");
+        jcProveedores.setSelectedIndex(-1);
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jTableOfertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableOfertasMouseClicked
+//        try {
+//            columna2 = jTableOfertas.getColumnModel().getColumnIndexAtX(evt.getX());
+//            fila2 = evt.getY() / jTableOfertas.getRowHeight();
+//
+//            if (columna2 <= jTableOfertas.getColumnCount() && columna2 >= 0 && fila2 <= jTableOfertas.getRowCount() && fila2 >= 0) {
+//                Object o = jTableOfertas.getValueAt(fila2, columna2);
+//                if (o instanceof JButton) {
+//                    ((JButton) o).doClick();
+//                    JButton botones = (JButton) o;
+//
+//                    if (botones.getName().equals("Borrar")) {
+//                        // Preguntar al usuario si realmente desea borrar el registro
+//                        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este registro?", "Confirmación", JOptionPane.YES_NO_OPTION);
+//
+//                        if (confirmacion == JOptionPane.YES_OPTION) {
+//                            // Continuar con la eliminación
+//                            int idOF = (int) modelo2.getValueAt(jTableOfertas.getSelectedRow(), 1);
+//                            Session session = HibernateConfig.get().openSession();
+//                            Oferta_data ofd = new Oferta_data(session);
+//                            ofd.eliminarPorID(idOF);
+//                            borrarFilas2();
+//                            actualizarListaOfertas();
+//                            session.close();
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+//        }
+    }//GEN-LAST:event_jTableOfertasMouseClicked
+
+    private void jbLimpiarTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTotalActionPerformed
+        jlTotalOf.setText("0");
+        actualizarListaOfertas();
+    }//GEN-LAST:event_jbLimpiarTotalActionPerformed
+
+    private void jbEliminarOfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarOfActionPerformed
         try {
-            columna2 = jTableOfertas.getColumnModel().getColumnIndexAtX(evt.getX());
-            fila2 = evt.getY() / jTableOfertas.getRowHeight();
+            Session session = HibernateConfig.get().openSession();
+            Oferta_data ofd = new Oferta_data(session);
 
-            if (columna2 <= jTableOfertas.getColumnCount() && columna2 >= 0 && fila2 <= jTableOfertas.getRowCount() && fila2 >= 0) {
-                Object o = jTableOfertas.getValueAt(fila2, columna2);
-                if (o instanceof JButton) {
-                    ((JButton) o).doClick();
-                    JButton botones = (JButton) o;
+            List<Oferta> ofertas = ofd.listarTodo();
+            List<Oferta> ofertasAEliminar = new ArrayList<>(); // Inicializar la lista
 
-                    if (botones.getName().equals("Borrar")) {
-                        // Preguntar al usuario si realmente desea borrar el registro
-                        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este registro?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            boolean ver;
+            Oferta of;
 
-                        if (confirmacion == JOptionPane.YES_OPTION) {
-                            // Continuar con la eliminación
-                            int idOF = (int) modelo2.getValueAt(jTableOfertas.getSelectedRow(), 0);
-                            Session session = HibernateConfig.get().openSession();
-                            Oferta_data ofd = new Oferta_data(session);
-                            ofd.eliminarPorID(idOF);
-                            borrarFilas2();
-                            actualizarListaOfertas();
-                            session.close();
-                        }
-                    }
+            for (int i = 0; i < ofertas.size(); i++) {
+                ver = (boolean) modelo2.getValueAt(i, 0);
+                of = ofd.encontrarPorID((int) modelo2.getValueAt(i, 1));
+                if (ver) {
+                    ofertasAEliminar.add(of);
                 }
             }
+
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Realmente desea eliminar las filas seleccionadas?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                for (Oferta o : ofertasAEliminar) {
+                    ofd.eliminar(o);
+                }
+                JOptionPane.showMessageDialog(null, "Elementos eliminados exitosamente");
+                borrarFilas2();
+                actualizarListaOfertas();
+            } else {
+                JOptionPane.showMessageDialog(null, "Operacion cancelada");
+            }
+
+            session.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-    }//GEN-LAST:event_jTableOfertasMouseClicked
+    }//GEN-LAST:event_jbEliminarOfActionPerformed
+
+    private void jbSumarOfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSumarOfActionPerformed
+        try {
+            Session session = HibernateConfig.get().openSession();
+            Oferta_data ofd = new Oferta_data(session);
+
+            List<Oferta> ofertas = ofd.listarTodo();
+            List<Oferta> ofertasASumar = new ArrayList<>(); // Inicializar la lista
+
+            boolean ver;
+            Oferta of;
+            float totalSeleccionados = 0;
+
+            for (int i = 0; i < ofertas.size(); i++) {
+                ver = (boolean) modelo2.getValueAt(i, 0);
+                of = ofd.encontrarPorID((int) modelo2.getValueAt(i, 1));
+                if (ver) {
+                    ofertasASumar.add(of);
+                }
+            }
+
+            for (Oferta o : ofertasASumar) {
+                totalSeleccionados = totalSeleccionados + o.getPrecioFinalTotal();
+            }
+
+            jlTotalOf.setText(totalSeleccionados + "");
+
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jbSumarOfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -697,16 +909,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableOfertas;
     private javax.swing.JTable jTableProductos;
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEliminarOf;
     private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbLimpiarTotal;
     private javax.swing.JButton jbPreventistas;
     private javax.swing.JButton jbProductos;
+    private javax.swing.JButton jbSumarOf;
     private javax.swing.JComboBox<Proveedor> jcProveedores;
+    private javax.swing.JLabel jlAviso;
+    private javax.swing.JLabel jlTotalOf;
+    private javax.swing.JPanel jpAviso;
     private javax.swing.JPanel jpBotonera;
     private javax.swing.JPanel jpBusqueda;
     private javax.swing.JPanel jpDesktop;
@@ -748,6 +968,7 @@ public class Principal extends javax.swing.JFrame {
 
         jTableOfertas.setRowHeight(25);
 
+        modelo2.addColumn(" ");
         modelo2.addColumn("ID");
         modelo2.addColumn("Fecha");
         modelo2.addColumn("Producto");
@@ -757,16 +978,14 @@ public class Principal extends javax.swing.JFrame {
         modelo2.addColumn("$ unidad");
         modelo2.addColumn("$ pack");
         modelo2.addColumn("$ total");
-        modelo2.addColumn(" ");
 
         jTableOfertas.setModel(modelo2);
 
-        TableColumn column9 = jTableOfertas.getColumnModel().getColumn(9);  // Por ejemplo, la segunda columna (índice 1)
+        TableColumn column1 = jTableOfertas.getColumnModel().getColumn(1);
         TableColumn column0 = jTableOfertas.getColumnModel().getColumn(0);
 
-        // Establecer el ancho preferido de la columna
-        column9.setPreferredWidth(25);
-        column0.setPreferredWidth(25);
+        column1.setPreferredWidth(25);
+        column0.setPreferredWidth(20);
     }
 
     public void actualizarListaProductos() {
@@ -807,6 +1026,7 @@ public class Principal extends javax.swing.JFrame {
         Collections.sort(ofertas, Comparator.comparing(Oferta::getPrecioFinalTotal));
         for (Oferta o : ofertas) {
             modelo2.addRow(new Object[]{
+                false,
                 o.getIdOferta(),
                 o.getFecha(),
                 o.getProducto().getNombre(),
@@ -815,8 +1035,7 @@ public class Principal extends javax.swing.JFrame {
                 o.getTasaDesc(),
                 o.getPrecioFinalUnitario(),
                 o.getPrecioFinalPack(),
-                o.getPrecioFinalTotal(),
-                botonEliminar});
+                o.getPrecioFinalTotal(), /*botonEliminar*/});
         }
 
         session.close();
@@ -843,6 +1062,7 @@ public class Principal extends javax.swing.JFrame {
         Session session = HibernateConfig.get().openSession();
         Proveedor_data pd = new Proveedor_data(session);
         List<Proveedor> proveedores = pd.listarTodo();
+        System.out.println(proveedores);
 
         Set<String> proveedoresAgregados = new HashSet<>();
 
