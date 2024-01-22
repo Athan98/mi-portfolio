@@ -127,6 +127,7 @@ public class Categorias extends javax.swing.JInternalFrame {
             jtNuevaCategoria.setText("");
         } else {
             String nombreCategoria = jtNuevaCategoria.getText().toUpperCase();
+            System.out.println("NOMRE CATEGORIA "+nombreCategoria );
             Categoria cat = new Categoria(nombreCategoria);
             Session session = HibernateConfig.get().openSession();
             Categoria_data cat_data = new Categoria_data(session);

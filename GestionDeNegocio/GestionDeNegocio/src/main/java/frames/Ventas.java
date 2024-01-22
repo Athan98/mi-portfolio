@@ -46,7 +46,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         initComponents();
         llenarComboUsers();
         setearUser(usuario);
-        jtFecha.setText(convertirFecha(LocalDate.now()));
+        jtFecha.setText(setFecha());
         jlCaja.setText(caja.getNroCaja());
         armarCabeceraTabla();
         cargarFormasDePago();
@@ -655,8 +655,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                         //CREO LA VENTA
                         String cliente = (String) jcClientes.getSelectedItem();
                         Usuario user = (Usuario) jcUsuarios.getSelectedItem();
-                        SimpleDateFormat formatoFechaEntrada = new SimpleDateFormat("dd-MM-yyyy");
-                        Date fecha = formatoFechaEntrada.parse(jtFecha.getText());
+                        Date fecha = new Date();
                         Double precioTotal = Double.parseDouble(jlTotalPagar.getText());
                         FormaDePago fdp = (FormaDePago) jcFormasDePago.getSelectedItem();
                         List<DetalleVenta> detallesVenta = new ArrayList<>();
@@ -717,8 +716,6 @@ public class Ventas extends javax.swing.JInternalFrame {
 
                         limpiarCamposNumericosYTabla();
 
-                    } catch (ParseException ex) {
-                        JOptionPane.showMessageDialog(null, "Error al castear clases");
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
 
@@ -887,7 +884,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         double desc = (Double.parseDouble(jtDescuento.getText())) / 100;
         montoTotal = montoTotal * (1 - desc);
-        jlTotalPagar.setText(montoTotal + "");
+        jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -998,23 +995,6 @@ public class Ventas extends javax.swing.JInternalFrame {
                 break;
             }
         }
-    }
-
-    public String convertirFecha(LocalDate fechaActual) {
-        // Crear un formateador para el formato dd-MM-yyyy
-        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-        // Convertir LocalDate a String en el formato especificado
-        String fechaFormateada = fechaActual.format(formateador);
-
-        // Convertir LocalDate a Date
-        Date fechaDate = Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
-        // Configurar el texto del TextField
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String fechaDateFormateada = sdf.format(fechaDate);
-
-        return fechaDateFormateada;
     }
 
     private void procesarCodigo() {
@@ -1148,6 +1128,16 @@ public class Ventas extends javax.swing.JInternalFrame {
         jcFormasDePago.setSelectedIndex(-1);
 
         session.close();
+    }
+
+    public String setFecha() {
+        Date fechaYHoraActual = new Date();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        String fechaYHoraFormateada = formato.format(fechaYHoraActual);
+
+        return fechaYHoraFormateada;
     }
 
 }

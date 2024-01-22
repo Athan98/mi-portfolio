@@ -1,10 +1,15 @@
 package frames;
 
 import config.HibernateConfig;
+import data.Licencia_data;
 import data.Usuario_data;
+import entidades.Licencia;
 import entidades.Usuario;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -172,14 +177,17 @@ public class InicioSesion extends javax.swing.JFrame {
 
         Usuario usuario = returnUser(user, pass);
 
-        if (usuario != null) {
-            Principal p = new Principal(usuario);
-            p.setVisible(true);
-            this.dispose();
+        if (puedeEjecutar() == true) {
+            if (usuario != null) {
+                Principal p = new Principal(usuario);
+                p.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+            JOptionPane.showMessageDialog(null, "Su licencia ha expirado. Contacto: nicoroldan15@outlook.com.ar");
         }
-
 
     }//GEN-LAST:event_jbIniciarActionPerformed
 
@@ -250,6 +258,30 @@ public class InicioSesion extends javax.swing.JFrame {
     private void crearBD() {
         Session session = HibernateConfig.get().openSession();
         session.close();
+    }
+
+    private static boolean puedeEjecutar() {
+        Session session = HibernateConfig.get().openSession();
+        Licencia_data ld = new Licencia_data(session);
+        List<Licencia> licencias = ld.listarTodo();
+
+        LocalDate localDate = LocalDate.now();
+
+        // Convertir LocalDate a Date
+        Date fechaDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        System.out.println(fechaDate);
+        boolean ver = false;
+
+        for (Licencia lic : licencias) {
+            if (lic.isEstado() == true) {
+                if ((fechaDate.after(lic.getFechaAdq()) || fechaDate.equals(lic.getFechaAdq()))
+                        && (fechaDate.before(lic.getFechaTermino()) || fechaDate.equals(lic.getFechaTermino()))) {
+                    ver = true;
+                }
+            }
+        }
+
+        return ver;
     }
 
 }

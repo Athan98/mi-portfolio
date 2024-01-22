@@ -1,13 +1,6 @@
 package frames;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.criteria.Path;
 import javax.swing.JOptionPane;
 
 public class Sistema extends javax.swing.JInternalFrame {

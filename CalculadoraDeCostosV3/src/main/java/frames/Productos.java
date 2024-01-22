@@ -492,28 +492,36 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbActualizarListaProvActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        Session session = HibernateConfig.get().openSession();
-        DetalleProducto_data dpd = new DetalleProducto_data(session);
 
-        Producto prod = (Producto) jcProductos.getSelectedItem();
-        Proveedor prov = (Proveedor) jcProveedores.getSelectedItem();
-        float precioUnitario = Float.parseFloat(jtPrecioUnitario.getText());
-        int cantidad = Integer.parseInt(jtCantidadPorPaquete.getText());
-        float valorPaquete = Float.parseFloat(jtValorPaquete.getText());
+        if (jcProductos.getSelectedIndex() == -1 || jcProveedores.getSelectedIndex() == -1
+                || jtPrecioUnitario.getText().isEmpty() || jtValorPaquete.getText().isEmpty()
+                || jtCantidadPorPaquete.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Asegúrese de llenar todos los campos");
+        } else {
 
-        DetalleProducto dp = new DetalleProducto(prod, prov, precioUnitario, cantidad, valorPaquete);
+            Session session = HibernateConfig.get().openSession();
+            DetalleProducto_data dpd = new DetalleProducto_data(session);
 
-        try {
+            Producto prod = (Producto) jcProductos.getSelectedItem();
+            Proveedor prov = (Proveedor) jcProveedores.getSelectedItem();
+            float precioUnitario = Float.parseFloat(jtPrecioUnitario.getText());
+            int cantidad = Integer.parseInt(jtCantidadPorPaquete.getText());
+            float valorPaquete = Float.parseFloat(jtValorPaquete.getText());
 
-            dpd.agregar(dp);
-            limpiarCampos();
-            actualizarListaProductos();
+            DetalleProducto dp = new DetalleProducto(prod, prov, precioUnitario, cantidad, valorPaquete);
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+            try {
+
+                dpd.agregar(dp);
+                limpiarCampos();
+                actualizarListaProductos();
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+            }
+
+            session.close();
         }
-
-        session.close();
 
 
     }//GEN-LAST:event_jbAgregarActionPerformed

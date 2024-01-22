@@ -1,7 +1,7 @@
 package frames;
 
 import config.HibernateConfig;
-import config_tables.Render;
+import config_tables.RenderProveedores;
 import data.*;
 import entidades.*;
 import exportarExcel.Controlador;
@@ -16,7 +16,7 @@ import org.hibernate.Session;
 public class Proveedores extends javax.swing.JInternalFrame {
 
     Class tipo[] = new Class[]{java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-        java.lang.Object.class, java.lang.Object.class};
+        java.lang.Object.class, java.lang.Object.class, java.lang.Object.class};
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -62,6 +62,8 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jbAgregar = new javax.swing.JButton();
         jbLimpiar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jcEstado = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -77,7 +79,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("PROVEEDORES");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "GestiÃ³n", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Gestión", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ID :");
@@ -95,7 +97,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jLabel5.setText("Direccion :");
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Telefono:");
+        jLabel6.setText("Telefono :");
 
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -153,6 +155,9 @@ public class Proveedores extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Disponibilidad :");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -162,19 +167,23 @@ public class Proveedores extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtTelefono)
-                            .addComponent(jtDireccion)
-                            .addComponent(jtCUIT)
-                            .addComponent(jlID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtNombre)
+                            .addComponent(jtTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtCUIT, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -201,11 +210,15 @@ public class Proveedores extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jcEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "BÃºsqueda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Búsqueda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Buscar por nombre :");
@@ -376,10 +389,10 @@ public class Proveedores extends javax.swing.JInternalFrame {
         String cuit = jtCUIT.getText();
 
         if (jtNombre.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Al menos debe ingresar un nombre");
+            JOptionPane.showMessageDialog(null, "Debe llenar al menos el campo Nombre");
         } else {
 
-            Proveedor prov = new Proveedor(nombre, telefono, direccion, cuit);
+            Proveedor prov = new Proveedor(nombre, telefono, direccion, cuit, jcEstado.isSelected());
 
             Session session = HibernateConfig.get().openSession();
 
@@ -416,6 +429,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jtCUIT.setText(prov.getCuit());
         jtDireccion.setText(prov.getDireccion());
         jtTelefono.setText(prov.getTelefono());
+        jcEstado.setSelected(prov.isEstado());
 
         session.close();
     }//GEN-LAST:event_jbEditarActionPerformed
@@ -431,13 +445,25 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
         for (Proveedor p : proveedores) {
             if (p.getNombre().toUpperCase().startsWith(busquedaNombre)) {
-                modelo.addRow(new Object[]{
-                    false,
-                    p.getIdProveedor(),
-                    p.getCuit(),
-                    p.getNombre(),
-                    p.getTelefono(),
-                    p.getDireccion()});
+                if (p.isEstado() == true) {
+                    modelo.addRow(new Object[]{
+                        false,
+                        p.getIdProveedor(),
+                        p.getCuit(),
+                        p.getNombre(),
+                        p.getTelefono(),
+                        p.getDireccion(),
+                        "DISPONIBLE"});
+                } else {
+                    modelo.addRow(new Object[]{
+                        false,
+                        p.getIdProveedor(),
+                        p.getCuit(),
+                        p.getNombre(),
+                        p.getTelefono(),
+                        p.getDireccion(),
+                        "NO DISPONIBLE"});
+                }
             }
         }
         session.close();
@@ -454,13 +480,25 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
         for (Proveedor p : proveedores) {
             if (p.getCuit().toUpperCase().startsWith(busquedaCUIT)) {
-                modelo.addRow(new Object[]{
-                    false,
-                    p.getIdProveedor(),
-                    p.getCuit(),
-                    p.getNombre(),
-                    p.getTelefono(),
-                    p.getDireccion()});
+                if (p.isEstado() == true) {
+                    modelo.addRow(new Object[]{
+                        false,
+                        p.getIdProveedor(),
+                        p.getCuit(),
+                        p.getNombre(),
+                        p.getTelefono(),
+                        p.getDireccion(),
+                        "DISPONIBLE"});
+                } else {
+                    modelo.addRow(new Object[]{
+                        false,
+                        p.getIdProveedor(),
+                        p.getCuit(),
+                        p.getNombre(),
+                        p.getTelefono(),
+                        p.getDireccion(),
+                        "NO DISPONIBLE"});
+                }
             }
         }
         session.close();
@@ -479,8 +517,9 @@ public class Proveedores extends javax.swing.JInternalFrame {
             String nombre = jtNombre.getText();
             String telefono = jtTelefono.getText();
             String direccion = jtDireccion.getText();
+            boolean estado = jcEstado.isSelected();
 
-            Proveedor prov = new Proveedor(idProv, nombre, telefono, direccion, CUIT);
+            Proveedor prov = new Proveedor(idProv, nombre, telefono, direccion, CUIT, estado);
 
             provd.actualizar(prov);
 
@@ -520,11 +559,12 @@ public class Proveedores extends javax.swing.JInternalFrame {
                 }
             }
 
-            int confirmacion = JOptionPane.showConfirmDialog(this, "Â¿Realmente desea eliminar las filas seleccionadas?", "ConfirmaciÃ³n", JOptionPane.YES_NO_OPTION);
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Realmente desea eliminar las filas seleccionadas?", "ConfirmaciÃ³n", JOptionPane.YES_NO_OPTION);
 
             if (confirmacion == JOptionPane.YES_OPTION) {
                 for (Proveedor ps : proveedoresAEliminar) {
-                    pd.eliminar(ps);
+                    ps.setEstado(false);
+                    pd.actualizar(ps);
                 }
                 JOptionPane.showMessageDialog(null, "Elementos eliminados exitosamente");
                 borrarFilas();
@@ -560,6 +600,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -573,6 +614,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbExportar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
+    private javax.swing.JCheckBox jcEstado;
     private javax.swing.JLabel jlID;
     private javax.swing.JTextField jtBusquedaCUIT;
     private javax.swing.JTextField jtBusquedaNombre;
@@ -592,7 +634,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
     public void armarCabeceraTabla() {
         modelo.setColumnCount(0);
 
-        jTableProv.setDefaultRenderer(Object.class, new Render());
+        jTableProv.setDefaultRenderer(Object.class, new RenderProveedores());
 
         jTableProv.setRowHeight(25);
 
@@ -602,6 +644,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Telefono");
         modelo.addColumn("Direccion");
+        modelo.addColumn("Estado");
 
         jTableProv.setModel(modelo);
 
@@ -623,13 +666,25 @@ public class Proveedores extends javax.swing.JInternalFrame {
         List<Proveedor> proveedores = provd.listarTodo();
 
         for (Proveedor p : proveedores) {
-            modelo.addRow(new Object[]{
-                false,
-                p.getIdProveedor(),
-                p.getCuit(),
-                p.getNombre(),
-                p.getTelefono(),
-                p.getDireccion()});
+            if (p.isEstado() == true) {
+                modelo.addRow(new Object[]{
+                    false,
+                    p.getIdProveedor(),
+                    p.getCuit(),
+                    p.getNombre(),
+                    p.getTelefono(),
+                    p.getDireccion(),
+                    "DISPONIBLE"});
+            } else {
+                modelo.addRow(new Object[]{
+                    false,
+                    p.getIdProveedor(),
+                    p.getCuit(),
+                    p.getNombre(),
+                    p.getTelefono(),
+                    p.getDireccion(),
+                    "NO DISPONIBLE"});
+            }
         }
         session.close();
     }
@@ -641,6 +696,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jtDireccion.setText("");
         jtTelefono.setText("");
+        jcEstado.setSelected(false);
 
     }
 

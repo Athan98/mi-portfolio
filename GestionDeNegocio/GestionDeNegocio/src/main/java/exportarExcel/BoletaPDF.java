@@ -81,7 +81,7 @@ public class BoletaPDF {
                         documento.add(subtitulo);
                         documento.add(Chunk.NEWLINE);
                         documento.add(new Chunk(line));
-                        documento.add(new Paragraph("Fecha: " + fecha));
+                        documento.add(new Paragraph("Fecha y hora: " + fecha));
                         documento.add(new Paragraph("Caja N°: " + caja));
                         documento.add(new Paragraph("Cliente: " + cliente));
                         documento.add(new Chunk(line));

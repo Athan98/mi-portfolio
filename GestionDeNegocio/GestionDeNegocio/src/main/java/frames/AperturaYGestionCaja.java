@@ -3,11 +3,10 @@ package frames;
 import config.HibernateConfig;
 import data.*;
 import entidades.*;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +26,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
     public AperturaYGestionCaja() {
         initComponents();
-        jlFecha.setText(convertirFecha(LocalDate.now()));
+        jlFecha.setText(setFecha());
         jlUsuario.setText(usuario.getNombre());
         jcSucursal.setSelectedIndex(-1);
         jcCaja.setSelectedIndex(-1);
@@ -69,7 +68,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Fecha :");
+        jLabel1.setText("Apertura :");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -286,7 +285,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
                 }
 
                 if (caja.isEstado() == false && jcOperacion.getSelectedItem().equals("APERTURA")) {
-                    Date fecha = Date.valueOf(LocalDate.now());
+                    Date fecha = new Date();
                     Double monto = Double.parseDouble(jtMonto.getText());
                     String operacion = (String) jcOperacion.getSelectedItem();
                     String comentario = jtComentario.getText();
@@ -304,7 +303,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
                 } else if (caja.isEstado() == true && jcOperacion.getSelectedItem().equals("INGRESO")) {
 
-                    Date fecha = Date.valueOf(LocalDate.now());
+                    Date fecha = new Date();
                     Double monto = Double.parseDouble(jtMonto.getText());
                     String operacion = (String) jcOperacion.getSelectedItem();
                     String comentario = jtComentario.getText();
@@ -319,7 +318,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
                 } else if (caja.isEstado() == true && jcOperacion.getSelectedItem().equals("EGRESO")) {
 
-                    Date fecha = Date.valueOf(LocalDate.now());
+                    Date fecha = new Date();
                     Double monto = Double.parseDouble(jtMonto.getText());
                     String operacion = (String) jcOperacion.getSelectedItem();
                     String comentario = jtComentario.getText();
@@ -441,14 +440,14 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
         return ultimaApertura;
     }
 
-    public String convertirFecha(LocalDate fechaActual) {
-        // Crear un formateador para el formato dd-MM-yyyy
-        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public String setFecha() {
+        Date fechaYHoraActual = new Date();
 
-        // Convertir LocalDate a String en el formato especificado
-        String fechaFormateada = fechaActual.format(formateador);
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-        return fechaFormateada;
+        String fechaYHoraFormateada = formato.format(fechaYHoraActual);
+
+        return fechaYHoraFormateada;
     }
 
 }

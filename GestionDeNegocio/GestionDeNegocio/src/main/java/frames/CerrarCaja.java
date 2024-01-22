@@ -5,8 +5,9 @@ import data.*;
 import entidades.*;
 import exportarExcel.ReporteCajaPDF;
 import java.awt.Color;
-import java.sql.Date;
+
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
@@ -96,7 +97,7 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Fecha apertura :");
+        jLabel1.setText("Apertura :");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -221,7 +222,7 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("Fecha cierre :");
+        jLabel17.setText("Cierre :");
 
         jlFechaCierre.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jlFechaCierre.setForeground(new java.awt.Color(0, 0, 0));
@@ -653,7 +654,7 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         Double montoTotalReal = Double.parseDouble(jtTotalReal.getText());
         Double diferencia = montoTotalTeorico - montoTotalReal;
 
-        if (diferencia < 0) {
+        if (diferencia <= 0) {
             jlDiferencia.setForeground(Color.GREEN);
             jlDiferencia.setText(((-1) * diferencia) + "");
         } else {
@@ -664,30 +665,33 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbCalcularDifActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        if (caja.isEstado() == true) {
-            java.util.Date sqlDate = new java.util.Date();
-            Date fechaActual = new Date(sqlDate.getTime());
-            Double diferencia = Double.parseDouble(jlDiferencia.getText());
-            Double montoTotalReal = Double.parseDouble(jtTotalReal.getText());
-            String sucursal = jlSucursal.getText();
-
-            Session session = HibernateConfig.get().openSession();
-            MovimientosCaja_data mcd = new MovimientosCaja_data(session);
-            Caja_data cd = new Caja_data(session);
-
-            MovimientosCaja mc = new MovimientosCaja(fechaActual, montoTotalTeorico, montoTotalReal, diferencia, "CIERRE", caja, sucursal, usuario);
-            caja.setEstado(false);
-
-            mcd.agregar(mc);
-            cd.actualizar(caja);
-            JOptionPane.showMessageDialog(null, "La caja ha sido cerrada exitosamente");
-            montoTotalTeorico = 0.0;
-            Principal.setPaneCaja();
-            limpiar();
-            session.close();
-            cajas.dispose();
+        if (jtTotalReal.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Asegúrese de ingresar el total real y calcula la diferencia");
         } else {
-            JOptionPane.showMessageDialog(null, "La caja ya está cerrada. Intente realizar la apertura");
+            if (caja.isEstado() == true) {
+                Date fechaActual = new Date();
+                Double diferencia = Double.parseDouble(jlDiferencia.getText());
+                Double montoTotalReal = Double.parseDouble(jtTotalReal.getText());
+                String sucursal = jlSucursal.getText();
+
+                Session session = HibernateConfig.get().openSession();
+                MovimientosCaja_data mcd = new MovimientosCaja_data(session);
+                Caja_data cd = new Caja_data(session);
+
+                MovimientosCaja mc = new MovimientosCaja(fechaActual, montoTotalTeorico, montoTotalReal, diferencia, "CIERRE", caja, sucursal, usuario);
+                caja.setEstado(false);
+
+                mcd.agregar(mc);
+                cd.actualizar(caja);
+                JOptionPane.showMessageDialog(null, "La caja ha sido cerrada exitosamente");
+                montoTotalTeorico = 0.0;
+                Principal.setPaneCaja();
+                limpiar();
+                session.close();
+                cajas.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "La caja ya está cerrada. Intente realizar la apertura");
+            }
         }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -695,7 +699,11 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
     private void jbImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbImprimirActionPerformed
         ReporteCajaPDF obj;
         try {
-            obj = new ReporteCajaPDF(jlFechaApertura.getText(), jlFechaCierre.getText(), jlCaja.getText(), jlUsuario.getText(), jlSucursal.getText(), jlApertura.getText(), jlIngresos.getText(), jlEgresos.getText(), jlVentas.getText(), jlTotalTeorico.getText(), jtTotalReal.getText(), jlDiferencia.getText());
+            obj = new ReporteCajaPDF(jlFechaApertura.getText(), jlFechaCierre.getText(), jlCaja.getText(),
+                    jlUsuario.getText(), jlSucursal.getText(), jlApertura.getText(), jlIngresos.getText(),
+                    jlEgresos.getText(), jlVentas.getText(), jlTotalTeorico.getText(), jtTotalReal.getText(),
+                    jlDiferencia.getText(), jlEfectivo.getText(), jlDebito.getText(), jlCredito.getText(),
+                    jlTrans.getText(), jlMP.getText(), jlUala.getText(), jlCtaCte.getText());
             obj.crearPlantilla();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
@@ -765,16 +773,15 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
     public void setDatos() {
         try {
             MovimientosCaja movCajaApert = obtenerUltimaApertura();
-            java.util.Date fechaApertura = movCajaApert.getFecha();
-            java.util.Date sqlDate = new java.util.Date();
-            Date fechaActual = new Date(sqlDate.getTime());
+            Date fechaApertura = movCajaApert.getFecha();
+            Date fechaActual = new Date();
 
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-            String fechaAperturaFormateada = formatoFecha.format(fechaApertura);
-            String fechaActualFormateada = formatoFecha.format(fechaActual);
+            SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-            jlFechaApertura.setText(fechaAperturaFormateada);
-            jlFechaCierre.setText(fechaActualFormateada);
+            String fechaYHoraFormateada = formato.format(fechaApertura);
+
+            jlFechaApertura.setText(fechaYHoraFormateada);
+            jlFechaCierre.setText(setFecha());
 
             jlCaja.setText(caja.getNroCaja());
             jlUsuario.setText(usuario.getNombre());
@@ -878,20 +885,20 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
 
             }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            jlApertura.setText(montoApertura + "");
-            jlIngresos.setText(ingresos + "");
-            jlEgresos.setText(egresos + "");
-            jlVentas.setText(montoVentas + "");
-            jlDebito.setText(debito + "");
-            jlEfectivo.setText(efectivo + "");
-            jlTrans.setText(trans + "");
-            jlCtaCte.setText(cta + "");
-            jlCredito.setText(credito + "");
-            jlMP.setText(mp + "");
-            jlUala.setText(uala + "");
+            jlApertura.setText(Math.round(montoApertura * 100.0) / 100.0 + "");
+            jlIngresos.setText(Math.round(ingresos * 100.0) / 100.0 + "");
+            jlEgresos.setText(Math.round(egresos * 100.0) / 100.0 + "");
+            jlVentas.setText(Math.round(montoVentas * 100.0) / 100.0 + "");
+            jlDebito.setText(Math.round(debito * 100.0) / 100.0 + "");
+            jlEfectivo.setText(Math.round(efectivo * 100.0) / 100.0 + "");
+            jlTrans.setText(Math.round(trans * 100.0) / 100.0 + "");
+            jlCtaCte.setText(Math.round(cta * 100.0) / 100.0 + "");
+            jlCredito.setText(Math.round(credito * 100.0) / 100.0 + "");
+            jlMP.setText(Math.round(mp * 100.0) / 100.0 + "");
+            jlUala.setText(Math.round(uala * 100.0) / 100.0 + "");
 
             montoTotalTeorico = montoApertura + ingresos - egresos + montoVentas;
-            jlTotalTeorico.setText(montoTotalTeorico + "");
+            jlTotalTeorico.setText(Math.round(montoTotalTeorico * 100.0) / 100.0 + "");
 
             session.close();
         } catch (Exception ex) {
@@ -939,6 +946,16 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         jlTotalTeorico.setText("0");
         jtTotalReal.setText("0");
         jlDiferencia.setText("0");
+    }
+
+    public String setFecha() {
+        Date fechaYHoraActual = new Date();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        String fechaYHoraFormateada = formato.format(fechaYHoraActual);
+
+        return fechaYHoraFormateada;
     }
 
 }

@@ -33,7 +33,10 @@ public class Producto {
     @Column(name = "stock")
     private int stock;
 
-    public Producto(Categoria categoria, String nombre, String descripcion, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock) {
+    @Column(name = "disponibilidad")
+    private String disponibilidad;
+
+    public Producto(Categoria categoria, String nombre, String descripcion, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock, String disponibilidad) {
         this.categoria = categoria;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -41,18 +44,20 @@ public class Producto {
         this.precioVentaUnitario = precioVentaUnitario;
         this.precioCostoUnitario = precioCostoUnitario;
         this.stock = stock;
+        this.disponibilidad = disponibilidad;
     }
 
-    public Producto(Categoria categoria, String nombre, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock) {
+    public Producto(Categoria categoria, String nombre, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock, String disponibilidad) {
         this.categoria = categoria;
         this.nombre = nombre;
         this.codigo = codigo;
         this.precioVentaUnitario = precioVentaUnitario;
         this.precioCostoUnitario = precioCostoUnitario;
         this.stock = stock;
+        this.disponibilidad = disponibilidad;
     }
 
-    public Producto(int idProducto, Categoria categoria, String nombre, String descripcion, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock) {
+    public Producto(int idProducto, Categoria categoria, String nombre, String descripcion, String codigo, Double precioVentaUnitario, Double precioCostoUnitario, int stock, String disponibilidad) {
         this.idProducto = idProducto;
         this.categoria = categoria;
         this.nombre = nombre;
@@ -61,20 +66,20 @@ public class Producto {
         this.precioVentaUnitario = precioVentaUnitario;
         this.precioCostoUnitario = precioCostoUnitario;
         this.stock = stock;
+        this.disponibilidad = disponibilidad;
     }
 
     public Producto() {
     }
 
-    public Producto(Categoria categoria, String nombre, String descripcion, String codigo, int stock) {
+    public Producto(Categoria categoria, String nombre, String descripcion, String codigo, int stock, String disponibilidad) {
         this.categoria = categoria;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.codigo = codigo;
         this.stock = stock;
+        this.disponibilidad = disponibilidad;
     }
-    
-    
 
     public int getIdProducto() {
         return idProducto;
@@ -140,8 +145,17 @@ public class Producto {
         this.stock = stock;
     }
 
+    public String getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(String disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
     @Override
     public String toString() {
         return nombre;
     }
+
 }

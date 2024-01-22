@@ -2,9 +2,7 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "pedido")
@@ -24,30 +22,35 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
-    
+
     @ManyToOne
     @JoinColumn(name = "idProveedor", nullable = false)
     private Proveedor prov;
-    
+
     @ManyToOne
     @JoinColumn(name = "idFormaDePago", nullable = false)
     private FormaDePago fdp;
 
-    public Pedido(int idPedido, Date fecha, Double precioTotalCosto, Usuario usuario, Proveedor prov, FormaDePago fdp) {
+    @Column(name = "estado")
+    private boolean estado;
+
+    public Pedido(int idPedido, Date fecha, Double precioTotalCosto, Usuario usuario, Proveedor prov, FormaDePago fdp, boolean estado) {
         this.idPedido = idPedido;
         this.fecha = fecha;
         this.precioTotalCosto = precioTotalCosto;
         this.usuario = usuario;
         this.prov = prov;
         this.fdp = fdp;
+        this.estado = estado;
     }
 
-    public Pedido(Date fecha, Double precioTotalCosto, Usuario usuario, Proveedor prov, FormaDePago fdp) {
+    public Pedido(Date fecha, Double precioTotalCosto, Usuario usuario, Proveedor prov, FormaDePago fdp, boolean estado) {
         this.fecha = fecha;
         this.precioTotalCosto = precioTotalCosto;
         this.usuario = usuario;
         this.prov = prov;
         this.fdp = fdp;
+        this.estado = estado;
     }
 
     public Pedido() {
@@ -101,9 +104,12 @@ public class Pedido implements Serializable {
         this.fdp = fdp;
     }
 
-    @Override
-    public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", fecha=" + fecha + ", precioTotalCosto=" + precioTotalCosto + ", usuario=" + usuario + ", prov=" + prov + ", fdp=" + fdp + '}';
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
 }

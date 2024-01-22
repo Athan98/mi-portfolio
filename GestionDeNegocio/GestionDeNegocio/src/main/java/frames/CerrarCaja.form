@@ -253,7 +253,7 @@
                       <Color blue="0" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Fecha apertura :"/>
+                    <Property name="text" type="java.lang.String" value="Apertura :"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
@@ -548,7 +548,7 @@
                       <Color blue="0" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Fecha cierre :"/>
+                    <Property name="text" type="java.lang.String" value="Cierre :"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlFechaCierre">

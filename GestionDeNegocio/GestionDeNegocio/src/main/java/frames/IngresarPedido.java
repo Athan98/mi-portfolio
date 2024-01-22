@@ -32,7 +32,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
         cargarFormasDePago();
         llenarComboUsers();
         llenarComboProveedores();
-        jtFecha.setText(convertirFecha(LocalDate.now()));
+        jtFecha.setText(setFecha());
         setearUser(user);
     }
 
@@ -123,7 +123,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbIngresarPedido)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -210,7 +210,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jcUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 335, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,18 +234,18 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(124, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -273,6 +273,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
                     Proveedores p = new Proveedores();
                     p.setVisible(true);
                     escritorio.add(p);
+                    escritorio.moveToFront(p);
                     p.setLocation((escritorio.getWidth() - p.getWidth()) / 2, (escritorio.getHeight() - p.getHeight()) / 2);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -312,13 +313,13 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
                     Pedido_data pedd = new Pedido_data(session);
 
                     //CREO EL PEDIDO
-                    Date fechaDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    Date fechaDate = new Date();
                     Usuario user = (Usuario) jcUsuarios.getSelectedItem();
                     Double precioCostoTotal = Double.parseDouble(jtCosto.getText());
                     Proveedor prov = (Proveedor) jcProveedores.getSelectedItem();
                     FormaDePago fdp = (FormaDePago) jcFormaDePago.getSelectedItem();
 
-                    ped = new Pedido(fechaDate, precioCostoTotal, user, prov, fdp);
+                    ped = new Pedido(fechaDate, precioCostoTotal, user, prov, fdp, true);
 
                     pedd.agregar(ped);
 
@@ -435,23 +436,6 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
         jtCosto.setText("0");
     }
 
-    public String convertirFecha(LocalDate fechaActual) {
-        // Crear un formateador para el formato dd-MM-yyyy
-        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-        // Convertir LocalDate a String en el formato especificado
-        String fechaFormateada = fechaActual.format(formateador);
-
-        // Convertir LocalDate a Date
-        Date fechaDate = Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
-        // Configurar el texto del TextField
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String fechaDateFormateada = sdf.format(fechaDate);
-
-        return fechaDateFormateada;
-    }
-
     public void cargarFormasDePago() {
         jcFormaDePago.removeAllItems();
 
@@ -472,6 +456,16 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
         jcFormaDePago.setSelectedIndex(-1);
 
         session.close();
+    }
+
+    public String setFecha() {
+        Date fechaYHoraActual = new Date();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        String fechaYHoraFormateada = formato.format(fechaYHoraActual);
+
+        return fechaYHoraFormateada;
     }
 
 }

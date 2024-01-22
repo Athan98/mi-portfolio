@@ -23,11 +23,20 @@ public class ReporteCajaPDF {
     String totalReal;
     String diferencia;
 
+    String efectivo;
+    String debito;
+    String credito;
+    String trans;
+    String mp;
+    String uala;
+    String ctaCte;
+
     Document documento;
     FileOutputStream archivo;
     Paragraph titulo;
+    Paragraph subtitulo;
 
-    public ReporteCajaPDF(String fechaApertura, String fechaCierre, String caja, String usuario, String sucursal, String saldoApertura, String ingresos, String egresos, String ventas, String totalTeorico, String totalReal, String diferencia) {
+    public ReporteCajaPDF(String fechaApertura, String fechaCierre, String caja, String usuario, String sucursal, String saldoApertura, String ingresos, String egresos, String ventas, String totalTeorico, String totalReal, String diferencia, String efectivo, String debito, String credito, String trans, String mp, String uala, String ctaCte) {
         this.fechaApertura = fechaApertura;
         this.fechaCierre = fechaCierre;
         this.caja = caja;
@@ -40,9 +49,17 @@ public class ReporteCajaPDF {
         this.totalTeorico = totalTeorico;
         this.totalReal = totalReal;
         this.diferencia = diferencia;
+        this.efectivo = efectivo;
+        this.debito = debito;
+        this.credito = credito;
+        this.trans = trans;
+        this.mp = mp;
+        this.uala = uala;
+        this.ctaCte = ctaCte;
 
         documento = new Document();
-        titulo = new Paragraph("Reporte de caja", FontFactory.getFont(FontFactory.HELVETICA, 18));
+        titulo = new Paragraph("Reporte de caja", FontFactory.getFont(FontFactory.HELVETICA, 24));
+        subtitulo = new Paragraph("Resumen formas de pago de las ventas diarias", FontFactory.getFont(FontFactory.HELVETICA, 18));
     }
 
     public void crearPlantilla() {
@@ -67,12 +84,17 @@ public class ReporteCajaPDF {
 
                         LineSeparator line = new LineSeparator();
                         titulo.setAlignment(Element.ALIGN_CENTER);
+                        subtitulo.setAlignment(Element.ALIGN_CENTER);
 
+                        documento.add(new Chunk(line));
+                        documento.add(Chunk.NEWLINE);
                         documento.add(titulo);
                         documento.add(Chunk.NEWLINE);
+                        documento.add(new Chunk(line));
+                        documento.add(Chunk.NEWLINE);
                         documento.add(new Paragraph("Caja N°: " + caja));
-                        documento.add(new Paragraph("Fecha de apertura : " + fechaApertura));
-                        documento.add(new Paragraph("Fecha de cierre: " + fechaCierre));
+                        documento.add(new Paragraph("Fecha y hora de apertura : " + fechaApertura));
+                        documento.add(new Paragraph("Fecha y hora de cierre: " + fechaCierre));
                         documento.add(new Paragraph("Usuario: " + usuario));
                         documento.add(new Paragraph("Sucursal: " + sucursal));
                         documento.add(new Chunk(line));
@@ -87,7 +109,23 @@ public class ReporteCajaPDF {
                         documento.add(new Paragraph("Total real ($): " + totalReal));
                         documento.add(new Chunk(line));
                         documento.add(new Paragraph("Diferencia ($): " + diferencia));
+                        documento.add(Chunk.NEWLINE);
                         documento.add(new Chunk(line));
+                        documento.add(Chunk.NEWLINE);
+                        documento.add(subtitulo);
+                        documento.add(Chunk.NEWLINE);
+                        documento.add(new Chunk(line));
+                        documento.add(Chunk.NEWLINE);
+                        documento.add(new Paragraph("Debito ($): " + debito));
+                        documento.add(new Paragraph("Efectivo ($): " + efectivo));
+                        documento.add(new Paragraph("Transferencia bancaria ($): " + trans));
+                        documento.add(new Paragraph("Mercado pago ($): " + mp));
+                        documento.add(new Paragraph("Ualá ($): " + uala));
+                        documento.add(new Paragraph("Credito ($): " + credito));
+                        documento.add(new Paragraph("Cuenta corriente ($): " + ctaCte));
+                        documento.add(Chunk.NEWLINE);
+                        documento.add(new Chunk(line));
+
                         documento.close();
 
                         JOptionPane.showMessageDialog(null, "Archivo PDF creado exitosamente en: " + rutaArchivoPDF);
