@@ -8,11 +8,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -504,7 +500,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agregar productos por CÓDIGO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agregar productos por CODIGO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         jbEscanear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scanner.png"))); // NOI18N
         jbEscanear.addActionListener(new java.awt.event.ActionListener() {
@@ -634,7 +630,7 @@ public class Ventas extends javax.swing.JInternalFrame {
 
             Session session = HibernateConfig.get().openSession();
 
-            int opcion = JOptionPane.showConfirmDialog(null, "¿Desea confirmar la operacion ?", "Confirmación de venta", JOptionPane.YES_NO_OPTION);
+            int opcion = JOptionPane.showConfirmDialog(null, "�Desea confirmar la operacion ?", "Confirmacion de venta", JOptionPane.YES_NO_OPTION);
 
             if (opcion == JOptionPane.NO_OPTION) {
                 JOptionPane.showMessageDialog(null, "Operacion cancelada");
@@ -698,7 +694,7 @@ public class Ventas extends javax.swing.JInternalFrame {
 
                         vd.actualizar(venta);
 
-                        int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea generar el ticket?", "Generar ticket", JOptionPane.YES_NO_OPTION);
+                        int respuesta = JOptionPane.showConfirmDialog(null, "�Desea generar el ticket?", "Generar ticket", JOptionPane.YES_NO_OPTION);
 
                         if (respuesta == JOptionPane.YES_OPTION) {
                             BoletaPDF obj;
@@ -735,39 +731,75 @@ public class Ventas extends javax.swing.JInternalFrame {
         Double montoSUELTOS = Double.parseDouble(jtMONTOSUELTOS.getText());
 
         if (verificarProducto() == null) {
-            JOptionPane.showMessageDialog(null, "No se encontró el producto en la base de datos");
+            JOptionPane.showMessageDialog(null, "No se encontro el producto en la base de datos");
         } else {
             // AGREGAR PRODUCTO A LA LISTA
             Producto p = verificarProducto();
 
-            // Decidir si agregar montoSUELTOS o la cantidad
-            Double montoOPrecio;
-            if (!jtCodigoSUELTOS.getText().isEmpty() && !jtNOMBRESUELTOS.getText().isEmpty() && montoSUELTOS > 0) {
-                montoOPrecio = montoSUELTOS;
-            } else {
-                montoOPrecio = p.getPrecioVentaUnitario();
+            if (p.getDisponibilidad().equals("NO DISPONIBLE")) {
+
+                JOptionPane.showMessageDialog(null, "El producto no se encuentra disponible");
+
+            } else if (p.getDisponibilidad().equals("SIN STOCK")) {
+
+                JOptionPane.showMessageDialog(null, "�ATENCION! Verificar stock del producto");
+
+                // Decidir si agregar montoSUELTOS o la cantidad
+                Double montoOPrecio;
+                if (!jtCodigoSUELTOS.getText().isEmpty() && !jtNOMBRESUELTOS.getText().isEmpty() && montoSUELTOS > 0) {
+                    montoOPrecio = montoSUELTOS;
+                } else {
+                    montoOPrecio = p.getPrecioVentaUnitario();
+                }
+
+                modelo.addRow(new Object[]{
+                    p.getIdProducto(),
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),
+                    montoOPrecio,
+                    cant,});
+
+                precioNeto = precioNeto + (montoOPrecio * cant);
+                montoIva = montoIva + ((IVA * montoOPrecio) * cant);
+                montoTotal = (precioNeto + montoIva);
+
+                DecimalFormat formato = new DecimalFormat("#.##");
+
+                jlMontoIVA.setText(formato.format(montoIva));
+                jlPrecioNeto.setText(formato.format(precioNeto));
+                jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
+
+                limpiarCampos();
+            } else if (p.getDisponibilidad().equals("DISPONIBLE")) {
+
+                Double montoOPrecio;
+                if (!jtCodigoSUELTOS.getText().isEmpty() && !jtNOMBRESUELTOS.getText().isEmpty() && montoSUELTOS > 0) {
+                    montoOPrecio = montoSUELTOS;
+                } else {
+                    montoOPrecio = p.getPrecioVentaUnitario();
+                }
+
+                modelo.addRow(new Object[]{
+                    p.getIdProducto(),
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),
+                    montoOPrecio,
+                    cant,});
+
+                precioNeto = precioNeto + (montoOPrecio * cant);
+                montoIva = montoIva + ((IVA * montoOPrecio) * cant);
+                montoTotal = (precioNeto + montoIva);
+
+                DecimalFormat formato = new DecimalFormat("#.##");
+
+                jlMontoIVA.setText(formato.format(montoIva));
+                jlPrecioNeto.setText(formato.format(precioNeto));
+                jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
+
+                limpiarCampos();
             }
-
-            modelo.addRow(new Object[]{
-                p.getIdProducto(),
-                p.getCodigo(),
-                p.getCategoria().getNombre(),
-                p.getNombre(),
-                montoOPrecio,
-                cant,});
-
-            precioNeto = precioNeto + (montoOPrecio * cant);
-            montoIva = montoIva + ((IVA * montoOPrecio) * cant);
-            montoTotal = (precioNeto + montoIva);
-
-            DecimalFormat formato = new DecimalFormat("#.##");
-
-            jlMontoIVA.setText(formato.format(montoIva));
-            jlPrecioNeto.setText(formato.format(precioNeto));
-            jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
-
-            limpiarCampos();
-
         }
     }//GEN-LAST:event_jbAgregarProductoActionPerformed
 
@@ -819,7 +851,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (enterPresionado) {
                 jbAgregarProductoActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Enter"));
-                enterPresionado = false;  // Restablecer el estado después de ejecutar la acción
+                enterPresionado = false;  // Restablecer el estado despuÃ©s de ejecutar la acciÃ³n
             } else {
                 procesarCodigo();
                 enterPresionado = true;  // Marcar que Enter fue presionado por primera vez
@@ -832,6 +864,10 @@ public class Ventas extends javax.swing.JInternalFrame {
             jtCantidad.setEditable(true);
         } else {
             jtCantidad.setEditable(false);
+        }
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbAgregarProductoActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Enter"));
         }
     }//GEN-LAST:event_jtCantidadKeyPressed
 
@@ -869,7 +905,7 @@ public class Ventas extends javax.swing.JInternalFrame {
             } else {
                 jtNombre.requestFocus();
                 procesarCodigoNombre1();
-                enterPresionadoNombre = true; // Establece la bandera para la próxima vez
+                enterPresionadoNombre = true; // Establece la bandera para la prÃ³xima vez
             }
         }
     }//GEN-LAST:event_jtNombreKeyPressed

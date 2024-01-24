@@ -274,7 +274,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
         try {
             if (jcCaja.getSelectedIndex() == -1 || jcSucursal.getSelectedIndex() == -1 || jcOperacion.getSelectedIndex() == -1) {
-                JOptionPane.showMessageDialog(null, "Asegúrese de llenar los campos correctamente");
+                JOptionPane.showMessageDialog(null, "Asegurese de llenar los campos correctamente");
             } else {
                 Session session = HibernateConfig.get().openSession();
                 Caja_data cd = new Caja_data(session);
@@ -296,7 +296,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
                     mcd.agregar(mc);
                     cd.actualizar(caja);
-                    JOptionPane.showMessageDialog(null, "La apertura de caja se realizó correctamente");
+                    JOptionPane.showMessageDialog(null, "La apertura de caja se realizo correctamente");
                     Principal.setPaneCaja();
                     actualizarTabla();
                     limpiarCampos();
@@ -333,7 +333,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
                 } else if (caja.isEstado() == true && jcOperacion.getSelectedItem().equals("APERTURA")) {
 
-                    JOptionPane.showMessageDialog(null, "Ya se realizó la apertura de caja");
+                    JOptionPane.showMessageDialog(null, "La caja ya esta abierta");
 
                 }
                 session.close();

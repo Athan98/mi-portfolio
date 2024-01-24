@@ -46,7 +46,7 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
 
         setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ACTUALIZAR STOCK´S", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 20))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ACTUALIZAR STOCK", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 20))); // NOI18N
 
         jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,7 +93,7 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel11.setText("Buscar por código:");
+        jLabel11.setText("Buscar por codigo:");
 
         jLabel10.setText("Buscar por nombre:");
 

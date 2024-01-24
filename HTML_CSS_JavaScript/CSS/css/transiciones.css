@@ -1,0 +1,9 @@
+.caja{
+    width: 200px;
+    height: 200px;
+    background: #21295c;
+}
+
+.caja:hover{
+    background: #9eb3c2;
+}

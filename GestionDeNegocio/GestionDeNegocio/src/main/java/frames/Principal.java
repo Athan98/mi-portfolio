@@ -105,7 +105,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("隆BIENVENIDO!");
+        jLabel2.setText("BIENVENIDO");
 
         jbSalir.setBackground(new java.awt.Color(153, 0, 0));
         jbSalir.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 30)); // NOI18N
@@ -399,9 +399,9 @@ public class Principal extends javax.swing.JFrame {
     private void jbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosActionPerformed
 
         if (user.getAcceso() == 2) {
-            // Verificar si hay un hilo SwingWorker en ejecuci贸n y esperar a que termine
+            // Verificar si hay un hilo SwingWorker en ejecuci髇 y esperar a que termine
             if (cargaWorker != null && !cargaWorker.isDone()) {
-                JOptionPane.showMessageDialog(null, "Espere a que la operaci贸n actual termine.");
+                JOptionPane.showMessageDialog(null, "Espere a que la operaci髇 actual termine.");
                 return;
             }
 
@@ -431,7 +431,7 @@ public class Principal extends javax.swing.JFrame {
 
                 @Override
                 protected void done() {
-                    // Cerrar el frame de carga despu茅s de que la tarea haya terminado
+                    // Cerrar el frame de carga despu閟 de que la tarea haya terminado
                     loading.dispose();
                 }
             };
@@ -444,9 +444,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVentasActionPerformed
 
-// Verificar si hay un hilo SwingWorker en ejecuci贸n y esperar a que termine
+// Verificar si hay un hilo SwingWorker en ejecuci髇 y esperar a que termine
         if (cargaWorker != null && !cargaWorker.isDone()) {
-            JOptionPane.showMessageDialog(null, "Espere a que la operaci贸n actual termine.");
+            JOptionPane.showMessageDialog(null, "Espere a que la operaci髇 actual termine.");
             return;
         }
 
@@ -477,7 +477,7 @@ public class Principal extends javax.swing.JFrame {
 
             @Override
             protected void done() {
-                // Cerrar el frame de carga despu茅s de que la tarea haya terminado
+                // Cerrar el frame de carga despu閟 de que la tarea haya terminado
                 loading.dispose();
             }
         };
@@ -488,9 +488,9 @@ public class Principal extends javax.swing.JFrame {
     private void jbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProveedoresActionPerformed
 
         if (user.getAcceso() == 2) {
-            // Verificar si hay un hilo SwingWorker en ejecuci贸n y esperar a que termine
+            // Verificar si hay un hilo SwingWorker en ejecuci髇 y esperar a que termine
             if (cargaWorker != null && !cargaWorker.isDone()) {
-                JOptionPane.showMessageDialog(null, "Espere a que la operaci贸n actual termine.");
+                JOptionPane.showMessageDialog(null, "Espere a que la operaci髇 actual termine.");
                 return;
             }
 
@@ -521,7 +521,7 @@ public class Principal extends javax.swing.JFrame {
 
                 @Override
                 protected void done() {
-                    // Cerrar el frame de carga despu茅s de que la tarea haya terminado
+                    // Cerrar el frame de carga despu閟 de que la tarea haya terminado
                     loading.dispose();
                 }
             };
@@ -535,9 +535,9 @@ public class Principal extends javax.swing.JFrame {
     private void jbPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPedidosActionPerformed
 
         if (user.getAcceso() == 2) {
-            // Verificar si hay un hilo SwingWorker en ejecuci贸n y esperar a que termine
+            // Verificar si hay un hilo SwingWorker en ejecuci髇 y esperar a que termine
             if (cargaWorker != null && !cargaWorker.isDone()) {
-                JOptionPane.showMessageDialog(null, "Espere a que la operaci贸n actual termine.");
+                JOptionPane.showMessageDialog(null, "Espere a que la operaci髇 actual termine.");
                 return;
             }
 
@@ -568,7 +568,7 @@ public class Principal extends javax.swing.JFrame {
 
                 @Override
                 protected void done() {
-                    // Cerrar el frame de carga despu茅s de que la tarea haya terminado
+                    // Cerrar el frame de carga despu閟 de que la tarea haya terminado
                     loading.dispose();
                 }
             };
@@ -582,9 +582,9 @@ public class Principal extends javax.swing.JFrame {
     private void jbEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadisticasActionPerformed
 
         if (user.getAcceso() == 2) {
-            // Verificar si hay un hilo SwingWorker en ejecuci贸n y esperar a que termine
+            // Verificar si hay un hilo SwingWorker en ejecuci髇 y esperar a que termine
             if (cargaWorker != null && !cargaWorker.isDone()) {
-                JOptionPane.showMessageDialog(null, "Espere a que la operaci贸n actual termine.");
+                JOptionPane.showMessageDialog(null, "Espere a que la operaci髇 actual termine.");
                 return;
             }
 
@@ -615,7 +615,7 @@ public class Principal extends javax.swing.JFrame {
 
                 @Override
                 protected void done() {
-                    // Cerrar el frame de carga despu茅s de que la tarea haya terminado
+                    // Cerrar el frame de carga despu閟 de que la tarea haya terminado
                     loading.dispose();
                 }
             };
@@ -629,7 +629,7 @@ public class Principal extends javax.swing.JFrame {
     private void jbConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultasActionPerformed
 
         if (cargaWorker != null && !cargaWorker.isDone()) {
-            JOptionPane.showMessageDialog(null, "Espere a que la operaci贸n actual termine.");
+            JOptionPane.showMessageDialog(null, "Espere a que la operaci髇 actual termine.");
             return;
         }
         // Crear e iniciar el hilo SwingWorker
@@ -658,7 +658,7 @@ public class Principal extends javax.swing.JFrame {
 
             @Override
             protected void done() {
-                // Cerrar el frame de carga despu茅s de que la tarea haya terminado
+                // Cerrar el frame de carga despu閟 de que la tarea haya terminado
                 loading.dispose();
             }
         };
@@ -671,8 +671,9 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La caja se encuentra abierta, debe cerrarla para salir del programa");
             return;
         } else {
-            System.exit(0);
+            detenerXAMPP();
             user = null;
+            System.exit(0);
         }
     }//GEN-LAST:event_jbSalirActionPerformed
 
@@ -691,7 +692,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCajaActionPerformed
         if (cargaWorker != null && !cargaWorker.isDone()) {
-            JOptionPane.showMessageDialog(null, "Espere a que la operaci贸n actual termine.");
+            JOptionPane.showMessageDialog(null, "Espere a que la operaci髇 actual termine.");
             return;
         }
         // Crear e iniciar el hilo SwingWorker
@@ -722,7 +723,7 @@ public class Principal extends javax.swing.JFrame {
 
             @Override
             protected void done() {
-                // Cerrar el frame de carga despu茅s de que la tarea haya terminado
+                // Cerrar el frame de carga despu閟 de que la tarea haya terminado
                 loading.dispose();
             }
         };
@@ -785,37 +786,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jpInicio;
     // End of variables declaration//GEN-END:variables
 
-    private void ejectuarXAMPP() {
-        Process proceso = null;
-        try {
-            System.out.println("Ejecutando XAMPP");
-            String rutaXAMPP = "E:\\XAMPP\\xampp_start.exe";
-            proceso = Runtime.getRuntime().exec(rutaXAMPP);
-            System.out.println("XAMPP inicializado");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo ejecutar XAMPP");
-        }
-    }
-
-    private void detenerXAAMP() {
-        Process proceso = null;
-        try {
-            System.out.println("Deteniendo XAAMP");
-            String rutaXAMPP = "E:\\XAMPP\\xampp_stop.exe";
-            proceso = Runtime.getRuntime().exec(rutaXAMPP);
-            int exitCode = proceso.waitFor();
-            System.out.println("XAMPP detenido con c贸digo de salida: " + exitCode);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo ejecutar XAMPP");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (proceso != null) {
-                proceso.destroy();
-            }
-        }
-    }
-
     private void actualizarFechaHora() {
         Thread reloj = new Thread(() -> {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -867,6 +837,25 @@ public class Principal extends javax.swing.JFrame {
             jlCajaActivacion.setText("ABIERTA");
         }
 
+    }
+
+    private void detenerXAMPP() {
+        Process proceso = null;
+        try {
+            System.out.println("Deteniendo XAAMP");
+            String rutaXAMPP = "C:\\xampp\\xampp_stop.exe";
+            proceso = Runtime.getRuntime().exec(rutaXAMPP);
+            int exitCode = proceso.waitFor();
+            System.out.println("XAMPP detenido con c骴igo de salida: " + exitCode);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo ejecutar XAMPP");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (proceso != null) {
+                proceso.destroy();
+            }
+        }
     }
 
 }

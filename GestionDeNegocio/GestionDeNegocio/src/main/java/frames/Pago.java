@@ -311,7 +311,7 @@ public class Pago extends javax.swing.JFrame {
 
             session.close();
         } catch (NumberFormatException n) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un numero válido");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un numero valido");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }

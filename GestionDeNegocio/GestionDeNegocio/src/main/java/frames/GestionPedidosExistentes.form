@@ -71,7 +71,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder justification="2" title="B&#xda;SQUEDA">
+                <TitledBorder justification="2" title="BUSQUEDA">
                   <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
                     <BevelBorder/>
                   </Border>
@@ -122,7 +122,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder justification="2" title="B&#xfa;squeda por Proveedor">
+                    <TitledBorder justification="2" title="Busqueda por Proveedor">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
                         <BevelBorder/>
                       </Border>
@@ -175,7 +175,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder justification="2" title="B&#xfa;squeda por FECHA">
+                    <TitledBorder justification="2" title="Busqueda por FECHA">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
                         <BevelBorder/>
                       </Border>

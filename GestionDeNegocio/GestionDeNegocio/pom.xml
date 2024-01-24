@@ -6,7 +6,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
-        <project.build.sourceEncoding>windows-1252</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>9</maven.compiler.source>
         <maven.compiler.target>9</maven.compiler.target>
     </properties>

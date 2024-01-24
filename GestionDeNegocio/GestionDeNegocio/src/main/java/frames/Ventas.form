@@ -754,7 +754,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" title="Agregar productos por C&#xd3;DIGO">
+            <TitledBorder justification="2" title="Agregar productos por CODIGO">
               <Font PropertyName="font" name="Dialog" size="14" style="1"/>
             </TitledBorder>
           </Border>

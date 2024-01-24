@@ -12,7 +12,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         initComponents();
         PanelPedidos.addTab("Nuevos pedidos", ip);
         PanelPedidos.addTab("Pedidos existentes", gpe);
-        PanelPedidos.addTab("Actualizar stock´s", as);
+        PanelPedidos.addTab("Actualizar stock", as);
         PanelPedidos.setSelectedComponent(ip);
     }
 

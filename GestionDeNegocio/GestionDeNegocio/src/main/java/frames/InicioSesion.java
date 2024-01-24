@@ -7,10 +7,15 @@ import entidades.Licencia;
 import entidades.Usuario;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
@@ -20,6 +25,7 @@ public class InicioSesion extends javax.swing.JFrame {
     public InicioSesion() {
         setUndecorated(true);
         initComponents();
+        ejectuarXAMPP();
         crearBD();
         this.setLocationRelativeTo(null);
         jpIniciar.setOpaque(false);
@@ -66,10 +72,20 @@ public class InicioSesion extends javax.swing.JFrame {
         jtUser.setBackground(java.awt.Color.gray);
         jtUser.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         jtUser.setForeground(new java.awt.Color(0, 0, 0));
+        jtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtUserKeyPressed(evt);
+            }
+        });
 
         jtPass.setBackground(java.awt.Color.gray);
         jtPass.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         jtPass.setForeground(new java.awt.Color(0, 0, 0));
+        jtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtPassKeyPressed(evt);
+            }
+        });
 
         jbIniciar.setBackground(java.awt.Color.gray);
         jbIniciar.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 20)); // NOI18N
@@ -183,13 +199,25 @@ public class InicioSesion extends javax.swing.JFrame {
                 p.setVisible(true);
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario o contraseÃ±a incorrectos");
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Su licencia ha expirado. Contacto: nicoroldan15@outlook.com.ar");
         }
 
     }//GEN-LAST:event_jbIniciarActionPerformed
+
+    private void jtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPassKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbIniciarActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Enter"));
+        }
+    }//GEN-LAST:event_jtPassKeyPressed
+
+    private void jtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtUserKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbIniciarActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Enter"));
+        }
+    }//GEN-LAST:event_jtUserKeyPressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -282,6 +310,18 @@ public class InicioSesion extends javax.swing.JFrame {
         }
 
         return ver;
+    }
+
+    private void ejectuarXAMPP() {
+        Process proceso = null;
+        try {
+            System.out.println("Ejecutando XAMPP");
+            String rutaXAMPP = "C:\\xampp\\xampp_start.exe";
+            proceso = Runtime.getRuntime().exec(rutaXAMPP);
+            System.out.println("XAMPP inicializado");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo ejecutar XAMPP");
+        }
     }
 
 }

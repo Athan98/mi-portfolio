@@ -56,9 +56,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel10" max="32767" attributes="0"/>
+                              <Component id="jLabel11" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -151,7 +151,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Buscar por c&#xf3;digo:"/>
+            <Property name="text" type="java.lang.String" value="Buscar por codigo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">

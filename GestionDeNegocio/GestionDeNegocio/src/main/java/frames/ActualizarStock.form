@@ -45,7 +45,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" title="ACTUALIZAR STOCK&#xb4;S">
+            <TitledBorder justification="2" title="ACTUALIZAR STOCK">
               <Font PropertyName="font" name="Dialog" size="20" style="1"/>
             </TitledBorder>
           </Border>
@@ -160,7 +160,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Buscar por c&#xf3;digo:"/>
+            <Property name="text" type="java.lang.String" value="Buscar por codigo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">

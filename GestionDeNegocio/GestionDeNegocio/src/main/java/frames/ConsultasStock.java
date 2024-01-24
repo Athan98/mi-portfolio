@@ -88,7 +88,7 @@ public class ConsultasStock extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel11.setText("Buscar por código:");
+        jLabel11.setText("Buscar por codigo:");
 
         jLabel10.setText("Buscar por nombre:");
 

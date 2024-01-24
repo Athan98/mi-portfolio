@@ -254,7 +254,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
     private void jbAgregarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProveedorActionPerformed
         // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
         if (cargaWorker != null && !cargaWorker.isDone()) {
-            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+            JOptionPane.showMessageDialog(null, "Espere a que la operacion actual termine.");
             return;
         }
 
@@ -299,7 +299,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
     private void jbIngresarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIngresarPedidoActionPerformed
         Session session = HibernateConfig.get().openSession();
 
-        int opcion = JOptionPane.showConfirmDialog(null, "¿Desea confirmar la operacion ?", "Confirmación de ingreso", JOptionPane.YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(null, "�Desea confirmar la operacion ?", "Confirmacion de ingreso", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "Operacion cancelada");

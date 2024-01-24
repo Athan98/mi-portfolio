@@ -1,0 +1,16 @@
+/*SELECTOR DE HIJOS*/
+div > p{
+    font-size: 30px;
+}
+
+/*SELECTOR DE ATRIBUTOS*/
+input[type]{}
+
+/*SELECTOR DE ATRIBUTOS Y VALOR*/
+input[type="text"]{} 
+
+/*HERENCIA*/
+body{
+    font-size: 20px;
+    color: blue;
+}

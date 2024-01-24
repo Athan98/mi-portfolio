@@ -666,7 +666,7 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         if (jtTotalReal.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Asegúrese de ingresar el total real y calcula la diferencia");
+            JOptionPane.showMessageDialog(null, "Asegurese de ingresar el total real y calcula la diferencia");
         } else {
             if (caja.isEstado() == true) {
                 Date fechaActual = new Date();
@@ -690,7 +690,7 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
                 session.close();
                 cajas.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "La caja ya está cerrada. Intente realizar la apertura");
+                JOptionPane.showMessageDialog(null, "La caja ya esta cerrada. Intente realizar la apertura");
             }
         }
 
