@@ -23,8 +23,10 @@
 <script>alert('Si está en un teléfono móvil, habilite la rotación de pantalla. Si ya se encuentra habilitada coloque el teléfono en posicion horizontal para una mejor visualización')</script>
 
 <header>
-    <h1>Lista de precios</h1>
-    <img src="img/QS.png" alt="">
+    <h1>LISTA DE PRECIOS</h1>
+
+    <h2>QuantumScript</h2>
+
 </header>
 
         <div class="container">

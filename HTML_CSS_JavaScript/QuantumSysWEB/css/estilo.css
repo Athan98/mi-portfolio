@@ -23,23 +23,30 @@ header {
 
 }
 
-header img {
-    width: 30%;
-    height: 100%;
-    float: left;
-}
 
 header h1 {
-    text-align: center;
-    padding: 5px;
+    text-align: left;
+    padding: 20px;
     width: 70%;
     float: left;
-    text-align: left;
-    font-family:"Silkscreen-Regular",Arial, Helvetica, sans-serif;
-    font-size: 50px;
+    font-family:"Teko-VariableFont_wght",Arial, Helvetica, sans-serif;
+    font-size: 80px;
+    color: #fff;
+    overflow: hidden;
+    letter-spacing: 10px;
+}
+
+header h2 {
+    padding: 20px;
+    width: 30%;
+    float: left;
+    text-align: right;
+    font-family:"Antonio-Regular",Arial, Helvetica, sans-serif;
+    font-size: 55px;
     color: #fff;
     overflow: hidden;
 }
+
 
 
 main {
@@ -87,4 +94,30 @@ footer {
 @font-face {
     font-family: "Sixtyfour-Regular-VariableFont_BLED\,SCAN";
     src: url("fonts/Sixtyfour-Regular-VariableFont_BLED\,SCAN.ttf");
+}
+
+@font-face {
+    font-family: "Antonio-Regular";
+    src: url("fonts/Antonio-Regular.ttf");
+}
+
+@font-face {
+    font-family: "JosefinSans-VariableFont_wght";
+    src: url("fonts/JosefinSans-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Teko-VariableFont_wght";
+    src: url("fonts/Teko-VariableFont_wght.ttf");
+}
+
+@media screen and (max-width:800px){
+    header h1{
+        font-size: 30px;
+    }
+
+    header h2{
+        font-size: 25px;
+    }
+    
 }
