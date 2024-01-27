@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background: #D8DDDE;
+}
+
+header {
+    background: #3f2242;
+    color: #fff;
+    margin-bottom: 30px;
+    width: 100%;
+    padding: 10px;
+
+}
+
+header img {
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+
+header h1 {
+    text-align: center;
+    padding: 5px;
+    width: 70%;
+    float: left;
+    text-align: left;
+    font-family:"Silkscreen-Regular",Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    color: #fff;
+    overflow: hidden;
+}
+
+
+main {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto; /* Esto empujará el pie de página hacia la parte inferior */
+    padding: 5px;
+    width: 100%;
+    background: black;
+    color: #fff;
+    font-family: "LibreBarcode128Text-Regular",Arial, Helvetica, sans-serif;
+    font-size: 45px;
+    text-align: center;
+}
+
+@font-face {
+    font-family: "Orbitron-VariableFont_wght";
+    src: url("fonts/Orbitron-VariableFont_wght.ttf");
+
+}
+
+
+@font-face {
+    font-family: "LibreBarcode128Text-Regular";
+    src: url("fonts/LibreBarcode128Text-Regular.ttf");
+}
+
+@font-face {
+    font-family: "PressStart2P-Regular";
+    src: url("fonts/PressStart2P-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Silkscreen-Bold";
+    src: url("fonts/Silkscreen-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Silkscreen-Regular";
+    src: url("fonts/Silkscreen-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Sixtyfour-Regular-VariableFont_BLED\,SCAN";
+    src: url("fonts/Sixtyfour-Regular-VariableFont_BLED\,SCAN.ttf");
+}
