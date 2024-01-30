@@ -19,14 +19,13 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
     Double montoTotalTeorico = 0.0;
     Cajas cajas;
 
-    public CerrarCaja(Cajas c) {
+    public CerrarCaja() {
         initComponents();
         if (caja.isEstado() == false) {
             limpiar();
         } else {
             setDatos();
         }
-        this.cajas = c;
     }
 
     @SuppressWarnings("unchecked")
@@ -89,6 +88,9 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jlCtaCte = new javax.swing.JLabel();
+
+        setClosable(true);
+        setTitle("CIERRE DE CAJA");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -688,7 +690,6 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
                 Principal.setPaneCaja();
                 limpiar();
                 session.close();
-                cajas.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "La caja ya esta cerrada. Intente realizar la apertura");
             }

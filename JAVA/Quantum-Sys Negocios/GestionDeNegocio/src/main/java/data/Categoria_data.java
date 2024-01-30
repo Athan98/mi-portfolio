@@ -56,4 +56,22 @@ public class Categoria_data implements Repository<Categoria> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public Categoria obtenerCategoriaPorNombre(String nombre) {
+        Transaction trans = session.beginTransaction();
+        try {
+            // Consulta para obtener la categoría por nombre
+            Categoria categoria = session.createQuery("FROM Categoria WHERE nombre=:nombre", Categoria.class)
+                    .setParameter("nombre", nombre)
+                    .uniqueResult();
+
+            trans.commit();
+            return categoria;
+        } catch (Exception e) {
+            // Manejar la excepción (puede ser que no se encuentre la categoría)
+            trans.rollback();
+            JOptionPane.showMessageDialog(null, "Error al obtener la categoría por nombre: " + e.getMessage());
+            return null;
+        }
+    }
+
 }

@@ -2,9 +2,6 @@ package frames;
 
 import config.ImagenQuantum;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 
 public class Loading extends javax.swing.JFrame {
 
@@ -22,8 +19,6 @@ public class Loading extends javax.swing.JFrame {
         panelBack.setOpaque(false);
         panelBack.setBorder(null);
         panelBack.setBackground(transparent);
-        
-        cargarBarra();
 
     }
 
@@ -32,10 +27,13 @@ public class Loading extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBack = new javax.swing.JPanel();
-        barraCarga = new javax.swing.JProgressBar();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(350, 350));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loading.gif"))); // NOI18N
 
         javax.swing.GroupLayout panelBackLayout = new javax.swing.GroupLayout(panelBack);
         panelBack.setLayout(panelBackLayout);
@@ -43,15 +41,15 @@ public class Loading extends javax.swing.JFrame {
             panelBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBackLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(barraCarga, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelBackLayout.setVerticalGroup(
             panelBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBackLayout.createSequentialGroup()
-                .addContainerGap(333, Short.MAX_VALUE)
-                .addComponent(barraCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addContainerGap(317, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,18 +99,8 @@ public class Loading extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JProgressBar barraCarga;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelBack;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarBarra() {
-        Timer timer = new Timer(20, (ActionEvent e) -> {
-            barraCarga.setValue(barraCarga.getValue() + 1);
-            barraCarga.setBackground(Color.pink);
-            barraCarga.setStringPainted(true);
-            barraCarga.setString("CARGANDO... " + barraCarga.getValue() + "%");
-        });
-
-        timer.start();
-    }
 }

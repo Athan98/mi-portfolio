@@ -62,6 +62,9 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableMov = new javax.swing.JTable();
 
+        setClosable(true);
+        setTitle("APERTURA DE CAJA");
+
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caja", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24), new java.awt.Color(0, 0, 0))); // NOI18N

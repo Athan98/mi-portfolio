@@ -14,6 +14,7 @@ public class HibernateConfig {
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error al crear configuracion de Hibernate: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
 

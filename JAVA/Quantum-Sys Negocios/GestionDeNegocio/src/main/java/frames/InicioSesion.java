@@ -29,6 +29,7 @@ public class InicioSesion extends javax.swing.JFrame {
         crearBD();
         this.setLocationRelativeTo(null);
         jpIniciar.setOpaque(false);
+        jpInicio.setOpaque(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -45,12 +46,14 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         };
         jpIniciar = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jtUser = new javax.swing.JTextField();
-        jtPass = new javax.swing.JPasswordField();
         jbIniciar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jpInicio = new javax.swing.JPanel();
+        jtUser = new javax.swing.JTextField();
+        jtPass = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -63,33 +66,9 @@ public class InicioSesion extends javax.swing.JFrame {
         jpIniciar.setBackground(java.awt.Color.lightGray);
         jpIniciar.setForeground(java.awt.Color.lightGray);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userIcon.png"))); // NOI18N
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/passIcon.png"))); // NOI18N
-
-        jtUser.setBackground(java.awt.Color.gray);
-        jtUser.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jtUser.setForeground(new java.awt.Color(0, 0, 0));
-        jtUser.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtUserKeyPressed(evt);
-            }
-        });
-
-        jtPass.setBackground(java.awt.Color.gray);
-        jtPass.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jtPass.setForeground(new java.awt.Color(0, 0, 0));
-        jtPass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtPassKeyPressed(evt);
-            }
-        });
-
-        jbIniciar.setBackground(java.awt.Color.gray);
+        jbIniciar.setBackground(new java.awt.Color(213, 20, 81));
         jbIniciar.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 20)); // NOI18N
-        jbIniciar.setForeground(new java.awt.Color(0, 0, 0));
+        jbIniciar.setForeground(new java.awt.Color(255, 255, 255));
         jbIniciar.setText("Iniciar sesion");
         jbIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,15 +76,75 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
-        jbSalir.setBackground(java.awt.Color.gray);
+        jbSalir.setBackground(new java.awt.Color(213, 20, 81));
         jbSalir.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 20)); // NOI18N
-        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
+        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Dosis Medium", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("QUANTUM-SYS");
+
+        jpInicio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Negocios", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Mistral", 1, 36), new java.awt.Color(213, 20, 81))); // NOI18N
+
+        jtUser.setBackground(new java.awt.Color(213, 19, 80));
+        jtUser.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jtUser.setForeground(new java.awt.Color(255, 255, 255));
+        jtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtUserKeyPressed(evt);
+            }
+        });
+
+        jtPass.setBackground(new java.awt.Color(213, 19, 80));
+        jtPass.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jtPass.setForeground(new java.awt.Color(255, 255, 255));
+        jtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtPassKeyPressed(evt);
+            }
+        });
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userIcon.png"))); // NOI18N
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/passIcon.png"))); // NOI18N
+
+        javax.swing.GroupLayout jpInicioLayout = new javax.swing.GroupLayout(jpInicio);
+        jpInicio.setLayout(jpInicioLayout);
+        jpInicioLayout.setHorizontalGroup(
+            jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpInicioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtUser)
+                    .addComponent(jtPass))
+                .addContainerGap())
+        );
+        jpInicioLayout.setVerticalGroup(
+            jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpInicioLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(19, 19, 19))
+        );
 
         javax.swing.GroupLayout jpIniciarLayout = new javax.swing.GroupLayout(jpIniciar);
         jpIniciar.setLayout(jpIniciarLayout);
@@ -114,37 +153,26 @@ public class InicioSesion extends javax.swing.JFrame {
             .addGroup(jpIniciarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpIniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpIniciarLayout.createSequentialGroup()
-                        .addGroup(jpIniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpIniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtUser)
-                            .addComponent(jtPass)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpIniciarLayout.createSequentialGroup()
-                        .addComponent(jbIniciar)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jpIniciarLayout.createSequentialGroup()
+                        .addComponent(jbIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpIniciarLayout.setVerticalGroup(
             jpIniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpIniciarLayout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
-                .addGroup(jpIniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpIniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jpIniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbIniciar)
                     .addComponent(jbSalir))
-                .addContainerGap())
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelBackLayout = new javax.swing.GroupLayout(panelBack);
@@ -152,31 +180,27 @@ public class InicioSesion extends javax.swing.JFrame {
         panelBackLayout.setHorizontalGroup(
             panelBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBackLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jpIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jpIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelBackLayout.setVerticalGroup(
             panelBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBackLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jpIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -199,7 +223,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 p.setVisible(true);
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario o contrase�a incorrectos");
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Su licencia ha expirado. Contacto: nicoroldan15@outlook.com.ar");
@@ -253,6 +277,7 @@ public class InicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSlider jSlider1;
@@ -260,6 +285,7 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JButton jbIniciar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JPanel jpIniciar;
+    private javax.swing.JPanel jpInicio;
     private javax.swing.JPasswordField jtPass;
     private javax.swing.JTextField jtUser;
     private javax.swing.JPanel panelBack;

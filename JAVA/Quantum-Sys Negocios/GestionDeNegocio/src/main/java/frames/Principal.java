@@ -63,6 +63,7 @@ public class Principal extends javax.swing.JFrame {
         jpCaja = new javax.swing.JPanel();
         jpCajaActivacion = new javax.swing.JPanel();
         jlCajaActivacion = new javax.swing.JLabel();
+        jbActualizar = new javax.swing.JButton();
         jpBotonera = new javax.swing.JPanel();
         jbProductos = new javax.swing.JButton();
         jbVentas = new javax.swing.JButton();
@@ -154,19 +155,34 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jlCajaActivacion, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
         );
 
+        jbActualizar.setBackground(new java.awt.Color(63, 34, 66));
+        jbActualizar.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 18)); // NOI18N
+        jbActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        jbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/refresh.png"))); // NOI18N
+        jbActualizar.setText("ACTUALIZAR");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpCajaLayout = new javax.swing.GroupLayout(jpCaja);
         jpCaja.setLayout(jpCajaLayout);
         jpCajaLayout.setHorizontalGroup(
             jpCajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCajaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpCajaActivacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpCajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpCajaActivacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpCajaLayout.setVerticalGroup(
             jpCajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCajaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpCajaActivacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -178,18 +194,14 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jpInicioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbVolverAlInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlFechaHora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlFH1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpInicioLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jlFH1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         jpInicioLayout.setVerticalGroup(
             jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,20 +210,17 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jlUser)
-                .addGap(53, 53, 53)
-                .addComponent(jlFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
-                .addComponent(jpCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbVolverAlInicio)
+                .addGap(18, 18, 18)
+                .addComponent(jlFH1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSalir)
+                .addComponent(jlFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(jpCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbVolverAlInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpInicioLayout.createSequentialGroup()
-                    .addGap(125, 125, 125)
-                    .addComponent(jlFH1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(374, Short.MAX_VALUE)))
         );
 
         jpBotonera.setBackground(java.awt.Color.lightGray);
@@ -324,7 +333,8 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSistema, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                .addComponent(jbSistema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jpBotoneraLayout.setVerticalGroup(
             jpBotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -662,7 +672,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConsultasActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        if (caja.isEstado() == true) {
+        if (jlCajaActivacion.getText().equals("ABIERTA")) {
             JOptionPane.showMessageDialog(null, "La caja se encuentra abierta, debe cerrarla para salir del programa");
             return;
         } else {
@@ -719,44 +729,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbVolverAlInicioActionPerformed
 
     private void jbCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCajaActionPerformed
-        if (cargaWorker != null && !cargaWorker.isDone()) {
-            JOptionPane.showMessageDialog(null, "Espere a que la operaci�n actual termine.");
-            return;
-        }
-        // Crear e iniciar el hilo SwingWorker
-        cargaWorker = new SwingWorker<Void, Void>() {
-            Loading loading = new Loading();
-
-            @Override
-            protected Void doInBackground() throws Exception {
-                // Mostrar el frame de carga
-
-                loading.setVisible(true);
-
-                try {
-                    escritorio.removeAll();
-                    escritorio.repaint();
-                    Thread.sleep(2000);
-                    Cajas c = new Cajas();
-                    c.setVisible(true);
-                    escritorio.add(c);
-                    escritorio.moveToFront(c);
-                    c.setLocation((Principal.escritorio.getWidth() - c.getWidth()) / 2, (Principal.escritorio.getHeight() - c.getHeight()) / 2);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                return null;
-            }
-
-            @Override
-            protected void done() {
-                // Cerrar el frame de carga despu�s de que la tarea haya terminado
-                loading.dispose();
-            }
-        };
-
-        cargaWorker.execute();
+        Cajas c = new Cajas();
+        c.setVisible(true);
+        escritorio.add(c);
+        escritorio.moveToFront(c);
+        c.setLocation((Principal.escritorio.getWidth() - c.getWidth()) / 2, (Principal.escritorio.getHeight() - c.getHeight()) / 2);
     }//GEN-LAST:event_jbCajaActionPerformed
 
     private void jbSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSistemaActionPerformed
@@ -767,6 +744,15 @@ public class Principal extends javax.swing.JFrame {
         c.setLocation((Principal.escritorio.getWidth() - c.getWidth()) / 2, (Principal.escritorio.getHeight() - c.getHeight()) / 2);
 
     }//GEN-LAST:event_jbSistemaActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        try {
+            caja = buscarCaja(1);
+            setPaneCaja();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jbActualizarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -794,6 +780,7 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbCaja;
     private javax.swing.JButton jbConsultas;
     private javax.swing.JButton jbEstadisticas;

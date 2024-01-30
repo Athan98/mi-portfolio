@@ -46,8 +46,8 @@ public class Pedidos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(PanelPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.hibernate.Session;
@@ -30,6 +31,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     private boolean enterPresionado = false;
     private boolean enterPresionadoNombre = false;
     Caja caja = Principal.caja;
+    List<Producto> productosBuscados = null;
 
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -44,9 +46,10 @@ public class Ventas extends javax.swing.JInternalFrame {
         setearUser(usuario);
         jtFecha.setText(setFecha());
         jlCaja.setText(caja.getNroCaja());
+        listarProductos();
         armarCabeceraTabla();
         cargarFormasDePago();
-
+        jlCargar.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -94,6 +97,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
         jtDescuento = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jlCargar = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jbEscanear = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
@@ -335,7 +339,7 @@ public class Ventas extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -410,7 +414,7 @@ public class Ventas extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlTotalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
@@ -436,6 +440,9 @@ public class Ventas extends javax.swing.JInternalFrame {
             }
         });
 
+        jlCargar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlCargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cargar.gif"))); // NOI18N
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -444,7 +451,6 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -467,7 +473,12 @@ public class Ventas extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addComponent(jtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jbPagar)
+                        .addGap(33, 33, 33)
+                        .addComponent(jlCargar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -484,7 +495,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlMontoIVA)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -495,9 +506,11 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcFormasDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbPagar)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlCargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agregar productos por CODIGO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
@@ -545,20 +558,18 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addComponent(jbEscanear, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13)
+                    .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtNombre)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel14)
-                        .addGap(147, 147, 147))
-                    .addComponent(jtNombre))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(22, 22, 22))
-                    .addComponent(jtCantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtCantidad))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -591,9 +602,9 @@ public class Ventas extends javax.swing.JInternalFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -628,12 +639,12 @@ public class Ventas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Antes de confirmar una venta debe realizar la apertura de caja");
         } else {
 
-            Session session = HibernateConfig.get().openSession();
-
-            int opcion = JOptionPane.showConfirmDialog(null, "¿Desea confirmar la operacion ?", "Confirmacion de venta", JOptionPane.YES_NO_OPTION);
+            int opcion = JOptionPane.showConfirmDialog(null, "Â¿Desea confirmar la operacion ?", "Confirmacion de venta", JOptionPane.YES_NO_OPTION);
 
             if (opcion == JOptionPane.NO_OPTION) {
+
                 JOptionPane.showMessageDialog(null, "Operacion cancelada");
+
             } else {
 
                 if (jcUsuarios.getSelectedIndex() == -1 || jcFormasDePago.getSelectedIndex() == -1) {
@@ -642,84 +653,91 @@ public class Ventas extends javax.swing.JInternalFrame {
 
                 } else {
 
-                    try {
+                    Thread importThread = new Thread(() -> {
+                        try {
+                            SwingUtilities.invokeLater(() -> jlCargar.setVisible(true));
 
-                        Venta_data vd = new Venta_data(session);
-                        Producto_data pd = new Producto_data(session);
-                        DetalleVenta_data dvd = new DetalleVenta_data(session);
+                            Session session = HibernateConfig.get().openSession();
 
-                        //CREO LA VENTA
-                        String cliente = (String) jcClientes.getSelectedItem();
-                        Usuario user = (Usuario) jcUsuarios.getSelectedItem();
-                        Date fecha = new Date();
-                        Double precioTotal = Double.parseDouble(jlTotalPagar.getText());
-                        FormaDePago fdp = (FormaDePago) jcFormasDePago.getSelectedItem();
-                        List<DetalleVenta> detallesVenta = new ArrayList<>();
+                            Venta_data vd = new Venta_data(session);
+                            Producto_data pd = new Producto_data(session);
+                            DetalleVenta_data dvd = new DetalleVenta_data(session);
 
-                        venta = new Venta(user, fecha, precioTotal, cliente, detallesVenta, fdp, caja);
+                            //CREO LA VENTA
+                            String cliente = (String) jcClientes.getSelectedItem();
+                            Usuario user = (Usuario) jcUsuarios.getSelectedItem();
+                            Date fecha = new Date();
+                            Double precioTotal = Double.parseDouble(jlTotalPagar.getText());
+                            FormaDePago fdp = (FormaDePago) jcFormasDePago.getSelectedItem();
+                            List<DetalleVenta> detallesVenta = new ArrayList<>();
 
-                        //AGREGO VENTA A LA BD
-                        vd.agregar(venta);
+                            venta = new Venta(user, fecha, precioTotal, cliente, detallesVenta, fdp, caja);
 
-                        int filas = modelo.getRowCount();
-                        int idProducto = 0;
-                        int cantidad = 0;
-                        double precioUnitario = 0.0;
-                        double precio = 0.0;
-                        Producto p = null;
-                        DetalleVenta dv = null;
+                            //AGREGO VENTA A LA BD
+                            vd.agregar(venta);
 
-                        for (int i = 0; i <= filas - 1; i++) {
-                            idProducto = (int) modelo.getValueAt(i, 0);
-                            cantidad = (int) modelo.getValueAt(i, 5);
-                            precioUnitario = (Double) modelo.getValueAt(i, 4);
-                            precio = precioUnitario * cantidad;
+                            int filas = modelo.getRowCount();
+                            int idProducto = 0;
+                            int cantidad = 0;
+                            double precioUnitario = 0.0;
+                            double precio = 0.0;
+                            Producto p = null;
+                            DetalleVenta dv = null;
 
-                            //ENCONTRAR PRODUCTO EN BD
-                            p = pd.encontrarPorID(idProducto);
+                            for (int i = 0; i <= filas - 1; i++) {
+                                idProducto = (int) modelo.getValueAt(i, 0);
+                                cantidad = (int) modelo.getValueAt(i, 5);
+                                precioUnitario = (Double) modelo.getValueAt(i, 4);
+                                precio = precioUnitario * cantidad;
 
-                            //CREAR UN DETALLE DE VENTA
-                            dv = new DetalleVenta(p, cantidad, venta, precio);
+                                //ENCONTRAR PRODUCTO EN BD
+                                p = pd.encontrarPorID(idProducto);
 
-                            //AGREGAR A LA LISTA DE DETALLES DE VENTA PARA AGREGAR A LA VENTA
-                            detallesVenta.add(dv);
-                            dvd.agregar(dv);
+                                //CREAR UN DETALLE DE VENTA
+                                dv = new DetalleVenta(p, cantidad, venta, precio);
 
-                            //ACTUALIZAR STOCK
-                            p.setStock(p.getStock() - cantidad);
+                                //AGREGAR A LA LISTA DE DETALLES DE VENTA PARA AGREGAR A LA VENTA
+                                detallesVenta.add(dv);
+                                dvd.agregar(dv);
 
-                        }
+                                //ACTUALIZAR STOCK
+                                p.setStock(p.getStock() - cantidad);
 
-                        venta.setDetallesVenta(detallesVenta);
-
-                        vd.actualizar(venta);
-
-                        int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea generar el ticket?", "Generar ticket", JOptionPane.YES_NO_OPTION);
-
-                        if (respuesta == JOptionPane.YES_OPTION) {
-                            BoletaPDF obj;
-                            try {
-                                obj = new BoletaPDF(jcUsuarios.getSelectedItem().toString(), jcClientes.getSelectedItem().toString(), jtFecha.getText(), jlCaja.getText(), detallesVenta, jlPrecioNeto.getText(), jtIVA.getText(), jlTotalPagar.getText(), jtDescuento.getText(), jcFormasDePago.getSelectedItem().toString());
-                                obj.crearPlantilla();
-                            } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
                             }
 
+                            venta.setDetallesVenta(detallesVenta);
+
+                            vd.actualizar(venta);
+
+                            SwingUtilities.invokeLater(() -> jlCargar.setVisible(false));
+
+                            int respuesta = JOptionPane.showConfirmDialog(null, "Â¿Desea generar el ticket?", "Generar ticket", JOptionPane.YES_NO_OPTION);
+
+                            if (respuesta == JOptionPane.YES_OPTION) {
+                                BoletaPDF obj;
+                                try {
+                                    obj = new BoletaPDF(jcUsuarios.getSelectedItem().toString(), jcClientes.getSelectedItem().toString(), jtFecha.getText(), jlCaja.getText(), detallesVenta, jlPrecioNeto.getText(), jtIVA.getText(), jlTotalPagar.getText(), jtDescuento.getText(), jcFormasDePago.getSelectedItem().toString());
+                                    obj.crearPlantilla();
+                                } catch (Exception ex) {
+                                    JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
+                                }
+
+                            }
+
+                            Pago pago = new Pago();
+                            pago.setVisible(true);
+                            limpiarCamposNumericosYTabla();
+                            session.close();
+
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
                         }
+                    });
 
-                        Pago pago = new Pago();
-                        pago.setVisible(true);
-
-                        limpiarCamposNumericosYTabla();
-
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
-
-                    }
+                    importThread.start();
                 }
             }
 
-            session.close();
         }
 
     }//GEN-LAST:event_jbPagarActionPerformed
@@ -742,7 +760,7 @@ public class Ventas extends javax.swing.JInternalFrame {
 
             } else if (p.getDisponibilidad().equals("SIN STOCK")) {
 
-                JOptionPane.showMessageDialog(null, "¡ATENCION! Verificar stock del producto");
+                JOptionPane.showMessageDialog(null, "Â¡ATENCION! Verificar stock del producto");
 
                 // Decidir si agregar montoSUELTOS o la cantidad
                 Double montoOPrecio;
@@ -962,6 +980,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<FormaDePago> jcFormasDePago;
     private javax.swing.JComboBox<Usuario> jcUsuarios;
     private javax.swing.JLabel jlCaja;
+    private javax.swing.JLabel jlCargar;
     private javax.swing.JLabel jlMontoIVA;
     private javax.swing.JLabel jlPrecioNeto;
     private javax.swing.JLabel jlTotalPagar;
@@ -1034,12 +1053,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     }
 
     private void procesarCodigo() {
-
-        Session session = HibernateConfig.get().openSession();
-        Producto_data pd = new Producto_data(session);
-        List<Producto> productos = pd.listarTodo();
-
-        for (Producto p : productos) {
+        for (Producto p : productosBuscados) {
             if (jtCodigo.getText().equals(p.getCodigo())) {
                 jtNombre.setText(p.getNombre());
                 break;
@@ -1049,17 +1063,12 @@ public class Ventas extends javax.swing.JInternalFrame {
             }
 
         }
-        session.close();
     }
 
     private void procesarCodigoNombre1() {
-        Session session = HibernateConfig.get().openSession();
-        Producto_data pd = new Producto_data(session);
-        List<Producto> productos = pd.listarTodo();
-
         String nombreIngresado1 = jtNombre.getText().toUpperCase();
 
-        for (Producto p : productos) {
+        for (Producto p : productosBuscados) {
             String nombreProducto = p.getNombre().toUpperCase();
 
             if (nombreProducto.startsWith(nombreIngresado1)) {
@@ -1069,18 +1078,12 @@ public class Ventas extends javax.swing.JInternalFrame {
             }
 
         }
-
-        session.close();
     }
 
     private void procesarCodigoNombre2() {
-        Session session = HibernateConfig.get().openSession();
-        Producto_data pd = new Producto_data(session);
-        List<Producto> productos = pd.listarTodo();
-
         String nombreIngresado1 = jtNOMBRESUELTOS.getText().toUpperCase();
 
-        for (Producto p : productos) {
+        for (Producto p : productosBuscados) {
             String nombreProducto = p.getNombre().toUpperCase();
 
             if (nombreProducto.startsWith(nombreIngresado1)) {
@@ -1090,8 +1093,6 @@ public class Ventas extends javax.swing.JInternalFrame {
             }
 
         }
-
-        session.close();
     }
 
     private void limpiarCampos() {
@@ -1120,22 +1121,20 @@ public class Ventas extends javax.swing.JInternalFrame {
         column0.setPreferredWidth(20);
     }
 
-    private List<Producto> listarProductos() {
+    private void listarProductos() {
         Session session = HibernateConfig.get().openSession();
 
         Producto_data pd = new Producto_data(session);
 
-        List<Producto> productos = pd.listarTodo();
+        productosBuscados = pd.listarTodo();
 
         session.close();
 
-        return productos;
     }
 
     private Producto verificarProducto() {
-        List<Producto> productos = listarProductos();
 
-        for (Producto p : productos) {
+        for (Producto p : productosBuscados) {
             if ((jtCodigo.getText().equals(p.getCodigo()) && jtNombre.getText().equals(p.getNombre())
                     || (jtNOMBRESUELTOS.getText().equals(p.getNombre()) && jtCodigoSUELTOS.getText().equals(p.getCodigo())))) {
                 return p;
