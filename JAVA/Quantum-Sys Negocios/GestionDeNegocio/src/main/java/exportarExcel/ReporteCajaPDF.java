@@ -104,6 +104,8 @@ public class ReporteCajaPDF {
                         documento.add(new Chunk(line));
                         documento.add(new Paragraph("Egresos ($): " + egresos));
                         documento.add(new Chunk(line));
+                        documento.add(new Paragraph("Ventas ($): " + ventas));
+                        documento.add(new Chunk(line));
                         documento.add(new Paragraph("Total teorico ($): " + totalTeorico));
                         documento.add(new Chunk(line));
                         documento.add(new Paragraph("Total real ($): " + totalReal));

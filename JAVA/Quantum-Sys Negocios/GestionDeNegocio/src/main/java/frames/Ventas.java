@@ -744,106 +744,117 @@ public class Ventas extends javax.swing.JInternalFrame {
 
     private void jbAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProductoActionPerformed
 
-        Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
-        int cant = Integer.parseInt(jtCantidad.getText());
-        Double montoSUELTOS = Double.parseDouble(jtMONTOSUELTOS.getText());
+        try {
 
-        if (verificarProducto() == null) {
-            JOptionPane.showMessageDialog(null, "No se encontro el producto en la base de datos");
-        } else {
-            // AGREGAR PRODUCTO A LA LISTA
-            Producto p = verificarProducto();
+            Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
+            int cant = Integer.parseInt(jtCantidad.getText());
+            Double montoSUELTOS = Double.parseDouble(jtMONTOSUELTOS.getText());
 
-            if (p.getDisponibilidad().equals("NO DISPONIBLE")) {
+            if (verificarProducto() == null) {
+                JOptionPane.showMessageDialog(null, "No se encontro el producto en la base de datos");
+            } else {
+                // AGREGAR PRODUCTO A LA LISTA
+                Producto p = verificarProducto();
 
-                JOptionPane.showMessageDialog(null, "El producto no se encuentra disponible");
+                if (p.getDisponibilidad().equals("NO DISPONIBLE")) {
 
-            } else if (p.getDisponibilidad().equals("SIN STOCK")) {
+                    JOptionPane.showMessageDialog(null, "El producto no se encuentra disponible");
 
-                JOptionPane.showMessageDialog(null, "¡ATENCION! Verificar stock del producto");
+                } else if (p.getDisponibilidad().equals("SIN STOCK")) {
 
-                // Decidir si agregar montoSUELTOS o la cantidad
-                Double montoOPrecio;
-                if (!jtCodigoSUELTOS.getText().isEmpty() && !jtNOMBRESUELTOS.getText().isEmpty() && montoSUELTOS > 0) {
-                    montoOPrecio = montoSUELTOS;
-                } else {
-                    montoOPrecio = p.getPrecioVentaUnitario();
+                    JOptionPane.showMessageDialog(null, "¡ATENCION! Verificar stock del producto");
+
+                    // Decidir si agregar montoSUELTOS o la cantidad
+                    Double montoOPrecio;
+                    if (!jtCodigoSUELTOS.getText().isEmpty() && !jtNOMBRESUELTOS.getText().isEmpty() && montoSUELTOS > 0) {
+                        montoOPrecio = montoSUELTOS;
+                    } else {
+                        montoOPrecio = p.getPrecioVentaUnitario();
+                    }
+
+                    modelo.addRow(new Object[]{
+                        p.getIdProducto(),
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        montoOPrecio,
+                        cant,});
+
+                    precioNeto = precioNeto + (montoOPrecio * cant);
+                    montoIva = montoIva + ((IVA * montoOPrecio) * cant);
+                    montoTotal = (precioNeto + montoIva);
+
+                    DecimalFormat formato = new DecimalFormat("#.##");
+
+                    jlMontoIVA.setText(formato.format(montoIva));
+                    jlPrecioNeto.setText(formato.format(precioNeto));
+                    jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
+
+                    limpiarCampos();
+                } else if (p.getDisponibilidad().equals("DISPONIBLE")) {
+
+                    Double montoOPrecio;
+                    if (!jtCodigoSUELTOS.getText().isEmpty() && !jtNOMBRESUELTOS.getText().isEmpty() && montoSUELTOS > 0) {
+                        montoOPrecio = montoSUELTOS;
+                    } else {
+                        montoOPrecio = p.getPrecioVentaUnitario();
+                    }
+
+                    modelo.addRow(new Object[]{
+                        p.getIdProducto(),
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        montoOPrecio,
+                        cant,});
+
+                    precioNeto = precioNeto + (montoOPrecio * cant);
+                    montoIva = montoIva + ((IVA * montoOPrecio) * cant);
+                    montoTotal = (precioNeto + montoIva);
+
+                    DecimalFormat formato = new DecimalFormat("#.##");
+
+                    jlMontoIVA.setText(formato.format(montoIva));
+                    jlPrecioNeto.setText(formato.format(precioNeto));
+                    jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
+
+                    limpiarCampos();
                 }
-
-                modelo.addRow(new Object[]{
-                    p.getIdProducto(),
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    montoOPrecio,
-                    cant,});
-
-                precioNeto = precioNeto + (montoOPrecio * cant);
-                montoIva = montoIva + ((IVA * montoOPrecio) * cant);
-                montoTotal = (precioNeto + montoIva);
-
-                DecimalFormat formato = new DecimalFormat("#.##");
-
-                jlMontoIVA.setText(formato.format(montoIva));
-                jlPrecioNeto.setText(formato.format(precioNeto));
-                jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
-
-                limpiarCampos();
-            } else if (p.getDisponibilidad().equals("DISPONIBLE")) {
-
-                Double montoOPrecio;
-                if (!jtCodigoSUELTOS.getText().isEmpty() && !jtNOMBRESUELTOS.getText().isEmpty() && montoSUELTOS > 0) {
-                    montoOPrecio = montoSUELTOS;
-                } else {
-                    montoOPrecio = p.getPrecioVentaUnitario();
-                }
-
-                modelo.addRow(new Object[]{
-                    p.getIdProducto(),
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    montoOPrecio,
-                    cant,});
-
-                precioNeto = precioNeto + (montoOPrecio * cant);
-                montoIva = montoIva + ((IVA * montoOPrecio) * cant);
-                montoTotal = (precioNeto + montoIva);
-
-                DecimalFormat formato = new DecimalFormat("#.##");
-
-                jlMontoIVA.setText(formato.format(montoIva));
-                jlPrecioNeto.setText(formato.format(precioNeto));
-                jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
-
-                limpiarCampos();
             }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jbAgregarProductoActionPerformed
 
     private void jbEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarProductoActionPerformed
-        int filaSeleccionada = jTablePedido.getSelectedRow();
-        Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
 
-        if (filaSeleccionada != -1) {
-            Double precioVenta = (Double) modelo.getValueAt(filaSeleccionada, 4);
-            int cantidad = (int) modelo.getValueAt(filaSeleccionada, 5);
+        try {
+            int filaSeleccionada = jTablePedido.getSelectedRow();
+            Double IVA = (Double.parseDouble(jtIVA.getText())) / 100;
 
-            precioNeto = precioNeto - (precioVenta * cantidad);
-            montoIva = montoIva - ((IVA * precioVenta) * cantidad);
-            montoTotal = (precioNeto + montoIva);
+            if (filaSeleccionada != -1) {
+                Double precioVenta = (Double) modelo.getValueAt(filaSeleccionada, 4);
+                int cantidad = (int) modelo.getValueAt(filaSeleccionada, 5);
 
-            // Actualizar las etiquetas
-            DecimalFormat formato = new DecimalFormat("#.##");
-            jlMontoIVA.setText(formato.format(montoIva));
-            jlPrecioNeto.setText(formato.format(precioNeto));
-            jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
+                precioNeto = precioNeto - (precioVenta * cantidad);
+                montoIva = montoIva - ((IVA * precioVenta) * cantidad);
+                montoTotal = (precioNeto + montoIva);
 
-            // Eliminar la fila del modelo
-            modelo.removeRow(filaSeleccionada);
+                // Actualizar las etiquetas
+                DecimalFormat formato = new DecimalFormat("#.##");
+                jlMontoIVA.setText(formato.format(montoIva));
+                jlPrecioNeto.setText(formato.format(precioNeto));
+                jlTotalPagar.setText(Math.round(montoTotal * 100.0) / 100.0 + "");
 
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar");
+                // Eliminar la fila del modelo
+                modelo.removeRow(filaSeleccionada);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jbEliminarProductoActionPerformed
 
@@ -1021,77 +1032,99 @@ public class Ventas extends javax.swing.JInternalFrame {
     }
 
     private void llenarComboUsers() {
-        jcUsuarios.removeAllItems();
 
-        Session session = HibernateConfig.get().openSession();
-        Usuario_data userd = new Usuario_data(session);
-        List<Usuario> users = userd.listarTodo();
+        try {
+            jcUsuarios.removeAllItems();
 
-        Set<String> usersAgregados = new HashSet<>();
+            Session session = HibernateConfig.get().openSession();
+            Usuario_data userd = new Usuario_data(session);
+            List<Usuario> users = userd.listarTodo();
 
-        for (Usuario u : users) {
-            String nombreUser = u.getNombre();
-            if (!usersAgregados.contains(nombreUser)) {
-                jcUsuarios.addItem(u);
-                usersAgregados.add(nombreUser);
+            Set<String> usersAgregados = new HashSet<>();
+
+            for (Usuario u : users) {
+                String nombreUser = u.getNombre();
+                if (!usersAgregados.contains(nombreUser)) {
+                    jcUsuarios.addItem(u);
+                    usersAgregados.add(nombreUser);
+                }
             }
-        }
 
-        session.close();
+            session.close();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }
 
     private void setearUser(Usuario usuarioBuscado) {
-        for (int i = 0; i <= jcUsuarios.getItemCount(); i++) {
-            Usuario usuario = (Usuario) jcUsuarios.getItemAt(i);
+        try {
+            for (int i = 0; i <= jcUsuarios.getItemCount(); i++) {
+                Usuario usuario = (Usuario) jcUsuarios.getItemAt(i);
 
-            if (usuario.getNombre().equals(usuarioBuscado.getNombre())) {
+                if (usuario.getNombre().equals(usuarioBuscado.getNombre())) {
 
-                jcUsuarios.setSelectedItem(usuario);
-                break;
+                    jcUsuarios.setSelectedItem(usuario);
+                    break;
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }
 
     private void procesarCodigo() {
-        for (Producto p : productosBuscados) {
-            if (jtCodigo.getText().equals(p.getCodigo())) {
-                jtNombre.setText(p.getNombre());
-                break;
-            } else if (jtCodigoSUELTOS.getText().equals(p.getCodigo())) {
-                jtNOMBRESUELTOS.setText(p.getNombre());
-                break;
-            }
+        try {
+            for (Producto p : productosBuscados) {
+                if (jtCodigo.getText().equals(p.getCodigo())) {
+                    jtNombre.setText(p.getNombre());
+                    break;
+                } else if (jtCodigoSUELTOS.getText().equals(p.getCodigo())) {
+                    jtNOMBRESUELTOS.setText(p.getNombre());
+                    break;
+                }
 
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }
 
     private void procesarCodigoNombre1() {
-        String nombreIngresado1 = jtNombre.getText().toUpperCase();
+        try {
+            String nombreIngresado1 = jtNombre.getText().toUpperCase();
 
-        for (Producto p : productosBuscados) {
-            String nombreProducto = p.getNombre().toUpperCase();
+            for (Producto p : productosBuscados) {
+                String nombreProducto = p.getNombre().toUpperCase();
 
-            if (nombreProducto.startsWith(nombreIngresado1)) {
-                jtNombre.setText(p.getNombre());
-                jtCodigo.setText(p.getCodigo());
-                break;
+                if (nombreProducto.startsWith(nombreIngresado1)) {
+                    jtNombre.setText(p.getNombre());
+                    jtCodigo.setText(p.getCodigo());
+                    break;
+                }
+
             }
-
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }
 
     private void procesarCodigoNombre2() {
-        String nombreIngresado1 = jtNOMBRESUELTOS.getText().toUpperCase();
+        try {
+            String nombreIngresado1 = jtNOMBRESUELTOS.getText().toUpperCase();
 
-        for (Producto p : productosBuscados) {
-            String nombreProducto = p.getNombre().toUpperCase();
+            for (Producto p : productosBuscados) {
+                String nombreProducto = p.getNombre().toUpperCase();
 
-            if (nombreProducto.startsWith(nombreIngresado1)) {
-                jtNOMBRESUELTOS.setText(p.getNombre());
-                jtCodigoSUELTOS.setText(p.getCodigo());
-                break;
+                if (nombreProducto.startsWith(nombreIngresado1)) {
+                    jtNOMBRESUELTOS.setText(p.getNombre());
+                    jtCodigoSUELTOS.setText(p.getCodigo());
+                    break;
+                }
+
             }
-
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }
 
@@ -1122,50 +1155,65 @@ public class Ventas extends javax.swing.JInternalFrame {
     }
 
     private void listarProductos() {
-        Session session = HibernateConfig.get().openSession();
+        try {
+            Session session = HibernateConfig.get().openSession();
 
-        Producto_data pd = new Producto_data(session);
+            Producto_data pd = new Producto_data(session);
 
-        productosBuscados = pd.listarTodo();
+            productosBuscados = pd.listarTodo();
 
-        session.close();
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
 
     }
 
     private Producto verificarProducto() {
+        try {
 
-        for (Producto p : productosBuscados) {
-            if ((jtCodigo.getText().equals(p.getCodigo()) && jtNombre.getText().equals(p.getNombre())
-                    || (jtNOMBRESUELTOS.getText().equals(p.getNombre()) && jtCodigoSUELTOS.getText().equals(p.getCodigo())))) {
-                return p;
+            for (Producto p : productosBuscados) {
+                if ((jtCodigo.getText().equals(p.getCodigo()) && jtNombre.getText().equals(p.getNombre())
+                        || (jtNOMBRESUELTOS.getText().equals(p.getNombre()) && jtCodigoSUELTOS.getText().equals(p.getCodigo())))) {
+                    return p;
+                }
             }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
         return null;
+
     }
 
     public void cargarFormasDePago() {
-        jcFormasDePago.removeAllItems();
+        try {
+            jcFormasDePago.removeAllItems();
 
-        Session session = HibernateConfig.get().openSession();
-        FormaDePago_data fdpd = new FormaDePago_data(session);
-        List<FormaDePago> formasDePago = fdpd.listarTodo();
+            Session session = HibernateConfig.get().openSession();
+            FormaDePago_data fdpd = new FormaDePago_data(session);
+            List<FormaDePago> formasDePago = fdpd.listarTodo();
 
-        Set<String> formasDePagoAgregadas = new HashSet<>();
+            Set<String> formasDePagoAgregadas = new HashSet<>();
 
-        for (FormaDePago fp : formasDePago) {
-            String formaDePago = fp.getNombreFormaDePago();
-            if (!formasDePagoAgregadas.contains(formaDePago)) {
-                jcFormasDePago.addItem(fp);
-                formasDePagoAgregadas.add(formaDePago);
+            for (FormaDePago fp : formasDePago) {
+                String formaDePago = fp.getNombreFormaDePago();
+                if (!formasDePagoAgregadas.contains(formaDePago)) {
+                    jcFormasDePago.addItem(fp);
+                    formasDePagoAgregadas.add(formaDePago);
+                }
             }
+
+            jcFormasDePago.setSelectedIndex(-1);
+
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        jcFormasDePago.setSelectedIndex(-1);
-
-        session.close();
     }
 
     public String setFecha() {
+
         Date fechaYHoraActual = new Date();
 
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

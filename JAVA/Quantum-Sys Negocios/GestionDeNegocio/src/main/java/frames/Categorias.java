@@ -13,9 +13,9 @@ public class Categorias extends javax.swing.JInternalFrame {
 
     public Categorias(Productos prod) {
         initComponents();
-        this.frameProd=prod;
+        this.frameProd = prod;
     }
-    
+
     public Categorias() {
         initComponents();
     }
@@ -119,22 +119,26 @@ public class Categorias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAgregarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarCategoriaActionPerformed
+        try {
+            if (jtNuevaCategoria.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar el nombre de la categoría");
+            } else if (verificarCategoria() == true) {
+                JOptionPane.showMessageDialog(null, "La categoria ingresada ya existe");
+                jtNuevaCategoria.setText("");
+            } else {
+                String nombreCategoria = jtNuevaCategoria.getText().toUpperCase();
+                System.out.println("NOMRE CATEGORIA " + nombreCategoria);
+                Categoria cat = new Categoria(nombreCategoria);
+                Session session = HibernateConfig.get().openSession();
+                Categoria_data cat_data = new Categoria_data(session);
+                cat_data.agregar(cat);
+                JOptionPane.showMessageDialog(null, "La categoria ha sido agregada exitosamente");
+                jtNuevaCategoria.setText("");
+                session.close();
+            }
 
-        if (jtNuevaCategoria.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar el nombre de la categoría");
-        } else if (verificarCategoria() == true) {
-            JOptionPane.showMessageDialog(null, "La categoria ingresada ya existe");
-            jtNuevaCategoria.setText("");
-        } else {
-            String nombreCategoria = jtNuevaCategoria.getText().toUpperCase();
-            System.out.println("NOMRE CATEGORIA "+nombreCategoria );
-            Categoria cat = new Categoria(nombreCategoria);
-            Session session = HibernateConfig.get().openSession();
-            Categoria_data cat_data = new Categoria_data(session);
-            cat_data.agregar(cat);
-            JOptionPane.showMessageDialog(null, "La categoria ha sido agregada exitosamente");
-            jtNuevaCategoria.setText("");
-            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jbAgregarCategoriaActionPerformed
 
@@ -149,19 +153,24 @@ public class Categorias extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private boolean verificarCategoria() {
-        boolean verificacion = false;
-        String nombreCategoria = jtNuevaCategoria.getText().toUpperCase();
+        try {
+            boolean verificacion = false;
+            String nombreCategoria = jtNuevaCategoria.getText().toUpperCase();
 
-        Session session = HibernateConfig.get().openSession();
-        Categoria_data cat_data = new Categoria_data(session);
-        List<Categoria> categorias = cat_data.listarTodo();
+            Session session = HibernateConfig.get().openSession();
+            Categoria_data cat_data = new Categoria_data(session);
+            List<Categoria> categorias = cat_data.listarTodo();
 
-        for (Categoria cat : categorias) {
-            if (nombreCategoria.equals(cat.getNombre())) {
-                verificacion = true;
+            for (Categoria cat : categorias) {
+                if (nombreCategoria.equals(cat.getNombre())) {
+                    verificacion = true;
+                }
             }
+            session.close();
+            return verificacion;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-        session.close();
-        return verificacion;
+        return false;
     }
 }

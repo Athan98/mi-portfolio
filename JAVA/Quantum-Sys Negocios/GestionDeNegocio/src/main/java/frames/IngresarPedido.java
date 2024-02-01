@@ -6,10 +6,6 @@ import entidades.*;
 import static frames.Principal.escritorio;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
-import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 
 public class IngresarPedido extends javax.swing.JInternalFrame {
@@ -61,7 +56,8 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
 
         jCheckBox1.setText("jCheckBox1");
 
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setClosable(true);
+        setTitle("INGRESAR NUEVOS PEDIDOS");
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NUEVAS ENTRADAS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 20))); // NOI18N
 
@@ -96,20 +92,20 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jbIngresarPedido.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        jbIngresarPedido.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbIngresarPedido.setForeground(new java.awt.Color(0, 204, 0));
-        jbIngresarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregarPedido.png"))); // NOI18N
-        jbIngresarPedido.setText("INGRESAR PEDIDO");
+        jbIngresarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        jbIngresarPedido.setText("AGREGAR");
         jbIngresarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbIngresarPedidoActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 0, 0));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/limpiasCamposPedidos.png"))); // NOI18N
-        jButton1.setText("LIMPIAR CAMPOS");
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(153, 153, 0));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
+        jButton1.setText("LIMPIAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -123,7 +119,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbIngresarPedido)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -145,51 +141,52 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jcFormaDePago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcProveedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(38, 38, 38)
-                        .addComponent(jbAgregarProveedor)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbActualizarProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))))
-            .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel9Layout.createSequentialGroup()
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(jcProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel9Layout.createSequentialGroup()
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(24, 24, 24)
+                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jcFormaDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbAgregarProveedor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbActualizarProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbActualizarProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14)
                         .addComponent(jcProveedores)
-                        .addComponent(jbAgregarProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(22, 22, 22)
+                        .addComponent(jbAgregarProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(jcFormaDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del pedido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
@@ -210,7 +207,7 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jcUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,17 +230,17 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -297,9 +294,10 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbActualizarProveedoresActionPerformed
 
     private void jbIngresarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIngresarPedidoActionPerformed
+
         Session session = HibernateConfig.get().openSession();
 
-        int opcion = JOptionPane.showConfirmDialog(null, "¿Desea confirmar la operacion ?", "Confirmacion de ingreso", JOptionPane.YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(null, "Â¿Desea confirmar la operacion ?", "Confirmacion de ingreso", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "Operacion cancelada");
@@ -374,58 +372,73 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void llenarComboUsers() {
-        jcUsuarios.removeAllItems();
 
-        Session session = HibernateConfig.get().openSession();
-        Usuario_data userd = new Usuario_data(session);
-        List<Usuario> users = userd.listarTodo();
+        try {
+            jcUsuarios.removeAllItems();
 
-        Set<String> usersAgregados = new HashSet<>();
+            Session session = HibernateConfig.get().openSession();
+            Usuario_data userd = new Usuario_data(session);
+            List<Usuario> users = userd.listarTodo();
 
-        for (Usuario u : users) {
-            String nombreUser = u.getNombre();
-            if (!usersAgregados.contains(nombreUser)) {
-                jcUsuarios.addItem(u);
-                usersAgregados.add(nombreUser);
+            Set<String> usersAgregados = new HashSet<>();
+
+            for (Usuario u : users) {
+                String nombreUser = u.getNombre();
+                if (!usersAgregados.contains(nombreUser)) {
+                    jcUsuarios.addItem(u);
+                    usersAgregados.add(nombreUser);
+                }
             }
+
+            jcUsuarios.setSelectedIndex(-1);
+
+            session.close();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        jcUsuarios.setSelectedIndex(-1);
-
-        session.close();
     }
 
     private void llenarComboProveedores() {
-        jcProveedores.removeAllItems();
 
-        Session session = HibernateConfig.get().openSession();
-        Proveedor_data pd = new Proveedor_data(session);
-        List<Proveedor> proveedores = pd.listarTodo();
+        try {
+            jcProveedores.removeAllItems();
 
-        Set<String> proveedoresAgregados = new HashSet<>();
+            Session session = HibernateConfig.get().openSession();
+            Proveedor_data pd = new Proveedor_data(session);
+            List<Proveedor> proveedores = pd.listarTodo();
 
-        for (Proveedor p : proveedores) {
-            String nombreProveedores = p.getNombre();
-            if (!proveedoresAgregados.contains(nombreProveedores)) {
-                jcProveedores.addItem(p);
-                proveedoresAgregados.add(nombreProveedores);
+            Set<String> proveedoresAgregados = new HashSet<>();
+
+            for (Proveedor p : proveedores) {
+                String nombreProveedores = p.getNombre();
+                if (!proveedoresAgregados.contains(nombreProveedores)) {
+                    jcProveedores.addItem(p);
+                    proveedoresAgregados.add(nombreProveedores);
+                }
             }
+
+            jcProveedores.setSelectedIndex(-1);
+
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        jcProveedores.setSelectedIndex(-1);
-
-        session.close();
     }
 
     private void setearUser(Usuario usuarioBuscado) {
-        for (int i = 0; i <= jcUsuarios.getItemCount(); i++) {
-            Usuario usuario = (Usuario) jcUsuarios.getItemAt(i);
+        try {
+            for (int i = 0; i <= jcUsuarios.getItemCount(); i++) {
+                Usuario usuario = (Usuario) jcUsuarios.getItemAt(i);
 
-            if (usuario.getNombre().equals(usuarioBuscado.getNombre())) {
+                if (usuario.getNombre().equals(usuarioBuscado.getNombre())) {
 
-                jcUsuarios.setSelectedItem(usuario);
-                break;
+                    jcUsuarios.setSelectedItem(usuario);
+                    break;
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }
 
@@ -437,25 +450,29 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
     }
 
     public void cargarFormasDePago() {
-        jcFormaDePago.removeAllItems();
+        try {
+            jcFormaDePago.removeAllItems();
 
-        Session session = HibernateConfig.get().openSession();
-        FormaDePago_data fdpd = new FormaDePago_data(session);
-        List<FormaDePago> formasDePago = fdpd.listarTodo();
+            Session session = HibernateConfig.get().openSession();
+            FormaDePago_data fdpd = new FormaDePago_data(session);
+            List<FormaDePago> formasDePago = fdpd.listarTodo();
 
-        Set<String> formasDePagoAgregadas = new HashSet<>();
+            Set<String> formasDePagoAgregadas = new HashSet<>();
 
-        for (FormaDePago fp : formasDePago) {
-            String formaDePago = fp.getNombreFormaDePago();
-            if (!formasDePagoAgregadas.contains(formaDePago)) {
-                jcFormaDePago.addItem(fp);
-                formasDePagoAgregadas.add(formaDePago);
+            for (FormaDePago fp : formasDePago) {
+                String formaDePago = fp.getNombreFormaDePago();
+                if (!formasDePagoAgregadas.contains(formaDePago)) {
+                    jcFormaDePago.addItem(fp);
+                    formasDePagoAgregadas.add(formaDePago);
+                }
             }
+
+            jcFormaDePago.setSelectedIndex(-1);
+
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        jcFormaDePago.setSelectedIndex(-1);
-
-        session.close();
     }
 
     public String setFecha() {

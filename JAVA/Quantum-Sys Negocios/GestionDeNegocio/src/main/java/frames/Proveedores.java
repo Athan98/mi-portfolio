@@ -30,6 +30,8 @@ public class Proveedores extends javax.swing.JInternalFrame {
         }
     };
 
+    List<Proveedor> proveedoresBuscados = null;
+
     public Proveedores() {
         initComponents();
         jbGuardar.setEnabled(false);
@@ -72,6 +74,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProv = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
         jbEditar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbExportar = new javax.swing.JButton();
@@ -102,8 +105,8 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jbAgregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jbAgregar.setForeground(new java.awt.Color(0, 0, 0));
-        jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar.png"))); // NOI18N
+        jbAgregar.setForeground(new java.awt.Color(0, 153, 0));
+        jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregarx18.png"))); // NOI18N
         jbAgregar.setText("AGREGAR");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,8 +115,8 @@ public class Proveedores extends javax.swing.JInternalFrame {
         });
 
         jbLimpiar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jbLimpiar.setForeground(new java.awt.Color(0, 0, 0));
-        jbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/limpiar.png"))); // NOI18N
+        jbLimpiar.setForeground(new java.awt.Color(153, 153, 0));
+        jbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiarx18.png"))); // NOI18N
         jbLimpiar.setText("LIMPIAR");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,8 +125,8 @@ public class Proveedores extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jbGuardar.setForeground(new java.awt.Color(0, 0, 0));
-        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guardar.png"))); // NOI18N
+        jbGuardar.setForeground(new java.awt.Color(0, 0, 153));
+        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/savex18.png"))); // NOI18N
         jbGuardar.setText("GUARDAR");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,9 +152,9 @@ public class Proveedores extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbAgregar)
+                    .addComponent(jbLimpiar)
+                    .addComponent(jbGuardar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -209,11 +212,11 @@ public class Proveedores extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jcEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -266,13 +269,15 @@ public class Proveedores extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jbEditar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jbEditar.setForeground(new java.awt.Color(0, 0, 0));
-        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar.png"))); // NOI18N
+        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/editarx18.png"))); // NOI18N
         jbEditar.setText("EDITAR");
         jbEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,7 +287,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
         jbEliminar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jbEliminar.setForeground(new java.awt.Color(204, 0, 0));
-        jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eliminar.png"))); // NOI18N
+        jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminarx18.png"))); // NOI18N
         jbEliminar.setText("ELIMINAR");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,7 +297,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
         jbExportar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jbExportar.setForeground(new java.awt.Color(0, 153, 0));
-        jbExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/excel.png"))); // NOI18N
+        jbExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/excelx18.png"))); // NOI18N
         jbExportar.setText("EXPORTAR");
         jbExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,21 +305,40 @@ public class Proveedores extends javax.swing.JInternalFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbEditar)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbExportar))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jbEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbExportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -338,10 +362,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbEditar)
-                    .addComponent(jbEliminar)
-                    .addComponent(jbExportar))
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -353,8 +374,8 @@ public class Proveedores extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,40 +396,42 @@ public class Proveedores extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        String nombre = jtNombre.getText();
-        String telefono = jtTelefono.getText();
-        String direccion = jtDireccion.getText();
-        String cuit = jtCUIT.getText();
+        try {
+            String nombre = jtNombre.getText();
+            String telefono = jtTelefono.getText();
+            String direccion = jtDireccion.getText();
+            String cuit = jtCUIT.getText();
 
-        if (jtNombre.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Debe llenar al menos el campo Nombre");
-        } else {
+            if (jtNombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debe llenar al menos el campo Nombre");
+            } else {
 
-            Proveedor prov = new Proveedor(nombre, telefono, direccion, cuit, jcEstado.isSelected());
+                Proveedor prov = new Proveedor(nombre, telefono, direccion, cuit, jcEstado.isSelected());
 
-            Session session = HibernateConfig.get().openSession();
+                Session session = HibernateConfig.get().openSession();
 
-            Proveedor_data provd = new Proveedor_data(session);
+                Proveedor_data provd = new Proveedor_data(session);
 
-            provd.agregar(prov);
+                provd.agregar(prov);
 
-            JOptionPane.showMessageDialog(null, "El proveedor ha sido agregado a la base de datos");
+                session.close();
 
-            session.close();
-
-            limpiarCampos();
-            borrarFilas();
-            actualizarTabla();
+                limpiarCampos();
+                borrarFilas();
+                actualizarTabla();
+                JOptionPane.showMessageDialog(null, "El proveedor ha sido agregado a la base de datos");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
 
     }//GEN-LAST:event_jbAgregarActionPerformed
 
@@ -416,122 +439,132 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jbAgregar.setEnabled(false);
         jbGuardar.setEnabled(true);
 
-        Proveedor prov = new Proveedor();
+        try {
+            Proveedor prov = new Proveedor();
 
-        int idProv = (int) modelo.getValueAt(jTableProv.getSelectedRow(), 1);
+            int idProv = (int) modelo.getValueAt(jTableProv.getSelectedRow(), 1);
 
-        Session session = HibernateConfig.get().openSession();
-        Proveedor_data provd = new Proveedor_data(session);
-        prov = provd.encontrarPorID(idProv);
+            Session session = HibernateConfig.get().openSession();
+            Proveedor_data provd = new Proveedor_data(session);
+            prov = provd.encontrarPorID(idProv);
 
-        jlID.setText(prov.getIdProveedor() + "");
-        jtNombre.setText(prov.getNombre());
-        jtCUIT.setText(prov.getCuit());
-        jtDireccion.setText(prov.getDireccion());
-        jtTelefono.setText(prov.getTelefono());
-        jcEstado.setSelected(prov.isEstado());
+            jlID.setText(prov.getIdProveedor() + "");
+            jtNombre.setText(prov.getNombre());
+            jtCUIT.setText(prov.getCuit());
+            jtDireccion.setText(prov.getDireccion());
+            jtTelefono.setText(prov.getTelefono());
+            jcEstado.setSelected(prov.isEstado());
 
-        session.close();
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jtBusquedaNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaNombreKeyReleased
-        Session session = HibernateConfig.get().openSession();
-        Proveedor_data provd = new Proveedor_data(session);
-        List<Proveedor> proveedores = provd.listarTodo();
+        try {
 
-        String busquedaNombre = jtBusquedaNombre.getText().toUpperCase();
+            String busquedaNombre = jtBusquedaNombre.getText().toUpperCase();
 
-        borrarFilas();
+            borrarFilas();
 
-        for (Proveedor p : proveedores) {
-            if (p.getNombre().toUpperCase().startsWith(busquedaNombre)) {
-                if (p.isEstado() == true) {
-                    modelo.addRow(new Object[]{
-                        false,
-                        p.getIdProveedor(),
-                        p.getCuit(),
-                        p.getNombre(),
-                        p.getTelefono(),
-                        p.getDireccion(),
-                        "DISPONIBLE"});
-                } else {
-                    modelo.addRow(new Object[]{
-                        false,
-                        p.getIdProveedor(),
-                        p.getCuit(),
-                        p.getNombre(),
-                        p.getTelefono(),
-                        p.getDireccion(),
-                        "NO DISPONIBLE"});
+            for (Proveedor p : proveedoresBuscados) {
+                if (p.getNombre().toUpperCase().startsWith(busquedaNombre)) {
+                    if (p.isEstado() == true) {
+                        modelo.addRow(new Object[]{
+                            false,
+                            p.getIdProveedor(),
+                            p.getCuit(),
+                            p.getNombre(),
+                            p.getTelefono(),
+                            p.getDireccion(),
+                            "DISPONIBLE"});
+                    } else {
+                        modelo.addRow(new Object[]{
+                            false,
+                            p.getIdProveedor(),
+                            p.getCuit(),
+                            p.getNombre(),
+                            p.getTelefono(),
+                            p.getDireccion(),
+                            "NO DISPONIBLE"});
+                    }
                 }
             }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-        session.close();
     }//GEN-LAST:event_jtBusquedaNombreKeyReleased
 
     private void jtBusquedaCUITKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaCUITKeyReleased
-        Session session = HibernateConfig.get().openSession();
-        Proveedor_data provd = new Proveedor_data(session);
-        List<Proveedor> proveedores = provd.listarTodo();
+        try {
+            String busquedaCUIT = jtBusquedaCUIT.getText().toUpperCase();
 
-        String busquedaCUIT = jtBusquedaCUIT.getText().toUpperCase();
+            borrarFilas();
 
-        borrarFilas();
-
-        for (Proveedor p : proveedores) {
-            if (p.getCuit().toUpperCase().startsWith(busquedaCUIT)) {
-                if (p.isEstado() == true) {
-                    modelo.addRow(new Object[]{
-                        false,
-                        p.getIdProveedor(),
-                        p.getCuit(),
-                        p.getNombre(),
-                        p.getTelefono(),
-                        p.getDireccion(),
-                        "DISPONIBLE"});
-                } else {
-                    modelo.addRow(new Object[]{
-                        false,
-                        p.getIdProveedor(),
-                        p.getCuit(),
-                        p.getNombre(),
-                        p.getTelefono(),
-                        p.getDireccion(),
-                        "NO DISPONIBLE"});
+            for (Proveedor p : proveedoresBuscados) {
+                if (p.getCuit().toUpperCase().startsWith(busquedaCUIT)) {
+                    if (p.isEstado() == true) {
+                        modelo.addRow(new Object[]{
+                            false,
+                            p.getIdProveedor(),
+                            p.getCuit(),
+                            p.getNombre(),
+                            p.getTelefono(),
+                            p.getDireccion(),
+                            "DISPONIBLE"});
+                    } else {
+                        modelo.addRow(new Object[]{
+                            false,
+                            p.getIdProveedor(),
+                            p.getCuit(),
+                            p.getNombre(),
+                            p.getTelefono(),
+                            p.getDireccion(),
+                            "NO DISPONIBLE"});
+                    }
                 }
             }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-        session.close();
     }//GEN-LAST:event_jtBusquedaCUITKeyReleased
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        if (jtNombre.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Al menos debe ingresar un nombre");
-        } else {
-            Session session = HibernateConfig.get().openSession();
 
-            Proveedor_data provd = new Proveedor_data(session);
+        try {
 
-            int idProv = Integer.parseInt(jlID.getText());
-            String CUIT = jtCUIT.getText();
-            String nombre = jtNombre.getText();
-            String telefono = jtTelefono.getText();
-            String direccion = jtDireccion.getText();
-            boolean estado = jcEstado.isSelected();
+            if (jtNombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Al menos debe ingresar un nombre");
+            } else {
+                Session session = HibernateConfig.get().openSession();
 
-            Proveedor prov = new Proveedor(idProv, nombre, telefono, direccion, CUIT, estado);
+                Proveedor_data provd = new Proveedor_data(session);
 
-            provd.actualizar(prov);
+                int idProv = Integer.parseInt(jlID.getText());
+                String CUIT = jtCUIT.getText();
+                String nombre = jtNombre.getText();
+                String telefono = jtTelefono.getText();
+                String direccion = jtDireccion.getText();
+                boolean estado = jcEstado.isSelected();
 
-            JOptionPane.showMessageDialog(null, "El proveedor ha sido actualizado");
+                Proveedor prov = new Proveedor(idProv, nombre, telefono, direccion, CUIT, estado);
 
-            borrarFilas();
-            actualizarTabla();
-            limpiarCampos();
-            jbAgregar.setEnabled(true);
-            jbGuardar.setEnabled(false);
+                provd.actualizar(prov);
 
-            session.close();
+                borrarFilas();
+                actualizarTabla();
+                limpiarCampos();
+                JOptionPane.showMessageDialog(null, "El proveedor ha sido actualizado");
+                jbAgregar.setEnabled(true);
+                jbGuardar.setEnabled(false);
+
+                session.close();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -545,13 +578,12 @@ public class Proveedores extends javax.swing.JInternalFrame {
             Session session = HibernateConfig.get().openSession();
             Proveedor_data pd = new Proveedor_data(session);
 
-            List<Proveedor> proveedores = pd.listarTodo();
             List<Proveedor> proveedoresAEliminar = new ArrayList<>(); // Inicializar la lista
 
             boolean ver;
             Proveedor p;
 
-            for (int i = 0; i < proveedores.size(); i++) {
+            for (int i = 0; i < proveedoresBuscados.size(); i++) {
                 ver = (boolean) modelo.getValueAt(i, 0);
                 p = pd.encontrarPorID((int) modelo.getValueAt(i, 1));
                 if (ver) {
@@ -559,16 +591,17 @@ public class Proveedores extends javax.swing.JInternalFrame {
                 }
             }
 
-            int confirmacion = JOptionPane.showConfirmDialog(this, "�Realmente desea eliminar las filas seleccionadas?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Realmente desea eliminar las filas seleccionadas?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
             if (confirmacion == JOptionPane.YES_OPTION) {
                 for (Proveedor ps : proveedoresAEliminar) {
                     ps.setEstado(false);
                     pd.actualizar(ps);
                 }
-                JOptionPane.showMessageDialog(null, "Elementos eliminados exitosamente");
+
                 borrarFilas();
                 actualizarTabla();
+                JOptionPane.showMessageDialog(null, "Elementos eliminados exitosamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Operacion cancelada");
             }
@@ -606,6 +639,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProv;
     private javax.swing.JButton jbAgregar;
@@ -656,37 +690,41 @@ public class Proveedores extends javax.swing.JInternalFrame {
     }
 
     public void actualizarTabla() {
+        try {
+            modelo.setRowCount(0);
 
-        modelo.setRowCount(0);
+            Session session = HibernateConfig.get().openSession();
 
-        Session session = HibernateConfig.get().openSession();
+            Proveedor_data provd = new Proveedor_data(session);
 
-        Proveedor_data provd = new Proveedor_data(session);
+            proveedoresBuscados = provd.listarTodo();
 
-        List<Proveedor> proveedores = provd.listarTodo();
-
-        for (Proveedor p : proveedores) {
-            if (p.isEstado() == true) {
-                modelo.addRow(new Object[]{
-                    false,
-                    p.getIdProveedor(),
-                    p.getCuit(),
-                    p.getNombre(),
-                    p.getTelefono(),
-                    p.getDireccion(),
-                    "DISPONIBLE"});
-            } else {
-                modelo.addRow(new Object[]{
-                    false,
-                    p.getIdProveedor(),
-                    p.getCuit(),
-                    p.getNombre(),
-                    p.getTelefono(),
-                    p.getDireccion(),
-                    "NO DISPONIBLE"});
+            for (Proveedor p : proveedoresBuscados) {
+                if (p.isEstado() == true) {
+                    modelo.addRow(new Object[]{
+                        false,
+                        p.getIdProveedor(),
+                        p.getCuit(),
+                        p.getNombre(),
+                        p.getTelefono(),
+                        p.getDireccion(),
+                        "DISPONIBLE"});
+                } else {
+                    modelo.addRow(new Object[]{
+                        false,
+                        p.getIdProveedor(),
+                        p.getCuit(),
+                        p.getNombre(),
+                        p.getTelefono(),
+                        p.getDireccion(),
+                        "NO DISPONIBLE"});
+                }
             }
+            session.close();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-        session.close();
     }
 
     private void limpiarCampos() {

@@ -317,12 +317,16 @@ public class PagoPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAceptarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        try {
+            Session session = HibernateConfig.get().openSession();
+            Pedido_data pd = new Pedido_data(session);
+            pd.eliminarPorID(ped.getIdPedido());
+            session.close();
+            this.setVisible(false);
 
-        Session session = HibernateConfig.get().openSession();
-        Pedido_data pd = new Pedido_data(session);
-        pd.eliminarPorID(ped.getIdPedido());
-        session.close();
-        this.setVisible(false);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
 
     }//GEN-LAST:event_jbCancelarActionPerformed
 
@@ -403,28 +407,34 @@ public class PagoPedido extends javax.swing.JFrame {
     }
 
     public void cargarFormasDePago() {
-        jcForma1.removeAllItems();
-        jcForma2.removeAllItems();
 
-        Session session = HibernateConfig.get().openSession();
-        FormaDePago_data fdpd = new FormaDePago_data(session);
-        List<FormaDePago> formasDePago = fdpd.listarTodo();
+        try {
+            jcForma1.removeAllItems();
+            jcForma2.removeAllItems();
 
-        Set<String> formasDePagoAgregadas = new HashSet<>();
+            Session session = HibernateConfig.get().openSession();
+            FormaDePago_data fdpd = new FormaDePago_data(session);
+            List<FormaDePago> formasDePago = fdpd.listarTodo();
 
-        for (FormaDePago fp : formasDePago) {
-            String formaDePago = fp.getNombreFormaDePago();
-            if (!formasDePagoAgregadas.contains(formaDePago)) {
-                jcForma1.addItem(fp);
-                jcForma2.addItem(fp);
-                formasDePagoAgregadas.add(formaDePago);
+            Set<String> formasDePagoAgregadas = new HashSet<>();
+
+            for (FormaDePago fp : formasDePago) {
+                String formaDePago = fp.getNombreFormaDePago();
+                if (!formasDePagoAgregadas.contains(formaDePago)) {
+                    jcForma1.addItem(fp);
+                    jcForma2.addItem(fp);
+                    formasDePagoAgregadas.add(formaDePago);
+                }
             }
+
+            jcForma1.setSelectedIndex(-1);
+            jcForma2.setSelectedIndex(-1);
+
+            session.close();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        jcForma1.setSelectedIndex(-1);
-        jcForma2.setSelectedIndex(-1);
-
-        session.close();
     }
 
     private void setearFDP() {

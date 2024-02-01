@@ -220,17 +220,17 @@ public class Productos extends javax.swing.JInternalFrame {
                                 .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbEscanearNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jlID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jcEstado, 0, 202, Short.MAX_VALUE)
                                     .addComponent(jcCategorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -453,9 +453,6 @@ public class Productos extends javax.swing.JInternalFrame {
         jLabel10.setText("Buscar por nombre:");
 
         jtBuscarPorNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtBuscarPorNombreKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtBuscarPorNombreKeyReleased(evt);
             }
@@ -857,17 +854,22 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private String reemplazarEnie(String cadena) {
-        // Car�cter Unicode para la letra "�" min�scula
-        char enieMinuscula = '\u00F1';
-        // Car�cter Unicode para la letra "�" may�scula
-        char enieMayuscula = '\u00D1';
+        try {
+            // Car�cter Unicode para la letra "�" min�scula
+            char enieMinuscula = '\u00F1';
+            // Car�cter Unicode para la letra "�" may�scula
+            char enieMayuscula = '\u00D1';
 
-        // Reemplazar "�" min�scula
-        cadena = cadena.replace("�", String.valueOf(enieMinuscula));
-        // Reemplazar "�" may�scula
-        cadena = cadena.replace("�", String.valueOf(enieMayuscula));
+            // Reemplazar "�" min�scula
+            cadena = cadena.replace("�", String.valueOf(enieMinuscula));
+            // Reemplazar "�" may�scula
+            cadena = cadena.replace("�", String.valueOf(enieMayuscula));
 
-        return cadena;
+            return cadena;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+        return null;
     }
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
@@ -875,11 +877,16 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbCalcularPrecioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularPrecioVentaActionPerformed
-        Double costoUnitario = Double.parseDouble(jtCostoUnitario.getText());
-        Double porcentajeGanancia = Double.parseDouble(jtGanancia.getText()) / 100;
-        Double resultado = costoUnitario + (costoUnitario * porcentajeGanancia);
+        try {
+            Double costoUnitario = Double.parseDouble(jtCostoUnitario.getText());
+            Double porcentajeGanancia = Double.parseDouble(jtGanancia.getText()) / 100;
+            Double resultado = costoUnitario + (costoUnitario * porcentajeGanancia);
 
-        jtPrecioVenta.setText(Math.round(resultado * 100.0) / 100.0 + "");
+            jtPrecioVenta.setText(Math.round(resultado * 100.0) / 100.0 + "");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jbCalcularPrecioVentaActionPerformed
 
     private void jbEscanearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscanearActionPerformed
@@ -931,15 +938,6 @@ public class Productos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtStockKeyPressed
 
-    private void jtBuscarPorNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarPorNombreKeyPressed
-        char x = evt.getKeyChar();
-        if (Character.isLetter(x) || Character.isISOControl(x) || (evt.getKeyChar() == ' ')) {
-            jtBuscarPorNombre.setEditable(true);
-        } else {
-            jtBuscarPorNombre.setEditable(false);
-        }
-    }//GEN-LAST:event_jtBuscarPorNombreKeyPressed
-
     private void jtBusquedaCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaCodigoKeyPressed
         if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
             jtBusquedaCodigo.setEditable(true);
@@ -949,24 +947,28 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtBusquedaCodigoKeyPressed
 
     private void jtBuscarPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarPorNombreKeyReleased
+        try {
+            String campoBuscarNombre = jtBuscarPorNombre.getText().toUpperCase();
 
-        String campoBuscarNombre = jtBuscarPorNombre.getText().toUpperCase();
+            borrarFilas();
 
-        borrarFilas();
-
-        for (Producto p : productosBuscados) {
-            if (p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) {
-                modelo.addRow(new Object[]{
-                    false,
-                    p.getIdProducto(),
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    p.getPrecioCostoUnitario(),
-                    p.getPrecioVentaUnitario(),
-                    p.getStock(),
-                    p.getDisponibilidad()});
+            for (Producto p : productosBuscados) {
+                if (p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) {
+                    modelo.addRow(new Object[]{
+                        false,
+                        p.getIdProducto(),
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        p.getPrecioCostoUnitario(),
+                        p.getPrecioVentaUnitario(),
+                        p.getStock(),
+                        p.getDisponibilidad()});
+                }
             }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jtBuscarPorNombreKeyReleased
 
@@ -1023,28 +1025,36 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEditarProductoActionPerformed
 
     private void jbLimpiarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCodigoActionPerformed
-        jtBusquedaCodigo.setText("");
-        actualizarListaProductos();
+        try {
+            jtBusquedaCodigo.setText("");
+            actualizarListaProductos();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jbLimpiarCodigoActionPerformed
 
     private void jbActualizarMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarMasivaActionPerformed
-        Session session = HibernateConfig.get().openSession();
-        Producto_data pd = new Producto_data(session);
+        try {
+            Session session = HibernateConfig.get().openSession();
+            Producto_data pd = new Producto_data(session);
 
-        double coeficiente = ((Double.parseDouble(jtTasaActualizacion.getText())) + 100) / 100;
-        double nuevoPrecio = 0;
+            double coeficiente = ((Double.parseDouble(jtTasaActualizacion.getText())) + 100) / 100;
+            double nuevoPrecio = 0;
 
-        for (Producto p : productosBuscados) {
-            nuevoPrecio = p.getPrecioVentaUnitario() * coeficiente;
-            p.setPrecioVentaUnitario(Math.round(nuevoPrecio * 100.0) / 100.0);
+            for (Producto p : productosBuscados) {
+                nuevoPrecio = p.getPrecioVentaUnitario() * coeficiente;
+                p.setPrecioVentaUnitario(Math.round(nuevoPrecio * 100.0) / 100.0);
 
-            pd.actualizar(p);
+                pd.actualizar(p);
+            }
+            borrarFilas();
+            JOptionPane.showMessageDialog(null, "La lista de productos ha sido actualizada completamente");
+            actualizarListaProductos();
+            jtTasaActualizacion.setText("");
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-        borrarFilas();
-        JOptionPane.showMessageDialog(null, "La lista de productos ha sido actualizada completamente");
-        actualizarListaProductos();
-        jtTasaActualizacion.setText("");
-        session.close();
     }//GEN-LAST:event_jbActualizarMasivaActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -1114,52 +1124,58 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtBusquedaCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaCodigoKeyReleased
+        try {
+            String campoBuscarCodigo = jtBusquedaCodigo.getText();
 
-        String campoBuscarCodigo = jtBusquedaCodigo.getText();
+            borrarFilas();
 
-        borrarFilas();
-
-        for (Producto p : productosBuscados) {
-            if (p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) {
-                modelo.addRow(new Object[]{
-                    false,
-                    p.getIdProducto(),
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    p.getPrecioCostoUnitario(),
-                    p.getPrecioVentaUnitario(),
-                    p.getStock(),
-                    p.getDisponibilidad()});
+            for (Producto p : productosBuscados) {
+                if (p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) {
+                    modelo.addRow(new Object[]{
+                        false,
+                        p.getIdProducto(),
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        p.getPrecioCostoUnitario(),
+                        p.getPrecioVentaUnitario(),
+                        p.getStock(),
+                        p.getDisponibilidad()});
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
     }//GEN-LAST:event_jtBusquedaCodigoKeyReleased
 
     private void jbActualizarCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarCatActionPerformed
+        try {
+            Categoria cat = (Categoria) jcCategoriasAct.getSelectedItem();
 
-        Categoria cat = (Categoria) jcCategoriasAct.getSelectedItem();
+            Session session = HibernateConfig.get().openSession();
+            Producto_data pd = new Producto_data(session);
 
-        Session session = HibernateConfig.get().openSession();
-        Producto_data pd = new Producto_data(session);
+            double coeficiente = ((Double.parseDouble(jtActualizarCat.getText())) + 100) / 100;
+            double nuevoPrecio = 0;
 
-        double coeficiente = ((Double.parseDouble(jtActualizarCat.getText())) + 100) / 100;
-        double nuevoPrecio = 0;
-
-        for (Producto p : productosBuscados) {
-            if (p.getCategoria().getNombre().equals(cat.getNombre())) {
-                nuevoPrecio = p.getPrecioVentaUnitario() * coeficiente;
-                p.setPrecioVentaUnitario(Math.round(nuevoPrecio * 100.0) / 100.0);
-                pd.actualizar(p);
+            for (Producto p : productosBuscados) {
+                if (p.getCategoria().getNombre().equals(cat.getNombre())) {
+                    nuevoPrecio = p.getPrecioVentaUnitario() * coeficiente;
+                    p.setPrecioVentaUnitario(Math.round(nuevoPrecio * 100.0) / 100.0);
+                    pd.actualizar(p);
+                }
             }
-        }
 
-        borrarFilas();
-        actualizarListaProductos();
-        jtActualizarCat.setText("");
-        jcCategoriasAct.setSelectedIndex(-1);
-        JOptionPane.showMessageDialog(null, "Los precios de los productos de la categoria " + cat.getNombre() + " han sido actualizados");
-        session.close();
+            borrarFilas();
+            actualizarListaProductos();
+            jtActualizarCat.setText("");
+            jcCategoriasAct.setSelectedIndex(-1);
+            JOptionPane.showMessageDialog(null, "Los precios de los productos de la categoria " + cat.getNombre() + " han sido actualizados");
+            session.close();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jbActualizarCatActionPerformed
 
     private void jtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCodigoActionPerformed
@@ -1264,24 +1280,29 @@ public class Productos extends javax.swing.JInternalFrame {
     }
 
     private String obtenerNombreProducto(String nombre) {
-        // Patr�n para coincidir con n�meros al principio del texto
-        Pattern pattern = Pattern.compile("^\\w+");
-        Matcher matcher = pattern.matcher(nombre);
+        try {
+            // Patrón para coincidir con texto después de un espacio
+            Pattern pattern = Pattern.compile("\\s(.+)");
+            Matcher matcher = pattern.matcher(nombre);
 
-        // Encuentra la coincidencia
-        if (matcher.find()) {
-            // Obtiene la posici�n del primer d�gito
-            int position = matcher.end();
+            // Encuentra la coincidencia
+            if (matcher.find()) {
+                // Obtiene el texto después del espacio
+                String textoDespuesDelEspacio = matcher.group(1).trim();
 
-            // Retorna el nombre sin los n�meros al principio
-            return nombre.substring(position).trim();
+                // Retorna el texto después del espacio
+                return textoDespuesDelEspacio;
+            }
+
+            // Si no se encuentra un espacio, retorna el nombre original
+            return nombre.trim();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
 
-        // Si no se encuentra ning�n n�mero al principio, retorna el nombre original
-        return nombre.trim();
-
+        return "";
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -1345,37 +1366,49 @@ public class Productos extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void cargarComboBox() {
-        jcCategorias.removeAllItems();
-        jcCategoriasAct.removeAllItems();
+        try {
+            jcCategorias.removeAllItems();
+            jcCategoriasAct.removeAllItems();
 
-        Session session = HibernateConfig.get().openSession();
-        Categoria_data cat_data = new Categoria_data(session);
-        List<Categoria> categorias = cat_data.listarTodo();
+            Session session = HibernateConfig.get().openSession();
+            Categoria_data cat_data = new Categoria_data(session);
+            List<Categoria> categorias = cat_data.listarTodo();
 
-        Set<String> categoriasAgregadas = new HashSet<>();
+            Set<String> categoriasAgregadas = new HashSet<>();
 
-        for (Categoria cat : categorias) {
-            String categoria = cat.getNombre();
-            if (!categoriasAgregadas.contains(categoria)) {
-                jcCategorias.addItem(cat);
-                jcCategoriasAct.addItem(cat);
-                categoriasAgregadas.add(categoria);
+            for (Categoria cat : categorias) {
+                String categoria = cat.getNombre();
+                if (!categoriasAgregadas.contains(categoria)) {
+                    jcCategorias.addItem(cat);
+                    jcCategoriasAct.addItem(cat);
+                    categoriasAgregadas.add(categoria);
+                }
             }
+
+            jcCategorias.setSelectedIndex(-1);
+            jcCategoriasAct.setSelectedIndex(-1);
+
+            session.close();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        jcCategorias.setSelectedIndex(-1);
-        jcCategoriasAct.setSelectedIndex(-1);
-
-        session.close();
     }
 
     private List<Categoria> listarCategorias() {
+        try {
 
-        Session session = HibernateConfig.get().openSession();
-        Categoria_data cat_data = new Categoria_data(session);
-        List<Categoria> categorias = cat_data.listarTodo();
-        session.close();
-        return categorias;
+            Session session = HibernateConfig.get().openSession();
+            Categoria_data cat_data = new Categoria_data(session);
+            List<Categoria> categorias = cat_data.listarTodo();
+            session.close();
+
+            return categorias;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+
+        return null;
 
     }
 
@@ -1424,29 +1457,35 @@ public class Productos extends javax.swing.JInternalFrame {
 
     public void actualizarListaProductos() {
 
-        modelo.setRowCount(0);
+        try {
 
-        Session session = HibernateConfig.get().openSession();
+            modelo.setRowCount(0);
 
-        Producto_data pd = new Producto_data(session);
+            Session session = HibernateConfig.get().openSession();
 
-        productosBuscados = pd.listarTodo();
+            Producto_data pd = new Producto_data(session);
 
-        for (Producto p : productosBuscados) {
-            modelo.addRow(new Object[]{
-                false,
-                p.getIdProducto(),
-                p.getCodigo(),
-                p.getCategoria().getNombre(),
-                p.getNombre(),
-                p.getPrecioCostoUnitario(),
-                p.getPrecioVentaUnitario(),
-                p.getStock(),
-                p.getDisponibilidad()});
+            productosBuscados = pd.listarTodo();
 
+            for (Producto p : productosBuscados) {
+                modelo.addRow(new Object[]{
+                    false,
+                    p.getIdProducto(),
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),
+                    p.getPrecioCostoUnitario(),
+                    p.getPrecioVentaUnitario(),
+                    p.getStock(),
+                    p.getDisponibilidad()});
+
+            }
+
+            session.close();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        session.close();
     }
 
     public void borrarFilas() {

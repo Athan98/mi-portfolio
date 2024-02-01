@@ -1,15 +1,9 @@
 package frames;
 
-import config.HibernateConfig;
-import data.Producto_data;
 import entidades.Producto;
 import java.awt.event.KeyEvent;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Session;
 
 public class ConsultasPromociones extends javax.swing.JInternalFrame {
 
@@ -99,9 +93,7 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -114,8 +106,8 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
                                 .addComponent(jbEscanear)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbLimpiarCodigo))
-                            .addComponent(jtBuscarPorNombre))
-                        .addGap(16, 16, 16))))
+                            .addComponent(jtBuscarPorNombre))))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,30 +164,26 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtBuscarPorNombreKeyPressed
 
     private void jtBuscarPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarPorNombreKeyReleased
-        Session session = HibernateConfig.get().openSession();
+        try {
+            String campoBuscarNombre = jtBuscarPorNombre.getText().toUpperCase();
 
-        Producto_data pd = new Producto_data(session);
+            borrarFilas();
 
-        List<Producto> productos = pd.listarTodo();
-        String campoBuscarNombre = jtBuscarPorNombre.getText().toUpperCase();
-
-        Collections.sort(productos, Comparator.comparing(Producto::getCodigo));
-
-        borrarFilas();
-
-        for (Producto p : productos) {
-            if ((p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) && (p.getCategoria().getNombre().equals("PROMOCIONES") 
-                    || p.getCategoria().getNombre().equals("PROMO")
-                    || p.getCategoria().getNombre().equals("PROMOCION"))) {
-                modelo.addRow(new Object[]{
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    p.getPrecioVentaUnitario()});
+            for (Producto p : Consultas.productos) {
+                if ((p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) && (p.getCategoria().getNombre().equals("PROMOCIONES")
+                        || p.getCategoria().getNombre().equals("PROMO")
+                        || p.getCategoria().getNombre().equals("PROMOCION"))) {
+                    modelo.addRow(new Object[]{
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        p.getPrecioVentaUnitario()});
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
 
-        session.close();
     }//GEN-LAST:event_jtBuscarPorNombreKeyReleased
 
     private void jbEscanearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscanearActionPerformed
@@ -206,35 +194,34 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEscanearActionPerformed
 
     private void jbLimpiarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCodigoActionPerformed
-
-        jtBusquedaCodigo.setText("");
-        actualizarListaProductos();
+        try {
+            jtBusquedaCodigo.setText("");
+            actualizarListaProductos();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jbLimpiarCodigoActionPerformed
 
     private void jtBusquedaCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaCodigoKeyReleased
-        Session session = HibernateConfig.get().openSession();
+        try {
+            String campoBuscarCodigo = jtBusquedaCodigo.getText();
 
-        Producto_data pd = new Producto_data(session);
+            borrarFilas();
 
-        List<Producto> productos = pd.listarTodo();
-        String campoBuscarCodigo = jtBusquedaCodigo.getText();
-
-        Collections.sort(productos, Comparator.comparing(Producto::getCodigo));
-
-        borrarFilas();
-
-        for (Producto p : productos) {
-            if ((p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) && (p.getCategoria().getNombre().equals("PROMOCIONES") 
-                    || p.getCategoria().getNombre().equals("PROMO")
-                    || p.getCategoria().getNombre().equals("PROMOCION"))) {
-                modelo.addRow(new Object[]{
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),});
+            for (Producto p : Consultas.productos) {
+                if ((p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) && (p.getCategoria().getNombre().equals("PROMOCIONES")
+                        || p.getCategoria().getNombre().equals("PROMO")
+                        || p.getCategoria().getNombre().equals("PROMOCION"))) {
+                    modelo.addRow(new Object[]{
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),});
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
 
-        session.close();
     }//GEN-LAST:event_jtBusquedaCodigoKeyReleased
 
 
@@ -258,29 +245,24 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
     }
 
     public void actualizarListaProductos() {
+        try {
+            modelo.setRowCount(0);
 
-        modelo.setRowCount(0);
-
-        Session session = HibernateConfig.get().openSession();
-
-        Producto_data pd = new Producto_data(session);
-
-        List<Producto> productos = pd.listarTodo();
-
-        Collections.sort(productos, Comparator.comparing(Producto::getCodigo));
-
-        for (Producto p : productos) {
-            if (p.getCategoria().getNombre().equals("PROMOCIONES") || p.getCategoria().getNombre().equals("PROMO")
-                    || p.getCategoria().getNombre().equals("PROMOCION")) {
-                modelo.addRow(new Object[]{
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    p.getPrecioVentaUnitario()});
+            for (Producto p : Consultas.productos) {
+                if (p.getCategoria().getNombre().equals("PROMOCIONES") || p.getCategoria().getNombre().equals("PROMO")
+                        || p.getCategoria().getNombre().equals("PROMOCION")) {
+                    modelo.addRow(new Object[]{
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        p.getPrecioVentaUnitario()});
+                }
             }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR");
         }
 
-        session.close();
     }
 
     public void armarCabeceraTabla() {

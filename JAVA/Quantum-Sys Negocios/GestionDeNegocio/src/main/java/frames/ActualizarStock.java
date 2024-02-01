@@ -18,6 +18,8 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
         }
     };
 
+    List<Producto> productosBuscados = null;
+
     public ActualizarStock() {
         initComponents();
         borrarColumnas();
@@ -44,7 +46,8 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jbActualizar = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setClosable(true);
+        setTitle("ACTUALIZAR STOCKS");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ACTUALIZAR STOCK", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 20))); // NOI18N
 
@@ -97,25 +100,22 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Buscar por nombre:");
 
+        jPanel6.setBackground(new java.awt.Color(0, 0, 0));
         jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel6.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 0));
         jLabel5.setText("unidades");
 
-        jtStock.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jtStock.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jtStock.setForeground(new java.awt.Color(153, 0, 153));
         jtStock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtStock.setText("0");
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 153, 0));
         jLabel6.setText("Se agregan ");
-
-        jbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/actualizar.png"))); // NOI18N
-        jbActualizar.setText("ACTUALIZAR");
-        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbActualizarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -124,56 +124,64 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtStock)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        jbActualizar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jbActualizar.setForeground(new java.awt.Color(0, 153, 0));
+        jbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/actualizar.png"))); // NOI18N
+        jbActualizar.setText("ACTUALIZAR");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
-                        .addGap(18, 18, 18)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtBuscarPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jtBusquedaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtBusquedaCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbEscanear)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbLimpiarCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 85, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbLimpiarCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtBuscarPorNombre))))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jtBuscarPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,21 +191,23 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
                     .addComponent(jtBusquedaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEscanear)
                     .addComponent(jbLimpiarCodigo))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,29 +237,27 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtBuscarPorNombreKeyPressed
 
     private void jtBuscarPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarPorNombreKeyReleased
-        Session session = HibernateConfig.get().openSession();
+        try {
+            String campoBuscarNombre = jtBuscarPorNombre.getText().toUpperCase();
 
-        Producto_data pd = new Producto_data(session);
+            borrarFilas();
 
-        List<Producto> productos = pd.listarTodo();
-        String campoBuscarNombre = jtBuscarPorNombre.getText().toUpperCase();
-
-        borrarFilas();
-
-        for (Producto p : productos) {
-            if (p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) {
-                modelo.addRow(new Object[]{
-                    p.getIdProducto(),
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    p.getPrecioCostoUnitario(),
-                    p.getPrecioVentaUnitario(),
-                    p.getStock(),});
+            for (Producto p : productosBuscados) {
+                if (p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) {
+                    modelo.addRow(new Object[]{
+                        p.getIdProducto(),
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        p.getPrecioCostoUnitario(),
+                        p.getPrecioVentaUnitario(),
+                        p.getStock(),});
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
 
-        session.close();
     }//GEN-LAST:event_jtBuscarPorNombreKeyReleased
 
     private void jbEscanearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscanearActionPerformed
@@ -265,53 +273,54 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
 
-        int idProducto = (int) modelo.getValueAt(jTableProductos.getSelectedRow(), 0);
-        int stock = Integer.parseInt(jtStock.getText());
+        try {
+            int idProducto = (int) modelo.getValueAt(jTableProductos.getSelectedRow(), 0);
+            int stock = Integer.parseInt(jtStock.getText());
 
-        Session session = HibernateConfig.get().openSession();
-        Producto_data pd = new Producto_data(session);
+            Session session = HibernateConfig.get().openSession();
+            Producto_data pd = new Producto_data(session);
 
-        Producto prod = pd.encontrarPorID(idProducto);
+            Producto prod = pd.encontrarPorID(idProducto);
 
-        prod.setStock(prod.getStock() + stock);
+            prod.setStock(prod.getStock() + stock);
 
-        pd.actualizar(prod);
+            pd.actualizar(prod);
 
-        session.close();
+            session.close();
 
-        actualizarListaProductos();
-        
-        JOptionPane.showMessageDialog(null, "El stock ha sido actualizado");
+            actualizarListaProductos();
 
-        jtBuscarPorNombre.setText("");
-        jtBusquedaCodigo.setText("");
-        jtStock.setText("0");
+            JOptionPane.showMessageDialog(null, "El stock ha sido actualizado");
+
+            jtBuscarPorNombre.setText("");
+            jtBusquedaCodigo.setText("");
+            jtStock.setText("0");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jtBusquedaCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaCodigoKeyReleased
-        Session session = HibernateConfig.get().openSession();
+        try {
+            String campoBuscarCodigo = jtBusquedaCodigo.getText();
 
-        Producto_data pd = new Producto_data(session);
+            borrarFilas();
 
-        List<Producto> productos = pd.listarTodo();
-        String campoBuscarCodigo = jtBusquedaCodigo.getText();
-
-        borrarFilas();
-
-        for (Producto p : productos) {
-            if (p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) {
-                modelo.addRow(new Object[]{
-                    p.getIdProducto(),
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),
-                    p.getPrecioCostoUnitario(),
-                    p.getPrecioVentaUnitario(),
-                    p.getStock(),});
+            for (Producto p : productosBuscados) {
+                if (p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) {
+                    modelo.addRow(new Object[]{
+                        p.getIdProducto(),
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        p.getPrecioCostoUnitario(),
+                        p.getPrecioVentaUnitario(),
+                        p.getStock(),});
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        session.close();
     }//GEN-LAST:event_jtBusquedaCodigoKeyReleased
 
 
@@ -341,27 +350,32 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
 
     public void actualizarListaProductos() {
 
-        modelo.setRowCount(0);
+        try {
 
-        Session session = HibernateConfig.get().openSession();
+            modelo.setRowCount(0);
 
-        Producto_data pd = new Producto_data(session);
+            Session session = HibernateConfig.get().openSession();
 
-        List<Producto> productos = pd.listarTodo();
+            Producto_data pd = new Producto_data(session);
 
-        for (Producto p : productos) {
-            modelo.addRow(new Object[]{
-                p.getIdProducto(),
-                p.getCodigo(),
-                p.getCategoria().getNombre(),
-                p.getNombre(),
-                p.getPrecioCostoUnitario(),
-                p.getPrecioVentaUnitario(),
-                p.getStock(),});
+            productosBuscados = pd.listarTodo();
 
+            for (Producto p : productosBuscados) {
+                modelo.addRow(new Object[]{
+                    p.getIdProducto(),
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),
+                    p.getPrecioCostoUnitario(),
+                    p.getPrecioVentaUnitario(),
+                    p.getStock(),});
+
+            }
+
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
-        session.close();
     }
 
     public void armarCabeceraTabla() {

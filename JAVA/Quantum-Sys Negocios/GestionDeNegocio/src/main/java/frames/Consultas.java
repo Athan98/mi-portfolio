@@ -1,13 +1,24 @@
 package frames;
 
+import config.HibernateConfig;
+import data.Producto_data;
+import entidades.Producto;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import javax.swing.JOptionPane;
+import org.hibernate.Session;
+
 public class Consultas extends javax.swing.JInternalFrame {
 
-    ConsultasStock cs=new ConsultasStock();
-    ConsultasPromociones cp=new ConsultasPromociones();
-    ConsultaCodigos cc=new ConsultaCodigos();
+    ConsultasStock cs = new ConsultasStock();
+    ConsultasPromociones cp = new ConsultasPromociones();
+    ConsultaCodigos cc = new ConsultaCodigos();
+    public static List<Producto> productos = null;
 
     public Consultas() {
         initComponents();
+        productos = listaProductos();
         ConsultasPane.addTab("Consulta de codigo", cc);
         ConsultasPane.addTab("Consulta de stock", cs);
         ConsultasPane.addTab("Consulta de promos", cp);
@@ -39,6 +50,27 @@ public class Consultas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public List<Producto> listaProductos() {
+        try {
+
+            Session session = HibernateConfig.get().openSession();
+
+            Producto_data pd = new Producto_data(session);
+
+            productos = pd.listarTodo();
+
+            Collections.sort(productos, Comparator.comparing(Producto::getCodigo));
+
+            session.close();
+
+            return productos;
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+
+        return null;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane ConsultasPane;

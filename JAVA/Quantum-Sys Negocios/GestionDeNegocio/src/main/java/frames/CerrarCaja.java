@@ -653,46 +653,57 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCalcularDifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularDifActionPerformed
-        Double montoTotalReal = Double.parseDouble(jtTotalReal.getText());
-        Double diferencia = montoTotalTeorico - montoTotalReal;
 
-        if (diferencia <= 0) {
-            jlDiferencia.setForeground(Color.GREEN);
-            jlDiferencia.setText(((-1) * diferencia) + "");
-        } else {
-            jlDiferencia.setForeground(Color.RED);
-            jlDiferencia.setText("-" + diferencia);
+        try {
+
+            Double montoTotalReal = Double.parseDouble(jtTotalReal.getText());
+            Double diferencia = montoTotalTeorico - montoTotalReal;
+
+            if (diferencia <= 0) {
+                jlDiferencia.setForeground(Color.GREEN);
+                jlDiferencia.setText(((-1) * diferencia) + "");
+            } else {
+                jlDiferencia.setForeground(Color.RED);
+                jlDiferencia.setText("-" + diferencia);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
 
     }//GEN-LAST:event_jbCalcularDifActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        if (jtTotalReal.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Asegurese de ingresar el total real y calcula la diferencia");
-        } else {
-            if (caja.isEstado() == true) {
-                Date fechaActual = new Date();
-                Double diferencia = Double.parseDouble(jlDiferencia.getText());
-                Double montoTotalReal = Double.parseDouble(jtTotalReal.getText());
-                String sucursal = jlSucursal.getText();
-
-                Session session = HibernateConfig.get().openSession();
-                MovimientosCaja_data mcd = new MovimientosCaja_data(session);
-                Caja_data cd = new Caja_data(session);
-
-                MovimientosCaja mc = new MovimientosCaja(fechaActual, montoTotalTeorico, montoTotalReal, diferencia, "CIERRE", caja, sucursal, usuario);
-                caja.setEstado(false);
-
-                mcd.agregar(mc);
-                cd.actualizar(caja);
-                JOptionPane.showMessageDialog(null, "La caja ha sido cerrada exitosamente");
-                montoTotalTeorico = 0.0;
-                Principal.setPaneCaja();
-                limpiar();
-                session.close();
+        try {
+            if (jtTotalReal.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Asegurese de ingresar el total real y calcula la diferencia");
             } else {
-                JOptionPane.showMessageDialog(null, "La caja ya esta cerrada. Intente realizar la apertura");
+                if (caja.isEstado() == true) {
+                    Date fechaActual = new Date();
+                    Double diferencia = Double.parseDouble(jlDiferencia.getText());
+                    Double montoTotalReal = Double.parseDouble(jtTotalReal.getText());
+                    String sucursal = jlSucursal.getText();
+
+                    Session session = HibernateConfig.get().openSession();
+                    MovimientosCaja_data mcd = new MovimientosCaja_data(session);
+                    Caja_data cd = new Caja_data(session);
+
+                    MovimientosCaja mc = new MovimientosCaja(fechaActual, montoTotalTeorico, montoTotalReal, diferencia, "CIERRE", caja, sucursal, usuario);
+                    caja.setEstado(false);
+
+                    mcd.agregar(mc);
+                    cd.actualizar(caja);
+
+                    montoTotalTeorico = 0.0;
+                    Principal.setPaneCaja();
+                    limpiar();
+                    session.close();
+                    JOptionPane.showMessageDialog(null, "La caja ha sido cerrada exitosamente");
+                } else {
+                    JOptionPane.showMessageDialog(null, "La caja ya esta cerrada. Intente realizar la apertura");
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -908,24 +919,31 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
     }
 
     private MovimientosCaja obtenerUltimaApertura() {
-        Session session = HibernateConfig.get().openSession();
-        MovimientosCaja_data mcd = new MovimientosCaja_data(session);
+        try {
+            Session session = HibernateConfig.get().openSession();
+            MovimientosCaja_data mcd = new MovimientosCaja_data(session);
 
-        List<MovimientosCaja> movimientos = mcd.listarTodo();
+            List<MovimientosCaja> movimientos = mcd.listarTodo();
 
-        MovimientosCaja ultimaApertura = null;
+            MovimientosCaja ultimaApertura = null;
 
-        for (MovimientosCaja mc : movimientos) {
+            for (MovimientosCaja mc : movimientos) {
 
-            if ("APERTURA".equals(mc.getOperacion())) {
-                if (ultimaApertura == null || mc.getFecha().after(ultimaApertura.getFecha())) {
-                    ultimaApertura = mc;
+                if ("APERTURA".equals(mc.getOperacion())) {
+                    if (ultimaApertura == null || mc.getFecha().after(ultimaApertura.getFecha())) {
+                        ultimaApertura = mc;
+                    }
                 }
             }
+
+            session.close();
+            return ultimaApertura;
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
 
-        session.close();
-        return ultimaApertura;
+        return null;
     }
 
     public void limpiar() {

@@ -118,8 +118,8 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jbEscanearNuevo" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jtNombre" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                                   <Component id="jlID" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Component id="jtNombre" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -129,9 +129,9 @@
                                   <Component id="jLabel15" min="-2" pref="71" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jcEstado" pref="202" max="32767" attributes="0"/>
                                           <Component id="jcCategorias" max="32767" attributes="0"/>
                                       </Group>
@@ -630,7 +630,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtBuscarPorNombre">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtBuscarPorNombreKeyPressed"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtBuscarPorNombreKeyReleased"/>
           </Events>
         </Component>

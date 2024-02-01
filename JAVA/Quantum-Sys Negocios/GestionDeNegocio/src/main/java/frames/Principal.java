@@ -538,50 +538,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbProveedoresActionPerformed
 
     private void jbPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPedidosActionPerformed
-
-        if (user.getAcceso() == 2) {
-            // Verificar si hay un hilo SwingWorker en ejecuci�n y esperar a que termine
-            if (cargaWorker != null && !cargaWorker.isDone()) {
-                JOptionPane.showMessageDialog(null, "Espere a que la operaci�n actual termine.");
-                return;
-            }
-
-            // Crear e iniciar el hilo SwingWorker
-            cargaWorker = new SwingWorker<Void, Void>() {
-                Loading loading = new Loading();
-
-                @Override
-                protected Void doInBackground() throws Exception {
-                    // Mostrar el frame de carga
-
-                    loading.setVisible(true);
-
-                    try {
-                        escritorio.removeAll();
-                        escritorio.repaint();
-                        Thread.sleep(2000);
-                        Pedidos p = new Pedidos();
-                        p.setVisible(true);
-                        escritorio.add(p);
-                        p.setLocation((Principal.escritorio.getWidth() - p.getWidth()) / 2, (Principal.escritorio.getHeight() - p.getHeight()) / 2);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    return null;
-                }
-
-                @Override
-                protected void done() {
-                    // Cerrar el frame de carga despu�s de que la tarea haya terminado
-                    loading.dispose();
-                }
-            };
-
-            cargaWorker.execute();
-        } else {
-            JOptionPane.showMessageDialog(null, "No posee los permisos suficientes");
-        }
+        escritorio.removeAll();
+        escritorio.repaint();
+        InicioPedidos p = new InicioPedidos();
+        p.setVisible(true);
+        escritorio.add(p);
+        p.setLocation((Principal.escritorio.getWidth() - p.getWidth()) / 2, (Principal.escritorio.getHeight() - p.getHeight()) / 2);
     }//GEN-LAST:event_jbPedidosActionPerformed
 
     private void jbEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadisticasActionPerformed

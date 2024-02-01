@@ -51,10 +51,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane2" pref="560" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane2" alignment="0" pref="560" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel10" max="32767" attributes="0"/>
@@ -62,7 +59,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Component id="jtBusquedaCodigo" max="32767" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jbEscanear" min="-2" max="-2" attributes="0"/>
@@ -71,9 +68,9 @@
                               </Group>
                               <Component id="jtBuscarPorNombre" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

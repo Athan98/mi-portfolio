@@ -1,7 +1,5 @@
 package frames;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
@@ -12,7 +10,7 @@ public class Iniciar {
     public static void main(String[] args) {
 
         if (cargaWorker != null && !cargaWorker.isDone()) {
-            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+            JOptionPane.showMessageDialog(null, "Espere a que la operacion actual termine.");
             return;
         }
 
@@ -39,7 +37,7 @@ public class Iniciar {
 
             @Override
             protected void done() {
-                // Cerrar el frame de carga después de que la tarea haya terminado
+                // Cerrar el frame de carga despuï¿½s de que la tarea haya terminado
                 loading.dispose();
             }
         };

@@ -14,7 +14,6 @@ public class Cajas extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -115,7 +114,8 @@ public class Cajas extends javax.swing.JInternalFrame {
                 loading.setVisible(true);
 
                 try {
-
+                    escritorio.removeAll();
+                    escritorio.repaint();
                     Thread.sleep(2000);
                     AperturaYGestionCaja apgc = new AperturaYGestionCaja();
                     apgc.setVisible(true);
@@ -155,7 +155,8 @@ public class Cajas extends javax.swing.JInternalFrame {
                 loading.setVisible(true);
 
                 try {
-
+                    escritorio.removeAll();
+                    escritorio.repaint();
                     Thread.sleep(2000);
                     CerrarCaja cc = new CerrarCaja();
                     cc.setVisible(true);

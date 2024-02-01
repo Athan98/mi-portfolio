@@ -1,15 +1,9 @@
 package frames;
 
-import config.HibernateConfig;
-import data.Producto_data;
 import entidades.Producto;
 import java.awt.event.KeyEvent;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Session;
 
 public class ConsultaCodigos extends javax.swing.JInternalFrame {
 
@@ -98,26 +92,25 @@ public class ConsultaCodigos extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(25, 25, 25))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jtBusquedaCodigo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbEscanear)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbLimpiarCodigo))
+                            .addComponent(jtBuscarPorNombre))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(25, 25, 25))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jtBusquedaCodigo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbEscanear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbLimpiarCodigo))
-                    .addComponent(jtBuscarPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,9 +150,12 @@ public class ConsultaCodigos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLimpiarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCodigoActionPerformed
-
-        jtBusquedaCodigo.setText("");
-        actualizarListaProductos();
+        try {
+            jtBusquedaCodigo.setText("");
+            actualizarListaProductos();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jbLimpiarCodigoActionPerformed
 
     private void jbEscanearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscanearActionPerformed
@@ -169,27 +165,23 @@ public class ConsultaCodigos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEscanearActionPerformed
 
     private void jtBuscarPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarPorNombreKeyReleased
-        Session session = HibernateConfig.get().openSession();
+        try {
+            String campoBuscarNombre = jtBuscarPorNombre.getText().toUpperCase();
 
-        Producto_data pd = new Producto_data(session);
+            borrarFilas();
 
-        List<Producto> productos = pd.listarTodo();
-        String campoBuscarNombre = jtBuscarPorNombre.getText().toUpperCase();
+            for (Producto p : Consultas.productos) {
+                if (p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) {
+                    modelo.addRow(new Object[]{
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),});
+                }
+            }
 
-        Collections.sort(productos, Comparator.comparing(Producto::getCodigo));
-
-        borrarFilas();
-
-        for (Producto p : productos) {
-            if (p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) {
-                modelo.addRow(new Object[]{
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),});
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-        }
-
-        session.close();
     }//GEN-LAST:event_jtBuscarPorNombreKeyReleased
 
     private void jtBuscarPorNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarPorNombreKeyPressed
@@ -202,27 +194,23 @@ public class ConsultaCodigos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtBuscarPorNombreKeyPressed
 
     private void jtBusquedaCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaCodigoKeyReleased
-        Session session = HibernateConfig.get().openSession();
+        try {
+            String campoBuscarCodigo = jtBusquedaCodigo.getText();
 
-        Producto_data pd = new Producto_data(session);
+            borrarFilas();
 
-        List<Producto> productos = pd.listarTodo();
-        String campoBuscarCodigo = jtBusquedaCodigo.getText();
+            for (Producto p : Consultas.productos) {
+                if (p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) {
+                    modelo.addRow(new Object[]{
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),});
+                }
+            }
 
-        Collections.sort(productos, Comparator.comparing(Producto::getCodigo));
-
-        borrarFilas();
-
-        for (Producto p : productos) {
-            if (p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) {
-                modelo.addRow(new Object[]{
-                    p.getCodigo(),
-                    p.getCategoria().getNombre(),
-                    p.getNombre(),});
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-        }
-
-        session.close();
     }//GEN-LAST:event_jtBusquedaCodigoKeyReleased
 
     private void jtBusquedaCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaCodigoKeyPressed
@@ -255,25 +243,21 @@ public class ConsultaCodigos extends javax.swing.JInternalFrame {
 
     public void actualizarListaProductos() {
 
-        modelo.setRowCount(0);
+        try {
 
-        Session session = HibernateConfig.get().openSession();
+            modelo.setRowCount(0);
 
-        Producto_data pd = new Producto_data(session);
+            for (Producto p : Consultas.productos) {
+                modelo.addRow(new Object[]{
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),});
 
-        List<Producto> productos = pd.listarTodo();
-        
-        Collections.sort(productos, Comparator.comparing(Producto::getCodigo));
-
-        for (Producto p : productos) {
-            modelo.addRow(new Object[]{
-                p.getCodigo(),
-                p.getCategoria().getNombre(),
-                p.getNombre(),});
-
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
 
-        session.close();
     }
 
     public void armarCabeceraTabla() {

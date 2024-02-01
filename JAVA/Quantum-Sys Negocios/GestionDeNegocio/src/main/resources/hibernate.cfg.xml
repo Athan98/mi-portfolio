@@ -4,9 +4,9 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://databaseqs1.cv2ycs6yihhk.us-east-2.rds.amazonaws.com:3306/negociobd?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
-        <property name="hibernate.connection.username">admin</property>
-        <property name="hibernate.connection.password">root2023</property>
+        <property name="hibernate.connection.url">jdbc:mysql://server:puerto/negociobd?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
+        <property name="hibernate.connection.username">user</property>
+        <property name="hibernate.connection.password">pass</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.connection.pool_size">1</property>
         <property name="hibernate.current_session_context_class">thread</property>

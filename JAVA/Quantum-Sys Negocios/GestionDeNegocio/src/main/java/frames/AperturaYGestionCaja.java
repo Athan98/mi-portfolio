@@ -4,8 +4,6 @@ import config.HibernateConfig;
 import data.*;
 import entidades.*;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -120,7 +118,8 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
         jbAceptar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jbAceptar.setForeground(new java.awt.Color(0, 204, 0));
-        jbAceptar.setText("ACEPTAR");
+        jbAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ok.png"))); // NOI18N
+        jbAceptar.setText("  ACEPTAR");
         jbAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAceptarActionPerformed(evt);
@@ -131,9 +130,9 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -186,7 +185,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbAceptar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -218,8 +217,8 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -235,12 +234,12 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -276,6 +275,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
         try {
+
             if (jcCaja.getSelectedIndex() == -1 || jcSucursal.getSelectedIndex() == -1 || jcOperacion.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(null, "Asegurese de llenar los campos correctamente");
             } else {
@@ -299,10 +299,10 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
                     mcd.agregar(mc);
                     cd.actualizar(caja);
-                    JOptionPane.showMessageDialog(null, "La apertura de caja se realizo correctamente");
                     Principal.setPaneCaja();
                     actualizarTabla();
                     limpiarCampos();
+                    JOptionPane.showMessageDialog(null, "La apertura de caja se realizo correctamente");
 
                 } else if (caja.isEstado() == true && jcOperacion.getSelectedItem().equals("INGRESO")) {
 
@@ -318,6 +318,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
                     actualizarTabla();
                     Principal.setPaneCaja();
                     limpiarCampos();
+                    JOptionPane.showMessageDialog(null, "El ingreso se realizo correctamente");
 
                 } else if (caja.isEstado() == true && jcOperacion.getSelectedItem().equals("EGRESO")) {
 
@@ -333,6 +334,7 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
                     actualizarTabla();
                     Principal.setPaneCaja();
                     limpiarCampos();
+                    JOptionPane.showMessageDialog(null, "El egreso se realizo correctamente");
 
                 } else if (caja.isEstado() == true && jcOperacion.getSelectedItem().equals("APERTURA")) {
 
@@ -389,29 +391,35 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
     private void actualizarTabla() {
 
-        MovimientosCaja movcaja = obtenerUltimaApertura();
+        try {
 
-        modelo.setRowCount(0);
+            MovimientosCaja movcaja = obtenerUltimaApertura();
 
-        Session session = HibernateConfig.get().openSession();
-        MovimientosCaja_data mcd = new MovimientosCaja_data(session);
+            modelo.setRowCount(0);
 
-        List<MovimientosCaja> movimientos = mcd.listarTodo();
+            Session session = HibernateConfig.get().openSession();
+            MovimientosCaja_data mcd = new MovimientosCaja_data(session);
 
-        for (MovimientosCaja mc : movimientos) {
-            if ((mc.getFecha().equals(movcaja.getFecha()) || mc.getFecha().after(movcaja.getFecha()))) {
-                modelo.addRow(new Object[]{
-                    mc.getFecha(),
-                    mc.getCaja().getNroCaja(),
-                    mc.getUsuario().getNombre(),
-                    mc.getOperacion(),
-                    mc.getMonto(),
-                    mc.getComentario()});
+            List<MovimientosCaja> movimientos = mcd.listarTodo();
+
+            for (MovimientosCaja mc : movimientos) {
+                if ((mc.getFecha().equals(movcaja.getFecha()) || mc.getFecha().after(movcaja.getFecha()))) {
+                    modelo.addRow(new Object[]{
+                        mc.getFecha(),
+                        mc.getCaja().getNroCaja(),
+                        mc.getUsuario().getNombre(),
+                        mc.getOperacion(),
+                        mc.getMonto(),
+                        mc.getComentario()});
+                }
+
             }
 
-        }
+            session.close();
 
-        session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
     }
 
     private void limpiarCampos() {
@@ -423,24 +431,29 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
     }
 
     private MovimientosCaja obtenerUltimaApertura() {
-        Session session = HibernateConfig.get().openSession();
-        MovimientosCaja_data mcd = new MovimientosCaja_data(session);
+        try {
+            Session session = HibernateConfig.get().openSession();
+            MovimientosCaja_data mcd = new MovimientosCaja_data(session);
 
-        List<MovimientosCaja> movimientos = mcd.listarTodo();
+            List<MovimientosCaja> movimientos = mcd.listarTodo();
 
-        MovimientosCaja ultimaApertura = null;
+            MovimientosCaja ultimaApertura = null;
 
-        for (MovimientosCaja mc : movimientos) {
+            for (MovimientosCaja mc : movimientos) {
 
-            if ("APERTURA".equals(mc.getOperacion())) {
-                if (ultimaApertura == null || mc.getFecha().after(ultimaApertura.getFecha())) {
-                    ultimaApertura = mc;
+                if ("APERTURA".equals(mc.getOperacion())) {
+                    if (ultimaApertura == null || mc.getFecha().after(ultimaApertura.getFecha())) {
+                        ultimaApertura = mc;
+                    }
                 }
             }
-        }
 
-        session.close();
-        return ultimaApertura;
+            session.close();
+            return ultimaApertura;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+        return null;
     }
 
     public String setFecha() {

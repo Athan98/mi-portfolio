@@ -9,7 +9,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -67,7 +69,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jpIniciar.setForeground(java.awt.Color.lightGray);
 
         jbIniciar.setBackground(new java.awt.Color(213, 20, 81));
-        jbIniciar.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 20)); // NOI18N
+        jbIniciar.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 28)); // NOI18N
         jbIniciar.setForeground(new java.awt.Color(255, 255, 255));
         jbIniciar.setText("Iniciar sesion");
         jbIniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +79,7 @@ public class InicioSesion extends javax.swing.JFrame {
         });
 
         jbSalir.setBackground(new java.awt.Color(213, 20, 81));
-        jbSalir.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 20)); // NOI18N
+        jbSalir.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 28)); // NOI18N
         jbSalir.setForeground(new java.awt.Color(255, 255, 255));
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +96,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jpInicio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Negocios", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Mistral", 1, 36), new java.awt.Color(213, 20, 81))); // NOI18N
 
         jtUser.setBackground(new java.awt.Color(213, 19, 80));
-        jtUser.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jtUser.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         jtUser.setForeground(new java.awt.Color(255, 255, 255));
         jtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -103,7 +105,7 @@ public class InicioSesion extends javax.swing.JFrame {
         });
 
         jtPass.setBackground(new java.awt.Color(213, 19, 80));
-        jtPass.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jtPass.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         jtPass.setForeground(new java.awt.Color(255, 255, 255));
         jtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -135,7 +137,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jpInicioLayout.setVerticalGroup(
             jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpInicioLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -143,7 +145,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addGroup(jpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(19, 19, 19))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jpIniciarLayout = new javax.swing.GroupLayout(jpIniciar);
@@ -154,11 +156,11 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpIniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jpIniciarLayout.createSequentialGroup()
-                        .addComponent(jbIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jpInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jbIniciar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpIniciarLayout.setVerticalGroup(
@@ -167,12 +169,12 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jpIniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbIniciar)
                     .addComponent(jbSalir))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panelBackLayout = new javax.swing.GroupLayout(panelBack);
