@@ -3,6 +3,7 @@ package frames;
 import config.HibernateConfig;
 import data.*;
 import entidades.*;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -111,6 +112,11 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
 
         jtMonto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtMonto.setText("0");
+        jtMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtMontoKeyPressed(evt);
+            }
+        });
 
         jtComentario.setColumns(20);
         jtComentario.setRows(5);
@@ -347,6 +353,15 @@ public class AperturaYGestionCaja extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jbAceptarActionPerformed
+
+    private void jtMontoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtMontoKeyPressed
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)
+                || (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_V) || (evt.getKeyChar() == '.')) {
+            jtMonto.setEditable(true);
+        } else {
+            jtMonto.setEditable(false);
+        }
+    }//GEN-LAST:event_jtMontoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

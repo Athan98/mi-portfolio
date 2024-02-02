@@ -112,6 +112,11 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
         jtStock.setForeground(new java.awt.Color(153, 0, 153));
         jtStock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtStock.setText("0");
+        jtStock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtStockKeyPressed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 153, 0));
@@ -322,6 +327,14 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jtBusquedaCodigoKeyReleased
+
+    private void jtStockKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtStockKeyPressed
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            jtStock.setEditable(true);
+        } else {
+            jtStock.setEditable(false);
+        }
+    }//GEN-LAST:event_jtStockKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

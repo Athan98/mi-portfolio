@@ -342,7 +342,9 @@ public class IngresarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtCostoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCostoKeyPressed
-        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)
+                || (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_V) || (evt.getKeyChar() == '.')) {
             jtCosto.setEditable(true);
         } else {
             jtCosto.setEditable(false);

@@ -5,6 +5,7 @@ import data.*;
 import entidades.*;
 import exportarExcel.ReporteCajaPDF;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -193,6 +194,11 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
 
         jtTotalReal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtTotalReal.setText("0");
+        jtTotalReal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtTotalRealKeyPressed(evt);
+            }
+        });
 
         jbCalcularDif.setText("Calcular");
         jbCalcularDif.addActionListener(new java.awt.event.ActionListener() {
@@ -721,6 +727,15 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_jbImprimirActionPerformed
+
+    private void jtTotalRealKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTotalRealKeyPressed
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)
+                || (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_V) || (evt.getKeyChar() == '.')) {
+            jtTotalReal.setEditable(true);
+        } else {
+            jtTotalReal.setEditable(false);
+        }
+    }//GEN-LAST:event_jtTotalRealKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

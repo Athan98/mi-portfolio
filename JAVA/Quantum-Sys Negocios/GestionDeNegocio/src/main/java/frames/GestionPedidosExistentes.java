@@ -714,7 +714,8 @@ public class GestionPedidosExistentes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jtMontoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtMontoKeyPressed
-        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+        if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)
+                || (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_V) || (evt.getKeyChar() == '.')) {
             jtMonto.setEditable(true);
         } else {
             jtMonto.setEditable(false);
