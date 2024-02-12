@@ -1027,7 +1027,20 @@ public class Productos extends javax.swing.JInternalFrame {
     private void jbLimpiarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCodigoActionPerformed
         try {
             jtBusquedaCodigo.setText("");
-            actualizarListaProductos();
+            borrarFilas();
+            for (Producto p : productosBuscados) {
+                modelo.addRow(new Object[]{
+                    false,
+                    p.getIdProducto(),
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),
+                    p.getPrecioCostoUnitario(),
+                    p.getPrecioVentaUnitario(),
+                    p.getStock(),
+                    p.getDisponibilidad()});
+
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }

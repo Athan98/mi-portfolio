@@ -274,8 +274,6 @@ public class Pago extends javax.swing.JFrame {
 
                     mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
 
-                    JOptionPane.showMessageDialog(null, "El pago de la venta ha sido agregado a la base de datos");
-
                     this.setVisible(false);
                 }
 
@@ -300,8 +298,6 @@ public class Pago extends javax.swing.JFrame {
                     DecimalFormat formato = new DecimalFormat("#.##");
 
                     mostrarVuelto("El vuelto es = $" + formato.format(vuelto));
-
-                    JOptionPane.showMessageDialog(null, "El pago de la venta ha sido agregado a la base de datos");
 
                     this.setVisible(false);
                 }

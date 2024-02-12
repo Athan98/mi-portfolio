@@ -39,10 +39,10 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+          <Color blue="d5" green="ba" red="a9" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+          <Color blue="d5" green="ba" red="a9" type="rgb"/>
         </Property>
       </Properties>
 
@@ -75,10 +75,10 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+              <Color blue="d5" green="ba" red="a9" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+              <Color blue="d5" green="ba" red="a9" type="rgb"/>
             </Property>
           </Properties>
 
@@ -113,18 +113,18 @@
             <Container class="javax.swing.JPanel" name="jPanel3">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+                  <Color blue="d5" green="ba" red="a9" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder justification="2" title="Ventas">
                       <Font PropertyName="font" name="Gill Sans MT Condensed" size="24" style="1"/>
-                      <Color PropertyName="color" blue="0" green="0" red="0" type="rgb"/>
+                      <Color PropertyName="color" blue="bc" green="80" red="62" type="rgb"/>
                     </TitledBorder>
                   </Border>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+                  <Color blue="d5" green="ba" red="a9" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -159,13 +159,13 @@
                 <Component class="javax.swing.JButton" name="jbVentasTotales">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                      <Color blue="bc" green="80" red="62" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Gill Sans MT Condensed" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Ventas por mes"/>
                   </Properties>
@@ -176,13 +176,13 @@
                 <Component class="javax.swing.JButton" name="jbVentasPorFormasDePago">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                      <Color blue="bc" green="80" red="62" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Gill Sans MT Condensed" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Ventas por formas de pago"/>
                   </Properties>
@@ -193,13 +193,13 @@
                 <Component class="javax.swing.JButton" name="jbVentasPorDia">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                      <Color blue="bc" green="80" red="62" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Gill Sans MT Condensed" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Ventas por dia"/>
                   </Properties>
@@ -212,18 +212,18 @@
             <Container class="javax.swing.JPanel" name="jPanel5">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+                  <Color blue="d5" green="ba" red="a9" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder justification="2" title="Productos">
                       <Font PropertyName="font" name="Gill Sans MT Condensed" size="24" style="1"/>
-                      <Color PropertyName="color" blue="0" green="0" red="0" type="rgb"/>
+                      <Color PropertyName="color" blue="bc" green="80" red="62" type="rgb"/>
                     </TitledBorder>
                   </Border>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+                  <Color blue="d5" green="ba" red="a9" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -251,13 +251,13 @@
                 <Component class="javax.swing.JButton" name="jbProductosMasVendidos">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                      <Color blue="bc" green="80" red="62" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Gill Sans MT Condensed" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Mas vendidos"/>
                   </Properties>
@@ -270,18 +270,18 @@
             <Container class="javax.swing.JPanel" name="jPanel4">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+                  <Color blue="d5" green="ba" red="a9" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder justification="2" title="Costos">
                       <Font PropertyName="font" name="Gill Sans MT Condensed" size="24" style="1"/>
-                      <Color PropertyName="color" blue="0" green="0" red="0" type="rgb"/>
+                      <Color PropertyName="color" blue="bc" green="80" red="62" type="rgb"/>
                     </TitledBorder>
                   </Border>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+                  <Color blue="d5" green="ba" red="a9" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -320,13 +320,13 @@
                 <Component class="javax.swing.JButton" name="jbCostosPorMes">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                      <Color blue="bc" green="80" red="62" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Gill Sans MT Condensed" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Costos por mes"/>
                   </Properties>
@@ -337,13 +337,13 @@
                 <Component class="javax.swing.JButton" name="jbCostosPorDia">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                      <Color blue="bc" green="80" red="62" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Gill Sans MT Condensed" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Costos por dia"/>
                   </Properties>
@@ -354,13 +354,13 @@
                 <Component class="javax.swing.JButton" name="jbCostosPorProveedor">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                      <Color blue="bc" green="80" red="62" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Gill Sans MT Condensed" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Costos por proveedor"/>
                   </Properties>
@@ -371,13 +371,13 @@
                 <Component class="javax.swing.JButton" name="jbCostosFDP">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                      <Color blue="bc" green="80" red="62" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Gill Sans MT Condensed" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Costos por formas de pago"/>
                   </Properties>
@@ -402,7 +402,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane(){&#xa;    public void paintComponent(Graphics g){&#xa;        g.drawImage(image,0,0,getWidth(),getHeight(),this);&#xa;    }&#xa;}"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icon = new ImageIcon(getClass().getResource(&quot;/imagenes/escritorio.png&quot;));&#xa; Image image = icon.getImage();"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icon = new ImageIcon(getClass().getResource(&quot;/imagenes/fondoOUSIA.jpeg&quot;));&#xa; Image image = icon.getImage();"/>
           </AuxValues>
 
           <Layout>

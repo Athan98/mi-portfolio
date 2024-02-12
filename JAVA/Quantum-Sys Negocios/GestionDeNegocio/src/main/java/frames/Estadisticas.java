@@ -35,7 +35,7 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         jbCostosPorDia = new javax.swing.JButton();
         jbCostosPorProveedor = new javax.swing.JButton();
         jbCostosFDP = new javax.swing.JButton();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/escritorio.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/fondoOUSIA.jpeg"));
         Image image = icon.getImage();
         estadisticasPane = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -46,19 +46,19 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("ESTADISTICAS");
 
-        jPanel1.setBackground(java.awt.Color.lightGray);
-        jPanel1.setForeground(java.awt.Color.lightGray);
+        jPanel1.setBackground(new java.awt.Color(169, 186, 213));
+        jPanel1.setForeground(new java.awt.Color(169, 186, 213));
 
-        jPanel2.setBackground(java.awt.Color.lightGray);
-        jPanel2.setForeground(java.awt.Color.lightGray);
+        jPanel2.setBackground(new java.awt.Color(169, 186, 213));
+        jPanel2.setForeground(new java.awt.Color(169, 186, 213));
 
-        jPanel3.setBackground(java.awt.Color.lightGray);
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ventas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 24), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel3.setForeground(java.awt.Color.lightGray);
+        jPanel3.setBackground(new java.awt.Color(169, 186, 213));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ventas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 24), new java.awt.Color(98, 128, 188))); // NOI18N
+        jPanel3.setForeground(new java.awt.Color(169, 186, 213));
 
-        jbVentasTotales.setBackground(java.awt.Color.gray);
+        jbVentasTotales.setBackground(new java.awt.Color(98, 128, 188));
         jbVentasTotales.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbVentasTotales.setForeground(new java.awt.Color(0, 0, 0));
+        jbVentasTotales.setForeground(new java.awt.Color(255, 255, 255));
         jbVentasTotales.setText("Ventas por mes");
         jbVentasTotales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,9 +66,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             }
         });
 
-        jbVentasPorFormasDePago.setBackground(java.awt.Color.gray);
+        jbVentasPorFormasDePago.setBackground(new java.awt.Color(98, 128, 188));
         jbVentasPorFormasDePago.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbVentasPorFormasDePago.setForeground(new java.awt.Color(0, 0, 0));
+        jbVentasPorFormasDePago.setForeground(new java.awt.Color(255, 255, 255));
         jbVentasPorFormasDePago.setText("Ventas por formas de pago");
         jbVentasPorFormasDePago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,9 +76,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             }
         });
 
-        jbVentasPorDia.setBackground(java.awt.Color.gray);
+        jbVentasPorDia.setBackground(new java.awt.Color(98, 128, 188));
         jbVentasPorDia.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbVentasPorDia.setForeground(new java.awt.Color(0, 0, 0));
+        jbVentasPorDia.setForeground(new java.awt.Color(255, 255, 255));
         jbVentasPorDia.setText("Ventas por dia");
         jbVentasPorDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,13 +109,13 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(java.awt.Color.lightGray);
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 24), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel5.setForeground(java.awt.Color.lightGray);
+        jPanel5.setBackground(new java.awt.Color(169, 186, 213));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 24), new java.awt.Color(98, 128, 188))); // NOI18N
+        jPanel5.setForeground(new java.awt.Color(169, 186, 213));
 
-        jbProductosMasVendidos.setBackground(java.awt.Color.gray);
+        jbProductosMasVendidos.setBackground(new java.awt.Color(98, 128, 188));
         jbProductosMasVendidos.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbProductosMasVendidos.setForeground(new java.awt.Color(0, 0, 0));
+        jbProductosMasVendidos.setForeground(new java.awt.Color(255, 255, 255));
         jbProductosMasVendidos.setText("Mas vendidos");
         jbProductosMasVendidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,13 +140,13 @@ public class Estadisticas extends javax.swing.JInternalFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(java.awt.Color.lightGray);
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Costos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 24), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel4.setForeground(java.awt.Color.lightGray);
+        jPanel4.setBackground(new java.awt.Color(169, 186, 213));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Costos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 24), new java.awt.Color(98, 128, 188))); // NOI18N
+        jPanel4.setForeground(new java.awt.Color(169, 186, 213));
 
-        jbCostosPorMes.setBackground(java.awt.Color.gray);
+        jbCostosPorMes.setBackground(new java.awt.Color(98, 128, 188));
         jbCostosPorMes.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbCostosPorMes.setForeground(new java.awt.Color(0, 0, 0));
+        jbCostosPorMes.setForeground(new java.awt.Color(255, 255, 255));
         jbCostosPorMes.setText("Costos por mes");
         jbCostosPorMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,9 +154,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             }
         });
 
-        jbCostosPorDia.setBackground(java.awt.Color.gray);
+        jbCostosPorDia.setBackground(new java.awt.Color(98, 128, 188));
         jbCostosPorDia.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbCostosPorDia.setForeground(new java.awt.Color(0, 0, 0));
+        jbCostosPorDia.setForeground(new java.awt.Color(255, 255, 255));
         jbCostosPorDia.setText("Costos por dia");
         jbCostosPorDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,9 +164,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             }
         });
 
-        jbCostosPorProveedor.setBackground(java.awt.Color.gray);
+        jbCostosPorProveedor.setBackground(new java.awt.Color(98, 128, 188));
         jbCostosPorProveedor.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbCostosPorProveedor.setForeground(new java.awt.Color(0, 0, 0));
+        jbCostosPorProveedor.setForeground(new java.awt.Color(255, 255, 255));
         jbCostosPorProveedor.setText("Costos por proveedor");
         jbCostosPorProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,9 +174,9 @@ public class Estadisticas extends javax.swing.JInternalFrame {
             }
         });
 
-        jbCostosFDP.setBackground(java.awt.Color.gray);
+        jbCostosFDP.setBackground(new java.awt.Color(98, 128, 188));
         jbCostosFDP.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        jbCostosFDP.setForeground(new java.awt.Color(0, 0, 0));
+        jbCostosFDP.setForeground(new java.awt.Color(255, 255, 255));
         jbCostosFDP.setText("Costos por formas de pago");
         jbCostosFDP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

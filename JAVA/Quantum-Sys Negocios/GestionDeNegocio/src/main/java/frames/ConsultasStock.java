@@ -2,6 +2,7 @@ package frames;
 
 import entidades.Producto;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,6 +14,8 @@ public class ConsultasStock extends javax.swing.JInternalFrame {
             return false;
         }
     };
+    
+    List<Producto>prod=Consultas.productos;
 
     public ConsultasStock() {
         initComponents();
@@ -171,7 +174,7 @@ public class ConsultasStock extends javax.swing.JInternalFrame {
 
             borrarFilas();
 
-            for (Producto p : Consultas.productos) {
+            for (Producto p : prod) {
                 if (p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) {
                     if (p.getStock() <= 0) {
                         modelo.addRow(new Object[]{
@@ -208,7 +211,32 @@ public class ConsultasStock extends javax.swing.JInternalFrame {
     private void jbLimpiarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCodigoActionPerformed
 
         jtBusquedaCodigo.setText("");
-        actualizarListaProductos();
+
+        borrarFilas();
+
+        int stock;
+
+        for (Producto p : prod) {
+            if (p.getStock() <= 0) {
+                modelo.addRow(new Object[]{
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),
+                    p.getPrecioVentaUnitario(),
+                    "-"
+                });
+            } else {
+                stock = p.getStock();
+                modelo.addRow(new Object[]{
+                    p.getCodigo(),
+                    p.getCategoria().getNombre(),
+                    p.getNombre(),
+                    p.getPrecioVentaUnitario(),
+                    stock
+                });
+            }
+        }
+
     }//GEN-LAST:event_jbLimpiarCodigoActionPerformed
 
     private void jtBusquedaCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBusquedaCodigoKeyReleased
@@ -219,7 +247,7 @@ public class ConsultasStock extends javax.swing.JInternalFrame {
 
             borrarFilas();
 
-            for (Producto p : Consultas.productos) {
+            for (Producto p : prod) {
                 if (p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) {
                     if (p.getStock() <= 0) {
                         modelo.addRow(new Object[]{
@@ -273,7 +301,7 @@ public class ConsultasStock extends javax.swing.JInternalFrame {
 
             int stock;
 
-            for (Producto p : Consultas.productos) {
+            for (Producto p : prod) {
                 if (p.getStock() <= 0) {
                     modelo.addRow(new Object[]{
                         p.getCodigo(),
@@ -309,6 +337,7 @@ public class ConsultasStock extends javax.swing.JInternalFrame {
         modelo.addColumn("Stock disponible");
 
         jTableProductos.setModel(modelo);
+        jTableProductos.setRowHeight(25);
     }
 
     public void borrarColumnas() {

@@ -587,7 +587,28 @@ public class GestionPedidosExistentes extends javax.swing.JInternalFrame {
         jcMeses.setSelectedIndex(-1);
         jtDia.setText("");
         jtAnio.setText("");
-        actualizarListaPedidos();
+        
+        borrarFilas();
+        
+        for (Pedido p : pedidosBuscados) {
+            if (p.isEstado() == true) {
+                modelo.addRow(new Object[]{
+                    false,
+                    p.getIdPedido(),
+                    p.getProv().getNombre(),
+                    p.getPrecioTotalCosto(),
+                    p.getFecha(),
+                    "DISPONIBLE"});
+            } else {
+                modelo.addRow(new Object[]{
+                    false,
+                    p.getIdPedido(),
+                    p.getProv().getNombre(),
+                    p.getPrecioTotalCosto(),
+                    p.getFecha(),
+                    "NO DISPONIBLE"});
+            }
+        }
     }//GEN-LAST:event_jbLimpiar2ActionPerformed
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed

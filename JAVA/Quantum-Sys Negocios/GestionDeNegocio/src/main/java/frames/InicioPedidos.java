@@ -23,6 +23,7 @@ public class InicioPedidos extends javax.swing.JInternalFrame {
         jbNuevos = new javax.swing.JButton();
         jbGestion = new javax.swing.JButton();
         jbStock = new javax.swing.JButton();
+        jbCalculo = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("CAJA");
@@ -59,6 +60,16 @@ public class InicioPedidos extends javax.swing.JInternalFrame {
             }
         });
 
+        jbCalculo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jbCalculo.setForeground(new java.awt.Color(0, 0, 0));
+        jbCalculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/calcular.png"))); // NOI18N
+        jbCalculo.setText(" CALCULO PEDIDO");
+        jbCalculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCalculoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -67,8 +78,9 @@ public class InicioPedidos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbNuevos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbGestion, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                    .addComponent(jbStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbGestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbCalculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -80,6 +92,8 @@ public class InicioPedidos extends javax.swing.JInternalFrame {
                 .addComponent(jbGestion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbStock)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCalculo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -96,8 +110,8 @@ public class InicioPedidos extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,10 +251,52 @@ public class InicioPedidos extends javax.swing.JInternalFrame {
         cargaWorker.execute();
     }//GEN-LAST:event_jbStockActionPerformed
 
+    private void jbCalculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalculoActionPerformed
+        if (cargaWorker != null && !cargaWorker.isDone()) {
+            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+            return;
+        }
+        // Crear e iniciar el hilo SwingWorker
+        cargaWorker = new SwingWorker<Void, Void>() {
+            Loading loading = new Loading();
+
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Mostrar el frame de carga
+
+                loading.setVisible(true);
+
+                try {
+                    escritorio.removeAll();
+                    escritorio.repaint();
+                    Thread.sleep(2000);
+                    CalculoPedidoInicio cp = new CalculoPedidoInicio();
+                    cp.setVisible(true);
+                    escritorio.add(cp);
+                    escritorio.moveToFront(cp);
+                    cp.setLocation((Principal.escritorio.getWidth() - cp.getWidth()) / 2, (Principal.escritorio.getHeight() - cp.getHeight()) / 2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // Cerrar el frame de carga despu�s de que la tarea haya terminado
+                loading.dispose();
+            }
+        };
+
+        cargaWorker.execute();
+    }//GEN-LAST:event_jbCalculoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jbCalculo;
     private javax.swing.JButton jbGestion;
     private javax.swing.JButton jbNuevos;
     private javax.swing.JButton jbStock;

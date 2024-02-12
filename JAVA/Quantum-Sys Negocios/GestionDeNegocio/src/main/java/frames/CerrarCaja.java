@@ -6,11 +6,13 @@ import entidades.*;
 import exportarExcel.ReporteCajaPDF;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import org.hibernate.Session;
 
 public class CerrarCaja extends javax.swing.JInternalFrame {
@@ -19,9 +21,11 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
     Usuario usuario = Principal.user;
     Double montoTotalTeorico = 0.0;
     Cajas cajas;
+    private SwingWorker<Void, Void> cargaWorker;
 
     public CerrarCaja() {
         initComponents();
+
         if (caja.isEstado() == false) {
             limpiar();
         } else {
@@ -68,7 +72,6 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         jbGuardar = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jlFechaCierre = new javax.swing.JLabel();
-        jbImprimir = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -217,10 +220,10 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         jlDiferencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlDiferencia.setText("0");
 
-        jbGuardar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jbGuardar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbGuardar.setForeground(new java.awt.Color(0, 0, 0));
         jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/savex25.png"))); // NOI18N
-        jbGuardar.setText("Guardar y cerrar");
+        jbGuardar.setText("Guardar y cerrar caja");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
@@ -237,16 +240,6 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         jlFechaCierre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlFechaCierre.setText("-");
 
-        jbImprimir.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        jbImprimir.setForeground(new java.awt.Color(0, 0, 0));
-        jbImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/imprimirx25.png"))); // NOI18N
-        jbImprimir.setText("Imprimir reporte");
-        jbImprimir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbImprimirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -260,10 +253,7 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jbGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -363,11 +353,9 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jlDiferencia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbGuardar)
-                    .addComponent(jbImprimir))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbGuardar)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resumen diario formas de pago de las ventas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -658,6 +646,7 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jbCalcularDifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularDifActionPerformed
 
         try {
@@ -684,26 +673,59 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Asegurese de ingresar el total real y calcula la diferencia");
             } else {
                 if (caja.isEstado() == true) {
-                    Date fechaActual = new Date();
-                    Double diferencia = Double.parseDouble(jlDiferencia.getText());
-                    Double montoTotalReal = Double.parseDouble(jtTotalReal.getText());
-                    String sucursal = jlSucursal.getText();
+                    if (cargaWorker != null && !cargaWorker.isDone()) {
+                        JOptionPane.showMessageDialog(null, "Espere a que la operacion actual termine.");
+                        return;
+                    }
 
-                    Session session = HibernateConfig.get().openSession();
-                    MovimientosCaja_data mcd = new MovimientosCaja_data(session);
-                    Caja_data cd = new Caja_data(session);
+                    // Crear e iniciar el hilo SwingWorker
+                    cargaWorker = new SwingWorker<Void, Void>() {
+                        Loading loading = new Loading();
 
-                    MovimientosCaja mc = new MovimientosCaja(fechaActual, montoTotalTeorico, montoTotalReal, diferencia, "CIERRE", caja, sucursal, usuario);
-                    caja.setEstado(false);
+                        @Override
+                        protected Void doInBackground() throws Exception {
+                            loading.setVisible(true);
+                            try {
 
-                    mcd.agregar(mc);
-                    cd.actualizar(caja);
+                                Date fechaActual = new Date();
+                                Double diferencia = Double.parseDouble(jlDiferencia.getText());
+                                Double montoTotalReal = Double.parseDouble(jtTotalReal.getText());
+                                String sucursal = jlSucursal.getText();
 
-                    montoTotalTeorico = 0.0;
-                    Principal.setPaneCaja();
-                    limpiar();
-                    session.close();
-                    JOptionPane.showMessageDialog(null, "La caja ha sido cerrada exitosamente");
+                                Session session = HibernateConfig.get().openSession();
+                                MovimientosCaja_data mcd = new MovimientosCaja_data(session);
+                                Caja_data cd = new Caja_data(session);
+
+                                MovimientosCaja mc = new MovimientosCaja(fechaActual, montoTotalTeorico, montoTotalReal, diferencia, "CIERRE", caja, sucursal, usuario);
+                                caja.setEstado(false);
+
+                                mcd.agregar(mc);
+                                cd.actualizar(caja);
+
+                                String[] destinatarios = {"niko_paradise98@hotmail.com"};
+
+                                enviarMail(destinatarios);
+
+                                montoTotalTeorico = 0.0;
+                                Principal.setPaneCaja();
+                                limpiar();
+                                session.close();
+                                JOptionPane.showMessageDialog(null, "La caja ha sido cerrada exitosamente");
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void done() {
+                            // Ocultar la pantalla de carga después de completar las operaciones
+                            loading.dispose();
+                        }
+                    };
+
+                    // Ejecutar el SwingWorker
+                    cargaWorker.execute();
                 } else {
                     JOptionPane.showMessageDialog(null, "La caja ya esta cerrada. Intente realizar la apertura");
                 }
@@ -711,10 +733,9 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-
     }//GEN-LAST:event_jbGuardarActionPerformed
 
-    private void jbImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbImprimirActionPerformed
+    private void enviarMail(String[] direcciones) {
         ReporteCajaPDF obj;
         try {
             obj = new ReporteCajaPDF(jlFechaApertura.getText(), jlFechaCierre.getText(), jlCaja.getText(),
@@ -723,10 +744,13 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
                     jlDiferencia.getText(), jlEfectivo.getText(), jlDebito.getText(), jlCredito.getText(),
                     jlTrans.getText(), jlMP.getText(), jlUala.getText(), jlCtaCte.getText());
             obj.crearPlantilla();
+
+            obj.crearEmail(direcciones);
+            obj.enviarEmail();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
-    }//GEN-LAST:event_jbImprimirActionPerformed
+    }
 
     private void jtTotalRealKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTotalRealKeyPressed
         if (Character.isDigit(evt.getKeyChar()) || (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)
@@ -775,7 +799,6 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JButton jbCalcularDif;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JButton jbImprimir;
     private javax.swing.JLabel jlApertura;
     private javax.swing.JLabel jlCaja;
     private javax.swing.JLabel jlCredito;
@@ -980,6 +1003,7 @@ public class CerrarCaja extends javax.swing.JInternalFrame {
         jlTotalTeorico.setText("0");
         jtTotalReal.setText("0");
         jlDiferencia.setText("0");
+        jlVentas.setText("0");
     }
 
     public String setFecha() {

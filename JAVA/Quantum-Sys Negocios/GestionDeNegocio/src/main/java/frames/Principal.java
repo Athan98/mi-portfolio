@@ -46,13 +46,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon2 = new ImageIcon(getClass().getResource("/imagenes/wallpaper.png"));
-        Image image2 = icon2.getImage();
-        jPanel3 = new javax.swing.JPanel(){
-            public void paintComponent(Graphics g){
-                g.drawImage(image2,0,0,getWidth(),getHeight(),this);
-            }
-        };
+        jPanel3 = new javax.swing.JPanel();
         jpInicio = new javax.swing.JPanel();
         jlUser = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -84,22 +78,22 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum-Sys: Negocios");
 
-        jPanel3.setBackground(java.awt.Color.lightGray);
-        jPanel3.setForeground(java.awt.Color.lightGray);
+        jPanel3.setBackground(new java.awt.Color(63, 34, 66));
+        jPanel3.setForeground(new java.awt.Color(63, 34, 66));
 
-        jpInicio.setBackground(java.awt.Color.lightGray);
-        jpInicio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jpInicio.setForeground(java.awt.Color.lightGray);
+        jpInicio.setBackground(new java.awt.Color(63, 34, 66));
+        jpInicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpInicio.setForeground(new java.awt.Color(63, 34, 66));
 
         jlUser.setBackground(new java.awt.Color(0, 0, 0));
         jlUser.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 30)); // NOI18N
-        jlUser.setForeground(new java.awt.Color(0, 204, 51));
+        jlUser.setForeground(new java.awt.Color(255, 255, 255));
         jlUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlUser.setText("-");
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Gill Sans MT Condensed", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(213, 12, 83));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("BIENVENIDO");
 
@@ -136,6 +130,7 @@ public class Principal extends javax.swing.JFrame {
 
         jpCaja.setBackground(new java.awt.Color(63, 34, 66));
         jpCaja.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "ESTADO CAJA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT Condensed", 1, 30), new java.awt.Color(255, 255, 255))); // NOI18N
+        jpCaja.setForeground(new java.awt.Color(0, 0, 0));
 
         jpCajaActivacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -214,7 +209,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jlFH1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(jpCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbVolverAlInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -349,7 +344,7 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jbProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        escritorio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        escritorio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -538,12 +533,17 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbProveedoresActionPerformed
 
     private void jbPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPedidosActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        InicioPedidos p = new InicioPedidos();
-        p.setVisible(true);
-        escritorio.add(p);
-        p.setLocation((Principal.escritorio.getWidth() - p.getWidth()) / 2, (Principal.escritorio.getHeight() - p.getHeight()) / 2);
+
+        if (user.getAcceso() == 2) {
+            escritorio.removeAll();
+            escritorio.repaint();
+            InicioPedidos p = new InicioPedidos();
+            p.setVisible(true);
+            escritorio.add(p);
+            p.setLocation((Principal.escritorio.getWidth() - p.getWidth()) / 2, (Principal.escritorio.getHeight() - p.getHeight()) / 2);
+        } else {
+            JOptionPane.showMessageDialog(null, "No posee los permisos suficientes");
+        }
     }//GEN-LAST:event_jbPedidosActionPerformed
 
     private void jbEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadisticasActionPerformed

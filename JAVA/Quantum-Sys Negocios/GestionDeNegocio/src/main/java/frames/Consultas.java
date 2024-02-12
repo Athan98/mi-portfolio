@@ -11,14 +11,17 @@ import org.hibernate.Session;
 
 public class Consultas extends javax.swing.JInternalFrame {
 
-    ConsultasStock cs = new ConsultasStock();
-    ConsultasPromociones cp = new ConsultasPromociones();
-    ConsultaCodigos cc = new ConsultaCodigos();
     public static List<Producto> productos = null;
+    ConsultasStock cs = null;
+    ConsultasPromociones cp = null;
+    ConsultaCodigos cc = null;
 
     public Consultas() {
-        initComponents();
         productos = listaProductos();
+        initComponents();
+        cs = new ConsultasStock();
+        cp = new ConsultasPromociones();
+        cc = new ConsultaCodigos();
         ConsultasPane.addTab("Consulta de codigo", cc);
         ConsultasPane.addTab("Consulta de stock", cs);
         ConsultasPane.addTab("Consulta de promos", cp);

@@ -8,47 +8,36 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
-import entidades.DetalleVenta;
+import entidades.DetalleCalculoPedido;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-public class BoletaPDF {
+public class InformeCalcularPedido {
 
     String usuario;
-    String cliente;
     String fecha;
-    String caja;
-    List<DetalleVenta> detalles;
-    String precioNeto;
-    String iva;
-    String montoTotal;
-    String descuento;
-    String fdp;
+    String nroInforme;
+    String total;
+    List<DetalleCalculoPedido> detalles;
 
     Document documento;
     FileOutputStream archivo;
     Paragraph titulo;
     Paragraph subtitulo;
 
-    public BoletaPDF(String usuario, String cliente, String fecha, String caja, List<DetalleVenta> detalles, String precioNeto, String iva, String montoTotal, String descuento, String fdp) {
+    public InformeCalcularPedido(String usuario, String fecha, String nroInforme, String total, List<DetalleCalculoPedido> detalles) {
         this.usuario = usuario;
-        this.cliente = cliente;
         this.fecha = fecha;
-        this.caja = caja;
+        this.nroInforme = nroInforme;
+        this.total = total;
         this.detalles = detalles;
-        this.precioNeto = precioNeto;
-        this.iva = iva;
-        this.montoTotal = montoTotal;
-        this.descuento = descuento;
-        this.fdp = fdp;
 
         documento = new Document();
-        titulo = new Paragraph("Ticket de venta", FontFactory.getFont(FontFactory.HELVETICA, 24));
-        subtitulo = new Paragraph("NO VÁLIDO COMO FACTURA", FontFactory.getFont(FontFactory.HELVETICA, 10));
-
+        titulo = new Paragraph("INFORME", FontFactory.getFont(FontFactory.HELVETICA, 24));
+        subtitulo = new Paragraph("Resumen de pedido calculado", FontFactory.getFont(FontFactory.HELVETICA, 10));
     }
 
     public void crearPlantilla() {
@@ -79,9 +68,10 @@ public class BoletaPDF {
                         documento.add(subtitulo);
                         documento.add(Chunk.NEWLINE);
                         documento.add(new Chunk(line));
+                        documento.add(new Paragraph("N° de informe: " + nroInforme));
                         documento.add(new Paragraph("Fecha y hora: " + fecha));
-                        documento.add(new Paragraph("Caja N°: " + caja));
-                        documento.add(new Paragraph("Cliente: " + cliente));
+                        documento.add(new Paragraph("Usuario: " + usuario));
+
                         documento.add(new Chunk(line));
                         documento.add(Chunk.NEWLINE);
 
@@ -89,25 +79,19 @@ public class BoletaPDF {
                         tabla.addCell("Codigo");
                         tabla.addCell("Producto");
                         tabla.addCell("Cantidad");
-                        tabla.addCell("Precio Neto ($)");
+                        tabla.addCell("Costo total ($)");
 
                         for (int i = 0; i < detalles.size(); i++) {
                             tabla.addCell(detalles.get(i).getProducto().getCodigo());
                             tabla.addCell(detalles.get(i).getProducto().getNombre());
                             tabla.addCell(detalles.get(i).getCantidad() + "");
-                            tabla.addCell((detalles.get(i).getPrecio()) + "");
+                            tabla.addCell((detalles.get(i).getCostoDetalle()) + "");
                         }
 
                         documento.add(tabla);
                         documento.add(Chunk.NEWLINE);
                         documento.add(new Chunk(line));
-                        documento.add(Chunk.NEWLINE);
-                        documento.add(new Paragraph("Subtotal ($): " + precioNeto));
-                        documento.add(new Paragraph("I.V.A.: " + iva + "%"));
-                        documento.add(new Paragraph("Descuento: " + descuento + "%"));
-                        documento.add(new Paragraph("Forma de pago: " + fdp));
-                        documento.add(new Chunk(line));
-                        documento.add(new Paragraph("TOTAL ($): " + montoTotal, FontFactory.getFont(FontFactory.HELVETICA, 18)));
+                        documento.add(new Paragraph("COSTO TOTAL DEL PEDIDO ($): " + total, FontFactory.getFont(FontFactory.HELVETICA, 18)));
                         documento.add(new Chunk(line));
 
                         documento.close();

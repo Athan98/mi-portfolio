@@ -37,16 +37,12 @@
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+          <Color blue="42" green="22" red="3f" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+          <Color blue="42" green="22" red="3f" type="rgb"/>
         </Property>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    public void paintComponent(Graphics g){&#xa;        g.drawImage(image2,0,0,getWidth(),getHeight(),this);&#xa;    }&#xa;}"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icon2 = new ImageIcon(getClass().getResource(&quot;/imagenes/wallpaper.png&quot;));&#xa; Image image2 = icon2.getImage();"/>
-      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -82,15 +78,15 @@
         <Container class="javax.swing.JPanel" name="jpInicio">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+              <Color blue="42" green="22" red="3f" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                <EtchetBorder/>
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
               </Border>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+              <Color blue="42" green="22" red="3f" type="rgb"/>
             </Property>
           </Properties>
 
@@ -123,7 +119,7 @@
                       <Component id="jlFH1" min="-2" pref="29" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jlFechaHora" min="-2" pref="29" max="-2" attributes="0"/>
-                      <EmptySpace pref="93" max="32767" attributes="0"/>
+                      <EmptySpace pref="95" max="32767" attributes="0"/>
                       <Component id="jpCaja" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jbVolverAlInicio" min="-2" pref="38" max="-2" attributes="0"/>
@@ -144,7 +140,7 @@
                   <Font name="Gill Sans MT Condensed" size="30" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="cc" red="0" type="rgb"/>
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="-"/>
@@ -159,7 +155,7 @@
                   <Font name="Gill Sans MT Condensed" size="36" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="53" green="c" red="d5" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="BIENVENIDO"/>
@@ -243,6 +239,9 @@
                       <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
                     </TitledBorder>
                   </Border>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -552,8 +551,8 @@
         <Container class="javax.swing.JDesktopPane" name="escritorio">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-                <BevelBorder/>
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
               </Border>
             </Property>
           </Properties>

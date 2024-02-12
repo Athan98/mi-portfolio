@@ -2,6 +2,7 @@ package frames;
 
 import entidades.Producto;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,6 +14,8 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
             return false;
         }
     };
+    
+    List<Producto>prod=Consultas.productos;
 
     public ConsultasPromociones() {
         initComponents();
@@ -169,7 +172,7 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
 
             borrarFilas();
 
-            for (Producto p : Consultas.productos) {
+            for (Producto p : prod) {
                 if ((p.getNombre().toUpperCase().startsWith(campoBuscarNombre)) && (p.getCategoria().getNombre().equals("PROMOCIONES")
                         || p.getCategoria().getNombre().equals("PROMO")
                         || p.getCategoria().getNombre().equals("PROMOCION"))) {
@@ -196,7 +199,18 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
     private void jbLimpiarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCodigoActionPerformed
         try {
             jtBusquedaCodigo.setText("");
-            actualizarListaProductos();
+            borrarFilas();
+
+            for (Producto p : prod) {
+                if (p.getCategoria().getNombre().equals("PROMOCIONES") || p.getCategoria().getNombre().equals("PROMO")
+                        || p.getCategoria().getNombre().equals("PROMOCION")) {
+                    modelo.addRow(new Object[]{
+                        p.getCodigo(),
+                        p.getCategoria().getNombre(),
+                        p.getNombre(),
+                        p.getPrecioVentaUnitario()});
+                }
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
@@ -208,7 +222,7 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
 
             borrarFilas();
 
-            for (Producto p : Consultas.productos) {
+            for (Producto p : prod) {
                 if ((p.getCodigo().startsWith(campoBuscarCodigo) || p.getCodigo().equals(campoBuscarCodigo)) && (p.getCategoria().getNombre().equals("PROMOCIONES")
                         || p.getCategoria().getNombre().equals("PROMO")
                         || p.getCategoria().getNombre().equals("PROMOCION"))) {
@@ -248,7 +262,7 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
         try {
             modelo.setRowCount(0);
 
-            for (Producto p : Consultas.productos) {
+            for (Producto p : prod) {
                 if (p.getCategoria().getNombre().equals("PROMOCIONES") || p.getCategoria().getNombre().equals("PROMO")
                         || p.getCategoria().getNombre().equals("PROMOCION")) {
                     modelo.addRow(new Object[]{
@@ -274,6 +288,8 @@ public class ConsultasPromociones extends javax.swing.JInternalFrame {
         modelo.addColumn("Precio Venta");
 
         jTableProductos.setModel(modelo);
+        jTableProductos.setRowHeight(25);
+
     }
 
     public void borrarColumnas() {
