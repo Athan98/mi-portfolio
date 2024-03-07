@@ -1,5 +1,5 @@
 # mi-portfolio
-Este es mi portfolio hecho en plataforma Java
+Este es mi portfolio hecho en plataforma Java, HTML5, CSS, Javascript y Node.js
 
 % AUTOR %
 
