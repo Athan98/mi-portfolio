@@ -1,0 +1,386 @@
+/* 
+Autor: Roldan Nicolás Mario Jesús
+Fecha: 29-03-2024
+Descripción: Este archivo CSS contiene los estilos para el sitio index.html.
+ */
+
+:root {
+    --primary-color: #0B0033;
+    --bg-color: #00000059;
+    --secondary-color: #2B59C3;
+    --third-color: #CAE5FF;
+    --white-color: #fdf5ef;
+    /* fuentes */
+    --primary-font: "Bebas Neue", Arial;
+    --secondary-font: "Wix Madefor Text", Arial;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-image: linear-gradient(to right, #0b0033, #131953, #1f2c76, #27429c, #2b59c3);
+    font-family: var(--primary-font);
+}
+
+header {
+    background-color: var(--bg-color);
+    padding: 2vh 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    font-size: 1.5rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    text-align: right;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 5px;
+}
+
+.header-name{
+    transition: color 0.3s;
+}
+
+.header-name:hover{
+    color: var(--secondary-color);
+}
+
+nav ul li:first-child {
+    margin-left: 0;
+}
+
+
+nav ul li:last-child {
+    margin-right: 2vw;
+}
+
+nav ul li a,
+nav>a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--third-color);
+    transition: background-color 0.3s,border-radius 0.3s,color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    color: var(--primary-color);
+}
+
+.banner {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner_content {
+    text-align: center;
+    position: absolute;
+    z-index: 2;
+}
+
+.video_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.cv-button {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: var(--third-color);
+    font-size: 1.2rem;
+    transition: background-color 0.3s,color 0.3s;
+}
+
+.cv-button i {
+    padding: 5px;
+}
+
+.cv-button:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.portfolio-button {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: var(--third-color);
+    font-size: 1.2rem;
+    transition: background-color 0.3s,color 0.3s;
+}
+
+.portfolio-button i {
+    padding: 5px;
+}
+
+.portfolio-button:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--third-color);
+}
+
+h1 {
+    color: var(--white-color);
+    font-size: 5rem;
+    white-space: nowrap;
+    border-right: 4px solid var(--white-color);
+    width: 15ch;
+
+    animation: typing 2s steps(15), blink .5s infinite step-end alternate;
+
+    overflow: hidden;
+}
+
+.nombre{
+    animation: changeColor 7s infinite alternate;
+}
+
+@keyframes typing{
+    from{width: 0}
+}
+
+@keyframes blink {
+    50%{border-color: transparent;}
+}
+
+@keyframes changeColor {
+    0% {color: var(#00A6FB);}
+    10% {color: #3F403F ;}
+    20% {color: #FE4A49;}
+    30% {color: #FED766;}
+    40% {color: #8DAB7F;}
+    50% {color: #989C94;}
+    60% {color: #B57F50;}
+    70%  {color: #454372;}
+    80% {color: #C52184 ;}
+    90% {color: #6DD3CE;}
+    100% {color: #E0FBFC;}
+}
+
+
+.stack {
+    color: var(--secondary-color);
+    font-size: 36px;
+}
+
+.about-me {
+    padding: 50px 50px;
+    color: var(--third-color);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.punto {
+    padding: 5px;
+    font-size: 3rem;
+    color: #2B59C3;
+}
+
+.subtitle_about-me {
+    font-size: 2.5rem;
+    width: 100%;
+}
+
+.text-about-me {
+    padding: 20px;
+    font-family: var(--secondary-font);
+    width: 100%;
+}
+
+.education {
+    padding-top: 30px;
+    width: 50%;
+    text-align: center;
+}
+
+.education h2 {
+    padding: 5px;
+    font-size: 2rem;
+}
+
+.education ul {
+    list-style: none;
+}
+
+.education ul li {
+    padding: 10px;
+}
+
+.education ul li h3 {
+    font-size: 1.2rem;
+    font-weight: lighter;
+}
+
+.education ul li h4 {
+    font-family: var(--secondary-font);
+    font-size: 0.7rem;
+    font-style: italic;
+    color: var(--white-color);
+    font-weight: lighter;
+}
+
+.hard-skills {
+    padding-top: 30px;
+    width: 50%;
+    text-align: center;
+}
+
+.hard-skills span {
+    display: block;
+    padding: 7px;
+}
+
+.hard-skills span i {
+    font-size: 2rem;
+}
+
+.hard-skills h2 {
+    padding: 5px;
+    font-size: 2rem;
+}
+
+.html5 {
+    color: #E5532D;
+}
+
+.css {
+    color: #2D53E5;
+}
+
+.javascript {
+    color: #F7E025;
+}
+
+.node {
+    color: #8EC608;
+}
+
+.git {
+    color: #F05539;
+}
+
+.projects {
+    padding: 50px 50px;
+    color: var(--third-color);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.projects h2 {
+    font-size: 2.5rem;
+    width: 100%;
+}
+
+.projects-info {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px var(--secondary-color) solid;
+    background-color: var(--primary-color);
+    transition: background-color 0.3s;
+}
+
+@keyframes grow {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.1);
+    }
+   
+}
+
+.projects-info:hover{
+    animation: grow 0.5s forwards;
+    background-color: var(--secondary-color);
+    border: 3px var(--third-color) solid;
+}
+
+.projects-info h2 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 5px;
+}
+
+.project-technologies {
+    display: flex;
+    justify-content: center;
+}
+
+.project-technologies i {
+    padding: 10px;
+    font-size: 2rem;
+}
+
+.contact {
+    padding: 50px 50px;
+    color: var(--third-color);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contact h2 {
+    font-size: 2.5rem;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.contact a {
+    display: block;
+    padding: 10px;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+    width: 50%;
+}
+
+.contact a i {
+    padding: 5px;
+}
+
+.contact a:hover {
+    color: var(--secondary-color);
+}
+
+.projects-image img{
+    width: 12rem;
+    height: 7rem;
+    margin-bottom: 5px;
+    border: var(--bg-color) solid;
+}
+

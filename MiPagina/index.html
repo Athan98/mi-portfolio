@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Bienvenido a mi página web!</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+    <script src="https://kit.fontawesome.com/fa04600604.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Quicksand:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <nav>
+            <a href="#banner" class="header-name">NicolásRoldan</a>
+            <ul class="nav-links">
+                <li><a href="#banner">Home</a></li>
+                <li><a href="#about-me">Sobre mí</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="banner" id="banner">
+            <div class="banner_content">
+                <h1>Hola! Soy <span class="nombre">Nicolás.</span></h1>
+                <h2 class="stack">Fullstack Developer</h2>
+                <a href="./static/CV_RoldanNicolas_21-03-2024.pdf" class="cv-button" download="CV_RoldanNicolas"><i
+                        class="fa-solid fa-file"></i><span>Mi currículum</span></a>
+                <a href="https://github.com/Athan98/mi-portfolio" class="portfolio-button" target="_blank"><i
+                        class="fa-brands fa-github"></i><span>Mi portfolio</span></a>
+            </div>
+
+            <video loop muted autoplay class="video_background">
+                <source src="./static/video/coding.mp4" type="video/mp4">
+                Tu navegador no soporta este formato de video
+            </video>
+        </section>
+
+        <section id="about-me" class="about-me">
+            <h2 class="subtitle_about-me">Sobre mí<span class="punto">.</span></h2>
+            <div class="text-about-me">
+                <p>
+                    ¡Hola! Soy Nicolás, estudiante de Administración de Empresas y próximo graduado en Gestión
+                    Financiera. Además de mi formación en negocios, tengo experiencia en programación, especialmente en
+                    lenguajes como Java, HTML, CSS y JavaScript. Mi interés por explorar campos diversos me ha llevado
+                    también a incursionar en la inteligencia artificial. Soy adaptable, comprometido y siempre estoy
+                    buscando nuevas oportunidades para crecer y contribuir al éxito de cualquier equipo. ¡Estoy
+                    emocionado de poder compartir mi experiencia y ser parte de proyectos innovadores!
+                </p>
+            </div>
+            <div class="education">
+                <h2>Educación</h2>
+                <ul>
+                    <li>
+                        <h3>Desarrollador fullstack Java</h3>
+                        <h4>"Argentina Programa 4.0". Universidad de la Punta</h4>
+                        <h4>2022-2023</h4>
+                    </li>
+                    <li>
+                        <h3>Desarrollador fullstack Java</h3>
+                        <h4>"Codo a codo 4.0". Agencia de aprendizaje a lo largo de la vida</h4>
+                        <h4>2024-Presente</h4>
+                    </li>
+                    <li>
+                        <h3>Desarrollador fullstack Javascript+Node.js</h3>
+                        <h4>"Codo a codo 4.0". Agencia de aprendizaje a lo largo de la vida</h4>
+                        <h4>2024-Presente</h4>
+                    </li>
+                    <li>
+                        <h3>Licenciatura en administracion de empresas</h3>
+                        <h4>Universidad Nacional de San Luis</h4>
+                        <h4>2021-Presente</h4>
+                    </li>
+                    <li>
+                        <h3>Tecnicatura universitaria en Gestión Financiera</h3>
+                        <h4>Universidad Nacional de San Luis</h4>
+                        <h4>2023-Presente</h4>
+                    </li>
+                </ul>
+            </div>
+            <div class="hard-skills">
+                <h2>Hard-skills</h2>
+                <span class="html5"><i class="fa-brands fa-html5"></i></span>
+                <span class="css"><i class="fa-brands fa-css3-alt"></i></span>
+                <span class="javascript"><i class="fa-brands fa-js"></i></span>
+                <span class="java"><i class="fa-brands fa-java"></i></span>
+                <span class="node"><i class="fa-brands fa-node"></i></span>
+                <span class="git"><i class="fa-brands fa-git-alt"></i></span>
+                <span class="github"><i class="fa-brands fa-github"></i></span>
+            </div>
+
+        </section>
+
+        <section class="projects" id="projects">
+            <h2>Mis proyectos</h2>
+            <article class="projects-info">
+                <a href="./templates/project1.html">
+                    <div class="projects-image"><img src="./static/img/qs_negocios/menu.PNG" alt="Menu principal QS: Negocios"
+                            title="Haz click para mas info"></div>
+                    <h2 class="projects-name">Proyecto 1</h2>
+                </a>
+
+                <div class="project-technologies">
+                    <i class="fa-brands fa-java"></i>
+                    <i class="fa-solid fa-database"></i>
+                    <i class="fa-brands fa-aws"></i>
+                </div>
+            </article>
+
+            <article class="projects-info">
+                <a href="#">
+                    <div class="projects-image"><img src="https://picsum.photos/200" alt="Imagen random"
+                            title="Haz click para mas info"></div>
+                    <h2 class="projects-name">Proyecto 2</h2>
+                </a>
+                <div class="project-technologies">
+                    <i class="fa-brands fa-js"></i>
+                    <i class="fa-brands fa-css3-alt"></i>
+                    <i class="fa-brands fa-html5"></i>
+                </div>
+            </article>
+
+
+            <article class="projects-info">
+                <a href="#">
+                    <div class="projects-image"><img src="https://picsum.photos/200" alt="Imagen random"
+                            title="Haz click para mas info"></div>
+                    <h2 class="projects-name">Proyecto 3</h2>
+                </a>
+                <div class="project-technologies">
+                    <i class="fa-brands fa-node"></i>
+                    <i class="fa-brands fa-js"></i>
+                </div>
+            </article>
+
+            <article class="projects-info">
+                <a href="#">
+                    <div class="projects-image"><img src="https://picsum.photos/200" alt="Imagen random"
+                            title="Haz click para mas info"></div>
+                    <h2 class="projects-name">Proyecto 4</h2>
+                </a>
+                <div class="project-technologies">
+                    <i class="fa-brands fa-react"></i>
+                    <i class="fa-brands fa-js"></i>
+                    <i class="fa-brands fa-html5"></i>
+                </div>
+            </article>
+
+            <article class="projects-info">
+                <a href="#">
+                    <div class="projects-image"><img src="https://picsum.photos/200" alt="Imagen random"
+                            title="Haz click para mas info"></div>
+                    <h2 class="projects-name">Proyecto 5</h2>
+                </a>
+                <div class="project-technologies">
+                    <i class="fa-brands fa-react"></i>
+                    <i class="fa-brands fa-js"></i>
+                    <i class="fa-brands fa-html5"></i>
+                </div>
+            </article>
+
+            <article class="projects-info">
+                <a href="#">
+                    <div class="projects-image"><img src="https://picsum.photos/200" alt="Imagen random"
+                            title="Haz click para mas info"></div>
+                    <h2 class="projects-name">Proyecto 6</h2>
+                </a>
+                <div class="project-technologies">
+                    <i class="fa-brands fa-java"></i>
+                    <i class="fa-brands fa-angular"></i>
+                </div>
+            </article>
+
+
+
+        </section>
+
+        <section class="contact" id="contact">
+            <h2>Contáctame</h2>
+            <!--E-mail-->
+            <a href="mailto:nicoroldan15@outlook.com.ar"><i
+                    class="fa-solid fa-envelope"></i>&nbsp;nicoroldan15@outlook.com.ar</a>
+            <!--Ubicación-->
+            <a href="https://www.google.com/maps/place/Villa+Mercedes,+San+Luis/@-33.6764657,-65.5048934,13z/data=!3m1!4b1!4m6!3m5!1s0x95d16a8988796ca7:0x178c644094662e35!8m2!3d-33.6754417!4d-65.4580688!16zL20vMGdtZGg4?entry=ttu"
+                target="_blank"><i class="fa-solid fa-location-dot"></i>&nbsp;Villa Mercedes, San Luis, Argentina</a>
+            <!--LinkedIn-->
+            <a href="https://www.linkedin.com/in/nico-roldan-595a76263/" target="_blank" class="profile-linkedin"><i
+                    class="fa-brands fa-linkedin"></i>Nico Roldan</a>
+            <!--GitHub-->
+            <a href="https://github.com/Athan98" target="_blank"><i class="fa-brands fa-github"></i>Athan98</a>
+        </section>
+    </main>
+
+    <footer></footer>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+/* 
+Autor: Roldan Nicolás Mario Jesús
+Fecha: 29-03-2024
+Descripción: Este archivo CSS contiene los estilos para el sitio index.html.
+ */
+
+ :root {
+    --primary-color: #0B0033;
+    --bg-color: #00000059;
+    --secondary-color: #2B59C3;
+    --third-color: #CAE5FF;
+    --white-color: #fdf5ef;
+    /* fuentes */
+    --primary-font: "Bebas Neue", Arial;
+    --secondary-font: "Wix Madefor Text", Arial;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: linear-gradient(to right, #0b0033, #131953, #1f2c76, #27429c, #2b59c3);
+    font-family: var(--primary-font);
+}
+
+header {
+    background-color: var(--bg-color);
+    padding: 2vh 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    font-size: 1.5rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a{
+    text-align: right;
+    text-decoration: none;
+}
+
+nav a i{
+    margin-right: 2vw;
+    margin-left: 0;
+    display: block;
+    padding: 10px 20px;
+    color: var(--third-color);
+    transition: background-color 0.3s,border-radius 0.3s,color 0.3s;
+    margin: 5px;
+}
+
+nav a i:hover{
+    color: var(--secondary-color);
+}
+
+.header-name{
+    text-decoration: none;
+    transition: color 0.3s;
+    margin-left: 2vw;
+    color: var(--third-color);
+}
+
+.header-name:hover{
+    color: var(--secondary-color);
+}
+
+.images{
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel{
+    width: 70vw;
+    border: 2px var(--secondary-color) solid;
+ }
