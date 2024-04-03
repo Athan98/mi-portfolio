@@ -57,7 +57,9 @@ nav a i{
 }
 
 nav a i:hover{
-    color: var(--secondary-color);
+    background-color: var(--secondary-color);
+    color:var(--primary-color);
+    border-radius: 5px;
 }
 
 .header-name{
@@ -71,16 +73,66 @@ nav a i:hover{
     color: var(--secondary-color);
 }
 
-.images{
+.project-presentation{
     height: 100vh;
+    width: 100vw;
     position: relative;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .carousel{
     width: 70vw;
     border: 2px var(--secondary-color) solid;
+    border-radius: 5px;
  }
+
+ .project-title{
+    position:absolute;
+    z-index: 2;
+    text-align: center;
+    top:80vh;
+    background-color: var(--primary-color);
+    border: 5px var(--secondary-color) solid;
+    border-radius: 20px;
+    
+ }
+
+ .project-title h1{
+    font-size: 5rem;
+    margin: 5px;
+    color:var(--third-color);
+    animation: changeColor 2s infinite alternate;
+ }
+
+ .project-description{
+    padding: 20px 100px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    font-family: var(--secondary-font);
+    color: var(--third-color);
+    font-size: 1.3rem;
+    font-weight: lighter;
+    position: relative;
+    overflow: hidden;
+ }
+
+ @keyframes changeColor {
+    0%{color: var(--white-color);}
+    50%{color: var(--third-color);}
+    100%{color: var(--secondary-color);}
+ }
+
+ .project-description p{
+    text-align: left;
+ }
+
+ .project-description ul{
+    list-style: circle;
+ }
+
+ 
