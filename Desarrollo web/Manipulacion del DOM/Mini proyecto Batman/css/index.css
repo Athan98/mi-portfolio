@@ -1,0 +1,42 @@
+* {
+    /*Se incluyen bordes y rellenos en los elementos. Facilita la accion de dimensionar los elementos*/
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.batman {
+    /*
+
+    Posicionamiento
+    -Fixed: queda fijado
+
+    */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    
+    /*Modificar una caja. Ver diferentes valores*/
+    transform: translate(-50%,-50%);
+
+    min-width: 700px;
+    height: 500px;
+
+    /*Trabajar sobre la imagen del fondo*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/batmanOFF.jpg);
+
+}
+
+.batman-activo{
+    background-image: url(../img/batmanON.gif);
+}
+
+.bati_boton{
+    margin: 291px auto 0;
+    width: 30px;
+    height: 50px;
+}

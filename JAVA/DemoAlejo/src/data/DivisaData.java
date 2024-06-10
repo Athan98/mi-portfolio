@@ -90,14 +90,4 @@ public class DivisaData {
         return ""; // Valor predeterminado si no se encuentra la fecha o si hay un error
     }
     
-    public float cotizacionTipoDolar(Divisa divisa) {
-
-        try {
-            return json.getFloat(divisa.getBanco());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener la cotizacion");
-        }
-        return 0.0f;
-
-    }
 }
