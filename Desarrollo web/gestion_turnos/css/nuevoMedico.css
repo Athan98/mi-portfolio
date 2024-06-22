@@ -18,10 +18,10 @@
     height: 100%;
 }
 
-.contenedor .formulario form .nombrePaciente,
-.apellidoPaciente,
-.docPaciente,
-.edadPaciente,
+.contenedor .formulario form .nombreMedico,
+.apellidoMedico,
+.docMedico,
+.especialidadMedico,
 .btnEnviar {
     width: 100%;
     display: flex;
@@ -30,18 +30,18 @@
     margin: 3% 0;
 }
 
-.contenedor .formulario form .nombrePaciente,
-.apellidoPaciente,
-.docPaciente,
-.edadPaciente,
+.contenedor .formulario form .nombreMedico,
+.apellidoMedico,
+.docMedico,
+.especialidadMedico,
 .btnEnviar {
     font-size: 1.5rem;
 }
 
-.contenedor .formulario form .nombrePaciente,
-.contenedor .formulario form .apellidoPaciente,
-.contenedor .formulario form .docPaciente,
-.contenedor .formulario form .edadPaciente,
+.contenedor .formulario form .nombreMedico,
+.contenedor .formulario form .apellidoMedico,
+.contenedor .formulario form .docMedico,
+.contenedor .formulario form .especialidadMedico,
 .contenedor .formulario form .btnEnviar {
     width: 100%;
     display: flex;
@@ -51,19 +51,19 @@
     font-size: 1.5rem;
 }
 
-.contenedor .formulario form .nombrePaciente label,
-.contenedor .formulario form .apellidoPaciente label,
-.contenedor .formulario form .docPaciente label,
-.contenedor .formulario form .edadPaciente label {
+.contenedor .formulario form .nombreMedico label,
+.contenedor .formulario form .apellidoMedico label,
+.contenedor .formulario form .docMedico label,
+.contenedor .formulario form .especialidadMedico label {
     width: 20%;
     color: black;
     font-weight: bold;
 }
 
-.contenedor .formulario form .nombrePaciente input,
-.contenedor .formulario form .apellidoPaciente input,
-.contenedor .formulario form .docPaciente input,
-.contenedor .formulario form .edadPaciente input {
+.contenedor .formulario form .nombreMedico input,
+.contenedor .formulario form .apellidoMedico input,
+.contenedor .formulario form .docMedico input,
+.contenedor .formulario form .especialidadMedico input {
     width: 60%;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
@@ -72,17 +72,17 @@
     padding: 0.5%;
 }
 
-.contenedor .formulario form .nombrePaciente input:hover,
-.contenedor .formulario form .apellidoPaciente input:hover,
-.contenedor .formulario form .docPaciente input:hover,
-.contenedor .formulario form .edadPaciente input:hover {
+.contenedor .formulario form .nombreMedico input:hover,
+.contenedor .formulario form .apellidoMedico input:hover,
+.contenedor .formulario form .docMedico input:hover,
+.contenedor .formulario form .especialidadMedico input:hover {
     border: 1px solid #41CCBD;
 }
 
-.contenedor .formulario form .nombrePaciente input:focus,
-.contenedor .formulario form .apellidoPaciente input:focus,
-.contenedor .formulario form .docPaciente input:focus,
-.contenedor .formulario form .edadPaciente input:focus {
+.contenedor .formulario form .nombreMedico input:focus,
+.contenedor .formulario form .apellidoMedico input:focus,
+.contenedor .formulario form .docMedico input:focus,
+.contenedor .formulario form .especialidadMedico input:focus {
     border: 1px solid #41CCBD;
     outline: none; /* Asegúrate de eliminar el contorno predeterminado del navegador */
 }
