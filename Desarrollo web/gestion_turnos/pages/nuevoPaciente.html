@@ -67,13 +67,26 @@
                 <img src="../img/fondo_respirar.jpg" alt="">
             </div>
             <div class="formulario">
-                <form action="post">
-                    <label for="nombrePaciente">Nombre:</label>
-                    <input type="text" placeholder="Ingrese el nombre del paciente" id="nombrePaciente">
-                    <label for="apellidoPaciente">Apellido:</label>
-                    <input type="text" placeholder="Ingrese el apellido del paciente" id="apellidoPaciente">
-                    <label for="nombrePaciente">Nombre:</label>
-                    <input type="text" placeholder="Ingrese el nombre del paciente" id="nombrePaciente">
+                <form method="post" id="datosFormulario">
+                    <div class="nombrePaciente">
+                        <label for="nombrePaciente">Nombre:</label>
+                        <input type="text" placeholder="Ingrese el nombre del paciente" id="nombrePaciente" name="nombre">
+                    </div>
+                    <div class="apellidoPaciente">
+                        <label for="apellidoPaciente">Apellido:</label>
+                        <input type="text" placeholder="Ingrese el apellido del paciente" id="apellidoPaciente" name="apellido">
+                    </div>
+                    <div class="docPaciente">
+                        <label for="docPaciente">Documento:</label>
+                        <input type="text" placeholder="Ingrese el N° de documento del paciente" id="docPaciente" name="dni">
+                    </div>
+                    <div class="edadPaciente">
+                        <label for="edadPaciente">Edad:</label>
+                        <input type="number" placeholder="Ingrese la edad del paciente" id="edadPaciente" name="edad">
+                    </div>
+                    <div class="btnEnviar">
+                        <input type="submit" id="btnEnviar" value="Agregar paciente">
+                    </div>
                 </form>
             </div>
         </main>
