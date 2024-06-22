@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llamador de pacientes</title>
+    <link rel="stylesheet" href="../css/llamador.css">
+    <!--Link FontAwesome-->
+    <script src="https://kit.fontawesome.com/fa04600604.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <audio src="../sounds/notificacion.mp3" id="notificacion" autoplay></audio>
+
+    <div class="contenedorGeneral">
+        <div class="contenedorInterno">
+            <h1><i class="fa-solid fa-lungs"></i>RESPIRAR<i class="fa-solid fa-lungs"></i></h1>
+            <div class="contenedor1">
+                <h2>Paciente:</h2>
+                <p class="nombrePaciente" id="nombrePaciente"></p>
+                <h2>N° Documento:</h2>
+                <p class="documentoPaciente" id="documentoPaciente"></p>
+                <h2>Medico:</h2>
+                <p class="nombreMedico" id="nombreMedico"></p>
+                <h2>Consultorio:</h2>
+                <p class="nroConsultorio" id="nroConsultorio"></p>
+            </div>
+            <div class="contenedor2">
+                <h2>Paciente:</h2>
+                <p class="nombrePaciente2" id="nombrePaciente2"></p>
+                <h2>N° Documento:</h2>
+                <p class="documentoPaciente2" id="documentoPaciente2"></p>
+                <h2>Medico:</h2>
+                <p class="nombreMedico2" id="nombreMedico2"></p>
+                <h2>Consultorio:</h2>
+                <p class="nroConsultorio2" id="nroConsultorio2"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/llamador.js"></script>
+
+</body>
+
+</html>

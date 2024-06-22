@@ -1,0 +1,78 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.contenedor {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100vw;
+    height: 100vh;
+    background: #ada996;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right,
+            #eaeaea,
+            #dbdbdb,
+            #f2f2f2,
+            #ada996);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #eaeaea, #dbdbdb, #f2f2f2, #ada996);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.contenedor .navbar {
+    background: #03c9b2;
+    background: linear-gradient(90deg,#03c9b2 0%, #d4d2d5 130%);
+    background: -webkit-linear-gradient(90deg,#03c9b2 0%, #d4d2d5 130%);
+    background: -moz-linear-gradient(90deg,#03c9b2 0%, #d4d2d5 130%);
+}
+
+.contenedor .nav-item {
+    padding: 0 5%;
+    transition: background-color 0.3s;
+}
+
+.contenedor .nav-link{
+    font-weight: bold;
+    color:white;
+    transition: color 0.3s;
+    font-size: 1.2rem;
+}
+
+.contenedor .nav-link i{
+    color: white;
+    transition: color 0.3s;
+}
+
+.contenedor .nav-link i:hover{
+    color: #545454;
+}
+
+.contenedor .nav-link:hover{
+    color: #545454;
+}
+
+.contenedor .navbar-brand i {
+    padding: 0 5%;
+}
+
+.contenedor main .imagen-fondo {
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+.imagen-fondo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Esto asegura que la imagen cubra completamente el contenedor */
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.contenedor main{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
