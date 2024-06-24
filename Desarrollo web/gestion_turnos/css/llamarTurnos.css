@@ -1,0 +1,144 @@
+.contenedor .tablaTurnos {
+    width: 80%;
+    height: 80%;
+    border: 1px solid black;
+    z-index: 3;
+    background-color: white;
+    position: absolute;
+    opacity: 0.6;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contenedor .turnos {
+    width: 95%;
+    overflow-y: auto;
+    max-height: 50%;
+    height: 50%;
+    border: 1px solid black;
+}
+
+.contenedor .turnos thead tr th {
+    padding: 1%;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px black solid;
+    text-align: center;
+    background-color: #27CBB8;
+    color: white;
+}
+
+.contenedor .turnos tbody tr {
+    background-color: white;
+    opacity: 1;
+    font-size: 1rem;
+    color: black;
+    text-align: center;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.contenedor .turnos tbody tr:hover {
+    background-color: #A0D0CD;
+}
+
+.contenedor .turnos tbody tr td button {
+    padding: 3px 5px;
+    font-weight: bold;
+    background-color: #27CBB8;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+.contenedor .turnos tbody tr td button:hover {
+    background-color: white;
+    color: #27CBB8;
+}
+
+.contenedor .tablaTurnos .buscador {
+    width: 95%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: #27CBB8 1px solid;
+    margin: 0.5%;
+    padding: 0;
+    border-radius: 15px;
+}
+
+.contenedor .tablaTurnos .buscador h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    background-color: #27CBB8;
+    color: white;
+    font-weight: bold;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda .medico {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda .fecha {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda .botonEnviar {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda .medico select {
+    width: 50%;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda .medico label {
+    width: 40%;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda .fecha input {
+    width: 90%;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda .botonEnviar button {
+    width: 90%;
+    padding: 2px;
+    background-color: #27CBB8;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda .botonEnviar button i {
+    padding: 0 5px;
+}
+
+.contenedor .tablaTurnos .buscador #formBusqueda .botonEnviar button:hover {
+    background-color: white;
+    color: #27CBB8;
+}

@@ -3,11 +3,15 @@ package com.quantumscript.llamadorPacientes.controllers;
 import com.quantumscript.llamadorPacientes.models.Medico;
 import com.quantumscript.llamadorPacientes.models.Paciente;
 import com.quantumscript.llamadorPacientes.models.Turno;
+import com.quantumscript.llamadorPacientes.services.IMedicoService;
 import com.quantumscript.llamadorPacientes.services.ITurnoService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +23,12 @@ public class TurnoController {
 
     @Autowired
     private ITurnoService ts;
+    @Autowired
+    private IMedicoService ms;
 
     @GetMapping("/turnos/listar")
     public List<Turno> getTurnos() {
-        List<Turno>turnos=ts.getTurnos();
+        List<Turno> turnos = ts.getTurnos();
         return turnos;
     }
 
@@ -31,9 +37,9 @@ public class TurnoController {
         return ts.findTurnosPaciente(p);
     }
 
-    @GetMapping("/turnos/listarturnosmedico")
-    public List<Turno> getTurnosMedico(@RequestBody Medico m) {
-        return ts.findTurnosMedico(m);
+    @GetMapping("/turnos/listarturnosmedico/{fecha}/{id_medico}")
+    public List<Turno> getTurnosMedico(@PathVariable String fecha, @PathVariable Long id_medico) {
+        return ts.findTurnosMedico(fecha, id_medico);
     }
 
     @PostMapping("/turnos/crear")

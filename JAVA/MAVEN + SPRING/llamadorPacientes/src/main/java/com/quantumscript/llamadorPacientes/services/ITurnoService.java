@@ -3,6 +3,7 @@ package com.quantumscript.llamadorPacientes.services;
 import com.quantumscript.llamadorPacientes.models.Medico;
 import com.quantumscript.llamadorPacientes.models.Paciente;
 import com.quantumscript.llamadorPacientes.models.Turno;
+import java.util.Date;
 import java.util.List;
 
 public interface ITurnoService {
@@ -17,7 +18,7 @@ public interface ITurnoService {
 
     public List<Turno> findTurnosPaciente(Paciente p);
 
-    public List<Turno> findTurnosMedico(Medico m);
+    public List<Turno> findTurnosMedico(String fecha, Long id_medico);
 
     public void editTurno(Turno t);
 

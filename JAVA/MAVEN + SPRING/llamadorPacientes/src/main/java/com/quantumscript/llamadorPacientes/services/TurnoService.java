@@ -4,7 +4,9 @@ import com.quantumscript.llamadorPacientes.models.Medico;
 import com.quantumscript.llamadorPacientes.models.Paciente;
 import com.quantumscript.llamadorPacientes.models.Turno;
 import com.quantumscript.llamadorPacientes.repositories.ITurnoRepository;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,12 +53,15 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public List<Turno> findTurnosMedico(Medico m) {
+    public List<Turno> findTurnosMedico(String fecha, Long id_medico) {
         List<Turno> turnos = this.getTurnos();
         List<Turno> turnosMedico = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaTurno = "";
 
         for (Turno t : turnos) {
-            if (t.getMedico().getId_medico() == m.getId_medico()) {
+            fechaTurno = dateFormat.format(t.getFecha());
+            if (t.getMedico().getId_medico() == id_medico && fechaTurno.equals(fecha)) {
                 turnosMedico.add(t);
             }
         }

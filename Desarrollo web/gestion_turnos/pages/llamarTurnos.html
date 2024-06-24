@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+
 <body>
     <div class="contenedor">
         <header>
@@ -43,7 +45,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./nuevoPaciente.html">Nuevo paciente</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="./gestionPacientes.html">Gestionar pacientes</a></li>
+                                    <li><a class="dropdown-item" href="./gestionPacientes.html">Gestionar pacientes</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -65,6 +68,39 @@
             <div class="imagen-fondo">
                 <img src="../img/fondo_respirar.jpg" alt="">
             </div>
+            <div class="tablaTurnos">
+                <div class="buscador">
+                    <h1>Buscar turnos por Médico y por Fecha</h1>
+                    <form method="get" id="formBusqueda">
+                        <div class="medico">
+                            <label for="medico">Seleccioná un médico:</label>
+                            <select name="medico" id="medico">Seleccionar un médico</select>
+                        </div>
+                        <div class="fecha">
+                            <input type="date" id="fecha">
+                        </div>
+                        <div class="botonEnviar">
+                            <button type="submit" id="btnEnviar"><i
+                                    class="fa-solid fa-magnifying-glass"></i>BUSCAR</button>
+                        </div>
+                    </form>
+                </div>
+                <table class="turnos" id="turnos">
+                    <thead>
+                        <tr>
+                            <th>ID Turno</th>
+                            <th>Apellido PACIENTE</th>
+                            <th>D.N.I. PACIENTE</th>
+                            <th>Apellido MÉDICO</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </main>
         <footer>
 
@@ -78,6 +114,7 @@
     <!--Script Axios-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!--Script para agregar Paciente con POST-->
-    <script src=""></script>
+    <script src="../js/llamarTurnos.js"></script>
 </body>
+
 </html>

@@ -128,4 +128,4 @@ const getUltimosDosPacientes = async () => {
 getUltimosDosPacientes()
 
 //EJECUTAR CADA 5 SEGUNDOS AUTOMATICAMENTE
-setInterval(getUltimosDosPacientes, 10000);
+setInterval(getUltimosDosPacientes, 5000);
