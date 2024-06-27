@@ -56,6 +56,7 @@ const crearLlamado=async(idTurno)=>{
         //Hacer la solicitud POST
         const res=await axios.post(urlCrearLlamado,llamado);
         console.log("Llamado creado exitosamente"),res.data;
+        alert("Se ha llamado al paciente");
     } catch (error) {
         console.log("No se pudo crear el llamado",error)
     }

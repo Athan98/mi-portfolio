@@ -41,4 +41,8 @@ public class PacienteController {
         return ps.findPaciente(p.getId_paciente());
     }
 
+    @GetMapping("/pacientes/buscarpaciente")
+    public Paciente getPaciente(@RequestParam Long id) {
+        return ps.findPaciente(id);
+    }
 }

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <title>Editar Paciente</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/editPaciente.css">
     <!--Link FontAwesome-->
     <script src="https://kit.fontawesome.com/fa04600604.js" crossorigin="anonymous"></script>
     <!--CSS Bootstrap-->
@@ -33,8 +34,6 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Reservar turno</a></li>
                                     <li><a class="dropdown-item" href="#">Listar turnos</a></li>
-                                    <li><a class="dropdown-item" href="./pages/llamarTurnos.html">Llamador de turnos</a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -43,10 +42,10 @@
                                     PACIENTES
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./pages/nuevoPaciente.html">Nuevo paciente</a>
+                                    <li><a class="dropdown-item" href="./nuevoPaciente.html">Nuevo paciente</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="./pages/gestionPacientes.html">Gestionar
-                                            pacientes</a></li>
+                                    <li><a class="dropdown-item" href="./gestionPacientes.html">Gestionar pacientes</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -55,9 +54,8 @@
                                     MÉDICOS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./pages/nuevoMedico.html">Nuevo médico</a></li>
-                                    <li><a class="dropdown-item" href="./pages/gestionMedicos.html">Gestionar
-                                            médicos</a></li>
+                                    <li><a class="dropdown-item" href="./nuevoMedico.html">Nuevo médico</a></li>
+                                    <li><a class="dropdown-item" href="./gestionMedicos.html">Gestionar médicos</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -67,7 +65,37 @@
         </header>
         <main>
             <div class="imagen-fondo">
-                <img src="./img/fondo_respirar.jpg" alt="">
+                <img src="../img/fondo_respirar.jpg" alt="">
+            </div>
+            <div class="formulario">
+                <form id="formPaciente">
+                    <div class="idPaciente">
+                        <label for="idPaciente">ID:</label>
+                        <p class="id" id="idPaciente">-</p>
+                    </div>
+                    <div class="nombrePaciente">
+                        <label for="nombrePaciente">Nombre:</label>
+                        <input type="text" placeholder="Ingrese el nombre del paciente" id="nombrePaciente"
+                            name="nombre">
+                    </div>
+                    <div class="apellidoPaciente">
+                        <label for="apellidoPaciente">Apellido:</label>
+                        <input type="text" placeholder="Ingrese el apellido del paciente" id="apellidoPaciente"
+                            name="apellido">
+                    </div>
+                    <div class="docPaciente">
+                        <label for="docPaciente">Documento:</label>
+                        <input type="text" placeholder="Ingrese el N° de documento del paciente" id="docPaciente"
+                            name="dni">
+                    </div>
+                    <div class="edadPaciente">
+                        <label for="edadPaciente">Edad:</label>
+                        <input type="number" placeholder="Ingrese la edad del paciente" id="edadPaciente" name="edad">
+                    </div>
+                    <div class="btnEnviar">
+                        <button id="btnEnviar" type="submit"><i class="fa-solid fa-floppy-disk"></i>Guardar paciente</button>
+                    </div>
+                </form>
             </div>
         </main>
         <footer>
@@ -79,6 +107,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <!--Script Axios-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!--Script para editar Paciente con PATCH-->
+    <script src="../js/editPaciente.js"></script>
 </body>
 
 </html>

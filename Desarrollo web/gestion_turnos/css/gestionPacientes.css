@@ -1,0 +1,137 @@
+.contenedor .tablaPacientes {
+    width: 80%;
+    height: 80%;
+    border: 1px solid black;
+    z-index: 3;
+    background-color: white;
+    position: absolute;
+    opacity: 0.6;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contenedor .listaPacientes {
+    width: 95%;
+    overflow-y: auto;
+    max-height: 50%;
+    height: 50%;
+    border: 1px solid black;
+}
+
+.contenedor .listaPacientes thead tr th {
+    padding: 1%;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px black solid;
+    text-align: center;
+    background-color: #27CBB8;
+    color: white;
+}
+
+.contenedor .listaPacientes tbody tr {
+    background-color: white;
+    opacity: 1;
+    font-size: 1rem;
+    color: black;
+    text-align: center;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.contenedor .listaPacientes tbody tr:hover {
+    background-color: #A0D0CD;
+}
+
+.contenedor .listaPacientes tbody tr td .btnEditar {
+    padding: 2%;
+    margin: 0 5%;
+    font-weight: bold;
+    background-color: #3185FC;
+    color: white;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+    border-radius: 5px;
+    border: white solid 1px;
+}
+
+.contenedor .listaPacientes tbody tr td .btnEditar:hover {
+    background-color: white;
+    color: #3185FC;
+    border: #3185FC solid 1px;
+}
+
+.contenedor .listaPacientes tbody tr td .btnEliminar {
+    padding: 2%;
+    margin: 0 5%;
+    font-weight: bold;
+    background-color: #F42C04;
+    color: white;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+    border-radius: 5px;
+    border: white solid 1px;
+}
+
+.contenedor .listaPacientes tbody tr td .btnEliminar:hover {
+    background-color: white;
+    color: #F42C04;
+    border: #F42C04 solid 1px;
+}
+
+.contenedor .tablaPacientes .buscador {
+    width: 95%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: #27CBB8 1px solid;
+    margin: 0.5%;
+    padding: 0;
+
+}
+
+.contenedor .tablaPacientes .buscador h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    background-color: #27CBB8;
+    color: white;
+    font-weight: bold;
+}
+
+.contenedor .tablaPacientes .buscador .inputs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor .tablaPacientes .buscador .inputs .dniPaciente,
+.contenedor .tablaPacientes .buscador .inputs .apellidoPaciente {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor .tablaPacientes .buscador .inputs .dniPaciente label,
+.contenedor .tablaPacientes .buscador .inputs .apellidoPaciente label {
+    width: 45%;
+    text-align: center;
+}
+
+.contenedor .tablaPacientes .buscador .inputs .dniPaciente input,
+.contenedor .tablaPacientes .buscador .inputs .apellidoPaciente input {
+    width: 45%;
+}
+
+.contenedor .tablaPacientes .buscador .inputs .dniPaciente input:focus,
+.contenedor .tablaPacientes .buscador .inputs .apellidoPaciente input:focus {
+    border: 2px solid #41CCBD;
+    outline: none;
+}
