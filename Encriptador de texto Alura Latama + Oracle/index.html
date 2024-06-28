@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador de texto</title>
+    <!--Link FontAwesome-->
+    <script src="https://kit.fontawesome.com/fa04600604.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="titulo-contenedor">
+            <h1 class="titulo">
+                Encriptador de texto
+            </h1>
+        </div>
+        <div class="textoIngresado-contenedor">
+            <input type="text" placeholder="Ingrese el texto aquí" id="textoIngresado" class="textoIngresado">
+        </div>
+        <div class="verificacionTextoIngresado-contenedor">
+            <p class="verificacionTextoIngresado" id="verificacionTextoIngresado"><i
+                    class="fa-solid fa-circle-info"></i>Solo letras minúsculas y sin acentos</p>
+        </div>
+        <div class="botonera-contenedor">
+            <button id="btnEncriptar" class="btnEncriptar" onclick="encriptarTexto();">Encriptar</button>
+            <button id="btnDesencriptar" class="btnDesencriptar" onclick="desencriptarTexto();">Desencriptar</button>
+        </div>
+        <div class="textoResultante-contenedor">
+            <p class="textoResultante" id="textoResultante"><img src="./img/mensajeNoEncontrado.png"
+                    alt="Texto no encontrado" title="Texto no encontrado" id="imagen-textoNoEncontrado"
+                    class="imagen-textoNoEncontrado"></p>
+            <div class="botoneraTextoResultante-contenedor">
+                <button id="btnCopiarTextoResultante" class="btnCopiarTextoResultante"><i
+                        class="fa-solid fa-copy"></i>Copiar</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Script-->
+    <script src="./js/index.js"></script>
+</body>
+
+</html>
