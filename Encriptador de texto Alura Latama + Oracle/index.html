@@ -7,34 +7,45 @@
     <title>Encriptador de texto</title>
     <!--Link FontAwesome-->
     <script src="https://kit.fontawesome.com/fa04600604.js" crossorigin="anonymous"></script>
+    <!--Link estilo propio-->
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 
 <body>
     <div class="contenedor">
-        <div class="titulo-contenedor">
-            <h1 class="titulo">
-                Encriptador de texto
-            </h1>
+        <div class="subcontenedor-izquierdo">
+            <div class="subcontenedor-izquierdo-1">
+                <div class="logo-contenedor">
+                    <img src="./img/logoAlura.PNG" alt="Logo Alura" title="Logo Alura">
+                </div>
+            </div>
+            <div class="subcontenedor-izquierdo-2">
+                <div class="textoIngresado-contenedor">
+                    <textarea id="textoIngresado" class="textoIngresado" placeholder="Ingrese el texto"></textarea>
+                </div>
+                <div class="verificacionTextoIngresado-contenedor">
+                    <p class="verificacionTextoIngresado" id="verificacionTextoIngresado"><i
+                            class="fa-solid fa-circle-info"></i>Solo letras minúsculas y sin acentos</p>
+                </div>
+                <div class="botonera-contenedor">
+                    <button id="btnEncriptar" class="btnEncriptar" onclick="encriptarTexto();">Encriptar</button>
+                    <button id="btnDesencriptar" class="btnDesencriptar"
+                        onclick="desencriptarTexto();">Desencriptar</button>
+                    <button id="btnLimpiarCampos" class="btnLimpiarCampos" onclick="reiniciarEncriptador();">Limpiar
+                        campos</button>
+                </div>
+            </div>
+
         </div>
-        <div class="textoIngresado-contenedor">
-            <input type="text" placeholder="Ingrese el texto aquí" id="textoIngresado" class="textoIngresado">
-        </div>
-        <div class="verificacionTextoIngresado-contenedor">
-            <p class="verificacionTextoIngresado" id="verificacionTextoIngresado"><i
-                    class="fa-solid fa-circle-info"></i>Solo letras minúsculas y sin acentos</p>
-        </div>
-        <div class="botonera-contenedor">
-            <button id="btnEncriptar" class="btnEncriptar" onclick="encriptarTexto();">Encriptar</button>
-            <button id="btnDesencriptar" class="btnDesencriptar" onclick="desencriptarTexto();">Desencriptar</button>
-            <button id="btnLimpiarCampos" class="btnLimpiarCampos" onclick="reiniciarEncriptador();">Limpiar campos</button>
-        </div>
-        <div class="textoResultante-contenedor">
-            <p class="textoResultante" id="textoResultante"><img src="./img/mensajeNoEncontrado.png"
-                    alt="Texto no encontrado" title="Texto no encontrado" id="imagen-textoNoEncontrado"
-                    class="imagen-textoNoEncontrado"></p>
-            <div class="botoneraTextoResultante-contenedor">
-                <button id="btnCopiarTextoResultante" class="btnCopiarTextoResultante"
-                    onclick="copiarTextoResultante();"><i class="fa-solid fa-copy"></i>Copiar</button>
+        <div class="subcontenedor-derecho">
+            <div class="textoResultante-contenedor">
+                <p class="textoResultante" id="textoResultante"><img src="./img/mensajeNoEncontrado.png"
+                        alt="Texto no encontrado" title="Texto no encontrado" id="imagen-textoNoEncontrado"
+                        class="imagen-textoNoEncontrado"></p>
+                <div class="botoneraTextoResultante-contenedor">
+                    <button id="btnCopiarTextoResultante" class="btnCopiarTextoResultante"
+                        onclick="copiarTextoResultante();"><i class="fa-solid fa-copy"></i>Copiar</button>
+                </div>
             </div>
         </div>
     </div>

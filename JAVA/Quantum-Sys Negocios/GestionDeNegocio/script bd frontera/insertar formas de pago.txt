@@ -1,0 +1,9 @@
+INSERT INTO `formadepago` (`idFormaDePago`, `formaDePago`) VALUES (NULL, 'Credito'), (NULL, 'Debito'), (NULL, 'Efectivo'), (NULL, 'Mercado Pago'), (NULL, 'Uala'), (NULL, 'Otro'), (NULL, 'Transferencia'),(NULL,'Cuenta corriente');
+
+INSERT INTO `caja` (`idCaja`, `estado`, `nroCaja`) VALUES (NULL, b'0', '0001');
+
+INSERT INTO `usuario` (`idUsuario`, `acceso`, `contrasenia`, `nombre`) VALUES (NULL, '2', '202120', 'Nicolas');
+
+INSERT INTO `categoria` (`idCategoria`, `nombre`) VALUES (NULL, 'PROMOCIONES');
+
+INSERT INTO `licencia` (`idLicencia`, `estado`, `fechaAdquisicion`, `fechaTermino`, `meses`) VALUES (NULL, b'1', '2024-01-16 00:00:00', '2025-01-16 00:00:00', '3');

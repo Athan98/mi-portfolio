@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contenedor {
+    width: 100vw;
+    height: 100vh;
+    background-color: #F3F5FC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.subcontenedor-izquierdo {
+    width: 65%;
+    height: 90%;
+}
+
+.subcontenedor-derecho {
+    width: 25%;
+    height: 90%;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-1 {
+    width: 100%;
+    height: 10%;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-1 .logo-contenedor {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 5%;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-1 .logo-contenedor img {
+    width: 2.8rem;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .textoIngresado-contenedor {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .textoIngresado-contenedor .textoIngresado {
+    width: 100%;
+    height: 95%;
+    font-size: 2rem;
+    background-color: white;
+    opacity: 0.6;
+    border-radius: 15px;
+    border: transparent;
+    transition: border 0.2s;
+    color: #0A3871;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15);
+    resize: none;
+    padding: 5%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .textoIngresado-contenedor .textoIngresado::placeholder {
+    color: #0A3871;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .textoIngresado-contenedor .textoIngresado:hover {
+    border: 1px solid #0A3871;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .textoIngresado-contenedor .textoIngresado:focus {
+    border: 1px solid #0A3871;
+    outline: none;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .verificacionTextoIngresado-contenedor {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .verificacionTextoIngresado-contenedor .verificacionTextoIngresado {
+    width: 100%;
+    height: 100%;
+    font-size: 0.9rem;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .verificacionTextoIngresado-contenedor .verificacionTextoIngresado i {
+    margin-right: 1%;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor button {
+    width: 30%;
+    margin: 1%;
+    padding: 1.5%;
+    font-size: 1rem;
+    border: 1px solid #0A3871;
+    border-radius: 10px;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnEncriptar {
+    background-color: #0A3871;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnEncriptar:hover {
+    background-color: #C5C5C5;
+    color: #0A3871;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnDesencriptar,
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnLimpiarCampos  {
+    background-color: #949B96;
+    color: #0A3871;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnDesencriptar:hover {
+    background-color: #C5C5C5;
+    color: #0A3871;
+}
+
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnLimpiarCampos:hover{
+    background-color: #FFC857;
+    color: #0A3871;
+}

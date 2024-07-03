@@ -63,7 +63,7 @@ function verificarInput(textoInput) {
     // Expresiones regulares para verificar
     const mayusculas = /[A-Z]/;
     const acentos = /[áéíóúÁÉÍÓÚüÜ]/;
-    const caracteresEspeciales = /[!@#$%^&*(),.?":{}|<>]/;
+    const caracteresEspeciales = /[@#$%^&*(),.?":{}|<>]/;
     const numeros = /\d/;
 
     // Verificar cada condición y devolver true si alguna se cumple
