@@ -5,15 +5,55 @@ function asignarTextoElemento(elemento, texto) {
     return;
 }
 
+function agregarElementoAlDOM(elemento, idElemento, claseElemento, contenido, elementoDondeSeAgrega) {
+    //Crear el elemento
+    const nuevoElemento = document.createElement(elemento);
+    //Agregarle un id
+    nuevoElemento.id = idElemento;
+    //Agregarle una clase
+    nuevoElemento.classList.add(claseElemento);
+    //Agregarle contenido
+    nuevoElemento.innerHTML = contenido;
+    //Capturar el contenedor
+    const contenedor = document.querySelector(elementoDondeSeAgrega);
+    if (contenedor) {
+        contenedor.appendChild(nuevoElemento);
+    }
+    if (elemento === "button") {
+        nuevoElemento.addEventListener("click", copiarTextoResultante);
+    }
+    return nuevoElemento;
+}
+
+
 function encriptarTexto() {
     let textoAEncriptar = document.querySelector("#textoIngresado").value;
     if (verificarInput(textoAEncriptar)) {
-        //Añadir estilo para cuando se cumpla alguna de las condiciones
         document.querySelector("#verificacionTextoIngresado").style.color = "red";
     } else {
         document.querySelector("#verificacionTextoIngresado").style.color = "black";
+        //Limpiamos el contenido del textoResultante para agregar el texto desencriptado
+
+        asignarTextoElemento(".textoResultante-contenedor", "");
+
+        agregarElementoAlDOM(
+            "textarea",
+            "textoResultante",
+            "textoResultante",
+            "",
+            ".textoResultante-contenedor"
+        );
+
+        agregarElementoAlDOM(
+            "button",
+            "btnCopiarTextoResultante",
+            "btnCopiarTextoResultante",
+            '<i class="fa-solid fa-copy"></i>Copiar',
+            ".textoResultante-contenedor"
+        );
+
         asignarTextoElemento("#textoResultante", procesoEncriptacion(textoAEncriptar));
-        limpiarCaja();
+        limpiarCajaTextoIngresado();
     }
     return;
 }
@@ -25,10 +65,12 @@ function desencriptarTexto() {
         document.querySelector("#verificacionTextoIngresado").style.color = "red";
     } else {
         document.querySelector("#verificacionTextoIngresado").style.color = "black";
+        //Limpiamos el contenido del textoResultante para agregar el texto desencriptado
+        asignarTextoElemento(".textoResultante-contenedor", "");
+        agregarElementoAlDOM("textarea", "textoResultante", "textoResultante", ".textoResultante-contenedor");
         asignarTextoElemento("#textoResultante", procesoDesencriptacion(textoADesencriptar));
-        limpiarCaja();
+        limpiarCajaTextoIngresado();
     }
-
     return;
 }
 
@@ -53,7 +95,7 @@ function procesoEncriptacion(texto) {
     return texto;
 }
 
-function limpiarCaja() {
+function limpiarCajaTextoIngresado() {
     document.querySelector("#textoIngresado").value = "";
     return;
 }
@@ -93,7 +135,19 @@ function copiarTextoResultante() {
     //Remover el textArea del DOM
     document.body.removeChild(textAreaTemporal);
 
-    console.log("Contenido copiado!")
+    // Cambiar el texto del botón a "Copiado"
+    const btnCopiar = document.querySelector('#btnCopiarTextoResultante');
+    btnCopiar.innerHTML = '<i class="fa-solid fa-check"></i>Texto copiado!';
+    //Remover y agregar clase para hacer cuenta de que el texto se copio
+    btnCopiar.classList.remove("btnCopiarTextoResultante");
+    btnCopiar.classList.add("btnCopiarTextoResultante-copiado");
+
+    //Volver el boton al estado normal
+    setTimeout(() => {
+        btnCopiar.innerHTML = '<i class="fa-solid fa-copy"></i>Copiar';
+        btnCopiar.classList.remove("btnCopiarTextoResultante-copiado");
+        btnCopiar.classList.add("btnCopiarTextoResultante");
+    }, 3000); // Cambiar el texto de vuelta después de 2 segundos
 
 }
 
@@ -102,17 +156,35 @@ function reiniciarEncriptador() {
 }
 
 function condicionesIniciales() {
+
+    //Capturamos el contenedor de textoResultante
+    const contenedorTextoResultante = document.querySelector(".textoResultante-contenedor");
+
     //Limpiamos el contenido del input
-    limpiarCaja();
+    limpiarCajaTextoIngresado();
+
     //Limpiamos el contenido del texto resultante
-    asignarTextoElemento("#textoResultante", "");
-    //Creamos e insertamos la imagen por defecto
+    asignarTextoElemento(".textoResultante-contenedor", "");
+
+    //Creamos e insertamos la imagen y los parrafos por defecto
     let imagen = document.createElement("img");
     imagen.src = "./img/mensajeNoEncontrado.png";
     imagen.alt = "Texto no encontrado";
     imagen.title = "Texto no encontrado";
+    contenedorTextoResultante.appendChild(imagen);
 
-    document.querySelector("#textoResultante").appendChild(imagen);
+    let p1 = document.createElement("p");
+    p1.id = "parrafo1-textoNoEncontrado";
+    p1.classList.add("parrafo1-textoNoEncontrado");
+    p1.textContent = "Ningún mensaje fue encontrado";
+    contenedorTextoResultante.appendChild(p1);
+
+    let p2 = document.createElement("p");
+    p2.id = "parrafo2-textoNoEncontrado";
+    p2.classList.add("parrafo2-textoNoEncontrado");
+    p2.textContent = "Ingresa el texto que deseas encriptar o desencriptar";
+    contenedorTextoResultante.appendChild(p2);
+
     //Pintar de negro nuevamente el aviso de letras minusculas. VER SI SE PUEDE MEJORAR!!!
     document.querySelector("#verificacionTextoIngresado").style.color = "black";
 }

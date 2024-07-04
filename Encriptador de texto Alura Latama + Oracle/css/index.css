@@ -22,6 +22,7 @@
 .subcontenedor-derecho {
     width: 25%;
     height: 90%;
+    margin-left: 1%;
 }
 
 .subcontenedor-izquierdo .subcontenedor-izquierdo-1 {
@@ -40,10 +41,11 @@
 
 .subcontenedor-izquierdo .subcontenedor-izquierdo-1 .logo-contenedor {
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-left: 5%;
+    padding-left: 5%;
 }
 
 .subcontenedor-izquierdo .subcontenedor-izquierdo-1 .logo-contenedor img {
@@ -108,7 +110,7 @@
 
 .subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor {
     width: 100%;
-    height: 15%;
+    height: 10%;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
@@ -120,7 +122,7 @@
     margin: 1%;
     padding: 1.5%;
     font-size: 1rem;
-    border: 1px solid #0A3871;
+    border: transparent;
     border-radius: 10px;
 }
 
@@ -136,7 +138,7 @@
 }
 
 .subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnDesencriptar,
-.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnLimpiarCampos  {
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnLimpiarCampos {
     background-color: #949B96;
     color: #0A3871;
     transition: background-color 0.3s, color 0.3s;
@@ -147,7 +149,47 @@
     color: #0A3871;
 }
 
-.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnLimpiarCampos:hover{
+.subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor .btnLimpiarCampos:hover {
     background-color: #FFC857;
     color: #0A3871;
+}
+
+.subcontenedor-derecho .textoResultante-contenedor {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: transparent;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    padding: 10%;
+}
+
+.subcontenedor-derecho .textoResultante-contenedor .parrafo1-textoNoEncontrado {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}
+
+.subcontenedor-derecho .textoResultante-contenedor .parrafo2-textoNoEncontrado {
+    font-size: 0.7rem;
+    text-align: center;
+    color: #949B96;
+}
+
+.subcontenedor-derecho .textoResultante-contenedor .textoResultante {
+    width: 100%;
+    height: 90%;
+    resize: none;
+    border: transparent;
+    font-size: 1.3rem;
+    color: #0A3871;
+}
+
+.subcontenedor-derecho .textoResultante-contenedor .textoResultante:focus {
+    outline: none;
 }
