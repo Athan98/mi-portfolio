@@ -193,3 +193,37 @@
 .subcontenedor-derecho .textoResultante-contenedor .textoResultante:focus {
     outline: none;
 }
+
+.subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante {
+    width: 80%;
+    padding: 5%;
+    font-size: 0.9rem;
+    border: transparent;
+    border-radius: 15px;
+    background-color: #0A3871;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante:hover {
+    background-color: #C5C5C5;
+    color: #0A3871;
+}
+
+.subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante i {
+    padding: 0 5%;
+}
+
+.subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante-copiado {
+    width: 80%;
+    padding: 5%;
+    font-size: 0.9rem;
+    border: transparent;
+    border-radius: 15px;
+    background-color: #8fb339;
+    color: black;
+}
+
+.subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante-copiado i {
+    padding: 0 5%;
+}

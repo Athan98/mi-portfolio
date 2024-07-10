@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 botonEditar.classList.add("btnEditar");
 
                 botonEditar.addEventListener("click", () => {
+
                     //Redirigir
                     window.location.href = `editPacientes.html?id_paciente=${p.id_paciente}`;
                 })
@@ -67,6 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error al cargar la lista de pacientes", error);
         }
     }
+
+
 
     //Funcion para borrar pacientes
     const borrarPacientes = async (idPaciente) => {

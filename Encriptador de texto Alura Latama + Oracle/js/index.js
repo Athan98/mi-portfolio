@@ -5,52 +5,55 @@ function asignarTextoElemento(elemento, texto) {
     return;
 }
 
-function agregarElementoAlDOM(elemento, idElemento, claseElemento, contenido, elementoDondeSeAgrega) {
+function crearElemento(elemento, idElemento, claseElemento) {
     //Crear el elemento
     const nuevoElemento = document.createElement(elemento);
     //Agregarle un id
     nuevoElemento.id = idElemento;
     //Agregarle una clase
     nuevoElemento.classList.add(claseElemento);
-    //Agregarle contenido
-    nuevoElemento.innerHTML = contenido;
-    //Capturar el contenedor
-    const contenedor = document.querySelector(elementoDondeSeAgrega);
-    if (contenedor) {
-        contenedor.appendChild(nuevoElemento);
-    }
-    if (elemento === "button") {
-        nuevoElemento.addEventListener("click", copiarTextoResultante);
-    }
+
     return nuevoElemento;
 }
 
 
 function encriptarTexto() {
+    //Obtenemos el valor del texto ingresado por el usuario
     let textoAEncriptar = document.querySelector("#textoIngresado").value;
+
+    //Capturamos el contenedor del texto resultante
+    const contenedorTextoResultante = document.querySelector(".textoResultante-contenedor");
+
     if (verificarInput(textoAEncriptar)) {
         document.querySelector("#verificacionTextoIngresado").style.color = "red";
     } else {
-        document.querySelector("#verificacionTextoIngresado").style.color = "black";
-        //Limpiamos el contenido del textoResultante para agregar el texto desencriptado
 
+        document.querySelector("#verificacionTextoIngresado").style.color = "black";
+
+        //Limpiamos el contenido del textoResultante para agregar el texto resultante
         asignarTextoElemento(".textoResultante-contenedor", "");
 
-        agregarElementoAlDOM(
+        //Creamos el textarea donde se mostrara el texto resultante
+        const textAreaResultante = crearElemento(
             "textarea",
             "textoResultante",
             "textoResultante",
-            "",
-            ".textoResultante-contenedor"
         );
+        //Agregamos el textarea al DOM
+        contenedorTextoResultante.appendChild(textAreaResultante);
 
-        agregarElementoAlDOM(
+        //Creamos boton al DOM el boton que permitira copiar el texto resultante
+        const boton = crearElemento(
             "button",
             "btnCopiarTextoResultante",
             "btnCopiarTextoResultante",
-            '<i class="fa-solid fa-copy"></i>Copiar',
-            ".textoResultante-contenedor"
         );
+        //Le agregamos al boton el evento para copiar el texto resultante
+        boton.addEventListener("click", copiarTextoResultante);
+        //Le agregamos contenido al boton
+        boton.innerHTML = '<i class="fa-solid fa-copy"></i>Copiar'
+
+        contenedorTextoResultante.appendChild(boton);
 
         asignarTextoElemento("#textoResultante", procesoEncriptacion(textoAEncriptar));
         limpiarCajaTextoIngresado();
@@ -59,15 +62,43 @@ function encriptarTexto() {
 }
 
 function desencriptarTexto() {
+    //Obtenemos el valor del texto ingresado por el usuario
     let textoADesencriptar = document.querySelector("#textoIngresado").value;
+
+    //Capturamos el contenedor del texto resultante
+    const contenedorTextoResultante = document.querySelector(".textoResultante-contenedor");
+
     if (verificarInput(textoADesencriptar)) {
-        //Añadir estilo para cuando se cumpla alguna de las condiciones
         document.querySelector("#verificacionTextoIngresado").style.color = "red";
     } else {
+
         document.querySelector("#verificacionTextoIngresado").style.color = "black";
-        //Limpiamos el contenido del textoResultante para agregar el texto desencriptado
+
+        //Limpiamos el contenido del textoResultante para agregar el texto resultante
         asignarTextoElemento(".textoResultante-contenedor", "");
-        agregarElementoAlDOM("textarea", "textoResultante", "textoResultante", ".textoResultante-contenedor");
+
+        //Creamos el textarea donde se mostrara el texto resultante
+        const textAreaResultante = crearElemento(
+            "textarea",
+            "textoResultante",
+            "textoResultante",
+        );
+        //Agregamos el textarea al DOM
+        contenedorTextoResultante.appendChild(textAreaResultante);
+
+        //Creamos boton al DOM el boton que permitira copiar el texto resultante
+        const boton = crearElemento(
+            "button",
+            "btnCopiarTextoResultante",
+            "btnCopiarTextoResultante",
+        );
+        //Le agregamos al boton el evento para copiar el texto resultante
+        boton.addEventListener("click", copiarTextoResultante);
+        //Le agregamos contenido al boton
+        boton.innerHTML = '<i class="fa-solid fa-copy"></i>Copiar'
+
+        contenedorTextoResultante.appendChild(boton);
+
         asignarTextoElemento("#textoResultante", procesoDesencriptacion(textoADesencriptar));
         limpiarCajaTextoIngresado();
     }
@@ -147,7 +178,7 @@ function copiarTextoResultante() {
         btnCopiar.innerHTML = '<i class="fa-solid fa-copy"></i>Copiar';
         btnCopiar.classList.remove("btnCopiarTextoResultante-copiado");
         btnCopiar.classList.add("btnCopiarTextoResultante");
-    }, 3000); // Cambiar el texto de vuelta después de 2 segundos
+    }, 2000); // Cambiar el texto de vuelta después de 2 segundos
 
 }
 
