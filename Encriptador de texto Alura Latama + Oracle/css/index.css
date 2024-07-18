@@ -49,7 +49,7 @@
 }
 
 .subcontenedor-izquierdo .subcontenedor-izquierdo-1 .logo-contenedor img {
-    width: 2.8rem;
+    width: 5%;
 }
 
 .subcontenedor-izquierdo .subcontenedor-izquierdo-2 .textoIngresado-contenedor {
@@ -190,6 +190,10 @@
     color: #0A3871;
 }
 
+.subcontenedor-derecho .textoResultante-contenedor img{
+    width: 80%;
+}
+
 .subcontenedor-derecho .textoResultante-contenedor .textoResultante:focus {
     outline: none;
 }
@@ -203,6 +207,7 @@
     background-color: #0A3871;
     color: white;
     transition: background-color 0.3s, color 0.3s;
+    height: 10%;
 }
 
 .subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante:hover {
@@ -226,4 +231,97 @@
 
 .subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante-copiado i {
     padding: 0 5%;
+}
+
+/* TABLETS */
+@media (max-width:800px){
+    .contenedor{
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .subcontenedor-izquierdo{
+        height: 70%;
+        width: 90%;
+    }
+
+    .subcontenedor-derecho{
+        height: 25%;
+        width: 90%;
+    }
+
+    .subcontenedor-derecho .textoResultante-contenedor {
+        padding: 2% 2% 1% 2%;
+    }
+
+    .subcontenedor-derecho .textoResultante-contenedor img{
+        display: none;
+    }
+
+    .subcontenedor-derecho .textoResultante-contenedor .textoResultante{
+        height: 70%;
+    }
+
+    .subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante{
+        height: 30%;
+        width: 30%;
+        padding: 0;
+        margin-top: 1%;
+    }
+
+    .subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante-copiado{
+        height: 30%;
+        width: 30%;
+        padding: 0;
+        margin-top: 1%;
+    }
+}
+
+/* CELULARES */
+@media (max-width:480px){
+
+    .subcontenedor-izquierdo{
+        margin-bottom: 3%;
+    }
+
+    .subcontenedor-izquierdo .subcontenedor-izquierdo-2 .textoIngresado-contenedor {
+        height: 60%;
+    }
+
+    .subcontenedor-izquierdo .subcontenedor-izquierdo-2 .textoIngresado-contenedor .textoIngresado{
+        font-size: 1.5rem;
+    }
+
+    .subcontenedor-izquierdo .subcontenedor-izquierdo-2 .verificacionTextoIngresado-contenedor{
+        height: 5%;
+    }
+
+    .subcontenedor-izquierdo .subcontenedor-izquierdo-2 .verificacionTextoIngresado-contenedor .verificacionTextoIngresado{
+        font-size: 0.8rem;
+    }
+
+    .subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor{
+        flex-direction: column;
+        height: 35%;
+    }
+
+    .subcontenedor-izquierdo .subcontenedor-izquierdo-2 .botonera-contenedor button{
+        width: 100%;
+        height: 30%;
+        font-size: 0.8rem;
+    }
+
+    .subcontenedor-derecho .textoResultante-contenedor .textoResultante{
+        font-size: 1rem;
+    }
+
+    .subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante{
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .subcontenedor-derecho .textoResultante-contenedor .btnCopiarTextoResultante-copiado{
+        width: 100%;
+        font-size: 0.8rem;
+    }
 }
