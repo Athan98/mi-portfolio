@@ -7,6 +7,7 @@ import entidades.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,6 +37,10 @@ public class Principal extends javax.swing.JFrame {
     public static float tasa = 0;
     public static DetalleProducto dp = null;
 
+    public List<Proveedor> proveedores = new ArrayList<>();
+    public List<Oferta> ofertas = new ArrayList<>();
+    public List<DetalleProducto> detalles = new ArrayList<>();
+
     private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int fila, int col) {
@@ -60,7 +65,11 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
-        jpBotonera.setOpaque(false);
+        ejectuarXAMPP();
+        crearBD();
+        proveedores = listarProveedores();
+        ofertas = listarOfertas();
+        detalles = listarDetalleProducto();
         jpBusqueda.setOpaque(false);
         jpDesktop.setOpaque(false);
         jpAviso.setOpaque(false);
@@ -87,6 +96,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         ImageIcon icon = new ImageIcon(getClass().getResource("/images/fondoPrincipal.png"));
         Image image = icon.getImage();
         jPanel1 = new javax.swing.JPanel(){
@@ -94,9 +104,6 @@ public class Principal extends javax.swing.JFrame {
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
             }
         };
-        jpBotonera = new javax.swing.JPanel();
-        jbProductos = new javax.swing.JButton();
-        jbPreventistas = new javax.swing.JButton();
         ImageIcon icon2 = new ImageIcon(getClass().getResource("/images/fondoEscritorio1.png"));
         Image image2 = icon2.getImage();
         escritorio = new javax.swing.JDesktopPane(){
@@ -117,6 +124,8 @@ public class Principal extends javax.swing.JFrame {
         jbEliminarOf = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jlTotalOf = new javax.swing.JLabel();
+        jpAviso = new javax.swing.JPanel();
+        jlAviso = new javax.swing.JLabel();
         jpBusqueda = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtBuscar = new javax.swing.JTextField();
@@ -125,53 +134,19 @@ public class Principal extends javax.swing.JFrame {
         jbLimpiar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jbActualizar = new javax.swing.JButton();
-        jpAviso = new javax.swing.JPanel();
-        jlAviso = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jbProductos.setBackground(new java.awt.Color(102, 102, 255));
-        jbProductos.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 18)); // NOI18N
-        jbProductos.setForeground(new java.awt.Color(255, 255, 255));
-        jbProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/productos.png"))); // NOI18N
-        jbProductos.setText("Productos");
-        jbProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbProductosActionPerformed(evt);
-            }
-        });
-
-        jbPreventistas.setBackground(new java.awt.Color(102, 102, 255));
-        jbPreventistas.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 18)); // NOI18N
-        jbPreventistas.setForeground(new java.awt.Color(255, 255, 255));
-        jbPreventistas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proveedor.png"))); // NOI18N
-        jbPreventistas.setText("Preventistas");
-        jbPreventistas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbPreventistasActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpBotoneraLayout = new javax.swing.GroupLayout(jpBotonera);
-        jpBotonera.setLayout(jpBotoneraLayout);
-        jpBotoneraLayout.setHorizontalGroup(
-            jpBotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBotoneraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbProductos)
-                .addGap(18, 18, 18)
-                .addComponent(jbPreventistas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jpBotoneraLayout.setVerticalGroup(
-            jpBotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBotoneraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpBotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbPreventistas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        setTitle("Calculadora de Costos V4");
 
         escritorio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -336,6 +311,53 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jlAviso.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jlAviso.setForeground(new java.awt.Color(255, 255, 0));
+        jlAviso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlAviso.setText("*ANTE CUALQUIER INCONVENIENTE, PRESIONE EL BOTON AMARILLO PARA ACTUALIZAR LA VENTANA*");
+
+        javax.swing.GroupLayout jpAvisoLayout = new javax.swing.GroupLayout(jpAviso);
+        jpAviso.setLayout(jpAvisoLayout);
+        jpAvisoLayout.setHorizontalGroup(
+            jpAvisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAvisoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpAvisoLayout.setVerticalGroup(
+            jpAvisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlAviso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jpDesktopLayout = new javax.swing.GroupLayout(jpDesktop);
+        jpDesktop.setLayout(jpDesktopLayout);
+        jpDesktopLayout.setHorizontalGroup(
+            jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDesktopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jpAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDesktopLayout.createSequentialGroup()
+                        .addComponent(jpProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jpDesktopLayout.setVerticalGroup(
+            jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDesktopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpAviso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jpDesktopLayout.createSequentialGroup()
+                        .addComponent(jpPromociones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 4, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
         jpBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Búsqueda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -423,91 +445,91 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jlAviso.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        jlAviso.setForeground(new java.awt.Color(255, 255, 0));
-        jlAviso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlAviso.setText("*ANTE CUALQUIER INCONVENIENTE, PRESIONE EL BOTON AMARILLO PARA ACTUALIZAR LA VENTANA*");
-
-        javax.swing.GroupLayout jpAvisoLayout = new javax.swing.GroupLayout(jpAviso);
-        jpAviso.setLayout(jpAvisoLayout);
-        jpAvisoLayout.setHorizontalGroup(
-            jpAvisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpAvisoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jpAvisoLayout.setVerticalGroup(
-            jpAvisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlAviso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jpDesktopLayout = new javax.swing.GroupLayout(jpDesktop);
-        jpDesktop.setLayout(jpDesktopLayout);
-        jpDesktopLayout.setHorizontalGroup(
-            jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDesktopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpBusqueda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDesktopLayout.createSequentialGroup()
-                        .addComponent(jpProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jpDesktopLayout.setVerticalGroup(
-            jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpDesktopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpAviso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jpDesktopLayout.createSequentialGroup()
-                        .addComponent(jpPromociones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
         escritorio.setLayer(jpDesktop, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jpBusqueda, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpDesktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpDesktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpBotonera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(escritorio))
+                .addComponent(escritorio)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpBotonera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(escritorio)
                 .addContainerGap())
         );
+
+        jMenu1.setText("Productos");
+
+        jMenuItem5.setText("ABM Productos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Proveedores");
+
+        jMenuItem4.setText("ABM Proveedores");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Productos & Proveedores");
+
+        jMenuItem2.setText("Nueva relación");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem3.setText("Gestión de relaciones existentes");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -522,88 +544,6 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosActionPerformed
-// Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
-        if (cargaWorker != null && !cargaWorker.isDone()) {
-            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
-            return;
-        }
-
-        // Crear e iniciar el hilo SwingWorker
-        cargaWorker = new SwingWorker<Void, Void>() {
-            Loading loading = new Loading();
-
-            @Override
-            protected Void doInBackground() throws Exception {
-                // Mostrar el frame de carga
-
-                loading.setVisible(true);
-
-                try {
-                    Thread.sleep(2000);
-                    Productos ap = new Productos();
-                    ap.setVisible(true);
-                    escritorio.add(ap);
-                    escritorio.moveToFront(ap);
-                    ap.setLocation((escritorio.getWidth() - ap.getWidth()) / 2, (escritorio.getHeight() - ap.getHeight()) / 2);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                return null;
-            }
-
-            @Override
-            protected void done() {
-                // Cerrar el frame de carga después de que la tarea haya terminado
-                loading.dispose();
-            }
-        };
-
-        cargaWorker.execute();
-    }//GEN-LAST:event_jbProductosActionPerformed
-
-    private void jbPreventistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreventistasActionPerformed
-        // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
-        if (cargaWorker != null && !cargaWorker.isDone()) {
-            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
-            return;
-        }
-
-        // Crear e iniciar el hilo SwingWorker
-        cargaWorker = new SwingWorker<Void, Void>() {
-            Loading loading = new Loading();
-
-            @Override
-            protected Void doInBackground() throws Exception {
-                // Mostrar el frame de carga
-
-                loading.setVisible(true);
-
-                try {
-                    Thread.sleep(2000);
-                    Proveedores p = new Proveedores();
-                    p.setVisible(true);
-                    escritorio.add(p);
-                    escritorio.moveToFront(p);
-                    p.setLocation((escritorio.getWidth() - p.getWidth()) / 2, (escritorio.getHeight() - p.getHeight()) / 2);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                return null;
-            }
-
-            @Override
-            protected void done() {
-                // Cerrar el frame de carga después de que la tarea haya terminado
-                loading.dispose();
-            }
-        };
-
-        cargaWorker.execute();
-    }//GEN-LAST:event_jbPreventistasActionPerformed
 
     private void jTableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProductosMouseClicked
         try {
@@ -638,21 +578,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void jtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarKeyReleased
         try {
-            Session session = HibernateConfig.get().openSession();
-
-            DetalleProducto_data pd = new DetalleProducto_data(session);
-            Oferta_data ofd = new Oferta_data(session);
-
-            List<DetalleProducto> productos = pd.listarTodo();
-            List<Oferta> ofertas = ofd.listarTodo();
-
             String campoBuscarNombre = jtBuscar.getText().toUpperCase();
 
             borrarFilas();
 
-            Collections.sort(productos, Comparator.comparing(DetalleProducto::getPrecioPorPaquete));
+            Collections.sort(detalles, Comparator.comparing(DetalleProducto::getPrecioPorPaquete));
 
-            for (DetalleProducto p : productos) {
+            for (DetalleProducto p : detalles) {
                 if (p.getProducto().getNombre().toUpperCase().startsWith(campoBuscarNombre)) {
                     modelo.addRow(new Object[]{
                         p.getIdDetalleProducto(),
@@ -685,7 +617,6 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
 
-            session.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
@@ -693,21 +624,10 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
-            Session session = HibernateConfig.get().openSession();
-
-            DetalleProducto_data pd = new DetalleProducto_data(session);
-            Oferta_data ofd = new Oferta_data(session);
-
-            List<DetalleProducto> productos = pd.listarTodo();
-            List<Oferta> ofertas = ofd.listarTodo();
-
             Proveedor prov = (Proveedor) jcProveedores.getSelectedItem();
-
             borrarFilas();
-
-            Collections.sort(productos, Comparator.comparing(DetalleProducto::getPrecioPorPaquete));
-
-            for (DetalleProducto p : productos) {
+            Collections.sort(detalles, Comparator.comparing(DetalleProducto::getPrecioPorPaquete));
+            for (DetalleProducto p : detalles) {
                 if (p.getProveedor().getNombre().equals(prov.getNombre())) {
                     modelo.addRow(new Object[]{
                         p.getIdDetalleProducto(),
@@ -737,8 +657,6 @@ public class Principal extends javax.swing.JFrame {
                         o.getPrecioFinalTotal(), /*botonEliminar*/});
                 }
             }
-
-            session.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
@@ -753,9 +671,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         borrarFilas();
+        detalles = listarDetalleProducto();
         actualizarListaProductos();
         borrarFilas2();
+        ofertas = listarOfertas();
         actualizarListaOfertas();
+        proveedores = listarProveedores();
         cargarProveedores();
         jtBuscar.setText("");
         jcProveedores.setSelectedIndex(-1);
@@ -869,6 +790,137 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbSumarOfActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
+        if (cargaWorker != null && !cargaWorker.isDone()) {
+            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+            return;
+        }
+
+        // Crear e iniciar el hilo SwingWorker
+        cargaWorker = new SwingWorker<Void, Void>() {
+            Loading loading = new Loading();
+
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Mostrar el frame de carga
+
+                loading.setVisible(true);
+
+                try {
+                    Thread.sleep(2000);
+                    AltaBajaModificacion_Producto abmp = new AltaBajaModificacion_Producto();
+                    abmp.setVisible(true);
+                    escritorio.add(abmp);
+                    escritorio.moveToFront(abmp);
+                    abmp.setLocation((escritorio.getWidth() - abmp.getWidth()) / 2, (escritorio.getHeight() - abmp.getHeight()) / 2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // Cerrar el frame de carga después de que la tarea haya terminado
+                loading.dispose();
+            }
+        };
+
+        cargaWorker.execute();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
+        if (cargaWorker != null && !cargaWorker.isDone()) {
+            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+            return;
+        }
+
+        // Crear e iniciar el hilo SwingWorker
+        cargaWorker = new SwingWorker<Void, Void>() {
+            Loading loading = new Loading();
+
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Mostrar el frame de carga
+
+                loading.setVisible(true);
+
+                try {
+                    Thread.sleep(2000);
+                    AltaBajaModificacion_Proveedor abmp = new AltaBajaModificacion_Proveedor();
+                    abmp.setVisible(true);
+                    escritorio.add(abmp);
+                    escritorio.moveToFront(abmp);
+                    abmp.setLocation((escritorio.getWidth() - abmp.getWidth()) / 2, (escritorio.getHeight() - abmp.getHeight()) / 2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // Cerrar el frame de carga después de que la tarea haya terminado
+                loading.dispose();
+            }
+        };
+
+        cargaWorker.execute();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // Verificar si hay un hilo SwingWorker en ejecución y esperar a que termine
+        if (cargaWorker != null && !cargaWorker.isDone()) {
+            JOptionPane.showMessageDialog(null, "Espere a que la operación actual termine.");
+            return;
+        }
+
+        // Crear e iniciar el hilo SwingWorker
+        cargaWorker = new SwingWorker<Void, Void>() {
+            Loading loading = new Loading();
+
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Mostrar el frame de carga
+
+                loading.setVisible(true);
+
+                try {
+                    Thread.sleep(2000);
+                    Productos_Proveedores p_p = new Productos_Proveedores();
+                    p_p.setVisible(true);
+                    escritorio.add(p_p);
+                    escritorio.moveToFront(p_p);
+                    p_p.setLocation((escritorio.getWidth() - p_p.getWidth()) / 2, (escritorio.getHeight() - p_p.getHeight()) / 2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // Cerrar el frame de carga después de que la tarea haya terminado
+                loading.dispose();
+            }
+        };
+
+        cargaWorker.execute();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        AltaModificacion_DetalleProducto amdp = new AltaModificacion_DetalleProducto();
+        amdp.setVisible(true);
+        Principal.escritorio.add(amdp);
+        Principal.escritorio.moveToFront(amdp);
+        amdp.setLocation((Principal.escritorio.getWidth() - amdp.getWidth()) / 2, (Principal.escritorio.getHeight() - amdp.getHeight()) / 2);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -908,6 +960,15 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -920,14 +981,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jbEliminarOf;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbLimpiarTotal;
-    private javax.swing.JButton jbPreventistas;
-    private javax.swing.JButton jbProductos;
     private javax.swing.JButton jbSumarOf;
     private javax.swing.JComboBox<Proveedor> jcProveedores;
     private javax.swing.JLabel jlAviso;
     private javax.swing.JLabel jlTotalOf;
     private javax.swing.JPanel jpAviso;
-    private javax.swing.JPanel jpBotonera;
     private javax.swing.JPanel jpBusqueda;
     private javax.swing.JPanel jpDesktop;
     private javax.swing.JPanel jpProductos;
@@ -990,17 +1048,10 @@ public class Principal extends javax.swing.JFrame {
 
     public void actualizarListaProductos() {
         modelo.setRowCount(0);
-
-        Session session = HibernateConfig.get().openSession();
-
-        DetalleProducto_data pd = new DetalleProducto_data(session);
-
-        List<DetalleProducto> productos = pd.listarTodo();
-
         // Ordenar la lista de productos por precioCosto de menor a mayor
-        Collections.sort(productos, Comparator.comparing(DetalleProducto::getPrecioPorPaquete));
+        Collections.sort(detalles, Comparator.comparing(DetalleProducto::getPrecioPorPaquete));
 
-        for (DetalleProducto p : productos) {
+        for (DetalleProducto p : detalles) {
             modelo.addRow(new Object[]{
                 p.getIdDetalleProducto(),
                 p.getProducto().getNombre(),
@@ -1010,19 +1061,10 @@ public class Principal extends javax.swing.JFrame {
                 p.getPrecioPorPaquete(),
                 boton});
         }
-
-        session.close();
     }
 
     public void actualizarListaOfertas() {
         modelo2.setRowCount(0);
-
-        Session session = HibernateConfig.get().openSession();
-
-        Oferta_data od = new Oferta_data(session);
-
-        List<Oferta> ofertas = od.listarTodo();
-
         Collections.sort(ofertas, Comparator.comparing(Oferta::getPrecioFinalTotal));
         for (Oferta o : ofertas) {
             modelo2.addRow(new Object[]{
@@ -1037,9 +1079,6 @@ public class Principal extends javax.swing.JFrame {
                 o.getPrecioFinalPack(),
                 o.getPrecioFinalTotal(), /*botonEliminar*/});
         }
-
-        session.close();
-
     }
 
     public void borrarFilas() {
@@ -1059,11 +1098,6 @@ public class Principal extends javax.swing.JFrame {
     private void cargarProveedores() {
         jcProveedores.removeAllItems();
 
-        Session session = HibernateConfig.get().openSession();
-        Proveedor_data pd = new Proveedor_data(session);
-        List<Proveedor> proveedores = pd.listarTodo();
-        System.out.println(proveedores);
-
         Set<String> proveedoresAgregados = new HashSet<>();
 
         for (Proveedor p : proveedores) {
@@ -1076,7 +1110,69 @@ public class Principal extends javax.swing.JFrame {
 
         jcProveedores.setSelectedIndex(-1);
 
-        session.close();
+    }
 
+    private List<Proveedor> listarProveedores() {
+        List<Proveedor> proveedoresListados = new ArrayList<Proveedor>();
+        try {
+            Session session = HibernateConfig.get().openSession();
+            Proveedor_data pd = new Proveedor_data(session);
+            proveedoresListados = pd.listarTodo();
+            session.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return proveedoresListados;
+    }
+
+    private List<Oferta> listarOfertas() {
+        List<Oferta> ofertasListadas = new ArrayList<Oferta>();
+        try {
+            Session session = HibernateConfig.get().openSession();
+            Oferta_data od = new Oferta_data(session);
+            ofertasListadas = od.listarTodo();
+            session.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return ofertasListadas;
+    }
+
+    private List<DetalleProducto> listarDetalleProducto() {
+        List<DetalleProducto> detalleProductoListados = new ArrayList<DetalleProducto>();
+        try {
+            Session session = HibernateConfig.get().openSession();
+            DetalleProducto_data dp = new DetalleProducto_data(session);
+            detalleProductoListados = dp.listarTodo();
+            session.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return detalleProductoListados;
+    }
+
+    private void crearBD() {
+        Session session = null;
+        try {
+            session = HibernateConfig.get().openSession();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    private void ejectuarXAMPP() {
+        Process proceso = null;
+        try {
+            System.out.println("Ejecutando XAMPP");
+            String rutaXAMPP = "C:\\xampp\\xampp_start.exe";
+            proceso = Runtime.getRuntime().exec(rutaXAMPP);
+            System.out.println("XAMPP inicializado");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo ejecutar XAMPP");
+        }
     }
 }

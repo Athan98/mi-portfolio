@@ -14,11 +14,14 @@ public class Render extends DefaultTableCellRenderer {
         if (value instanceof JButton) {
             JButton boton = (JButton) value;
             return boton;
-        }
-        if (value instanceof JCheckBox) {
+        } else if (value instanceof JCheckBox) {
             JCheckBox jcb = (JCheckBox) value;
             return jcb;
+        } else {
+            String tooltipText = (value == null) ? "" : value.toString();
+            setToolTipText(tooltipText);
         }
+
         return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 

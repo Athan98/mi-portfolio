@@ -1,21 +1,22 @@
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\data\Proveedor_data.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\config_tables\Render.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\frames\Ofertas.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\data\Repository.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\data\Oferta_data.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\entidades\Producto.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\config\HibernateConfig.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\frames\Principal.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\entidades\Proveedor.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\quantumscript\gestiondepedidos_fronterahnos\Pruebas.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\frames\AgregarProducto.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\exportarExcel\Controlador.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\config\ImagenQuantum.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\entidades\Oferta.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\data\Producto_data.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\frames\Productos.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\entidades\DetalleProducto.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\frames\Iniciar.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\data\DetalleProducto_data.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\frames\Loading.java
-C:\Users\Usuario\Documents\GitHub\mi-portfolio\CalculadoraDeCostosV3\src\main\java\frames\Proveedores.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\entidades\Oferta.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\config_tables\Render.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\frames\Ofertas.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\frames\AltaBajaModificacion_Producto.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\quantumscript\gestiondepedidos_fronterahnos\Pruebas.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\config\HibernateConfig.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\frames\Principal.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\data\Oferta_data.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\frames\AltaModificacion_DetalleProducto.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\frames\Iniciar.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\exportarExcel\Controlador.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\data\Proveedor_data.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\data\Repository.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\data\DetalleProducto_data.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\data\Producto_data.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\entidades\Proveedor.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\frames\AltaBajaModificacion_Proveedor.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\entidades\Producto.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\frames\Loading.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\frames\Productos_Proveedores.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\entidades\DetalleProducto.java
+E:\DOCUMENTOS NICO 2024\GitHub\mi-portfolio\JAVA\MAVEN\CalculadoraDeCostosV3\src\main\java\config\ImagenQuantum.java
