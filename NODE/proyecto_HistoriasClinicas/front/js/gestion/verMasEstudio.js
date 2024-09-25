@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const traerPaciente = async (id) => {
         try {
             const res = await axios.get(`http://192.168.1.9:5000/pacientes/${id}`);
+            // Establecer el enlace para redirigir a la página de detalles del paciente
+            const enlacePaciente = document.querySelector("#enlacePaciente");
+            enlacePaciente.href = `/front/pages/gestion/verMasPaciente.html?id=${id}`;
             return res.data;
         } catch (error) {
             console.log("-Error al traer el paciente-", error);

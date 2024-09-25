@@ -1,46 +1,51 @@
-const urlListar = "http://192.168.1.9:5000/pacientes/";
+const urlListar = "http://192.168.1.9:5000/medicos/";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const cuerpoTabla = document.querySelector("#bodyTablaPacientes");
+    const cuerpoTabla = document.querySelector("#bodyTablaMedicos");
     const buscadorEntrada = document.querySelector("#buscadorEntrada");
 
     //LISTAR PACIENTES
     const listar = async () => {
         try {
             const response = await axios.get(urlListar);
-            const pacientes = response.data;
+            const medicos = response.data;
 
             cuerpoTabla.innerHTML = "";
 
-            pacientes.forEach(p => {
+            medicos.forEach(m => {
                 const fila = document.createElement("tr");
 
                 const celdaApellido = document.createElement("td");
                 const celdaNombre = document.createElement("td");
-                const celdaDni = document.createElement("td");
-                const celdaEdad = document.createElement("td");
+                const celdaEspecialidad = document.createElement("td");
                 const celdaAcciones = document.createElement("td");
 
-                celdaApellido.textContent = p.apellidoPaciente;
-                celdaNombre.textContent = p.nombrePaciente;
-                celdaDni.textContent = p.dniPaciente;
-                celdaEdad.textContent = p.edadPaciente;
+                celdaApellido.textContent = m.apellidoMedico;
+                celdaNombre.textContent = m.nombreMedico;
+                celdaEspecialidad.textContent = m.especialidadMedico;
 
-                const btnMas = document.createElement("button");
-                btnMas.textContent = "VER MAS";
-                btnMas.classList.add("btnMas");
-                btnMas.addEventListener("click", () => {
+                const btnEditar = document.createElement("button");
+                btnEditar.textContent = "EDITAR";
+                btnEditar.classList.add("btnEditar");
+                btnEditar.addEventListener("click", () => {
 
-                    window.location.href = `/front/pages/gestion/verMasPaciente.html?id=${p.id}`
+                    window.location.href = `/front/pages/gestion/editarMedico.html?id=${m.id}`
 
                 });
 
+                const btnEliminar = document.createElement("button");
+                btnEliminar.textContent = "ELIMINAR";
+                btnEliminar.classList.add("btnEditar");
+                btnEliminar.addEventListener("click", () => {
+                    borrar(m.id);
+                });
 
-                celdaAcciones.appendChild(btnMas);
+
+                celdaAcciones.appendChild(btnEditar);
+                celdaAcciones.appendChild(btnEliminar);
                 fila.appendChild(celdaApellido);
                 fila.appendChild(celdaNombre);
-                fila.appendChild(celdaDni);
-                fila.appendChild(celdaEdad);
+                fila.appendChild(celdaEspecialidad);
                 fila.appendChild(celdaAcciones);
 
                 cuerpoTabla.appendChild(fila);
@@ -52,25 +57,38 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    const filtrarPacientes = () => {
+    //Funcion para borrar pacientes
+    const borrar = async (id) => {
+
+        if (id && confirm("¿Estás seguro de que deseas eliminar este médico?")) {
+            try {
+                await axios.delete(`http://192.168.1.9:5000/medicos/${id}`);
+                //Recargar posteos
+                listar();
+                alert("Registro eliminado");
+            } catch (error) {
+                console.error("Error para borrar el registro: ", error);
+                alert("No se ha podido eliminar el médico.");
+            }
+        }
+    }
+
+    const filtrarMedicos = () => {
         const filter = buscadorEntrada.value.toLowerCase(); // Obtiene el valor del campo de búsqueda en minúsculas
         const filas = cuerpoTabla.getElementsByTagName('tr'); // Obtiene todas las filas de la tabla
 
         Array.from(filas).forEach((fila) => { // Itera sobre cada fila
             const celdaApellido = fila.getElementsByTagName('td')[0]; // Selecciona la celda del apellido
             const celdaNombre = fila.getElementsByTagName('td')[1]; // Selecciona la celda del nombre
-            const celdaDNI = fila.getElementsByTagName('td')[2]; // Selecciona la celda del DNI
 
-            if (celdaApellido || celdaNombre || celdaDNI) {
+            if (celdaApellido || celdaNombre) {
                 const apellido = celdaApellido.textContent || celdaApellido.innerText; // Obtiene el texto del apellido
                 const nombre = celdaNombre.textContent || celdaNombre.innerText; // Obtiene el texto del nombre
-                const dni = celdaDNI.textContent || celdaDNI.innerText; // Obtiene el texto del DNI
 
                 // Comprueba si el valor de búsqueda está presente en el apellido, nombre o DNI
                 if (
                     apellido.toLowerCase().indexOf(filter) > -1 ||
-                    nombre.toLowerCase().indexOf(filter) > -1 ||
-                    dni.toLowerCase().indexOf(filter) > -1
+                    nombre.toLowerCase().indexOf(filter) > -1
                 ) {
                     fila.style.display = ""; // Muestra la fila si coincide
                 } else {
@@ -80,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    buscadorEntrada.addEventListener("input", filtrarPacientes); // Llama a la función filtrarPacientes cada vez que se escribe en el campo de búsqueda
+    buscadorEntrada.addEventListener("input", filtrarMedicos); // Llama a la función filtrarPacientes cada vez que se escribe en el campo de búsqueda
 
     listar();
 });

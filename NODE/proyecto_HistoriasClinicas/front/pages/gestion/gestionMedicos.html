@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GESTIÓN | Nuevo Paciente</title>
+    <title>GESTIÓN | Médicos</title>
     <link rel="stylesheet" href="../../css/gestion/indexGestion.css">
-    <link rel="stylesheet" href="../../css/gestion/nuevoPaciente.css">
+    <link rel="stylesheet" href="../../css/gestion/gestionMedicos.css">
     <!--Link FontAwesome-->
     <script src="https://kit.fontawesome.com/fa04600604.js" crossorigin="anonymous"></script>
     <!--CSS Bootstrap-->
@@ -52,40 +52,25 @@
             </nav>
         </header>
         <main>
-            <div class="formulario">
-                <form method="post" id="form-nuevoPaciente">
-                    <div class="nombrePaciente">
-                        <label for="nombrePaciente">Nombre:</label>
-                        <input type="text" placeholder="Ingrese el nombre del paciente" id="nombrePaciente"
-                            name="nombre" required>
-                    </div>
-                    <div class="apellidoPaciente">
-                        <label for="apellidoPaciente">Apellido:</label>
-                        <input type="text" placeholder="Ingrese el apellido del paciente" id="apellidoPaciente"
-                            name="apellido" required>
-                    </div>
-                    <div class="docPaciente">
-                        <label for="docPaciente">Documento:</label>
-                        <input type="text" placeholder="Ingrese el N° de documento del paciente" id="docPaciente"
-                            name="dni" required>
-                    </div>
-                    <div class="edadPaciente">
-                        <label for="edadPaciente">Edad:</label>
-                        <input type="number" placeholder="Ingrese la edad del paciente" id="edadPaciente" name="edad" required>
-                    </div>
-                    <div class="usuarioPaciente">
-                        <label for="usuarioPaciente">Usuario:</label>
-                        <input type="text" placeholder="Ingrese el usuario del paciente" id="usuarioPaciente" name="usuario" required>
-                    </div>
-                    <div class="passwordPaciente">
-                        <label for="passwordPaciente">Password:</label>
-                        <input type="text" placeholder="Ingrese la contraseña del paciente" id="passwordPaciente" name="password" required>
-                    </div>
-                    <div class="btn">
-                        <button id="btnAgregar" type="submit">Agregar paciente</button>
-                    </div>
-                </form>
+            <div class="buscador">
+                <h2>Médicos</h2>
+                <input type="text" id="buscadorEntrada" placeholder="Ingrese el nombre o apellido del médico">
             </div>
+
+            <div class="tabla">
+                <table class="tablaMedicos" id="tablaMedicos">
+                    <thead>
+                        <tr>
+                            <th>Apellido</th>
+                            <th>Nombre</th>
+                            <th>Especialidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyTablaMedicos"></tbody>
+                </table>
+            </div>
+            
         </main>
         <footer>
 
@@ -104,7 +89,7 @@
     <!--Script Axios-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <script src="../../js/gestion/nuevoPaciente.js"></script>
+    <script src="../../js/gestion/gestionMedicos.js"></script>
 </body>
 
 </html>

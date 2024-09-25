@@ -19,7 +19,7 @@
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                    <a class="navbar-brand" href="../../indexGestion.html">RESPIRAR</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -27,24 +27,23 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Pacientes
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./nuevoPaciente.html">Nuevo</a></li>
+                                </ul>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Dropdown link
+                                  Medicos
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li><a class="dropdown-item" href="./nuevoMedico.html">Nuevo</a></li>
+                                    <li><a class="dropdown-item" href="./gestionMedicos.html">Gestión</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -55,47 +54,39 @@
         <main>
 
             <div class="datosPaciente" id="datosPaciente">
-                <h1 class="paciente-nombreApellido" id="paciente-nombreApellido" onclick="">-</h1>
+                <a href="#" id="enlacePaciente">
+                    <h1 class="paciente-nombreApellido" id="paciente-nombreApellido">-</h1>
+                </a>
                 <h2 class="dniPaciente" id="dniPaciente">-</h2>
                 <h2 class="edadPaciente" id="edadPaciente">-</h2>
                 <h3 class="usuarioPaciente" id="usuarioPaciente">-</h3>
                 <h3 class="passwordPaciente" id="passwordPaciente">-</h3>
             </div>
-<!--
+
             <div class="formulario">
                 <form method="post" id="form-nuevoEstudio">
-                    <div class="nombrePaciente">
-                        <label for="nombrePaciente">Nombre:</label>
-                        <input type="text" placeholder="Ingrese el nombre del paciente" id="nombrePaciente"
-                            name="nombre">
+                    <div class="medicos">
+                        <label for="medicos">Medico:</label>
+                        <select name="medicos" id="medicos" required></select>
                     </div>
-                    <div class="apellidoPaciente">
-                        <label for="apellidoPaciente">Apellido:</label>
-                        <input type="text" placeholder="Ingrese el apellido del paciente" id="apellidoPaciente"
-                            name="apellido">
+                    <div class="fecha">
+                        <label for="fecha">Fecha del estudio:</label>
+                        <input type="date" name="fecha" id="fecha" required></input>
                     </div>
-                    <div class="docPaciente">
-                        <label for="docPaciente">Documento:</label>
-                        <input type="text" placeholder="Ingrese el N° de documento del paciente" id="docPaciente"
-                            name="dni">
+                    <div class="tipoEstudio">
+                        <label for="tipoEstudio">Tipo estudio:</label>
+                        <input type="text" name="tipoEstudio" id="tipoEstudio"
+                            placeholder="Ingrese una breve descripción del estudio" required></input>
                     </div>
-                    <div class="edadPaciente">
-                        <label for="edadPaciente">Edad:</label>
-                        <input type="number" placeholder="Ingrese la edad del paciente" id="edadPaciente" name="edad">
+                    <div class="files">
+                        <label for="file">Archivos:</label>
+                        <input type="file" id="file" name="file" multiple>
                     </div>
-                    <div class="usuarioPaciente">
-                        <label for="usuarioPaciente">Usuario:</label>
-                        <input type="text" placeholder="Ingrese el usuario del paciente" id="usuarioPaciente" name="usuario">
-                    </div>
-                    <div class="passwordPaciente">
-                        <label for="passwordPaciente">Password:</label>
-                        <input type="text" placeholder="Ingrese la contraseña del paciente" id="passwordPaciente" name="password">
-                    </div>
-                    <div class="btnEnviar">
-                        <button id="btnEnviar" type="submit">Agregar Paciente</button>
+                    <div class="btn">
+                        <button id="btnEnviar" type="submit">Agregar Estudio</button>
                     </div>
                 </form>
-            -->
+
             </div>
         </main>
         <footer>

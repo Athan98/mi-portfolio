@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const parametrosURL = new URLSearchParams(window.location.search);
     const idPaciente = parametrosURL.get("id");
     const formulario = document.querySelector("#form-editarPaciente");
-    const botonGuardar = document.querySelector("#btnGuardar");
 
     // Función para traer el estudio, pacientes, y médicos
     const traerPaciente = async (id) => {
