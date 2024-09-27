@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    box-sizing: border-box;
+}
+
+.contenedor {
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    height: 10%;
+    width: 100%;
+}
+
+main {
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    height: 5%;
+    width: 100%;
+}
+
+.buscador {
+    width: 90%;
+    height: 20%;
+    border: 1px black solid;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buscador h2 {
+    text-align: center;
+    padding: 1%;
+    margin: 0;
+    height: 50%;
+    width: 100%;
+}
+
+.buscador input {
+    padding: 1%;
+    width: 60%;
+    height: 50%;
+    margin: 1%;
+    border-radius: 15px;
+}
+
+.tabla {
+    width: 90%;
+    height: 79%;
+    margin-top: 1%;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 1%;
+    overflow-y: auto;
+    /* Añadir scroll vertical */
+}
+
+.tabla table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    /* Asegura que los bordes de las celdas no se separen */
+}
+
+.tabla thead {
+    position: sticky;
+    /* Mantener el encabezado fijo */
+    top: 0;
+    background-color: white;
+    /* Para que no se superponga el contenido al hacer scroll */
+    border-bottom: 3px solid black;
+    
+}
+
+.tabla tr {
+    border-bottom: 1px solid black;
+    
+}
+
+.tabla td {
+    padding: 1% 0 1% 0;
+
+}
+
+.tabla th {
+    padding: 1% 0 1% 0;
+
+}

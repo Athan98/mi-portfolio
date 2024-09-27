@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.datosEstudio {
+    width: 90%;
+    height: 40%;
+}
+
+.datosEstudio a{
+    text-decoration: none;
+}
+
+.contenedorFiles {
+    width: 90%;
+    height: 60%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    border: 1px solid black;
+    border-radius: 15px;
+    overflow: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+}
+
+.fileIndividual {
+    width: 96%;
+    margin: 2%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.fileIndividual a,.fileIndividual i{
+    font-size: 1.2rem;
+    padding: 1%;
+    text-decoration: none;
+}
