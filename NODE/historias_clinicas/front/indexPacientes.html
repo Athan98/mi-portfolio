@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INGRESO</title>
+    <link rel="stylesheet" href="./css/pacientes/indexPacientes.css">
+</head>
+
+<body>
+    <div class="contenedor">
+        <header>
+            <img src="./images/logoRespirar.png" alt="">
+        </header>
+        <main>
+            <div class="inicioSesion">
+                <form id="formLogin" method="post">
+                    <div class="usuario">
+                        <input type="text" class="nombreUsuario" id="nombreUsuario" required
+                            placeholder="Ingrese el usuario" name="nombreUsuario">
+                    </div>
+                    <div class="password">
+                        <input type="password" class="passwordUsuario" id="passwordUsuario" required
+                            placeholder="Ingrese la contraseña" name="passwordUsuario">
+                    </div>
+                    <div class="btn">
+                        <button type="submit" id="log">Iniciar sesión</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </div>
+
+
+    <!--Script Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!--Script Axios-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="./js/pacientes/login.js"></script>
+</body>
+
+</html>

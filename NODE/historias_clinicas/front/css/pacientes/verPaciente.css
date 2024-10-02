@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contenedor {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom, #c0c0c0, #cfcfcf, #dfdfdf, #efefef, #ffffff);
+    z-index: -1;
+    position: relative; /* Importante para controlar la jerarquía del logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.fondoLogo {
+    position: absolute;
+    z-index: 0; /* Aseguramos que el logo esté detrás */
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    opacity: 0.1;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative; /* Para asegurarnos de que main esté por delante del logo */
+    z-index: 99;
+}
+
+.datosPaciente {
+    width: 90%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.datosPaciente h1 {
+    font-size: 2rem;
+    text-decoration: none;
+    color: #1C7CAB;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
+}
+
+.datosPaciente h2 {
+    font-size: 1rem;
+    color: whitesmoke;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+
+.contenedorEstudiosTotal {
+    width: 90%;
+    height: 80%;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: whitesmoke;
+    opacity: 0.6;
+}
+
+.buscador {
+    width: 96%;
+    height: 21%;
+    margin: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buscador input {
+    font-size: 1rem;
+    width: 40%;
+    height: 50%;
+    margin: 0;
+    opacity: 1;
+    border: none;
+    padding: 1%;
+    border-radius: 15px;
+    transition: border 0.3, opacity 0.3s;
+    outline: none;
+    background-color: white;
+    color: #1C7CAB;
+}
+
+.buscador input:hover {
+    border: 1px #1C7CAB solid;
+    opacity: 1;
+}
+
+.buscador input:focus {
+    border: 2px #1C7CAB solid;
+    opacity: 1;
+}
+
+.buscador .filtrarEstudios {
+    width: 25%;
+    height: 50%;
+    border: 1px solid #1C7CAB;
+    border-radius: 15px;
+    color: #1C7CAB;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1rem;
+}
+
+.buscador .limpiarBusqueda {
+    width: 25%;
+    height: 50%;
+    border: 1px solid #1C7CAB;
+    border-radius: 15px;
+    color: #1C7CAB;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1rem;
+}
+
+.buscador .filtrarEstudios:hover {
+    background-color: #1C7CAB;
+    color: white;
+}
+
+.buscador .limpiarBusqueda:hover {
+    background-color: #1C7CAB;
+    color: white;
+}
+
+
+.contenedorEstudios {
+    width: 100%;
+    height: 69%;
+    overflow-y: auto;
+    /* Permite el scroll vertical */
+}
+
+.estudioIndividual {
+    margin: 1% 2%;
+    border: none;
+    padding: 1%;
+    border-radius: 15px;
+    background-color: white;
+    opacity: 1;
+}
+
+.estudioIndividual h4 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #1C7CAB;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+
+}
+
+.estudioIndividual h6 {
+    font-size: 0.8rem;
+    margin: 0;
+    color: black;
+    letter-spacing: 0.1rem;
+}
+
+.btnMas {
+    padding: 0.5% 0.5%;
+    border: none;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    width: 15%;
+    color: #1C7CAB;
+    background-color: whitesmoke;
+    font-weight: bolder;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+.btnMas i {
+    padding: 0 5%;
+}
+
+.btnMas:hover {
+    background-color: #1C7CAB;
+    color: white;
+}
+
+/* TABLETS */
+@media (max-width:700px) {
+
+    .btnMas {
+        width: 25%;
+    }
+
+    .buscador .limpiarBusqueda,
+    .buscador .filtrarEstudios,
+    .buscador input {
+        font-size: 0.9rem;
+    }
+
+
+
+}
+
+/* CELULARES */
+@media (max-width:580px) {
+
+
+    .btnMas {
+        width: 25%;
+        font-size: 0.6rem;
+    }
+
+    .buscador .limpiarBusqueda,
+    .buscador .filtrarEstudios,
+    .buscador input {
+        font-size: 0.7rem;
+        height: 40%;
+    }
+
+    .estudioIndividual h4 {
+        font-size: 1rem;
+       
+    
+    }
+    
+    .estudioIndividual h6 {
+        font-size: 0.6rem;
+        
+    }
+
+}
+
+/* CELULARES */
+@media (max-width:450px) {
+
+    .datosPaciente h1{
+        font-size: 1.5rem;
+    }
+    .datosPaciente h2{
+        font-size: 0.9rem;
+    }
+
+    .btnMas {
+        width: 30%;
+        font-size: 0.6rem;
+    }
+
+    .buscador .limpiarBusqueda,
+    .buscador .filtrarEstudios,
+    .buscador input {
+        font-size: 0.6rem;
+        height: 30%;
+    }
+
+    .estudioIndividual h4 {
+        font-size: 1rem;
+       
+    
+    }
+    
+    .estudioIndividual h6 {
+        font-size: 0.6rem;
+        
+    }
+
+}

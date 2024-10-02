@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.datosEstudio {
+    width: 90%;
+    height: 35%;
+    font-size: 1rem;
+}
+
+.datosEstudio a {
+    text-decoration: none;
+}
+
+.datosEstudio h1 {
+    font-size: 2.5rem;
+    color: #16719f;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+}
+
+.datosEstudio h1 {
+    font-size: 2.5rem;
+    color: #16719f;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+}
+
+.datosEstudio a h3 {
+    font-size: 1.7rem;
+    color: #16719f;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    transition: color 0.5s;
+}
+
+.datosEstudio h2 {
+    font-size: 1.5rem;
+    color: rgb(83, 83, 83);
+    font-weight: bold;
+}
+
+.datosEstudio a h3:hover {
+    color: rgb(83, 83, 83);
+}
+
+.contenedorFiles {
+    width: 90%;
+    height: 60%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    border: none;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.336);
+    overflow: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+}
+
+.fileIndividual {
+    width: 96%;
+    margin: 1% 2%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-radius: 15px;
+    background-color: #16719f1e;
+    color: #16719f;
+}
+
+.fileIndividual a {
+    font-size: 1.2rem;
+    padding: 1%;
+    text-decoration: none;
+    padding-right: 10%;
+    color: #16719f;
+    transition: color 0.1s; /* Agregamos transición de color */
+    font-weight: bolder;
+}
+
+.fileIndividual i {
+    padding-left: 10%;
+    font-size: 4rem;
+    margin: 1%;
+    transition: color 0.1s; /* Agregamos transición de color */
+}
+
+.fileIndividual.pdf:hover, .fileIndividual.pdf:hover a, .fileIndividual.pdf:hover i {
+    color: white; /* Cambiamos el color de ambos */
+    background-color: #D4473D;
+}
+
+.fileIndividual.image:hover, .fileIndividual.image:hover a, .fileIndividual.image:hover i {
+    color: white; /* Cambiamos el color de ambos */
+    background-color: rgb(34, 199, 250);
+}
+
+
+.fileIndividual.excel:hover, .fileIndividual.excel:hover a, .fileIndividual.excel:hover i {
+    color: white; /* Cambiamos el color de ambos */
+    background-color: rgb(3, 235, 34);
+}
+
+.fileIndividual.word:hover, .fileIndividual.word:hover a, .fileIndividual.word:hover i {
+    color: white; /* Cambiamos el color de ambos */
+    background-color: rgb(0, 60, 255);
+}
+
+.fileIndividual.text:hover, .fileIndividual.text:hover a, .fileIndividual.text:hover i {
+    color: white; /* Cambiamos el color de ambos */
+    background-color: goldenrod;
+}
+
+.fileIndividual.file:hover, .fileIndividual.file:hover a, .fileIndividual.file:hover i {
+    color: white; /* Cambiamos el color de ambos */
+    background-color: rgb(70, 70, 70);
+}

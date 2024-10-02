@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.formulario{
+    width: 90%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.formulario form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.formulario form .medicos,.formulario form .fecha,.formulario form .tipoEstudio,
+.formulario form .files,.formulario form .btn{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.formulario form .medicos label,.formulario form .fecha label,.formulario form .tipoEstudio label,
+.formulario form .files label{
+    width: 30%;
+    height: 50%;
+display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario form .medicos select,.formulario form .fecha input,.formulario form .tipoEstudio input,
+.formulario form .files input{
+    width: 60%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.1rem;
+}
+
