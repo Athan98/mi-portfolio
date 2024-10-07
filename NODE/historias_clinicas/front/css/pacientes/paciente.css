@@ -8,8 +8,7 @@
     width: 100vw;
     height: 100vh;
     background-image: linear-gradient(to bottom, #c0c0c0, #cfcfcf, #dfdfdf, #efefef, #ffffff);
-    z-index: -1;
-    position: relative; /* Importante para controlar la jerarquía del logo */
+    z-index: -2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +18,7 @@
 
 .fondoLogo {
     position: absolute;
-    z-index: 0; /* Aseguramos que el logo esté detrás */
+    z-index: 0;
     width: 70%;
     height: 70%;
     object-fit: contain;
@@ -33,7 +32,6 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position: relative; /* Para asegurarnos de que main esté por delante del logo */
     z-index: 99;
 }
 
@@ -44,34 +42,29 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: #16719f;
+    margin-bottom: 3%;
+    border-radius: 15px;
 }
 
 .datosPaciente h1 {
     font-size: 2rem;
     text-decoration: none;
-    color: #1C7CAB;
+    color: white;
     letter-spacing: 0.1rem;
     font-weight: bold;
 }
 
-.datosPaciente h2 {
-    font-size: 1rem;
-    color: whitesmoke;
-    font-weight: bold;
-    letter-spacing: 0.1rem;
-}
-
-.contenedorEstudiosTotal {
+.contenedorEstudiosTotal{
     width: 90%;
-    height: 80%;
+    height: 60%;
     border: none;
     border-radius: 15px;
     overflow: hidden;
-    background-color: whitesmoke;
-    opacity: 0.6;
+    background-color: rgba(255, 255, 255, 0.336);
 }
 
-.buscador {
+.buscador{
     width: 96%;
     height: 21%;
     margin: 2%;
@@ -81,147 +74,144 @@ main {
     align-items: center;
 }
 
-.buscador input {
+.buscador input{
     font-size: 1rem;
-    width: 40%;
+    width: 30%;
     height: 50%;
     margin: 0;
-    opacity: 1;
-    border: none;
+    border-radius: 15px;
     padding: 1%;
-    border-radius: 15px;
-    transition: border 0.3, opacity 0.3s;
+    border: none;
     outline: none;
-    background-color: white;
-    color: #1C7CAB;
 }
 
-.buscador input:hover {
-    border: 1px #1C7CAB solid;
-    opacity: 1;
+.buscador input:hover{
+    border: 1px #16719f solid;
 }
 
-.buscador input:focus {
-    border: 2px #1C7CAB solid;
-    opacity: 1;
+.buscador input:focus{
+    border: 2px #16719f solid;
 }
 
-.buscador .filtrarEstudios {
-    width: 25%;
+.buscador .filtrarEstudios{
+    width: 30%;
     height: 50%;
-    border: 1px solid #1C7CAB;
+    border: none;
     border-radius: 15px;
-    color: #1C7CAB;
-    transition: background-color 0.3s, color 0.3s;
-    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.336);
+    font-weight: bold;
+    color: #16719f;
+    transition: background-color 0.3s,color 0.3s;
 }
 
-.buscador .limpiarBusqueda {
-    width: 25%;
-    height: 50%;
-    border: 1px solid #1C7CAB;
-    border-radius: 15px;
-    color: #1C7CAB;
-    transition: background-color 0.3s, color 0.3s;
-    font-size: 1rem;
-}
-
-.buscador .filtrarEstudios:hover {
-    background-color: #1C7CAB;
+.buscador .filtrarEstudios:hover{
+    background-color: #16719f;
     color: white;
 }
 
-.buscador .limpiarBusqueda:hover {
-    background-color: #1C7CAB;
+.buscador .filtrarEstudios i{
+    padding: 0 3%;
+}
+
+.buscador .limpiarBusqueda{
+    width: 30%;
+    height: 50%;
+    border: none;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.336);
+    font-weight: bold;
+    color: #16719f;
+    transition: background-color 0.3s,color 0.3s;
+}
+
+.buscador .limpiarBusqueda i{
+    padding: 0 3%;
+}
+
+.buscador .limpiarBusqueda:hover{
+    background-color: #16719f;
     color: white;
 }
 
-
-.contenedorEstudios {
+.contenedorEstudios{
     width: 100%;
     height: 69%;
-    overflow-y: auto;
-    /* Permite el scroll vertical */
+    overflow-y: auto; /* Permite el scroll vertical */
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.estudioIndividual {
+.estudioIndividual{
     margin: 1% 2%;
     border: none;
     padding: 1%;
     border-radius: 15px;
-    background-color: white;
-    opacity: 1;
+    background-color: #16719f1e;
 }
 
-.estudioIndividual h4 {
+.estudioIndividual h4{
     font-size: 1.5rem;
     margin: 0;
-    color: #1C7CAB;
     font-weight: bold;
+    color: #16719f;
     letter-spacing: 0.1rem;
-
 }
 
-.estudioIndividual h6 {
-    font-size: 0.8rem;
+.estudioIndividual h6{
+    font-size: 1rem;
     margin: 0;
-    color: black;
-    letter-spacing: 0.1rem;
+    font-weight: bold;
 }
 
-.btnMas {
-    padding: 0.5% 0.5%;
+.estudioIndividual button{
+    padding: 0.5% 1%;
+    margin:0.5% 1% 0 0;
     border: none;
     border-radius: 15px;
-    font-size: 0.8rem;
-    width: 15%;
-    color: #1C7CAB;
-    background-color: whitesmoke;
-    font-weight: bolder;
-    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold; 
+    color:#16719f;
+    width: 25%;
+    transition: background-color 0.3s,color 0.3s;
 }
 
-
-.btnMas i {
-    padding: 0 5%;
+.estudioIndividual button i{
+padding: 0 3%;
 }
 
-.btnMas:hover {
-    background-color: #1C7CAB;
+.estudioIndividual button:hover{
+    background-color: #16719f;
     color: white;
 }
+
 
 /* TABLETS */
 @media (max-width:700px) {
 
-    .btnMas {
-        width: 25%;
+    .buscador .limpiarBusqueda,
+    .buscador .filtrarEstudios,
+    .buscador input {
+        font-size: 0.9rem;
+        width: 30%;
+    }
+
+    .estudioIndividual .btnMas{
+        width: 40%;
+        font-size: 1rem;
+    }
+}
+
+/* CELULARES */
+@media (max-width:580px) {
+
+    .buscador{
+        flex-direction: column;
     }
 
     .buscador .limpiarBusqueda,
     .buscador .filtrarEstudios,
     .buscador input {
         font-size: 0.9rem;
-    }
-
-
-
-}
-
-/* CELULARES */
-@media (max-width:580px) {
-
-
-    .btnMas {
-        width: 25%;
-        font-size: 0.6rem;
-    }
-
-    .buscador .limpiarBusqueda,
-    .buscador .filtrarEstudios,
-    .buscador input {
-        font-size: 0.7rem;
-        height: 40%;
+        height: 30%;
+        width: 90%;
     }
 
     .estudioIndividual h4 {
@@ -233,6 +223,15 @@ main {
     .estudioIndividual h6 {
         font-size: 0.6rem;
         
+    }
+
+    .estudioIndividual .btnMas{
+        width: 30%;
+        font-size: 0.6rem;
+    }
+
+    .estudioIndividual{
+        padding:1% 2%;
     }
 
 }
@@ -243,31 +242,34 @@ main {
     .datosPaciente h1{
         font-size: 1.5rem;
     }
-    .datosPaciente h2{
-        font-size: 0.9rem;
-    }
 
-    .btnMas {
-        width: 30%;
-        font-size: 0.6rem;
+    .buscador{
+        flex-direction: column;
     }
 
     .buscador .limpiarBusqueda,
     .buscador .filtrarEstudios,
     .buscador input {
-        font-size: 0.6rem;
+        font-size: 0.8rem;
         height: 30%;
+        width: 90%;
+    }
+
+    .estudioIndividual{
+        padding:1% 3%;
     }
 
     .estudioIndividual h4 {
         font-size: 1rem;
-       
-    
     }
     
     .estudioIndividual h6 {
         font-size: 0.6rem;
         
+    }
+
+    .estudioIndividual .btnMas{
+        width: 50%;
     }
 
 }

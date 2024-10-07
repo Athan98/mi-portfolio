@@ -2,17 +2,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const parametrosURL = new URLSearchParams(window.location.search);
     const idPaciente = parametrosURL.get("id");
     const formulario = document.querySelector("#form-nuevoEstudio");
+    const ip="192.168.1.9";
+
 
     // Función para traer paciente
     const traerPaciente = async (id) => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/pacientes/${id}`);
+            const res = await axios.get(`http://${ip}:5000/pacientes/${id}`);
             const paciente = res.data;
 
-            document.querySelector("#paciente-nombreApellido").innerHTML = `${paciente.apellidoPaciente}, ${paciente.nombrePaciente}`;
             document.querySelector("#dniPaciente").innerHTML = paciente.dniPaciente;
-            document.querySelector("#edadPaciente").innerHTML = paciente.edadPaciente;
-            document.querySelector("#usuarioPaciente").innerHTML = paciente.usuarioPaciente;
 
             // Establecer el enlace para redirigir a la página de detalles del paciente
             const enlacePaciente = document.querySelector("#enlacePaciente");
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función para traer médicos y llenar el select
     const traerMedicos = async () => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/medicos/`);
+            const res = await axios.get(`http://${ip}:5000/medicos/`);
             const medicos = res.data;
 
             const select = document.querySelector("#medicos");
@@ -78,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            await axios.post(`http://192.168.1.9:5000/estudios/multiple/create-estudio`, formData, {
+            await axios.post(`http://${ip}:5000/estudios/multiple/create-estudio`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }

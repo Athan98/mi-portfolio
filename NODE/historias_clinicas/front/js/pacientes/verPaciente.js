@@ -5,13 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonLimpiar = document.querySelector("#limpiarBusqueda");
     const idPaciente = parametrosURL.get("id");
     let estudiosPaciente = []; // Variable para almacenar los estudios cargados
+    const ip="192.168.1.9";
 
     const traerPaciente = async (id) => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/pacientes/${id}`);
+            const res = await axios.get(`http://${ip}:5000/pacientes/${id}`);
             const paciente = res.data;
 
-            document.querySelector("#paciente-nombreApellido").innerHTML = `${paciente.apellidoPaciente}, ${paciente.nombrePaciente}`;
             document.querySelector("#dniPaciente").innerHTML = paciente.dniPaciente;
 
         } catch (error) {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const listarEstudiosPaciente = async (id) => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/estudios/paciente/${id}`);
+            const res = await axios.get(`http://${ip}:5000/estudios/paciente/${id}`);
             estudiosPaciente = res.data; // Almacena los estudios
 
             const contenedorEstudiosPaciente = document.querySelector("#contenedorEstudios");

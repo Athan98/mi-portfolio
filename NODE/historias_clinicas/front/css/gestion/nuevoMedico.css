@@ -1,26 +1,41 @@
-.formulario{
+.formulario {
     height: 90%;
     width: 70%;
     border: none;
     border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: rgba(255, 255, 255, 0.336);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.formulario h1 {
+    width: 90%;
+    height: 25%;
+    border-bottom: #16719f 2px solid;
+    margin-bottom: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #16719f;
+    letter-spacing: 0.2rem;
+}
+
+.formulario form {
+    width: 70%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.formulario form{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.formulario form label{
-    height: 30%;
+.formulario form label {
+    height: 50%;
     width: 30%;
     display: flex;
     justify-content: center;
@@ -31,16 +46,8 @@
     letter-spacing: 0.1rem;
 }
 
-.formulario form input:hover{
-    border: 1px solid #16719f;
-}
-
-.formulario form input:focus{
-    border: solid 2px #16719f;
-}
-
-.formulario form input{
-    height: 30%;
+.formulario form input {
+    height: 50%;
     width: 70%;
     display: flex;
     justify-content: center;
@@ -50,37 +57,45 @@
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.705);
     outline: none;
+    font-style: oblique;
+}
+
+.formulario form input:hover {
+    border: 1px solid #16719f;
+}
+
+.formulario form input:focus {
+    border: solid 2px #16719f;
 }
 
 
-
 .formulario form .nombreMedico{
-    width: 90%;
-    height: 33.33%;
+    width: 100%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .formulario form .apellidoMedico{
-    width: 90%;
-    height: 33.33%;
+    width: 100%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .formulario form .especialidadMedico{
-    width: 90%;
-    height: 33.33%;
+    width: 100%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .formulario form .btn{
-    width: 90%;
-    height: 33.33%;
+    width: 100%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,7 +105,7 @@
     padding: 1% 1%;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
-    width: 35%;
+    width: 50%;
     border: none;
     border-radius: 15px;
     background-color: rgba(109, 109, 109, 0.274);

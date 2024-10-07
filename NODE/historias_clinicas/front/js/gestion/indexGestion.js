@@ -1,13 +1,14 @@
-const urlListar = "http://192.168.1.9:5000/pacientes/";
+const urlListar = "http://192.168.2.198:5000/pacientes/";
 
 document.addEventListener("DOMContentLoaded", () => {
     const cuerpoTabla = document.querySelector("#bodyTablaPacientes");
     const buscadorEntrada = document.querySelector("#buscadorEntrada");
+    const ip="192.168.1.9";
 
     //LISTAR PACIENTES
     const listar = async () => {
         try {
-            const response = await axios.get(urlListar);
+            const response = await axios.get(`http://${ip}:5000/pacientes/`);
             const pacientes = response.data;
 
             cuerpoTabla.innerHTML = "";
@@ -15,16 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
             pacientes.forEach(p => {
                 const fila = document.createElement("tr");
 
-                const celdaApellido = document.createElement("td");
-                const celdaNombre = document.createElement("td");
                 const celdaDni = document.createElement("td");
-                const celdaEdad = document.createElement("td");
                 const celdaAcciones = document.createElement("td");
 
-                celdaApellido.textContent = p.apellidoPaciente;
-                celdaNombre.textContent = p.nombrePaciente;
                 celdaDni.textContent = p.dniPaciente;
-                celdaEdad.textContent = p.edadPaciente;
 
                 const btnMas = document.createElement("button");
                 btnMas.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>VER MAS';
@@ -37,10 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 celdaAcciones.appendChild(btnMas);
-                fila.appendChild(celdaApellido);
-                fila.appendChild(celdaNombre);
                 fila.appendChild(celdaDni);
-                fila.appendChild(celdaEdad);
                 fila.appendChild(celdaAcciones);
 
                 fila.classList.add("fila");
@@ -58,19 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const filas = cuerpoTabla.getElementsByTagName('tr'); // Obtiene todas las filas de la tabla
 
         Array.from(filas).forEach((fila) => { // Itera sobre cada fila
-            const celdaApellido = fila.getElementsByTagName('td')[0]; // Selecciona la celda del apellido
-            const celdaNombre = fila.getElementsByTagName('td')[1]; // Selecciona la celda del nombre
-            const celdaDNI = fila.getElementsByTagName('td')[2]; // Selecciona la celda del DNI
+            const celdaDNI = fila.getElementsByTagName('td')[0]; // Selecciona la celda del DNI
 
-            if (celdaApellido || celdaNombre || celdaDNI) {
-                const apellido = celdaApellido.textContent || celdaApellido.innerText; // Obtiene el texto del apellido
-                const nombre = celdaNombre.textContent || celdaNombre.innerText; // Obtiene el texto del nombre
+            if (celdaDNI) {
                 const dni = celdaDNI.textContent || celdaDNI.innerText; // Obtiene el texto del DNI
 
                 // Comprueba si el valor de búsqueda está presente en el apellido, nombre o DNI
                 if (
-                    apellido.toLowerCase().indexOf(filter) > -1 ||
-                    nombre.toLowerCase().indexOf(filter) > -1 ||
                     dni.toLowerCase().indexOf(filter) > -1
                 ) {
                     fila.style.display = ""; // Muestra la fila si coincide

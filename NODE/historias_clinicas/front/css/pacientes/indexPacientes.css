@@ -62,10 +62,10 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
-.inicioSesion form .usuario input,
-.inicioSesion form .password input {
+.inicioSesion form .usuario input {
     width: 30%;
     height: 70%;
     display: flex;
@@ -76,25 +76,63 @@ main {
     border: 1px solid black;
     font-family: Arial, Helvetica, sans-serif;
     opacity: 0.5;
-    transition: border 0.3s,opacity 0.3s; /* Solo se necesita border aquí */
+    transition: border 0.3s, opacity 0.3s;
+    /* Solo se necesita border aquí */
     outline: none;
+    font-style: oblique;
+}
+
+.inicioSesion form .password input {
+    width: 25%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    border-radius: 15px;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    opacity: 0.5;
+    transition: border 0.3s, opacity 0.3s;
+    /* Solo se necesita border aquí */
+    outline: none;
+    font-style: oblique;
 }
 
 .inicioSesion form .usuario input:hover,
 .inicioSesion form .password input:hover {
-    border: 1px solid #1C7CAB; /* Cambia el borde al pasar el ratón */
+    border: 1px solid #1C7CAB;
+    /* Cambia el borde al pasar el ratón */
     opacity: 1;
 }
 
 .inicioSesion form .usuario input:focus,
 .inicioSesion form .password input:focus {
-    border: 2px solid #1C7CAB; /* Cambia el borde al pasar el ratón */
+    border: 2px solid #1C7CAB;
+    /* Cambia el borde al pasar el ratón */
     opacity: 1;
 
 }
 
+.inicioSesion form .password #eye {
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 1%;
+    width: 5%;
+    height: 33.33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1C7CAB;
+    transition: color 0.3s;
+}
+
+.inicioSesion form .password #eye:hover {
+    color: #49b1e6;
+}
+
 .inicioSesion form .btn {
-    width: 80%;
+    width: 100%;
     height: 33.33%;
     display: flex;
     justify-content: center;
@@ -109,11 +147,12 @@ main {
     border-radius: 15px;
     font-size: 1rem;
     letter-spacing: 0.1rem;
-    transition: background-color 0.3s,color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     color: #1C7CAB;
+    font-weight: bold;
 }
 
-.inicioSesion form .btn #log:hover{
+.inicioSesion form .btn #log:hover {
     background-color: #1C7CAB;
     color: white;
 }
@@ -121,10 +160,23 @@ main {
 /* TABLETS */
 @media (max-width:800px) {
 
-    .inicioSesion form .usuario input,
-    .inicioSesion form .password input {
+    .inicioSesion form .usuario input {
         width: 50%;
     }
+
+
+    .inicioSesion form .usuario input {
+        width: 50%;
+    }
+
+    .inicioSesion form .password input {
+        width: 40%;
+    }
+
+    .inicioSesion form .password #eye {
+        width: 10%;
+    }
+
 
     .inicioSesion form .btn #log {
         width: 50%;
@@ -135,14 +187,21 @@ main {
 /* CELULARES */
 @media (max-width:480px) {
 
-    header{
+    header {
         height: 50%;
     }
-    
 
-    .inicioSesion form .usuario input,
+
+    .inicioSesion form .usuario input {
+        width: 80%;
+    }
+
     .inicioSesion form .password input {
-        width:80%;
+        width: 65%;
+    }
+
+    .inicioSesion form .password #eye {
+        width: 15%;
     }
 
     .inicioSesion form .btn #log {

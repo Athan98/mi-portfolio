@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const formulario = document.querySelector("#form-nuevoMedico");
+    const ip="192.168.1.9";
 
     formulario.addEventListener("submit", async (m) => {
         m.preventDefault();
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            await axios.post(`http://192.168.1.9:5000/medicos/`, medicoNuevo);
+            await axios.post(`http://${ip}:5000/medicos/`, medicoNuevo);
             alert("Médico creado correctamente");
 
             //Redirigimos al index.html una vez se actualiza la pelicula

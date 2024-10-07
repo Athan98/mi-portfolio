@@ -20,7 +20,7 @@
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="../../indexGestion.html">RESPIRAR</a>
+                    <a class="navbar-brand" href="../../indexGestion.html"><i class="fa-solid fa-lungs"></i>RESPIRAR</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Pacientes
+                                    <i class="fa-solid fa-hospital-user"></i>Pacientes
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./nuevoPaciente.html">Nuevo</a></li>
@@ -40,7 +40,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Medicos
+                                    <i class="fa-solid fa-user-doctor"></i>Medicos
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./nuevoMedico.html">Nuevo</a></li>
@@ -54,20 +54,21 @@
         </header>
         <main>
             <div class="datosPaciente" id="datosPaciente">
-                <a href="#" id="enlacePaciente">
-                    <h1 class="paciente-nombreApellido" id="paciente-nombreApellido">-</h1>
-                </a>
                 <h2 class="dniPaciente" id="dniPaciente">-</h2>
-                <h2 class="edadPaciente" id="edadPaciente">-</h2>
-                <h3 class="usuarioPaciente" id="usuarioPaciente">-</h3>
-                <button id="btnEditar" class="btnEditar"><i class="fa-solid fa-user-pen"></i>EDITAR PACIENTE</button>
-                <button id="btnAgregarEstudio" class="btnAgregarEstudio"><i class="fa-solid fa-file-circle-plus"></i>AGREGAR ESTUDIO</button>
+                <div class="botonera">
+                    <button id="btnEditar" class="btnEditar"><i class="fa-solid fa-user-pen"></i>EDITAR
+                        PACIENTE</button>
+                    <button id="btnAgregarEstudio" class="btnAgregarEstudio"><i
+                            class="fa-solid fa-file-circle-plus"></i>AGREGAR ESTUDIO</button>
+                </div>
             </div>
             <div class="contenedorEstudiosTotal">
                 <div class="buscador">
                     <input type="date" class="fechaEstudio" id="fechaEstudio">
-                    <button class="filtrarEstudios" id="filtrarEstudios"><i class="fa-solid fa-filter"></i>Filtrar estudios</button>
-                    <button class="limpiarBusqueda" id="limpiarBusqueda"><i class="fa-solid fa-broom"></i>Limpiar búsqueda</button>
+                    <button class="filtrarEstudios" id="filtrarEstudios"><i class="fa-solid fa-filter"></i>Filtrar
+                        estudios</button>
+                    <button class="limpiarBusqueda" id="limpiarBusqueda"><i class="fa-solid fa-broom"></i>Limpiar
+                        búsqueda</button>
                 </div>
 
                 <div class="contenedorEstudios" id="contenedorEstudios">

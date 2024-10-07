@@ -1,13 +1,13 @@
-const urlListar = "http://192.168.1.9:5000/medicos/";
 
 document.addEventListener("DOMContentLoaded", () => {
     const cuerpoTabla = document.querySelector("#bodyTablaMedicos");
     const buscadorEntrada = document.querySelector("#buscadorEntrada");
+    const ip="192.168.1.9";
 
     //LISTAR PACIENTES
     const listar = async () => {
         try {
-            const response = await axios.get(urlListar);
+            const response = await axios.get(`http://${ip}:5000/medicos/`);
             const medicos = response.data;
 
             cuerpoTabla.innerHTML = "";
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (id && confirm("¿Estás seguro de que deseas eliminar este médico?")) {
             try {
-                await axios.delete(`http://192.168.1.9:5000/medicos/${id}`);
+                await axios.delete(`http://${ip}:5000/medicos/${id}`);
                 //Recargar posteos
                 listar();
                 alert("Registro eliminado");

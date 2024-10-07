@@ -9,8 +9,14 @@
 
 .datosEstudio {
     width: 90%;
-    height: 35%;
+    height: 30%;
     font-size: 1rem;
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: #16719f 2px solid;
 }
 
 .datosEstudio a {
@@ -50,7 +56,7 @@
 }
 
 .contenedorFiles {
-    width: 90%;
+    width: 60%;
     height: 60%;
     display: flex;
     justify-content: start;

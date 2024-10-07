@@ -3,11 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const parametrosURL = new URLSearchParams(window.location.search);
     const idMedico = parametrosURL.get("id");
     const formulario = document.querySelector("#form-editarMedico");
+    const ip="192.168.1.9";
 
     // Función para traer el estudio, pacientes, y médicos
     const traerMedico = async (id) => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/medicos/${id}`);
+            const res = await axios.get(`http://${ip}:5000/medicos/${id}`);
             const medico = res.data;
 
             document.querySelector("#nombreMedico").value = medico.nombreMedico;
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            await axios.put(`http://192.168.1.9:5000/medicos/${idMedico}`, medicoActualizado);
+            await axios.put(`http://${ip}:5000/medicos/${idMedico}`, medicoActualizado);
             alert("Médico actualizado correctamente");
 
             //Redirigimos al index.html una vez se actualiza la pelicula

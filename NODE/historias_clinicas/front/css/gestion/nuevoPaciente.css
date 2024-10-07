@@ -1,4 +1,4 @@
-.formulario{
+.formulario {
     height: 90%;
     width: 70%;
     border: none;
@@ -11,18 +11,32 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.formulario form{
-    width: 100%;
-    height: 100%;
+.formulario h1 {
+    width: 90%;
+    height: 25%;
+    border-bottom: #16719f 2px solid;
+    margin-bottom: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #16719f;
+    letter-spacing: 0.2rem;
+}
+
+.formulario form {
+    width: 70%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.formulario form label{
+.formulario form label {
     height: 50%;
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,9 +46,9 @@
     letter-spacing: 0.1rem;
 }
 
-.formulario form input{
+.formulario form input {
     height: 50%;
-    width: 80%;
+    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,77 +57,54 @@
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.705);
     outline: none;
+    font-style: oblique;
 }
 
-.formulario form input:hover{
+.formulario form input:hover {
     border: 1px solid #16719f;
 }
 
-.formulario form input:focus{
+.formulario form input:focus {
     border: solid 2px #16719f;
 }
 
-.formulario form .nombrePaciente{
-    width: 90%;
-    height: 14.28%;
+.formulario form .docPaciente {
+    width: 100%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.formulario form .apellidoPaciente{
-    width: 90%;
-    height: 14.28%;
+.formulario form .usuarioPaciente {
+    width: 100%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.formulario form .docPaciente{
-    width: 90%;
-    height: 14.28%;
+.formulario form .passwordPaciente {
+    width: 100%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.formulario form .edadPaciente{
-    width: 90%;
-    height: 14.28%;
+.formulario form .btn {
+    width: 100%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.formulario form .usuarioPaciente{
-    width: 90%;
-    height: 14.28%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.formulario form .passwordPaciente{
-    width: 90%;
-    height: 14.28%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.formulario form .btn{
-    width: 90%;
-    height: 14.28%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn button{
+.btn button {
     padding: 1% 1%;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
-    width: 35%;
+    width: 50%;
     border: none;
     border-radius: 15px;
     background-color: rgba(109, 109, 109, 0.274);
@@ -122,11 +113,11 @@
     transition: background-color 0.3s,color 0.3s;
 }
 
-.btn button i{
+.btn button i {
     padding: 0 2%;
 }
 
-.btn button:hover{
+.btn button:hover {
     background-color: #16719f;
     color: white;
 }

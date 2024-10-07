@@ -8,32 +8,32 @@
 }
 
 .datosPaciente{
-    width: 90%;
-    height: 35%;
+    width: 80%;
+    height: 20%;
     font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 2%;
+    border-bottom: 2px solid #16719f;
 }
 
-.datosPaciente .paciente-nombreApellido{
-    font-size: 2rem;
-    color: #16719f;
+.datosPaciente h2{
+    font-size: 3rem;
+    color:#16719f ;
     font-weight: bold;
-    letter-spacing: 0.2rem;
-    transition: color 0.5s;
+    height: 40%;
+    width: 100%;
+    text-align: center;
 }
 
-.datosPaciente a{
-    text-decoration: none;
-
-}
-
-.datosPaciente .paciente-nombreApellido:hover{
-    color: rgb(83, 83, 83);
-}
-
-.datosPaciente h2,.datosPaciente h3{
-    font-size: 1.5rem;
-    color: rgb(83, 83, 83);
-    font-weight: bold;
+.botonera{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
 }
 
 .datosPaciente button{
@@ -42,7 +42,7 @@
     border: none;
     background-color: rgba(255, 255, 255, 0.336);
     border-radius: 15px;
-    width: 20%;
+    width: 30%;
     color:#16719f;
     font-weight: bold;
     transition: color 0.3s,background-color 0.3s;
@@ -58,8 +58,8 @@
 }
 
 .contenedorEstudiosTotal{
-    width: 90%;
-    height: 60%;
+    width: 60%;
+    height: 70%;
     border: none;
     border-radius: 15px;
     overflow: hidden;
@@ -159,7 +159,7 @@
     border-radius: 15px;
     font-weight: bold; 
     color:#16719f;
-    width: 15%;
+    width: 25%;
     transition: background-color 0.3s,color 0.3s;
 }
 

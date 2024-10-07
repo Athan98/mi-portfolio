@@ -20,7 +20,7 @@
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="../../indexGestion.html">RESPIRAR</a>
+                    <a class="navbar-brand" href="../../indexGestion.html"><i class="fa-solid fa-lungs"></i>RESPIRAR</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Pacientes
+                                    <i class="fa-solid fa-hospital-user"></i>Pacientes
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./nuevoPaciente.html">Nuevo</a></li>
@@ -40,7 +40,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                  Medicos
+                                    <i class="fa-solid fa-user-doctor"></i>Medicos
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./nuevoMedico.html">Nuevo</a></li>
@@ -54,32 +54,20 @@
         </header>
         <main>
             <div class="formulario">
+                <h1>Datos del paciente</h1>
                 <form method="post" id="form-editarPaciente">
-                    <div class="nombrePaciente">
-                        <label for="nombrePaciente">Nombre:</label>
-                        <input type="text" placeholder="Ingrese el nombre del paciente" id="nombrePaciente"
-                            name="nombre" required>
-                    </div>
-                    <div class="apellidoPaciente">
-                        <label for="apellidoPaciente">Apellido:</label>
-                        <input type="text" placeholder="Ingrese el apellido del paciente" id="apellidoPaciente"
-                            name="apellido" required>
-                    </div>
                     <div class="docPaciente">
                         <label for="docPaciente">Documento:</label>
                         <input type="text" placeholder="Ingrese el N° de documento del paciente" id="docPaciente"
                             name="dni" required>
                     </div>
-                    <div class="edadPaciente">
-                        <label for="edadPaciente">Edad:</label>
-                        <input type="number" placeholder="Ingrese la edad del paciente" id="edadPaciente" name="edad" required>
-                    </div>
                     <div class="usuarioPaciente">
                         <label for="usuarioPaciente">Usuario:</label>
-                        <input type="text" placeholder="Ingrese el usuario del paciente" id="usuarioPaciente" name="usuario" required>
+                        <input type="text" placeholder="Ingrese el usuario del paciente" id="usuarioPaciente"
+                            name="usuario" required>
                     </div>
                     <div class="btn">
-                        <button id="btnGuardar" type="submit">Guardar cambios</button>
+                        <button id="btnGuardar" type="submit"><i class="fa-solid fa-floppy-disk"></i>Guardar cambios</button>
                     </div>
                 </form>
             </div>

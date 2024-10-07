@@ -4,20 +4,8 @@ const bcrypt = require('bcrypt');
 const estudioModel = require("./estudioModels.js");
 
 const pacienteModel = db.define("pacientes", {
-    nombrePaciente: {
-        type: DataTypes.STRING,
-    },
-
-    apellidoPaciente: {
-        type: DataTypes.STRING,
-    },
-
     dniPaciente: {
         type: DataTypes.STRING,
-    },
-
-    edadPaciente: {
-        type: DataTypes.INTEGER,
     },
 
     usuarioPaciente: {

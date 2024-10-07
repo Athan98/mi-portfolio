@@ -2,11 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const parametrosURL = new URLSearchParams(window.location.search);
     const idEstudio = parametrosURL.get("id");
+    const ip="192.168.1.9";
 
     // Función para traer el estudio, pacientes, y médicos
     const traerEstudio = async (id) => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/estudios/${id}`);
+            const res = await axios.get(`http://${ip}:5000/estudios/${id}`);
             const estudio = res.data;
 
             document.querySelector("#tipoEstudio").innerHTML = estudio.tipoEstudio;
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función para traer médico
     const traerMedico = async (id) => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/medicos/${id}`);
+            const res = await axios.get(`http://${ip}:5000/medicos/${id}`);
             return res.data;
         } catch (error) {
             console.log("-Error al traer el médico-", error);
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función para listar archivos
     const listarFiles = async (id) => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/files/estudio/${id}`);
+            const res = await axios.get(`http://${ip}:5000/files/estudio/${id}`);
             const filesEstudio = res.data;
 
             const contenedorFiles = document.querySelector("#contenedorFiles");
@@ -60,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const icono = getFileIcon(f.tipoFile);
 
                 divFileIndividual.innerHTML = `
-                    ${icono} <a href="/historias_clinicas${f.url}" target="_blank">${f.nombreFile}</a>
+                    ${icono} <a href="/historias_clinicas${f.url}" target="_blank">CLICK PARA VER</a>
                 `;
 
                 if (f.tipoFile.includes("pdf")) {

@@ -5,19 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonLimpiar = document.querySelector("#limpiarBusqueda");
     const idPaciente = parametrosURL.get("id");
     let estudiosPaciente = []; // Variable para almacenar los estudios cargados
+    const ip = "192.168.1.9";
 
     const traerPaciente = async (id) => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/pacientes/${id}`);
+            const res = await axios.get(`http://${ip}:5000/pacientes/${id}`);
             const paciente = res.data;
 
-            document.querySelector("#paciente-nombreApellido").innerHTML = `${paciente.apellidoPaciente}, ${paciente.nombrePaciente}`;
             document.querySelector("#dniPaciente").innerHTML = paciente.dniPaciente;
-            document.querySelector("#edadPaciente").innerHTML = paciente.edadPaciente;
-            document.querySelector("#usuarioPaciente").innerHTML = paciente.usuarioPaciente;
 
-            const enlacePaciente = document.querySelector("#enlacePaciente");
-            enlacePaciente.href = `/historias_clinicas/front/pages/gestion/verMasPaciente.html?id=${id}`;
         } catch (error) {
             console.log("-Error al traer el registro-", error);
         }
@@ -30,8 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const listarEstudiosPaciente = async (id) => {
         try {
-            const res = await axios.get(`http://192.168.1.9:5000/estudios/paciente/${id}`);
+            const res = await axios.get(`http://${ip}:5000/estudios/paciente/${id}`);
             estudiosPaciente = res.data; // Almacena los estudios
+
+            // Ordenar estudios por fecha (más recientes primero)
+            estudiosPaciente.sort((a, b) => new Date(b.fechaEstudio) - new Date(a.fechaEstudio));
 
             const contenedorEstudiosPaciente = document.querySelector("#contenedorEstudios");
             contenedorEstudiosPaciente.innerHTML = "";
@@ -154,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const borrarEstudio = async (idEstudio, idPaciente) => {
         if (idEstudio && confirm("¿Estás seguro de que deseas eliminar este estudio?")) {
             try {
-                await axios.delete(`http://192.168.1.9:5000/estudios/${idEstudio}`);
+                await axios.delete(`http://${ip}:5000/estudios/${idEstudio}`);
                 listarEstudiosPaciente(idPaciente);
                 alert("Registro eliminado");
             } catch (error) {

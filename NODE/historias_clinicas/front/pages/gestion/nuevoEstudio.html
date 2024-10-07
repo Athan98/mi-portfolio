@@ -17,10 +17,11 @@
 
 <body>
     <div class="contenedor">
+        <img src="../../images/logoRespirar.png" alt="" class="fondoLogo">
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="../../indexGestion.html">RESPIRAR</a>
+                    <a class="navbar-brand" href="../../indexGestion.html"><i class="fa-solid fa-lungs"></i>RESPIRAR</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -31,7 +32,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Pacientes
+                                    <i class="fa-solid fa-hospital-user"></i>Pacientes
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./nuevoPaciente.html">Nuevo</a></li>
@@ -40,7 +41,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                  Medicos
+                                    <i class="fa-solid fa-user-doctor"></i>Medicos
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./nuevoMedico.html">Nuevo</a></li>
@@ -56,11 +57,8 @@
 
             <div class="datosPaciente" id="datosPaciente">
                 <a href="#" id="enlacePaciente">
-                    <h1 class="paciente-nombreApellido" id="paciente-nombreApellido">-</h1>
+                    <h2 class="dniPaciente" id="dniPaciente">-</h2>
                 </a>
-                <h2 class="dniPaciente" id="dniPaciente">-</h2>
-                <h2 class="edadPaciente" id="edadPaciente">-</h2>
-                <h3 class="usuarioPaciente" id="usuarioPaciente">-</h3>
             </div>
 
             <div class="formulario">
@@ -83,7 +81,7 @@
                         <input type="file" id="file" name="file" multiple>
                     </div>
                     <div class="btn">
-                        <button id="btnEnviar" type="submit">Agregar Estudio</button>
+                        <button id="btnEnviar" type="submit"><i class="fa-solid fa-plus"></i>Agregar Estudio</button>
                     </div>
                 </form>
 

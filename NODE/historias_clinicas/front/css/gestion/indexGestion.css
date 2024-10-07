@@ -34,6 +34,10 @@ header {
     width: 100%;
 }
 
+header i{
+    padding: 0 2%;
+}
+
 nav {
     background-image: linear-gradient(to right top, #1c7cab, #16719f, #0f6793, #075d87, #00537b);
 }
@@ -147,9 +151,13 @@ footer {
     top: 0;
     background-color: #16719f;
     color: whitesmoke;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     letter-spacing: 0.2rem;
+}
+
+.tabla thead i{
+    padding: 0 3%;
 }
 
 .fila {
@@ -169,6 +177,11 @@ footer {
     background-color: rgba(255, 255, 255, 0.336);
     color: #16719f;
     transition: background-color 0.3s,color 0.3s;
+    width: 40%;
+}
+
+.fila button i{
+    padding: 0 3%;
 }
 
 .fila button:hover {
@@ -178,6 +191,9 @@ footer {
 
 .tabla td {
     padding: 1% 0 1% 0;
+    font-size: 1.3rem;
+    letter-spacing: 0.2rem;
+    font-weight: bolder;
 }
 
 .tabla th {
